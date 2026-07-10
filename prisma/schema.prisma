@@ -1,8 +1,17 @@
 generator client {
   provider = "prisma-client"
-  output   = "../app/generated/prisma"
+  output   = "../prisma-generated"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+// npx prisma migrate dev --name init
+// npx prisma generate
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
 }

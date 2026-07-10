@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "target": "ES2023",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "allowJs": true,
     "sourceMap": true,
     "outDir": "./build",
@@ -12,7 +12,8 @@
     "strict": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "ignoreDeprecations": "6.0"
   },
-  "exclude": ["node_modules", "build", "migrate"]
+  "exclude": ["node_modules", "build", "migrate", "prisma-generated"]
 }
