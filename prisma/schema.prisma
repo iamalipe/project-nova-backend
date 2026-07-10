@@ -1,6 +1,7 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../prisma-generated"
+  provider        = "prisma-client"
+  output          = "../prisma-generated"
+  previewFeatures = ["fullTextSearchPostgres"]
 }
 
 datasource db {
@@ -10,8 +11,110 @@ datasource db {
 // npx prisma migrate dev --name init
 // npx prisma generate
 
+// 1. ENUMS
+// enum UserRole {
+//   USER
+//   EDITOR
+//   ADMIN
+// }
+
+// 2. THE ULTIMATE KITCHEN SINK MODEL
+// model EverythingModel {
+//   // --- IDENTIFIERS ---
+//   id            String   @id @default(uuid(7)) @db.Uuid // Primary key, UUIDv7
+//   serialNumber  Int      @default(autoincrement()) @unique // Auto-incrementing int
+//   cuidToken     String   @unique @default(cuid()) // Collision-resistant unique ID
+
+//   // --- STANDARD STRINGS & TEXT ---
+//   title         String   @db.VarChar(255) // Limited length string
+//   description   String?  @db.Text         // Unlimited length text, optional (?)
+
+//   // --- NUMBERS ---
+//   viewCount     Int      @default(0) // Standard 32-bit integer
+//   rating        Float?   // Floating point number
+//   revenue       Decimal  @db.Decimal(10, 2) // High precision for currency
+//   hugeNumber    BigInt   // For extremely large numbers (64-bit)
+
+//   // --- BOOLEANS & DATES ---
+//   isPublished   Boolean  @default(false)
+//   createdAt     DateTime @default(now()) // Auto-set on insert
+//   updatedAt     DateTime @updatedAt      // Auto-update on modification
+//   scheduledFor  DateTime @db.Date        // Date only (no time)
+//   timeOnly      DateTime @db.Time        // Time only (no date)
+
+//   // --- POSTGRES-SPECIFIC TYPES ---
+//   metadata      Json     @db.JsonB // Searchable JSON object
+//   tags          String[] // Arrays of any scalar type
+//   ipAddress     String?  @db.Inet  // PostgreSQL IP address type
+//   fileData      Bytes?   // Binary data buffer
+
+//   // --- ENUMS ---
+//   role          UserRole @default(USER)
+
+//   // --- ATTRIBUTE MAPPING (Renaming) ---
+//   // Exposes as 'camelCase' in TS, but saves as 'snake_case' in Postgres
+//   mappedColumn  String   @map("mapped_database_column")
+
+//   // --- RELATIONS ---
+//   // 1-to-1 Relation (Requires a unique foreign key on the other model)
+//   profile       Profile?
+
+//   // 1-to-Many Relation (One EverythingModel has many Posts)
+//   posts         Post[]
+
+//   // Many-to-Many Relation (Implicit - Prisma handles the join table automatically)
+//   categories    Category[]
+
+//   // Self-Relation (A model relating to itself, like Employees and a Manager)
+//   managerId     String?          @db.Uuid
+//   manager       EverythingModel? @relation("Management", fields: [managerId], references: [id])
+//   reports       EverythingModel[] @relation("Management")
+
+//   // --- BLOCK-LEVEL ATTRIBUTES ---
+//   // Composite Index: Speeds up queries filtering by both role and isPublished
+//   @@index([role, isPublished])
+
+//   // Composite Unique Constraint: No two rows can have the same title AND scheduledFor date
+//   @@unique([title, scheduledFor])
+
+//   // Renames the entire table in the actual database without changing the Prisma model name
+//   @@map("everything_models_table")
+// }
+
+// --- RELATED MODELS ---
+
+// model Profile {
+//   id                String          @id @default(uuid(7)) @db.Uuid
+//   bio               String?
+//   // 1-to-1 mapping back to EverythingModel
+//   everythingId      String          @unique @db.Uuid
+//   everythingModel   EverythingModel @relation(fields: [everythingId], references: [id], onDelete: Cascade)
+// }
+
+// model Post {
+//   id                String          @id @default(uuid(7)) @db.Uuid
+//   title             String
+//   // 1-to-Many mapping back to EverythingModel
+//   authorId          String          @db.Uuid
+//   author            EverythingModel @relation(fields: [authorId], references: [id], onDelete: SetNull)
+// }
+
+// model Category {
+//   id                String            @id @default(uuid(7)) @db.Uuid
+//   name              String            @unique
+//   // Many-to-Many mapping back to EverythingModel
+//   everythingModels  EverythingModel[]
+// }
+
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id           String   @id @default(uuid(7)) @db.Uuid
+  email        String   @unique
+  firstName    String
+  lastName     String?
+  password     String?
+  profileImage String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([firstName, lastName])
 }
