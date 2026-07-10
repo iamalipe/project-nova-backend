@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "commonjs",
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "allowJs": true,
     "sourceMap": true,
     "outDir": "./build",
@@ -11,7 +12,7 @@
     "strict": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "noImplicitAny": false
+    "noImplicitAny": true
   },
   "exclude": ["node_modules", "build", "migrate"]
 }
