@@ -13,7 +13,7 @@ export interface TempLogEntry {
   createdAt: string;
 }
 
-const TEMP_DIR = path.join(__dirname, '../temp');
+const TEMP_DIR = path.join(process.cwd(), 'temp');
 const TEMP_LOG_FILE = path.join(TEMP_DIR, 'temp-log.json');
 const MAX_ENTRIES = 100;
 
