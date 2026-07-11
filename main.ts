@@ -27,7 +27,6 @@ import { swaggerSpec } from './config/swagger';
 import { globalErrorHandler } from './middlewares/error.middleware';
 import { resTime } from './middlewares/resTime.middleware';
 import { AuthUser } from './types/general.type';
-import './utils/appError.utils';
 import { logger, requestLogger } from './utils/logger';
 import { startMetricsServer } from './utils/metrics.utils';
 
@@ -117,15 +116,4 @@ const start = async (): Promise<void> => {
 
 start();
 
-// Keep AppError declaration if you use it globally
-declare global {
-  var AppError: {
-    new (
-      message: string,
-      options?: { path?: string; status?: number },
-    ): AppError;
-  };
-  interface AppError extends Error {
-    options?: { path?: string; status?: number };
-  }
-}
+
