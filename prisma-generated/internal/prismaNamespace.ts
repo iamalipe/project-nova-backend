@@ -384,6 +384,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
+  McpOAuthClient: 'McpOAuthClient',
+  McpOAuthCode: 'McpOAuthCode',
   Product: 'Product',
   User: 'User',
   UserSession: 'UserSession'
@@ -402,10 +404,158 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "product" | "user" | "userSession"
+    modelProps: "mcpOAuthClient" | "mcpOAuthCode" | "product" | "user" | "userSession"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
+    McpOAuthClient: {
+      payload: Prisma.$McpOAuthClientPayload<ExtArgs>
+      fields: Prisma.McpOAuthClientFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.McpOAuthClientFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthClientPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.McpOAuthClientFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthClientPayload>
+        }
+        findFirst: {
+          args: Prisma.McpOAuthClientFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthClientPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.McpOAuthClientFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthClientPayload>
+        }
+        findMany: {
+          args: Prisma.McpOAuthClientFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthClientPayload>[]
+        }
+        create: {
+          args: Prisma.McpOAuthClientCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthClientPayload>
+        }
+        createMany: {
+          args: Prisma.McpOAuthClientCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.McpOAuthClientCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthClientPayload>[]
+        }
+        delete: {
+          args: Prisma.McpOAuthClientDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthClientPayload>
+        }
+        update: {
+          args: Prisma.McpOAuthClientUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthClientPayload>
+        }
+        deleteMany: {
+          args: Prisma.McpOAuthClientDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.McpOAuthClientUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.McpOAuthClientUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthClientPayload>[]
+        }
+        upsert: {
+          args: Prisma.McpOAuthClientUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthClientPayload>
+        }
+        aggregate: {
+          args: Prisma.McpOAuthClientAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMcpOAuthClient>
+        }
+        groupBy: {
+          args: Prisma.McpOAuthClientGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.McpOAuthClientGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.McpOAuthClientCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.McpOAuthClientCountAggregateOutputType> | number
+        }
+      }
+    }
+    McpOAuthCode: {
+      payload: Prisma.$McpOAuthCodePayload<ExtArgs>
+      fields: Prisma.McpOAuthCodeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.McpOAuthCodeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthCodePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.McpOAuthCodeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthCodePayload>
+        }
+        findFirst: {
+          args: Prisma.McpOAuthCodeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthCodePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.McpOAuthCodeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthCodePayload>
+        }
+        findMany: {
+          args: Prisma.McpOAuthCodeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthCodePayload>[]
+        }
+        create: {
+          args: Prisma.McpOAuthCodeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthCodePayload>
+        }
+        createMany: {
+          args: Prisma.McpOAuthCodeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.McpOAuthCodeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthCodePayload>[]
+        }
+        delete: {
+          args: Prisma.McpOAuthCodeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthCodePayload>
+        }
+        update: {
+          args: Prisma.McpOAuthCodeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthCodePayload>
+        }
+        deleteMany: {
+          args: Prisma.McpOAuthCodeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.McpOAuthCodeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.McpOAuthCodeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthCodePayload>[]
+        }
+        upsert: {
+          args: Prisma.McpOAuthCodeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$McpOAuthCodePayload>
+        }
+        aggregate: {
+          args: Prisma.McpOAuthCodeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMcpOAuthCode>
+        }
+        groupBy: {
+          args: Prisma.McpOAuthCodeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.McpOAuthCodeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.McpOAuthCodeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.McpOAuthCodeCountAggregateOutputType> | number
+        }
+      }
+    }
     Product: {
       payload: Prisma.$ProductPayload<ExtArgs>
       fields: Prisma.ProductFieldRefs
@@ -667,6 +817,34 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const McpOAuthClientScalarFieldEnum = {
+  id: 'id',
+  clientId: 'clientId',
+  clientName: 'clientName',
+  redirectUris: 'redirectUris',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type McpOAuthClientScalarFieldEnum = (typeof McpOAuthClientScalarFieldEnum)[keyof typeof McpOAuthClientScalarFieldEnum]
+
+
+export const McpOAuthCodeScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  clientId: 'clientId',
+  userId: 'userId',
+  redirectUri: 'redirectUri',
+  codeChallenge: 'codeChallenge',
+  codeChallengeMethod: 'codeChallengeMethod',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type McpOAuthCodeScalarFieldEnum = (typeof McpOAuthCodeScalarFieldEnum)[keyof typeof McpOAuthCodeScalarFieldEnum]
+
+
 export const ProductScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -723,45 +901,12 @@ export const QueryMode = {
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
-export const ProductOrderByRelevanceFieldEnum = {
-  id: 'id',
-  name: 'name',
-  description: 'description',
-  category: 'category',
-  userId: 'userId'
-} as const
-
-export type ProductOrderByRelevanceFieldEnum = (typeof ProductOrderByRelevanceFieldEnum)[keyof typeof ProductOrderByRelevanceFieldEnum]
-
-
 export const NullsOrder = {
   first: 'first',
   last: 'last'
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
-export const UserOrderByRelevanceFieldEnum = {
-  id: 'id',
-  email: 'email',
-  firstName: 'firstName',
-  lastName: 'lastName',
-  password: 'password',
-  profileImage: 'profileImage'
-} as const
-
-export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
-
-
-export const UserSessionOrderByRelevanceFieldEnum = {
-  id: 'id',
-  ip: 'ip',
-  userAgent: 'userAgent',
-  userId: 'userId'
-} as const
-
-export type UserSessionOrderByRelevanceFieldEnum = (typeof UserSessionOrderByRelevanceFieldEnum)[keyof typeof UserSessionOrderByRelevanceFieldEnum]
 
 
 
@@ -785,20 +930,6 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
- * Reference to a field of type 'Decimal'
- */
-export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
-    
-
-
-/**
- * Reference to a field of type 'Decimal[]'
- */
-export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
-    
-
-
-/**
  * Reference to a field of type 'DateTime'
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -809,6 +940,20 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal'
+ */
+export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal[]'
+ */
+export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
     
 
 
@@ -935,6 +1080,8 @@ export type PrismaClientOptions = ({
   queryPlanCacheMaxSize?: number
 }
 export type GlobalOmitConfig = {
+  mcpOAuthClient?: Prisma.McpOAuthClientOmit
+  mcpOAuthCode?: Prisma.McpOAuthCodeOmit
   product?: Prisma.ProductOmit
   user?: Prisma.UserOmit
   userSession?: Prisma.UserSessionOmit

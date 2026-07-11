@@ -15,6 +15,7 @@ import {
   tempLogController,
 } from './app/app.controller';
 import appRouter from './app/app.route';
+import oauthRouter from './app/oauth/oauth.route';
 import {
   API_DOCS_UI,
   CORS_OPTIONS,
@@ -86,6 +87,7 @@ if (API_DOCS_UI === 'SWAGGER') {
 }
 
 // 5. Mount App Router & Error Handler
+app.route('/oauth', oauthRouter);
 app.route('/v1', appRouter);
 app.onError(globalErrorHandler);
 

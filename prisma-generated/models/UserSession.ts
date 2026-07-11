@@ -201,7 +201,6 @@ export type UserSessionOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
-  _relevance?: Prisma.UserSessionOrderByRelevanceInput
 }
 
 export type UserSessionWhereUniqueInput = Prisma.AtLeast<{
@@ -311,12 +310,6 @@ export type UserSessionListRelationFilter = {
 
 export type UserSessionOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type UserSessionOrderByRelevanceInput = {
-  fields: Prisma.UserSessionOrderByRelevanceFieldEnum | Prisma.UserSessionOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type UserSessionCountOrderByAggregateInput = {

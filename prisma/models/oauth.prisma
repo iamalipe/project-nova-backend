@@ -1,0 +1,25 @@
+model McpOAuthClient {
+  id           String   @id @default(uuid(7)) @db.Uuid
+  clientId     String   @unique
+  clientName   String
+  redirectUris String[]
+  userId       String?  @db.Uuid
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([clientId])
+}
+
+model McpOAuthCode {
+  id                  String   @id @default(uuid(7)) @db.Uuid
+  code                String   @unique
+  clientId            String
+  userId              String   @db.Uuid
+  redirectUri         String
+  codeChallenge       String
+  codeChallengeMethod String
+  expiresAt           DateTime
+  createdAt           DateTime @default(now())
+
+  @@index([code])
+}

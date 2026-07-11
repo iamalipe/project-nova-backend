@@ -51,6 +51,8 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  McpOAuthClient: 'McpOAuthClient',
+  McpOAuthCode: 'McpOAuthCode',
   Product: 'Product',
   User: 'User',
   UserSession: 'UserSession'
@@ -70,6 +72,34 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const McpOAuthClientScalarFieldEnum = {
+  id: 'id',
+  clientId: 'clientId',
+  clientName: 'clientName',
+  redirectUris: 'redirectUris',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type McpOAuthClientScalarFieldEnum = (typeof McpOAuthClientScalarFieldEnum)[keyof typeof McpOAuthClientScalarFieldEnum]
+
+
+export const McpOAuthCodeScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  clientId: 'clientId',
+  userId: 'userId',
+  redirectUri: 'redirectUri',
+  codeChallenge: 'codeChallenge',
+  codeChallengeMethod: 'codeChallengeMethod',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type McpOAuthCodeScalarFieldEnum = (typeof McpOAuthCodeScalarFieldEnum)[keyof typeof McpOAuthCodeScalarFieldEnum]
 
 
 export const ProductScalarFieldEnum = {
@@ -128,43 +158,10 @@ export const QueryMode = {
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
-export const ProductOrderByRelevanceFieldEnum = {
-  id: 'id',
-  name: 'name',
-  description: 'description',
-  category: 'category',
-  userId: 'userId'
-} as const
-
-export type ProductOrderByRelevanceFieldEnum = (typeof ProductOrderByRelevanceFieldEnum)[keyof typeof ProductOrderByRelevanceFieldEnum]
-
-
 export const NullsOrder = {
   first: 'first',
   last: 'last'
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
-export const UserOrderByRelevanceFieldEnum = {
-  id: 'id',
-  email: 'email',
-  firstName: 'firstName',
-  lastName: 'lastName',
-  password: 'password',
-  profileImage: 'profileImage'
-} as const
-
-export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
-
-
-export const UserSessionOrderByRelevanceFieldEnum = {
-  id: 'id',
-  ip: 'ip',
-  userAgent: 'userAgent',
-  userId: 'userId'
-} as const
-
-export type UserSessionOrderByRelevanceFieldEnum = (typeof UserSessionOrderByRelevanceFieldEnum)[keyof typeof UserSessionOrderByRelevanceFieldEnum]
 

@@ -3,6 +3,7 @@ import { Hono } from 'hono';
 import { jwtAuth } from '../middlewares/jwtAuth.middleware';
 import authRouter from './auth/auth.route';
 import productRouter from './product/product.route';
+import { mcpRouter, mcpConnectionRouter } from './mcp/mcp.route';
 
 import {
   getImageController,
@@ -20,6 +21,9 @@ appRouter.route('/auth', authRouter);
 // Note the '/*' wildcard — this tells Hono to apply the middleware to all nested routes
 appRouter.use('/product/*', jwtAuth);
 appRouter.route('/product', productRouter);
+
+appRouter.route('/mcp', mcpRouter);
+appRouter.route('/mcp/connections', mcpConnectionRouter);
 
 // Standard controllers
 appRouter.get('/sse-demo', sseDemoController);
