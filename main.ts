@@ -8,6 +8,7 @@ import { compress } from 'hono/compress';
 import { cors } from 'hono/cors';
 import { trimTrailingSlash } from 'hono/trailing-slash';
 
+import { Server as HttpServer } from 'http';
 import {
   healthCheckController,
   rootController,
@@ -17,19 +18,20 @@ import appRouter from './app/app.route';
 import {
   API_DOCS_UI,
   CORS_OPTIONS,
+  ENABLE_SOCKET,
   METRICS_SERVER_ENABLED,
   PORT,
   SWAGGER_PASSWORD,
   SWAGGER_USERNAME,
 } from './config/default';
 import { scalarHTML } from './config/static';
-import { limiter } from './middlewares/limiter.middleware';
-import { cacheConnect, cacheDisconnect } from './services/cache.service';
-import { dbConnect, dbDisconnect } from './services/prisma.service';
-// import type { PublicUser } from './types/PublicUser.type';
 import { swaggerSpec } from './config/swagger';
 import { globalErrorHandler } from './middlewares/error.middleware';
+import { limiter } from './middlewares/limiter.middleware';
 import { resTime } from './middlewares/resTime.middleware';
+import { cacheConnect, cacheDisconnect } from './services/cache.service';
+import { dbConnect, dbDisconnect } from './services/prisma.service';
+import { initSocket } from './services/socket.service';
 import { AuthUser } from './types/general.type';
 import { logger, requestLogger } from './utils/logger';
 import { startMetricsServer } from './utils/metrics.utils';
@@ -98,7 +100,7 @@ const start = async (): Promise<void> => {
       startMetricsServer();
     }
 
-    serve(
+    const server = serve(
       {
         fetch: app.fetch,
         port: Number(PORT),
@@ -107,6 +109,11 @@ const start = async (): Promise<void> => {
         logger.info(`App is running on http://localhost:${info.port}`);
       },
     );
+
+    if (ENABLE_SOCKET) {
+      initSocket(server as unknown as HttpServer);
+      logger.info('Socket.io server initialized and running.');
+    }
   } catch (error: unknown) {
     if (error instanceof Error) {
       logger.error(error.message);

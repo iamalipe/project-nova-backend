@@ -67,3 +67,7 @@ export const TWILIO_NUMBER = process.env.TWILIO_NUMBER || '';
 export const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID || '';
 export const TWILIO_API_KEY_SID = process.env.TWILIO_API_KEY_SID || '';
 export const TWILIO_API_KEY_SECRET = process.env.TWILIO_API_KEY_SECRET || '';
+
+// SOCKET
+const _ENABLE_SOCKET = process.env.ENABLE_SOCKET || 'false';
+export const ENABLE_SOCKET = _ENABLE_SOCKET === 'true';
