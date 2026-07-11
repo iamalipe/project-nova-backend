@@ -45,9 +45,9 @@ export const sortArraySchema = z
 export const zFileSchema = z.object({
   fieldname: z.string(),
   originalname: z.string(),
-  encoding: z.string(),
+  encoding: z.string().optional(),
   mimetype: z.string(),
-  destination: z.string(),
+  destination: z.string().optional(),
   filename: z.string(),
   path: z.string(),
   size: z.number(),
@@ -55,11 +55,12 @@ export const zFileSchema = z.object({
 export const zFileS3Schema = z.object({
   fieldname: z.string(),
   originalname: z.string(),
-  encoding: z.string(),
+  encoding: z.string().optional(),
   mimetype: z.string(),
-  destination: z.string(),
+  destination: z.string().optional(),
   filename: z.string(),
   path: z.string(),
   size: z.number(),
   s3Url: z.string(),
 });
+

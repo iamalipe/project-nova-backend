@@ -4,6 +4,7 @@ import fsp from 'node:fs/promises';
 import path from 'node:path';
 
 import { s3Upload } from '../services/s3.services';
+import { AppError } from '../utils/appError.utils';
 
 // Ensure temp folder exists
 const TEMP_DIR = path.join(process.cwd(), 'temp');
@@ -135,6 +136,26 @@ export const validateFiles = (params?: ValidateMulterType) => {
     // Pass the perfectly structured files down to the controller using Hono Context
     c.set('uploadedFiles', parsedFiles);
 
-    await next();
+    try {
+      await next();
+    } finally {
+      // Clean up any remaining local temp files
+      for (const fieldName in parsedFiles) {
+        const fileData = parsedFiles[fieldName];
+        if (!fileData) continue;
+        const filesToCleanup = Array.isArray(fileData) ? fileData : [fileData];
+        for (const file of filesToCleanup) {
+          if (file && file.path) {
+            try {
+              if (fs.existsSync(file.path)) {
+                await fsp.unlink(file.path);
+              }
+            } catch (err) {
+              // Ignore failure to delete
+            }
+          }
+        }
+      }
+    }
   });
 };

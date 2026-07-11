@@ -1,7 +1,7 @@
 export const swaggerSpec = {
   openapi: '3.0.0',
   info: {
-    title: 'Express TypeScript Backend API',
+    title: 'Hono & Prisma Retail Backend API',
     version: '1.0.0',
     description: 'Modern full-stack TypeScript template API documentation powered by Scalar.',
     contact: {
@@ -41,7 +41,7 @@ export const swaggerSpec = {
                 schema: {
                   type: 'object',
                   properties: {
-                    message: { type: 'string', example: 'Welcome to Express TypeScript Template API!' },
+                    message: { type: 'string', example: 'Welcome to Hono & Prisma Retail Backend API!' },
                   },
                 },
               },
@@ -75,7 +75,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/auth/register': {
+    '/v1/auth/register': {
       post: {
         summary: 'Register User',
         description: 'Create a new user account with email, name, and password.',
@@ -87,11 +87,12 @@ export const swaggerSpec = {
             'application/json': {
               schema: {
                 type: 'object',
-                required: ['email', 'name', 'password'],
+                required: ['email', 'firstName', 'lastName', 'password'],
                 properties: {
                   email: { type: 'string', format: 'email', example: 'user@example.com' },
-                  name: { type: 'string', minLength: 2, example: 'John Doe' },
-                  password: { type: 'string', minLength: 6, example: 'password123' },
+                  firstName: { type: 'string', minLength: 1, example: 'John' },
+                  lastName: { type: 'string', minLength: 1, example: 'Doe' },
+                  password: { type: 'string', minLength: 8, example: 'password123' },
                 },
               },
             },
@@ -116,7 +117,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/auth/login': {
+    '/v1/auth/login': {
       post: {
         summary: 'Login User',
         description: 'Authenticate user with email and password to receive access cookies/tokens.',
@@ -156,7 +157,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/auth/me': {
+    '/v1/auth/me': {
       get: {
         summary: 'Get Current User Profile',
         description: 'Retrieve details of the currently logged-in user.',
@@ -180,7 +181,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/auth/logout': {
+    '/v1/auth/logout': {
       get: {
         summary: 'Logout User',
         description: 'Clear authentication cookies and terminate session.',
@@ -203,7 +204,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/auth/profile-image': {
+    '/v1/auth/profile-image': {
       put: {
         summary: 'Update Profile Image',
         description: 'Upload a new profile image (PNG/JPEG) to S3.',
@@ -250,7 +251,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/auth/passkey/register': {
+    '/v1/auth/passkey/register': {
       post: {
         summary: 'Register Passkey Option',
         description: 'Generate registration options for adding a WebAuthn passkey.',
@@ -262,7 +263,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/auth/passkey/register-verify': {
+    '/v1/auth/passkey/register-verify': {
       post: {
         summary: 'Verify Passkey Registration',
         description: 'Verify the credentials payload sent by the WebAuthn client registration flow.',
@@ -284,7 +285,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/auth/passkey/login': {
+    '/v1/auth/passkey/login': {
       post: {
         summary: 'Initiate Passkey Login',
         description: 'Generate WebAuthn assertion authentication options for passkey sign-in.',
@@ -311,7 +312,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/auth/passkey/login-verify': {
+    '/v1/auth/passkey/login-verify': {
       post: {
         summary: 'Verify Passkey Login',
         description: 'Verify the credentials payload sent by the WebAuthn client login flow.',
@@ -339,7 +340,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/product': {
+    '/v1/product': {
       post: {
         summary: 'Create Product',
         description: 'Create a new product listing.',
@@ -411,7 +412,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/product/many': {
+    '/v1/product/many': {
       post: {
         summary: 'Bulk Create Products',
         description: 'Create multiple product listings in a single payload.',
@@ -461,7 +462,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/product/{id}': {
+    '/v1/product/{id}': {
       get: {
         summary: 'Get Product By ID',
         description: 'Retrieve a single product details.',
@@ -547,7 +548,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/blog': {
+    '/v1/blog': {
       post: {
         summary: 'Create Blog Post',
         description: 'Create a new blog post.',
@@ -619,7 +620,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/blog/{id}': {
+    '/v1/blog/{id}': {
       get: {
         summary: 'Get Blog Post By ID',
         description: 'Retrieve a single blog post details.',
@@ -705,7 +706,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/change-log': {
+    '/v1/change-log': {
       get: {
         summary: 'Get Changelogs',
         description: 'Retrieve a list of change log entries.',
@@ -722,7 +723,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/change-log/{id}': {
+    '/v1/change-log/{id}': {
       get: {
         summary: 'Get Changelog By ID',
         description: 'Retrieve detail of a specific changelog entry.',
@@ -736,7 +737,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/ip/lookup': {
+    '/v1/ip/lookup': {
       get: {
         summary: 'IP Geolocation Lookup',
         description: 'Look up geographical and ISP information for a specific IP address.',
@@ -772,7 +773,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/ip/update': {
+    '/v1/ip/update': {
       post: {
         summary: 'Update Geolocation Database',
         description: 'Manually trigger a download of the latest MaxMind IP database.',
@@ -784,7 +785,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/chat/temp': {
+    '/v1/chat/temp': {
       post: {
         summary: 'Create Temporary Chat Stream',
         description: 'Create an anonymous, non-persisted AI chat session. Responds using SSE.',
@@ -820,7 +821,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/chat/new': {
+    '/v1/chat/new': {
       post: {
         summary: 'Create Authenticated Chat Stream',
         description: 'Start a new persisted chat thread and receive SSE stream responses.',
@@ -855,7 +856,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/chat/{id}': {
+    '/v1/chat/{id}': {
       post: {
         summary: 'Continue Chat Stream',
         description: 'Post a new user message to an existing persisted chat thread. Returns SSE responses.',
@@ -938,7 +939,7 @@ export const swaggerSpec = {
         },
       },
     },
-    '/api/chat': {
+    '/v1/chat': {
       get: {
         summary: 'List Chat Threads',
         description: 'Retrieve a list of chat threads created by the logged-in user.',

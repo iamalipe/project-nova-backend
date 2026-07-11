@@ -1,20 +1,31 @@
 import KeyvRedis from '@keyv/redis';
 import Keyv from 'keyv';
+import { createClient } from 'redis';
 
 import { CACHE_PROVIDER, REDIS_URL } from '../config/default';
 import { logger } from '../utils/logger';
+
+export const redisClient =
+  CACHE_PROVIDER === 'REDIS' && REDIS_URL
+    ? createClient({ url: REDIS_URL })
+    : null;
 
 let keyv: Keyv;
 
 export async function cacheConnect() {
   if (CACHE_PROVIDER === 'REDIS') {
-    if (!REDIS_URL) {
+    if (!REDIS_URL || !redisClient) {
       logger.error(`Redis Database URL not set.`);
       return;
     }
 
-    // FIXED: Passed KeyvRedis inside the configuration object
-    keyv = new Keyv({ store: new KeyvRedis(REDIS_URL) });
+    redisClient.on('error', (err) => {
+      logger.error('Redis Client Error', err);
+    });
+
+    await redisClient.connect();
+
+    keyv = new Keyv({ store: new KeyvRedis(redisClient as any) });
     logger.info(`Successfully connected to Redis Database via Keyv.`);
   } else {
     // Default to in-memory store
@@ -31,6 +42,10 @@ export async function cacheDisconnect() {
   if (keyv) {
     await keyv.disconnect();
     logger.info(`Successfully disconnected from cache.`);
+  }
+  if (redisClient) {
+    await redisClient.disconnect().catch(() => {});
+    logger.info(`Successfully disconnected from Redis.`);
   }
 }
 

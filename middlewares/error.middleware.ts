@@ -3,6 +3,7 @@ import { HTTPException } from 'hono/http-exception'; // 1. Import this
 import { z } from 'zod';
 
 import { Prisma } from '../prisma-generated/client';
+import { AppError } from '../utils/appError.utils';
 import { logger } from '../utils/logger';
 
 export const globalErrorHandler: ErrorHandler = (err, c) => {

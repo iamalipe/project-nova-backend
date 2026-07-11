@@ -1,7 +1,8 @@
 import * as argon2 from 'argon2';
 import { sign, verify } from 'hono/jwt';
 import { JWT_EXPIRY, JWT_SECRET } from '../config/default';
-import type { AuthUser } from '../types/general.type'; // Updated to match your previous snippet
+import type { AuthUser } from '../types/general.type';
+import { parseDurationToSeconds } from './general.utils';
 
 /**
  * Uses argon2 to securely hash a given password.
@@ -21,7 +22,7 @@ export const comparePassword = async (hash: string, password: string) => {
 
 // In generateJWT
 export const generateJWT = async (payload: { [key: string]: any }) => {
-  const exp = Math.floor(Date.now() / 1000) + Number(JWT_EXPIRY);
+  const exp = Math.floor(Date.now() / 1000) + parseDurationToSeconds(JWT_EXPIRY);
   const tokenPayload = { ...payload, exp };
 
   // ADD 'HS256' HERE

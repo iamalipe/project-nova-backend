@@ -4,6 +4,7 @@ import { createMiddleware } from 'hono/factory';
 import { cacheGet, cacheSet } from '../services/cache.service';
 import { db } from '../services/prisma.service';
 import type { AuthUser } from '../types/general.type';
+import { AppError } from '../utils/appError.utils';
 import { verifyJWT } from '../utils/auth.utils';
 
 export const jwtAuth = createMiddleware(async (c, next) => {

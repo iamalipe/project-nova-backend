@@ -1,4 +1,4 @@
-global.AppError = class AppError extends Error {
+export class AppError extends Error {
   options?: { path?: string; status?: number };
 
   constructor(message: string, options?: { path?: string; status?: number }) {
@@ -6,4 +6,5 @@ global.AppError = class AppError extends Error {
     this.options = options;
     this.name = 'AppError';
   }
-};
+}
+

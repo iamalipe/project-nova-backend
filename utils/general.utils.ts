@@ -41,3 +41,36 @@ export const updateCheck = (newValue: any, oldValue: any) => {
   if (newValue === oldValue) return false;
   return true;
 };
+
+/**
+ * Parses a duration string (e.g. "30min", "2days", "1h") and returns the duration in seconds.
+ */
+export const parseDurationToSeconds = (duration: string | number): number => {
+  if (typeof duration === 'number') return duration;
+  const match = duration.match(/^(\d+)\s*(s|sec|seconds|m|min|minutes|h|hours|d|days|w|weeks)?$/);
+  if (!match) return 3600; // default 1 hour
+  const value = parseInt(match[1], 10);
+  const unit = match[2];
+  switch (unit) {
+    case 's':
+    case 'sec':
+    case 'seconds':
+      return value;
+    case 'm':
+    case 'min':
+    case 'minutes':
+      return value * 60;
+    case 'h':
+    case 'hours':
+      return value * 60 * 60;
+    case 'd':
+    case 'days':
+      return value * 24 * 60 * 60;
+    case 'w':
+    case 'weeks':
+      return value * 7 * 24 * 60 * 60;
+    default:
+      return value;
+  }
+};
+

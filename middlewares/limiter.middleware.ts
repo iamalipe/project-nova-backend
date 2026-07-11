@@ -1,9 +1,7 @@
 import { getConnInfo } from '@hono/node-server/conninfo';
-import { rateLimiter } from 'hono-rate-limiter';
-
-// If you want to use Redis, you still use the standard rate-limit-redis package
-// import RedisStore from 'rate-limit-redis';
-// import { redisClient } from '../services/cache.service';
+import { rateLimiter, RedisStore } from 'hono-rate-limiter';
+import { CACHE_PROVIDER } from '../config/default';
+import { redisClient } from '../services/cache.service';
 
 export const limiter = rateLimiter({
   windowMs: 1 * 60 * 1000, // 1 minute
@@ -24,8 +22,11 @@ export const limiter = rateLimiter({
     return info.remote.address || 'anonymous';
   },
 
-  // NOTE: and be use redis
-  // store: new RedisStore({
-  //   sendCommand: (...args: string[]) => redisClient.sendCommand(args),
-  // }),
+  store:
+    CACHE_PROVIDER === 'REDIS' && redisClient
+      ? new RedisStore({
+          client: redisClient as any,
+        })
+      : undefined,
 });
+

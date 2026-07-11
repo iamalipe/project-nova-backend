@@ -3,6 +3,7 @@ import { deleteCookie, setCookie } from 'hono/cookie';
 import { cacheDel, cacheGet, cacheSet } from '../../services/cache.service';
 import { db } from '../../services/prisma.service';
 import { AuthUser } from '../../types/general.type';
+import { AppError } from '../../utils/appError.utils';
 import {
   comparePassword,
   generateJWT,
