@@ -4,7 +4,7 @@ export const scalarHTML = `
 <!DOCTYPE html>
 <html>
   <head>
-    <title>API Reference | Hono Backend</title>
+    <title>Project Nova API Reference | Hono Backend</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>body { margin: 0; }</style>
@@ -25,7 +25,7 @@ export const getRootHTML = (frontendUrl: string): string => {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SafalEvents API | Console</title>
+    <title>Project Nova API | Console</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -149,9 +149,9 @@ export const getRootHTML = (frontendUrl: string): string => {
       <div class="status-pulse">
         <span class="status-dot"></span> Active & Online
       </div>
-      <h1>SafalEvents Backend</h1>
+      <h1>Project Nova Backend</h1>
       <p class="subtitle">Welcome to the central high-performance Hono & Prisma API gateway dashboard.</p>
-      
+
       <div class="links-group">
         <a href="${frontendUrl}" target="_blank" class="btn">
           <span>Go to Frontend</span>
@@ -166,7 +166,7 @@ export const getRootHTML = (frontendUrl: string): string => {
           <span class="btn-arrow">→</span>
         </a>
       </div>
-      
+
       <p class="footer">Project Nova Gateway • Built with Hono & Prisma</p>
     </div>
   </body>
@@ -189,7 +189,7 @@ export const getTempLogHTML = (logs: TempLogEntry[]): string => {
         log.channel === 'email'
           ? 'background: rgba(167, 139, 250, 0.15); border: 1px solid rgba(167, 139, 250, 0.25); color: #c4b5fd;'
           : 'background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.25); color: #7dd3fc;';
-      
+
       const formattedDate = new Date(log.createdAt).toLocaleString();
 
       return `
@@ -216,7 +216,7 @@ export const getTempLogHTML = (logs: TempLogEntry[]): string => {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Email & SMS Sandbox Logs</title>
+    <title>Project Nova Email & SMS Sandbox Logs</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">

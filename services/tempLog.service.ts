@@ -1,7 +1,7 @@
-import { randomUUIDv7 } from 'crypto';
 import fs from 'fs';
 import path from 'path';
 import { logger } from '../utils/logger';
+import { getUUIDv7 } from '../utils/uuid.utils';
 
 export interface TempLogEntry {
   id: string;
@@ -34,7 +34,7 @@ export const recordTempLog = (
     const logs = getTempLogs();
     logs.unshift({
       ...entry,
-      id: randomUUIDv7(),
+      id: getUUIDv7(),
       createdAt: new Date().toISOString(),
     });
     fs.writeFileSync(
