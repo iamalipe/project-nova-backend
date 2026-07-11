@@ -50,9 +50,10 @@ export const socketAuthenticate = async (
     let user = await cacheGet<AuthUser>(key);
 
     if (!user) {
-      // Fetch user from Prisma Database
+      // Fetch user from Prisma Database (omitting the password field)
       const userRes = await db.user.findUnique({
         where: { id: userId },
+        omit: { password: true },
       });
 
       if (!userRes) {
@@ -61,9 +62,7 @@ export const socketAuthenticate = async (
         );
       }
 
-      // Exclude password field
-      const { password, ...userWithoutPassword } = userRes;
-      user = userWithoutPassword as unknown as AuthUser;
+      user = userRes as unknown as AuthUser;
 
       // Set user in cache for 5 minutes
       await cacheSet(key, user, 60 * 5);

@@ -29,18 +29,13 @@ export const jwtAuth = createMiddleware(async (c, next) => {
 
     if (!user) {
       // UPDATED TO PRISMA SYNTAX: findUnique instead of Mongoose's findById
-      const userRes = await db.user.findUnique({
+      const user = await db.user.findUnique({
         where: { id: decoded.id },
       });
 
-      if (!userRes) {
+      if (!user) {
         throw new AppError('Unauthorized', { status: 401 });
       }
-
-      // Prisma already returns a plain JavaScript object, so no need for .toObject().
-      // You may want to exclude the password here if it's not handled by the type/query.
-      const { password, ...userWithoutPassword } = userRes;
-      user = userWithoutPassword as unknown as AuthUser;
 
       await cacheSet(key, user, 60 * 5); // 5 min cache
     }

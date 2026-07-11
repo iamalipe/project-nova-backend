@@ -7,7 +7,14 @@ import { logger } from '../utils/logger';
 import { databaseResponseTimeHistogram } from '../utils/metrics.utils';
 
 const adapter = new PrismaPg({ connectionString: DATABASE_URL });
-export const db = new PrismaClient({ adapter }).$extends({
+export const db = new PrismaClient({
+  adapter,
+  omit: {
+    user: {
+      password: true,
+    },
+  },
+}).$extends({
   query: {
     async $allOperations({ operation, model, args, query }) {
       const endTimer = databaseResponseTimeHistogram.startTimer();

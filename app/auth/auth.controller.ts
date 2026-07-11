@@ -73,6 +73,9 @@ export const loginController = async (c: Context) => {
 
   const user = await db.user.findFirst({
     where: { email: { equals: body.email, mode: 'insensitive' } },
+    omit: {
+      password: false,
+    },
   });
 
   if (!user)
@@ -183,15 +186,11 @@ export const profileImageUpdate = async (c: Context) => {
     data: { profileImage },
   });
 
-  await cacheDel([`user:${user.id}`]);
-  await cacheDel([`jwt-auth-middleware-user:${user.id}`]); // Clear the auth middleware cache too!
-
-  // Strip password before returning
-  const { password, ...safeUser } = updatedUser;
+  await cacheDel([`jwt-auth-middleware-user:${user.id}`, `user:${user.id}`]); // Clear the auth middleware cache too!
 
   return c.json({
     success: true,
-    data: safeUser,
+    data: updatedUser,
     errors: [],
     timestamp: new Date().toISOString(),
     message: 'success',
