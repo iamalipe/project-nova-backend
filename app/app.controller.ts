@@ -1,11 +1,77 @@
 import type { Context } from 'hono';
 import { stream, streamSSE } from 'hono/streaming';
 
+import { FRONTEND_URL } from '../config/default';
 import { s3Get } from '../services/s3.services';
+import { getTempLogs } from '../services/tempLog.service';
 import { AppError } from '../utils/appError.utils';
 
 export const rootController = async (c: Context) => {
-  return c.text('Hello World');
+  return c.html(`<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SafalEvents API</title>
+  </head>
+  <body>
+    <h1>SafalEvents Backend</h1>
+    <p>Frontend URL: <a href="${FRONTEND_URL}">${FRONTEND_URL}</a></p>
+    <p>Temp Log: <a href="/temp-log">/temp-log</a></p>
+  </body>
+</html>`);
+};
+
+const escapeHtml = (value: string) =>
+  value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+
+export const tempLogController = async (c: Context) => {
+  const logs = getTempLogs();
+
+  const rows = logs
+    .map(
+      (log) => `
+    <tr>
+      <td>${escapeHtml(log.createdAt)}</td>
+      <td>${escapeHtml(log.channel.toUpperCase())}</td>
+      <td>${escapeHtml(log.to)}</td>
+      <td>${escapeHtml(log.subject || '-')}</td>
+      <td><pre>${escapeHtml(log.content)}</pre></td>
+    </tr>`,
+    )
+    .join('');
+
+  c.html(`<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SafalEvents Demo Log</title>
+    <style>
+      body { font-family: sans-serif; margin: 2rem; }
+      table { border-collapse: collapse; width: 100%; }
+      th, td { border: 1px solid #ccc; padding: 8px; text-align: left; vertical-align: top; }
+      th { background: #f5f5f5; }
+      pre { white-space: pre-wrap; word-break: break-word; margin: 0; }
+      tr:nth-child(even) { background: #fafafa; }
+    </style>
+  </head>
+  <body>
+    <h1>Demo Email &amp; SMS Log</h1>
+    <p>Last ${logs.length} demo message(s) captured while EMAIL_ENABLE / SMS_ENABLE are disabled.</p>
+    <table>
+      <thead>
+        <tr><th>Time</th><th>Channel</th><th>To</th><th>Subject</th><th>Content</th></tr>
+      </thead>
+      <tbody>
+        ${rows || '<tr><td colspan="5">No demo logs yet.</td></tr>'}
+      </tbody>
+    </table>
+  </body>
+</html>`);
 };
 
 export const healthCheckController = async (c: Context) => {

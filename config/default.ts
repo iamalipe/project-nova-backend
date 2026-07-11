@@ -49,3 +49,21 @@ export const CACHE_PROVIDER: 'KEYV' | 'REDIS' =
 
 // AI
 export const GOOGLE_GEMINI_API_KEY = process.env.GOOGLE_GEMINI_API_KEY || '';
+
+// EMAIL
+export const _EMAIL_ENABLE = process.env.EMAIL_ENABLE || 'false';
+export const EMAIL_ENABLE = _EMAIL_ENABLE === 'true';
+
+// SMS
+export const _SMS_ENABLE = process.env.SMS_ENABLE || 'false';
+export const SMS_ENABLE = _SMS_ENABLE === 'true';
+
+// SENDGRID
+export const SENDGRID_EMAIL_FROM = process.env.SENDGRID_EMAIL_FROM || '';
+export const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY || '';
+
+// TWILIO
+export const TWILIO_NUMBER = process.env.TWILIO_NUMBER || '';
+export const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID || '';
+export const TWILIO_API_KEY_SID = process.env.TWILIO_API_KEY_SID || '';
+export const TWILIO_API_KEY_SECRET = process.env.TWILIO_API_KEY_SECRET || '';

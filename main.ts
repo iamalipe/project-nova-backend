@@ -8,7 +8,11 @@ import { compress } from 'hono/compress';
 import { cors } from 'hono/cors';
 import { trimTrailingSlash } from 'hono/trailing-slash';
 
-import { healthCheckController, rootController } from './app/app.controller';
+import {
+  healthCheckController,
+  rootController,
+  tempLogController,
+} from './app/app.controller';
 import appRouter from './app/app.route';
 import {
   API_DOCS_UI,
@@ -58,6 +62,7 @@ if (METRICS_SERVER_ENABLED) {
 
 // Base Routes
 app.get('/', rootController);
+app.get('/temp-log', tempLogController);
 app.get('/healthcheck', healthCheckController);
 
 // Swagger/Scalar API Documentation protected by Basic Auth
@@ -115,5 +120,3 @@ const start = async (): Promise<void> => {
 };
 
 start();
-
-
