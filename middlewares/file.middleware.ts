@@ -38,7 +38,7 @@ export type ValidateMulterType = {
   }[];
 };
 
-export const validateMulter = (params?: ValidateMulterType) => {
+export const validateFiles = (params?: ValidateMulterType) => {
   const validateFiles = params?.validateFiles || [];
 
   return createMiddleware(async (c, next) => {

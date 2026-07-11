@@ -34,6 +34,10 @@ import { startMetricsServer } from './utils/metrics.utils';
 // Define Hono Variables for Type Safety (Replaces Express.Request extension)
 type Variables = {
   user: AuthUser;
+  uploadedFiles: any;
+  body: any;
+  query: any;
+  params: any;
 };
 
 const app = new Hono<{ Variables: Variables }>();

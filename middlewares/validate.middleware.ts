@@ -1,40 +1,31 @@
-import { zValidator } from '@hono/zod-validator';
-import { ZodSchema } from 'zod';
+import { createMiddleware } from 'hono/factory';
+import { ZodType } from 'zod';
 
-// This hook tells Hono: "If validation fails, throw the error so the globalErrorHandler can catch and format it."
-const customHook = (result: any) => {
-  if (!result.success) {
-    throw result.error; // Throws the ZodError
-  }
+export const validateRequest = (schema: ZodType) => {
+  return createMiddleware(async (c, next) => {
+    let body = {};
+    const contentType = c.req.header('content-type') || '';
+
+    if (contentType.includes('application/json')) {
+      body = await c.req.json().catch(() => ({}));
+    } else if (
+      contentType.includes('multipart/form-data') ||
+      contentType.includes('application/x-www-form-urlencoded')
+    ) {
+      body = await c.req.parseBody().catch(() => ({}));
+    }
+
+    const parsedData: any = await schema.parseAsync({
+      body: body,
+      query: c.req.query(),
+      params: c.req.param(),
+    });
+
+    // Spread them into individual context variables
+    c.set('body', parsedData.body || {});
+    c.set('query', parsedData.query || {});
+    c.set('params', parsedData.params || {});
+
+    await next();
+  });
 };
-
-// Export helpers for the different parts of the request
-export const validateBody = (schema: ZodSchema) =>
-  zValidator('json', schema, customHook);
-export const validateQuery = (schema: ZodSchema) =>
-  zValidator('query', schema, customHook);
-export const validateParams = (schema: ZodSchema) =>
-  zValidator('param', schema, customHook);
-
-// const productRouter = new Hono();
-
-// const createProductSchema = z.object({
-//   name: z.string().min(3),
-//   price: z.number().positive(),
-// });
-
-// const productIdSchema = z.object({
-//   id: z.string().uuid(),
-// });
-
-// productRouter.put(
-//   '/:id',
-//   validateParams(productIdSchema),
-//   validateBody(createProductSchema),
-//   async (c) => {
-//     const { id } = c.req.valid('param'); // Typed as { id: string }
-//     const body = c.req.valid('json');    // Typed as { name: string, price: number }
-
-//     return c.json({ success: true, id, body });
-//   }
-// );
