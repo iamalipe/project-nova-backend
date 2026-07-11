@@ -24,6 +24,7 @@ import {
   PORT,
   SWAGGER_PASSWORD,
   SWAGGER_USERNAME,
+  WHITELISTED_DOMAINS_ARRAY,
 } from './config/default';
 import { scalarHTML } from './config/static';
 import { swaggerSpec } from './config/swagger';
@@ -53,7 +54,17 @@ app.use('*', trimTrailingSlash());
 app.use('*', requestLogger);
 app.use('*', compress());
 app.use('*', bodyLimit({ maxSize: 10 * 1024 * 1024 })); // 10mb limit (replaces express.json limit)
-app.use('*', cors(CORS_OPTIONS));
+app.use('*', cors({
+  origin: (origin, c) => {
+    if (c.req.path.startsWith('/v1/mcp') || c.req.path.startsWith('/oauth')) {
+      return origin || '*';
+    }
+    return WHITELISTED_DOMAINS_ARRAY.includes(origin) ? origin : null;
+  },
+  allowMethods: ['GET', 'HEAD', 'PUT', 'POST', 'DELETE', 'PATCH', 'OPTIONS'],
+  exposeHeaders: ['mcp-session-id'],
+  credentials: true,
+}));
 app.use('*', limiter);
 // app.use('*', timing());
 if (METRICS_SERVER_ENABLED) {

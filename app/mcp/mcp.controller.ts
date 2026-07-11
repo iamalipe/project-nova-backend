@@ -19,6 +19,10 @@ export const handleMcpPost = async (c: Context) => {
 
   const body = await c.req.json().catch(() => ({}));
 
+  c.res.headers.forEach((value, key) => {
+    outgoing.setHeader(key, value);
+  });
+
   await server.connect(transport);
   await transport.handleRequest(incoming, outgoing, body);
 

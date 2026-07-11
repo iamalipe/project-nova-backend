@@ -16,12 +16,23 @@ type Variables = {
 };
 
 const mcpBearerAuth = createMiddleware(async (c, next) => {
-  const authHeader = c.req.header('Authorization');
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return c.json({ error: 'Unauthorized', message: 'Missing or invalid token format' }, 401);
+  if (c.req.method === 'OPTIONS') {
+    await next();
+    return;
   }
 
-  const token = authHeader.substring(7);
+  let token = '';
+  const authHeader = c.req.header('Authorization');
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    token = authHeader.substring(7);
+  } else {
+    token = c.req.query('token') || '';
+  }
+
+  if (!token) {
+    return c.json({ error: 'Unauthorized', message: 'Missing token' }, 401);
+  }
+
   const { decoded, expired } = (await verifyJWT(token)) as any;
 
   if (expired) {
@@ -46,8 +57,7 @@ const mcpBearerAuth = createMiddleware(async (c, next) => {
 });
 
 const mcpRouter = new Hono<{ Variables: Variables }>();
-mcpRouter.post('/', mcpBearerAuth, handleMcpPost);
-mcpRouter.all('/', methodNotAllowed);
+mcpRouter.all('/', mcpBearerAuth, handleMcpPost);
 
 const mcpConnectionRouter = new Hono<{ Variables: Variables }>();
 mcpConnectionRouter.use('/*', jwtAuth);
