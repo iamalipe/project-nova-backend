@@ -1,0 +1,14 @@
+model Product {
+  id          String   @id @default(uuid(7)) @db.Uuid
+  name        String
+  description String
+  category    String
+  price       Decimal  @db.Decimal(10, 2)
+  userId      String   @db.Uuid
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
+  @@index([name])
+}

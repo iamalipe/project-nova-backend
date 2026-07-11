@@ -42,6 +42,7 @@
     "@keyv/redis": "^5.1.6",
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
+    "ai": "^7.0.22",
     "argon2": "^0.44.0",
     "dayjs": "^1.11.21",
     "dotenv": "^17.4.2",

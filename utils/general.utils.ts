@@ -34,12 +34,56 @@ export const getObjectKeys = (obj: { [key: string]: any }, parentKey = '') => {
   return keys;
 };
 
-export const updateCheck = (newValue: any, oldValue: any) => {
+const isDeepEqual = (a: any, b: any): boolean => {
+  if (a === b) return true;
+
+  if (a && b && typeof a === 'object' && typeof b === 'object') {
+    if (a.constructor !== b.constructor) return false;
+
+    if (Array.isArray(a)) {
+      const length = a.length;
+      if (length !== b.length) return false;
+      for (let i = 0; i < length; i++) {
+        if (!isDeepEqual(a[i], b[i])) return false;
+      }
+      return true;
+    }
+
+    if (a instanceof Date && b instanceof Date) {
+      return a.getTime() === b.getTime();
+    }
+
+    if (a instanceof RegExp && b instanceof RegExp) {
+      return a.toString() === b.toString();
+    }
+
+    const keys = Object.keys(a);
+    if (keys.length !== Object.keys(b).length) return false;
+
+    for (let i = 0; i < keys.length; i++) {
+      if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return false;
+    }
+
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      if (!isDeepEqual(a[key], b[key])) return false;
+    }
+
+    return true;
+  }
+
+  // Handle NaN
+  if (typeof a === 'number' && typeof b === 'number' && isNaN(a) && isNaN(b)) {
+    return true;
+  }
+
+  return false;
+};
+
+export const updateCheck = (newValue: any, oldValue: any): boolean => {
   if (newValue === undefined) return false;
   if (newValue === null) return false;
-  // if (isNaN(newValue)) return false;
-  if (newValue === oldValue) return false;
-  return true;
+  return !isDeepEqual(newValue, oldValue);
 };
 
 /**

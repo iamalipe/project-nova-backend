@@ -1,8 +1,11 @@
 import { Hono } from 'hono';
 
 import authRouter from './auth/auth.route';
+import productRouter from './product/product.route';
+import { jwtAuth } from '../middlewares/jwtAuth.middleware';
 
 import {
+  getImageController,
   longPollDemoController,
   readableStreamDemoController,
   sseDemoController,
@@ -19,8 +22,8 @@ appRouter.route('/auth', authRouter);
 // appRouter.use('/copy-me/*', jwtAuth);
 // appRouter.route('/copy-me', copyMeRouter);
 
-// appRouter.use('/product/*', jwtAuth);
-// appRouter.route('/product', productRouter);
+appRouter.use('/product/*', jwtAuth);
+appRouter.route('/product', productRouter);
 
 // appRouter.use('/chat/*', jwtAuth);
 // appRouter.route('/chat', chatRouter);
@@ -29,6 +32,7 @@ appRouter.route('/auth', authRouter);
 appRouter.get('/sse-demo', sseDemoController);
 appRouter.get('/readable-stream-demo', readableStreamDemoController);
 appRouter.get('/long-poll-demo', longPollDemoController);
+appRouter.get('/get-image/*', getImageController);
 
 // Environment specific routes
 // if (process.env.NODE_ENV === 'development') {

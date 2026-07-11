@@ -462,6 +462,53 @@ export const swaggerSpec = {
         },
       },
     },
+    '/v1/product/delete-many': {
+      post: {
+        summary: 'Bulk Delete Products',
+        description: 'Delete multiple products in a single request by their UUIDs.',
+        tags: ['Product'],
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                required: ['ids'],
+                properties: {
+                  ids: {
+                    type: 'array',
+                    items: { type: 'string', format: 'uuid' },
+                    example: ['00000000-0000-0000-0000-000000000000'],
+                  },
+                },
+              },
+            },
+          },
+        },
+        responses: {
+          200: {
+            description: 'Bulk deletion result',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    success: { type: 'boolean', example: true },
+                    data: {
+                      type: 'object',
+                      properties: {
+                        count: { type: 'number', example: 5 },
+                      },
+                    },
+                    message: { type: 'string', example: 'success' },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
     '/v1/product/{id}': {
       get: {
         summary: 'Get Product By ID',

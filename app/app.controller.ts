@@ -1,12 +1,45 @@
 import type { Context } from 'hono';
 import { stream, streamSSE } from 'hono/streaming';
 
+import { s3Get } from '../services/s3.services';
+import { AppError } from '../utils/appError.utils';
+
 export const rootController = async (c: Context) => {
   return c.text('Hello World');
 };
 
 export const healthCheckController = async (c: Context) => {
   return c.body(null, 200);
+};
+
+// Fetch image from S3 route
+export const getImageController = async (c: Context) => {
+  const key = c.req.param('*');
+  if (!key) {
+    throw new AppError('Key is required', { status: 400 });
+  }
+
+  try {
+    const s3Response = await s3Get(key);
+    if (s3Response.ContentType) {
+      c.header('Content-Type', s3Response.ContentType);
+    }
+    if (s3Response.ContentLength) {
+      c.header('Content-Length', String(s3Response.ContentLength));
+    }
+
+    const body = s3Response.Body;
+    if (body) {
+      return c.body(body as any);
+    } else {
+      throw new AppError('Image stream not found', { status: 404 });
+    }
+  } catch (error: any) {
+    if (error.name === 'NoSuchKey') {
+      throw new AppError('Image not found', { status: 404 });
+    }
+    throw error;
+  }
 };
 
 export const sseDemoController = async (c: Context) => {
