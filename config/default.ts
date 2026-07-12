@@ -2,7 +2,8 @@ import 'dotenv/config';
 
 export const PORT = process.env.PORT || 3000;
 export const DATABASE_URL = process.env.DATABASE_URL || '';
-export const BACKEND_URL = process.env.BACKEND_URL || '';
+export const BACKEND_URL =
+  process.env.BACKEND_URL || 'https://api-nova.abhiseck.dev';
 
 // JWT
 export const JWT_SECRET = process.env.JWT_SECRET || '';
@@ -27,8 +28,10 @@ export const API_DOCS_UI: 'SCALAR' | 'SWAGGER' =
   (process.env.API_DOCS_UI as 'SCALAR' | 'SWAGGER') || 'SCALAR';
 
 // CORS WHITELISTED DOMAINS
-export const FRONTEND_URL = process.env.FRONTEND_URL || '';
-export const WHITELISTED_DOMAINS = process.env.WHITELISTED_DOMAINS || '';
+export const FRONTEND_URL =
+  process.env.FRONTEND_URL || 'https://nova.abhiseck.dev';
+export const WHITELISTED_DOMAINS =
+  process.env.WHITELISTED_DOMAINS || 'https://nova.abhiseck.dev';
 const WHITELISTED_DOMAINS_ARRAY_TEMP = WHITELISTED_DOMAINS.split(',') || [];
 export const WHITELISTED_DOMAINS_ARRAY = [
   ...WHITELISTED_DOMAINS_ARRAY_TEMP,
