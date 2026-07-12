@@ -3,7 +3,8 @@ export const swaggerSpec = {
   info: {
     title: 'Hono & Prisma Retail Backend API',
     version: '1.0.0',
-    description: 'Modern full-stack TypeScript template API documentation powered by Scalar.',
+    description:
+      'Modern full-stack TypeScript template API documentation powered by Scalar.',
     contact: {
       name: 'API Support',
       email: 'Abhiseck@outlook.com',
@@ -14,13 +15,20 @@ export const swaggerSpec = {
       url: 'http://localhost:3000',
       description: 'Local Development Server',
     },
+    {
+      url: 'https://api-nova.abhiseck.dev',
+      description: 'Production Server',
+    },
   ],
   tags: [
     { name: 'Auth', description: 'Authentication and Passkey management' },
     { name: 'Product', description: 'Product catalog operations' },
     { name: 'Blog', description: 'Blog management operations' },
     { name: 'Chat', description: 'AI assistant chat streams' },
-    { name: 'General', description: 'Utility, changelog, and metadata operations' },
+    {
+      name: 'General',
+      description: 'Utility, changelog, and metadata operations',
+    },
   ],
   security: [
     {
@@ -41,7 +49,10 @@ export const swaggerSpec = {
                 schema: {
                   type: 'object',
                   properties: {
-                    message: { type: 'string', example: 'Welcome to Hono & Prisma Retail Backend API!' },
+                    message: {
+                      type: 'string',
+                      example: 'Welcome to Hono & Prisma Retail Backend API!',
+                    },
                   },
                 },
               },
@@ -53,7 +64,8 @@ export const swaggerSpec = {
     '/healthcheck': {
       get: {
         summary: 'Health check',
-        description: 'Get health check status of the application, database, and cache connections.',
+        description:
+          'Get health check status of the application, database, and cache connections.',
         tags: ['General'],
         responses: {
           200: {
@@ -65,7 +77,10 @@ export const swaggerSpec = {
                   properties: {
                     success: { type: 'boolean', example: true },
                     uptime: { type: 'number', example: 124.5 },
-                    timestamp: { type: 'string', example: '2026-06-28T18:15:00.000Z' },
+                    timestamp: {
+                      type: 'string',
+                      example: '2026-06-28T18:15:00.000Z',
+                    },
                     message: { type: 'string', example: 'success' },
                   },
                 },
@@ -78,7 +93,8 @@ export const swaggerSpec = {
     '/v1/auth/register': {
       post: {
         summary: 'Register User',
-        description: 'Create a new user account with email, name, and password.',
+        description:
+          'Create a new user account with email, name, and password.',
         tags: ['Auth'],
         security: [],
         requestBody: {
@@ -89,10 +105,18 @@ export const swaggerSpec = {
                 type: 'object',
                 required: ['email', 'firstName', 'lastName', 'password'],
                 properties: {
-                  email: { type: 'string', format: 'email', example: 'user@example.com' },
+                  email: {
+                    type: 'string',
+                    format: 'email',
+                    example: 'user@example.com',
+                  },
                   firstName: { type: 'string', minLength: 1, example: 'John' },
                   lastName: { type: 'string', minLength: 1, example: 'Doe' },
-                  password: { type: 'string', minLength: 8, example: 'password123' },
+                  password: {
+                    type: 'string',
+                    minLength: 8,
+                    example: 'password123',
+                  },
                 },
               },
             },
@@ -120,7 +144,8 @@ export const swaggerSpec = {
     '/v1/auth/login': {
       post: {
         summary: 'Login User',
-        description: 'Authenticate user with email and password to receive access cookies/tokens.',
+        description:
+          'Authenticate user with email and password to receive access cookies/tokens.',
         tags: ['Auth'],
         security: [],
         requestBody: {
@@ -131,7 +156,11 @@ export const swaggerSpec = {
                 type: 'object',
                 required: ['email', 'password'],
                 properties: {
-                  email: { type: 'string', format: 'email', example: 'user@example.com' },
+                  email: {
+                    type: 'string',
+                    format: 'email',
+                    example: 'user@example.com',
+                  },
                   password: { type: 'string', example: 'password123' },
                 },
               },
@@ -239,7 +268,11 @@ export const swaggerSpec = {
                     data: {
                       type: 'object',
                       properties: {
-                        imageUrl: { type: 'string', example: 'https://s3.amazonaws.com/bucket/profile-image/123.jpg' },
+                        imageUrl: {
+                          type: 'string',
+                          example:
+                            'https://s3.amazonaws.com/bucket/profile-image/123.jpg',
+                        },
                       },
                     },
                     message: { type: 'string', example: 'success' },
@@ -254,7 +287,8 @@ export const swaggerSpec = {
     '/v1/auth/passkey/register': {
       post: {
         summary: 'Register Passkey Option',
-        description: 'Generate registration options for adding a WebAuthn passkey.',
+        description:
+          'Generate registration options for adding a WebAuthn passkey.',
         tags: ['Auth'],
         responses: {
           200: {
@@ -266,7 +300,8 @@ export const swaggerSpec = {
     '/v1/auth/passkey/register-verify': {
       post: {
         summary: 'Verify Passkey Registration',
-        description: 'Verify the credentials payload sent by the WebAuthn client registration flow.',
+        description:
+          'Verify the credentials payload sent by the WebAuthn client registration flow.',
         tags: ['Auth'],
         requestBody: {
           required: true,
@@ -288,7 +323,8 @@ export const swaggerSpec = {
     '/v1/auth/passkey/login': {
       post: {
         summary: 'Initiate Passkey Login',
-        description: 'Generate WebAuthn assertion authentication options for passkey sign-in.',
+        description:
+          'Generate WebAuthn assertion authentication options for passkey sign-in.',
         tags: ['Auth'],
         security: [],
         requestBody: {
@@ -299,7 +335,11 @@ export const swaggerSpec = {
                 type: 'object',
                 required: ['email'],
                 properties: {
-                  email: { type: 'string', format: 'email', example: 'user@example.com' },
+                  email: {
+                    type: 'string',
+                    format: 'email',
+                    example: 'user@example.com',
+                  },
                 },
               },
             },
@@ -315,7 +355,8 @@ export const swaggerSpec = {
     '/v1/auth/passkey/login-verify': {
       post: {
         summary: 'Verify Passkey Login',
-        description: 'Verify the credentials payload sent by the WebAuthn client login flow.',
+        description:
+          'Verify the credentials payload sent by the WebAuthn client login flow.',
         tags: ['Auth'],
         security: [],
         requestBody: {
@@ -326,7 +367,11 @@ export const swaggerSpec = {
                 type: 'object',
                 required: ['email', 'body'],
                 properties: {
-                  email: { type: 'string', format: 'email', example: 'user@example.com' },
+                  email: {
+                    type: 'string',
+                    format: 'email',
+                    example: 'user@example.com',
+                  },
                   body: { type: 'object' },
                 },
               },
@@ -353,8 +398,14 @@ export const swaggerSpec = {
                 type: 'object',
                 required: ['name', 'description', 'category', 'price'],
                 properties: {
-                  name: { type: 'string', example: 'Premium Mechanical Keyboard' },
-                  description: { type: 'string', example: 'Tactile switches with RGB backlight.' },
+                  name: {
+                    type: 'string',
+                    example: 'Premium Mechanical Keyboard',
+                  },
+                  description: {
+                    type: 'string',
+                    example: 'Tactile switches with RGB backlight.',
+                  },
                   category: { type: 'string', example: 'Electronics' },
                   price: { type: 'number', example: 129.99 },
                 },
@@ -382,14 +433,40 @@ export const swaggerSpec = {
       },
       get: {
         summary: 'Get All Products',
-        description: 'Retrieve a paginated, sorted, and searchable list of products.',
+        description:
+          'Retrieve a paginated, sorted, and searchable list of products.',
         tags: ['Product'],
         parameters: [
-          { name: 'page', in: 'query', required: false, schema: { type: 'string', default: '1' } },
-          { name: 'limit', in: 'query', required: false, schema: { type: 'string', default: '10' } },
-          { name: 'order', in: 'query', required: false, schema: { type: 'string', enum: ['asc', 'desc'], default: 'desc' } },
-          { name: 'orderBy', in: 'query', required: false, schema: { type: 'string', default: 'createdAt' } },
-          { name: 'search', in: 'query', required: false, schema: { type: 'string' } },
+          {
+            name: 'page',
+            in: 'query',
+            required: false,
+            schema: { type: 'string', default: '1' },
+          },
+          {
+            name: 'limit',
+            in: 'query',
+            required: false,
+            schema: { type: 'string', default: '10' },
+          },
+          {
+            name: 'order',
+            in: 'query',
+            required: false,
+            schema: { type: 'string', enum: ['asc', 'desc'], default: 'desc' },
+          },
+          {
+            name: 'orderBy',
+            in: 'query',
+            required: false,
+            schema: { type: 'string', default: 'createdAt' },
+          },
+          {
+            name: 'search',
+            in: 'query',
+            required: false,
+            schema: { type: 'string' },
+          },
         ],
         responses: {
           200: {
@@ -400,7 +477,10 @@ export const swaggerSpec = {
                   type: 'object',
                   properties: {
                     success: { type: 'boolean', example: true },
-                    data: { type: 'array', items: { $ref: '#/components/schemas/Product' } },
+                    data: {
+                      type: 'array',
+                      items: { $ref: '#/components/schemas/Product' },
+                    },
                     sort: { type: 'object' },
                     pagination: { type: 'object' },
                     message: { type: 'string', example: 'success' },
@@ -428,7 +508,10 @@ export const swaggerSpec = {
                   required: ['name', 'description', 'category', 'price'],
                   properties: {
                     name: { type: 'string', example: 'Product A' },
-                    description: { type: 'string', example: 'Description of A' },
+                    description: {
+                      type: 'string',
+                      example: 'Description of A',
+                    },
                     category: { type: 'string', example: 'Category X' },
                     price: { type: 'number', example: 10.99 },
                   },
@@ -465,7 +548,8 @@ export const swaggerSpec = {
     '/v1/product/delete-many': {
       post: {
         summary: 'Bulk Delete Products',
-        description: 'Delete multiple products in a single request by their UUIDs.',
+        description:
+          'Delete multiple products in a single request by their UUIDs.',
         tags: ['Product'],
         requestBody: {
           required: true,
@@ -514,7 +598,14 @@ export const swaggerSpec = {
         summary: 'Get Product By ID',
         description: 'Retrieve a single product details.',
         tags: ['Product'],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string' } }],
+        parameters: [
+          {
+            name: 'id',
+            in: 'path',
+            required: true,
+            schema: { type: 'string' },
+          },
+        ],
         responses: {
           200: {
             description: 'Product details',
@@ -537,7 +628,14 @@ export const swaggerSpec = {
         summary: 'Update Product',
         description: 'Update selective properties of a product.',
         tags: ['Product'],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string' } }],
+        parameters: [
+          {
+            name: 'id',
+            in: 'path',
+            required: true,
+            schema: { type: 'string' },
+          },
+        ],
         requestBody: {
           required: true,
           content: {
@@ -576,7 +674,14 @@ export const swaggerSpec = {
         summary: 'Delete Product',
         description: 'Remove a product listing by ID.',
         tags: ['Product'],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string' } }],
+        parameters: [
+          {
+            name: 'id',
+            in: 'path',
+            required: true,
+            schema: { type: 'string' },
+          },
+        ],
         responses: {
           200: {
             description: 'Product deleted successfully',
@@ -609,8 +714,15 @@ export const swaggerSpec = {
                 required: ['title', 'content'],
                 properties: {
                   title: { type: 'string', example: 'My First Blog Post' },
-                  content: { type: 'string', example: 'This is the body content of the blog post.' },
-                  tags: { type: 'array', items: { type: 'string' }, example: ['tech', 'node'] },
+                  content: {
+                    type: 'string',
+                    example: 'This is the body content of the blog post.',
+                  },
+                  tags: {
+                    type: 'array',
+                    items: { type: 'string' },
+                    example: ['tech', 'node'],
+                  },
                 },
               },
             },
@@ -636,15 +748,41 @@ export const swaggerSpec = {
       },
       get: {
         summary: 'Get All Blog Posts',
-        description: 'Retrieve a paginated, sorted, and searchable list of blog posts.',
+        description:
+          'Retrieve a paginated, sorted, and searchable list of blog posts.',
         tags: ['Blog'],
         security: [],
         parameters: [
-          { name: 'page', in: 'query', required: false, schema: { type: 'string', default: '1' } },
-          { name: 'limit', in: 'query', required: false, schema: { type: 'string', default: '10' } },
-          { name: 'order', in: 'query', required: false, schema: { type: 'string', enum: ['asc', 'desc'], default: 'desc' } },
-          { name: 'orderBy', in: 'query', required: false, schema: { type: 'string', default: 'createdAt' } },
-          { name: 'search', in: 'query', required: false, schema: { type: 'string' } },
+          {
+            name: 'page',
+            in: 'query',
+            required: false,
+            schema: { type: 'string', default: '1' },
+          },
+          {
+            name: 'limit',
+            in: 'query',
+            required: false,
+            schema: { type: 'string', default: '10' },
+          },
+          {
+            name: 'order',
+            in: 'query',
+            required: false,
+            schema: { type: 'string', enum: ['asc', 'desc'], default: 'desc' },
+          },
+          {
+            name: 'orderBy',
+            in: 'query',
+            required: false,
+            schema: { type: 'string', default: 'createdAt' },
+          },
+          {
+            name: 'search',
+            in: 'query',
+            required: false,
+            schema: { type: 'string' },
+          },
         ],
         responses: {
           200: {
@@ -655,7 +793,10 @@ export const swaggerSpec = {
                   type: 'object',
                   properties: {
                     success: { type: 'boolean', example: true },
-                    data: { type: 'array', items: { $ref: '#/components/schemas/Blog' } },
+                    data: {
+                      type: 'array',
+                      items: { $ref: '#/components/schemas/Blog' },
+                    },
                     sort: { type: 'object' },
                     pagination: { type: 'object' },
                     message: { type: 'string', example: 'success' },
@@ -673,7 +814,14 @@ export const swaggerSpec = {
         description: 'Retrieve a single blog post details.',
         tags: ['Blog'],
         security: [],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string' } }],
+        parameters: [
+          {
+            name: 'id',
+            in: 'path',
+            required: true,
+            schema: { type: 'string' },
+          },
+        ],
         responses: {
           200: {
             description: 'Blog post details',
@@ -696,7 +844,14 @@ export const swaggerSpec = {
         summary: 'Update Blog Post',
         description: 'Update selective properties of a blog post.',
         tags: ['Blog'],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string' } }],
+        parameters: [
+          {
+            name: 'id',
+            in: 'path',
+            required: true,
+            schema: { type: 'string' },
+          },
+        ],
         requestBody: {
           required: true,
           content: {
@@ -734,7 +889,14 @@ export const swaggerSpec = {
         summary: 'Delete Blog Post',
         description: 'Remove a blog post by ID.',
         tags: ['Blog'],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string' } }],
+        parameters: [
+          {
+            name: 'id',
+            in: 'path',
+            required: true,
+            schema: { type: 'string' },
+          },
+        ],
         responses: {
           200: {
             description: 'Blog post deleted successfully',
@@ -760,8 +922,18 @@ export const swaggerSpec = {
         tags: ['General'],
         security: [],
         parameters: [
-          { name: 'page', in: 'query', required: false, schema: { type: 'string', default: '1' } },
-          { name: 'limit', in: 'query', required: false, schema: { type: 'string', default: '10' } },
+          {
+            name: 'page',
+            in: 'query',
+            required: false,
+            schema: { type: 'string', default: '1' },
+          },
+          {
+            name: 'limit',
+            in: 'query',
+            required: false,
+            schema: { type: 'string', default: '10' },
+          },
         ],
         responses: {
           200: {
@@ -776,7 +948,14 @@ export const swaggerSpec = {
         description: 'Retrieve detail of a specific changelog entry.',
         tags: ['General'],
         security: [],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string' } }],
+        parameters: [
+          {
+            name: 'id',
+            in: 'path',
+            required: true,
+            schema: { type: 'string' },
+          },
+        ],
         responses: {
           200: {
             description: 'Changelog details',
@@ -787,11 +966,18 @@ export const swaggerSpec = {
     '/v1/ip/lookup': {
       get: {
         summary: 'IP Geolocation Lookup',
-        description: 'Look up geographical and ISP information for a specific IP address.',
+        description:
+          'Look up geographical and ISP information for a specific IP address.',
         tags: ['General'],
         security: [],
         parameters: [
-          { name: 'ip', in: 'query', required: true, schema: { type: 'string' }, example: '8.8.8.8' },
+          {
+            name: 'ip',
+            in: 'query',
+            required: true,
+            schema: { type: 'string' },
+            example: '8.8.8.8',
+          },
         ],
         responses: {
           200: {
@@ -823,7 +1009,8 @@ export const swaggerSpec = {
     '/v1/ip/update': {
       post: {
         summary: 'Update Geolocation Database',
-        description: 'Manually trigger a download of the latest MaxMind IP database.',
+        description:
+          'Manually trigger a download of the latest MaxMind IP database.',
         tags: ['General'],
         responses: {
           200: {
@@ -835,7 +1022,8 @@ export const swaggerSpec = {
     '/v1/chat/temp': {
       post: {
         summary: 'Create Temporary Chat Stream',
-        description: 'Create an anonymous, non-persisted AI chat session. Responds using SSE.',
+        description:
+          'Create an anonymous, non-persisted AI chat session. Responds using SSE.',
         tags: ['Chat'],
         security: [],
         requestBody: {
@@ -871,7 +1059,8 @@ export const swaggerSpec = {
     '/v1/chat/new': {
       post: {
         summary: 'Create Authenticated Chat Stream',
-        description: 'Start a new persisted chat thread and receive SSE stream responses.',
+        description:
+          'Start a new persisted chat thread and receive SSE stream responses.',
         tags: ['Chat'],
         requestBody: {
           required: true,
@@ -906,9 +1095,17 @@ export const swaggerSpec = {
     '/v1/chat/{id}': {
       post: {
         summary: 'Continue Chat Stream',
-        description: 'Post a new user message to an existing persisted chat thread. Returns SSE responses.',
+        description:
+          'Post a new user message to an existing persisted chat thread. Returns SSE responses.',
         tags: ['Chat'],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string' } }],
+        parameters: [
+          {
+            name: 'id',
+            in: 'path',
+            required: true,
+            schema: { type: 'string' },
+          },
+        ],
         requestBody: {
           required: true,
           content: {
@@ -942,7 +1139,14 @@ export const swaggerSpec = {
         summary: 'Get Chat History Detail',
         description: 'Retrieve all messages in an existing chat thread.',
         tags: ['Chat'],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string' } }],
+        parameters: [
+          {
+            name: 'id',
+            in: 'path',
+            required: true,
+            schema: { type: 'string' },
+          },
+        ],
         responses: {
           200: {
             description: 'Chat details and message array',
@@ -953,7 +1157,14 @@ export const swaggerSpec = {
         summary: 'Rename Chat Thread',
         description: 'Change the title of an existing chat thread.',
         tags: ['Chat'],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string' } }],
+        parameters: [
+          {
+            name: 'id',
+            in: 'path',
+            required: true,
+            schema: { type: 'string' },
+          },
+        ],
         requestBody: {
           required: true,
           content: {
@@ -978,7 +1189,14 @@ export const swaggerSpec = {
         summary: 'Delete Chat Thread',
         description: 'Delete a chat thread and all associated messages.',
         tags: ['Chat'],
-        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string' } }],
+        parameters: [
+          {
+            name: 'id',
+            in: 'path',
+            required: true,
+            schema: { type: 'string' },
+          },
+        ],
         responses: {
           200: {
             description: 'Chat thread deleted successfully',
@@ -989,11 +1207,22 @@ export const swaggerSpec = {
     '/v1/chat': {
       get: {
         summary: 'List Chat Threads',
-        description: 'Retrieve a list of chat threads created by the logged-in user.',
+        description:
+          'Retrieve a list of chat threads created by the logged-in user.',
         tags: ['Chat'],
         parameters: [
-          { name: 'page', in: 'query', required: false, schema: { type: 'string', default: '1' } },
-          { name: 'limit', in: 'query', required: false, schema: { type: 'string', default: '10' } },
+          {
+            name: 'page',
+            in: 'query',
+            required: false,
+            schema: { type: 'string', default: '1' },
+          },
+          {
+            name: 'limit',
+            in: 'query',
+            required: false,
+            schema: { type: 'string', default: '10' },
+          },
         ],
         responses: {
           200: {
@@ -1009,7 +1238,8 @@ export const swaggerSpec = {
         type: 'http',
         scheme: 'bearer',
         bearerFormat: 'JWT',
-        description: 'Enter your JWT authorization token (exclude the Bearer prefix).',
+        description:
+          'Enter your JWT authorization token (exclude the Bearer prefix).',
       },
     },
     schemas: {
@@ -1017,11 +1247,26 @@ export const swaggerSpec = {
         type: 'object',
         properties: {
           id: { type: 'string', example: '60c72b2f9b1d8e001c888888' },
-          email: { type: 'string', format: 'email', example: 'user@example.com' },
+          email: {
+            type: 'string',
+            format: 'email',
+            example: 'user@example.com',
+          },
           name: { type: 'string', example: 'John Doe' },
-          profileImage: { type: 'string', example: 'https://s3.amazonaws.com/bucket/profile-image/123.jpg' },
-          createdAt: { type: 'string', format: 'date-time', example: '2026-06-28T18:15:00.000Z' },
-          updatedAt: { type: 'string', format: 'date-time', example: '2026-06-28T18:15:00.000Z' },
+          profileImage: {
+            type: 'string',
+            example: 'https://s3.amazonaws.com/bucket/profile-image/123.jpg',
+          },
+          createdAt: {
+            type: 'string',
+            format: 'date-time',
+            example: '2026-06-28T18:15:00.000Z',
+          },
+          updatedAt: {
+            type: 'string',
+            format: 'date-time',
+            example: '2026-06-28T18:15:00.000Z',
+          },
         },
       },
       Product: {
@@ -1029,12 +1274,23 @@ export const swaggerSpec = {
         properties: {
           id: { type: 'string', example: '60c72b2f9b1d8e001c888889' },
           name: { type: 'string', example: 'Premium Mechanical Keyboard' },
-          description: { type: 'string', example: 'Tactile switches with RGB backlight.' },
+          description: {
+            type: 'string',
+            example: 'Tactile switches with RGB backlight.',
+          },
           category: { type: 'string', example: 'Electronics' },
           price: { type: 'number', example: 129.99 },
           userId: { type: 'string', example: '60c72b2f9b1d8e001c888888' },
-          createdAt: { type: 'string', format: 'date-time', example: '2026-06-28T18:15:00.000Z' },
-          updatedAt: { type: 'string', format: 'date-time', example: '2026-06-28T18:15:00.000Z' },
+          createdAt: {
+            type: 'string',
+            format: 'date-time',
+            example: '2026-06-28T18:15:00.000Z',
+          },
+          updatedAt: {
+            type: 'string',
+            format: 'date-time',
+            example: '2026-06-28T18:15:00.000Z',
+          },
         },
       },
       Blog: {
@@ -1042,11 +1298,26 @@ export const swaggerSpec = {
         properties: {
           id: { type: 'string', example: '60c72b2f9b1d8e001c888890' },
           title: { type: 'string', example: 'My First Blog Post' },
-          content: { type: 'string', example: 'This is the body content of the blog post.' },
-          tags: { type: 'array', items: { type: 'string' }, example: ['tech', 'node'] },
+          content: {
+            type: 'string',
+            example: 'This is the body content of the blog post.',
+          },
+          tags: {
+            type: 'array',
+            items: { type: 'string' },
+            example: ['tech', 'node'],
+          },
           userId: { type: 'string', example: '60c72b2f9b1d8e001c888888' },
-          createdAt: { type: 'string', format: 'date-time', example: '2026-06-28T18:15:00.000Z' },
-          updatedAt: { type: 'string', format: 'date-time', example: '2026-06-28T18:15:00.000Z' },
+          createdAt: {
+            type: 'string',
+            format: 'date-time',
+            example: '2026-06-28T18:15:00.000Z',
+          },
+          updatedAt: {
+            type: 'string',
+            format: 'date-time',
+            example: '2026-06-28T18:15:00.000Z',
+          },
         },
       },
     },

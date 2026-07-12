@@ -19,7 +19,14 @@ export const scalarHTML = `
 </html>
     `;
 
-export const getRootHTML = (frontendUrl: string): string => {
+export const getRootHTML = (
+  frontendUrl: string,
+  whitelistedDomains: string[],
+): string => {
+  const domainsListHTML = whitelistedDomains
+    .map((domain) => `<li class="domain-item">${domain || '<em>(empty)</em>'}</li>`)
+    .join('');
+
   return `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -142,6 +149,37 @@ export const getRootHTML = (frontendUrl: string): string => {
         font-size: 0.8rem;
         color: #64748b;
       }
+      .cors-section {
+        margin-top: 32px;
+        text-align: left;
+      }
+      .cors-section h2 {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #94a3b8;
+        font-weight: 600;
+        margin-bottom: 12px;
+      }
+      .domain-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .domain-item {
+        font-family: monospace;
+        font-size: 0.85rem;
+        color: #e2e8f0;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 8px;
+        padding: 8px 12px;
+      }
+      .domain-item em {
+        color: #64748b;
+        font-style: italic;
+      }
     </style>
   </head>
   <body>
@@ -165,6 +203,11 @@ export const getRootHTML = (frontendUrl: string): string => {
           <span>API Documentation Spec</span>
           <span class="btn-arrow">→</span>
         </a>
+      </div>
+
+      <div class="cors-section">
+        <h2>CORS Whitelisted Origins</h2>
+        <ul class="domain-list">${domainsListHTML}</ul>
       </div>
 
       <p class="footer">Project Nova Gateway • Built with Hono & Prisma</p>

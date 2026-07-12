@@ -1,14 +1,18 @@
 import type { Context } from 'hono';
 import { stream, streamSSE } from 'hono/streaming';
 
-import { BACKEND_URL, FRONTEND_URL } from '../config/default';
+import {
+  BACKEND_URL,
+  FRONTEND_URL,
+  WHITELISTED_DOMAINS_ARRAY,
+} from '../config/default';
 import { getRootHTML, getTempLogHTML } from '../config/static';
 import { s3Get } from '../services/s3.services';
 import { getTempLogs } from '../services/tempLog.service';
 import { AppError } from '../utils/appError.utils';
 
 export const rootController = async (c: Context) => {
-  return c.html(getRootHTML(String(FRONTEND_URL)));
+  return c.html(getRootHTML(String(FRONTEND_URL), WHITELISTED_DOMAINS_ARRAY));
 };
 
 // /.well-known/openid-configuration
