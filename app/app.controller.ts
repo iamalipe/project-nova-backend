@@ -1,7 +1,7 @@
 import type { Context } from 'hono';
 import { stream, streamSSE } from 'hono/streaming';
 
-import { FRONTEND_URL } from '../config/default';
+import { BACKEND_URL, FRONTEND_URL } from '../config/default';
 import { getRootHTML, getTempLogHTML } from '../config/static';
 import { s3Get } from '../services/s3.services';
 import { getTempLogs } from '../services/tempLog.service';
@@ -9,6 +9,40 @@ import { AppError } from '../utils/appError.utils';
 
 export const rootController = async (c: Context) => {
   return c.html(getRootHTML(String(FRONTEND_URL)));
+};
+
+// /.well-known/openid-configuration
+export const openidConfigurationController = async (c: Context) => {
+  return c.json({
+    issuer: BACKEND_URL,
+    authorization_endpoint: `${BACKEND_URL}/oauth/authorize`,
+    token_endpoint: `${BACKEND_URL}/oauth/token`,
+    userinfo_endpoint: `${BACKEND_URL}/oauth/userinfo`,
+    jwks_uri: `${BACKEND_URL}/oauth/jwks`,
+    scopes_supported: ['openid'],
+    response_types_supported: ['code'],
+    response_modes_supported: ['query'],
+    grant_types_supported: ['authorization_code', 'refresh_token'],
+    code_challenge_methods_supported: ['S256'],
+    subject_types_supported: ['public'],
+    id_token_signing_alg_values_supported: ['RS256'],
+    token_endpoint_auth_methods_supported: ['client_secret_post', 'none'],
+  });
+};
+
+// /.well-known/oauth-authorization-server
+export const oauthAuthorizationServerController = async (c: Context) => {
+  return c.json({
+    issuer: BACKEND_URL,
+    authorization_endpoint: `${BACKEND_URL}/oauth/authorize`,
+    token_endpoint: `${BACKEND_URL}/oauth/token`,
+    jwks_uri: `${BACKEND_URL}/oauth/jwks`,
+    scopes_supported: ['openid'],
+    response_types_supported: ['code'],
+    grant_types_supported: ['authorization_code', 'refresh_token'],
+    code_challenge_methods_supported: ['S256'],
+    token_endpoint_auth_methods_supported: ['client_secret_post', 'none'],
+  });
 };
 
 export const tempLogController = async (c: Context) => {

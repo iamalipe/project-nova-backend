@@ -1,18 +1,13 @@
 import { Hono } from 'hono';
-import {
-  getMetadata,
-  registerClient,
-  showAuthorizePage,
-  consent,
-  issueToken,
-} from './oauth.controller';
+import { validateRequest } from '../../middlewares/validate.middleware';
+import { authorizeController } from './oauth.controller';
+import { authorizeSchema } from './oauth.schema';
 
-const oauthRouter = new Hono();
+const router = new Hono();
 
-oauthRouter.get('/.well-known/oauth-authorization-server', getMetadata);
-oauthRouter.post('/register', registerClient);
-oauthRouter.get('/authorize', showAuthorizePage);
-oauthRouter.post('/consent', consent);
-oauthRouter.post('/token', issueToken);
+// router.post('/register', registerClient);
+router.get('/authorize', validateRequest(authorizeSchema), authorizeController);
+// router.post('/consent', consent);
+// router.post('/token', issueToken);
 
-export default oauthRouter;
+export default router;

@@ -11,14 +11,15 @@ import { trimTrailingSlash } from 'hono/trailing-slash';
 import { Server as HttpServer } from 'http';
 import {
   healthCheckController,
+  oauthAuthorizationServerController,
+  openidConfigurationController,
   rootController,
   tempLogController,
 } from './app/app.controller';
 import appRouter from './app/app.route';
-import oauthRouter from './app/oauth/oauth.route';
+import router from './app/oauth/oauth.route';
 import {
   API_DOCS_UI,
-  CORS_OPTIONS,
   ENABLE_SOCKET,
   METRICS_SERVER_ENABLED,
   PORT,
@@ -54,17 +55,20 @@ app.use('*', trimTrailingSlash());
 app.use('*', requestLogger);
 app.use('*', compress());
 app.use('*', bodyLimit({ maxSize: 10 * 1024 * 1024 })); // 10mb limit (replaces express.json limit)
-app.use('*', cors({
-  origin: (origin, c) => {
-    if (c.req.path.startsWith('/v1/mcp') || c.req.path.startsWith('/oauth')) {
-      return origin || '*';
-    }
-    return WHITELISTED_DOMAINS_ARRAY.includes(origin) ? origin : null;
-  },
-  allowMethods: ['GET', 'HEAD', 'PUT', 'POST', 'DELETE', 'PATCH', 'OPTIONS'],
-  exposeHeaders: ['mcp-session-id'],
-  credentials: true,
-}));
+app.use(
+  '*',
+  cors({
+    origin: (origin, c) => {
+      if (c.req.path.startsWith('/v1/mcp') || c.req.path.startsWith('/oauth')) {
+        return origin || '*';
+      }
+      return WHITELISTED_DOMAINS_ARRAY.includes(origin) ? origin : null;
+    },
+    allowMethods: ['GET', 'HEAD', 'PUT', 'POST', 'DELETE', 'PATCH', 'OPTIONS'],
+    exposeHeaders: ['mcp-session-id'],
+    credentials: true,
+  }),
+);
 app.use('*', limiter);
 // app.use('*', timing());
 if (METRICS_SERVER_ENABLED) {
@@ -78,6 +82,11 @@ if (METRICS_SERVER_ENABLED) {
 app.get('/', rootController);
 app.get('/temp-log', tempLogController);
 app.get('/healthcheck', healthCheckController);
+app.get('/.well-known/openid-configuration', openidConfigurationController);
+app.get(
+  '/.well-known/oauth-authorization-server',
+  oauthAuthorizationServerController,
+);
 
 // Swagger/Scalar API Documentation protected by Basic Auth
 const authMiddleware = basicAuth({
@@ -98,7 +107,7 @@ if (API_DOCS_UI === 'SWAGGER') {
 }
 
 // 5. Mount App Router & Error Handler
-app.route('/oauth', oauthRouter);
+app.route('/oauth', router);
 app.route('/v1', appRouter);
 app.onError(globalErrorHandler);
 
