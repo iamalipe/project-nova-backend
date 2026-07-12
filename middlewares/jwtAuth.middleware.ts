@@ -28,15 +28,16 @@ export const jwtAuth = createMiddleware(async (c, next) => {
     let user = await cacheGet<AuthUser>(key);
 
     if (!user) {
-      // UPDATED TO PRISMA SYNTAX: findUnique instead of Mongoose's findById
-      const user = await db.user.findUnique({
+      const dbUser = await db.user.findUnique({
         where: { id: decoded.id },
+        omit: { password: true },
       });
 
-      if (!user) {
+      if (!dbUser) {
         throw new AppError('Unauthorized', { status: 401 });
       }
 
+      user = dbUser as AuthUser;
       await cacheSet(key, user, 60 * 5); // 5 min cache
     }
 

@@ -41,7 +41,7 @@ export const registerController = async (c: Context) => {
     data: { ip, userAgent, userId: user.id },
   });
 
-  const token = await generateJWT({ id: user.id });
+  const token = await generateJWT({ id: user.id, sub: user.id });
 
   setCookie(c, 'access', token, {
     httpOnly: true,
@@ -96,7 +96,7 @@ export const loginController = async (c: Context) => {
     data: { ip, userAgent, userId: user.id },
   });
 
-  const token = await generateJWT({ id: user.id });
+  const token = await generateJWT({ id: user.id, sub: user.id });
 
   setCookie(c, 'access', token, {
     httpOnly: true,
@@ -121,6 +121,7 @@ export const loginController = async (c: Context) => {
 
 export const getCurrentUser = async (c: Context) => {
   const reqUser = c.get('user') as AuthUser;
+
   const key = `user:${reqUser.id}`;
 
   let currentUser = (await cacheGet(key)) as AuthUser | null;
