@@ -28,7 +28,6 @@ export type McpOAuthClientMinAggregateOutputType = {
   id: string | null
   clientId: string | null
   clientName: string | null
-  userId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -37,7 +36,6 @@ export type McpOAuthClientMaxAggregateOutputType = {
   id: string | null
   clientId: string | null
   clientName: string | null
-  userId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -47,7 +45,6 @@ export type McpOAuthClientCountAggregateOutputType = {
   clientId: number
   clientName: number
   redirectUris: number
-  userId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -58,7 +55,6 @@ export type McpOAuthClientMinAggregateInputType = {
   id?: true
   clientId?: true
   clientName?: true
-  userId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -67,7 +63,6 @@ export type McpOAuthClientMaxAggregateInputType = {
   id?: true
   clientId?: true
   clientName?: true
-  userId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -77,7 +72,6 @@ export type McpOAuthClientCountAggregateInputType = {
   clientId?: true
   clientName?: true
   redirectUris?: true
-  userId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -160,7 +154,6 @@ export type McpOAuthClientGroupByOutputType = {
   clientId: string
   clientName: string
   redirectUris: string[]
-  userId: string | null
   createdAt: Date
   updatedAt: Date
   _count: McpOAuthClientCountAggregateOutputType | null
@@ -191,7 +184,6 @@ export type McpOAuthClientWhereInput = {
   clientId?: Prisma.StringFilter<"McpOAuthClient"> | string
   clientName?: Prisma.StringFilter<"McpOAuthClient"> | string
   redirectUris?: Prisma.StringNullableListFilter<"McpOAuthClient">
-  userId?: Prisma.UuidNullableFilter<"McpOAuthClient"> | string | null
   createdAt?: Prisma.DateTimeFilter<"McpOAuthClient"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"McpOAuthClient"> | Date | string
 }
@@ -201,7 +193,6 @@ export type McpOAuthClientOrderByWithRelationInput = {
   clientId?: Prisma.SortOrder
   clientName?: Prisma.SortOrder
   redirectUris?: Prisma.SortOrder
-  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -214,7 +205,6 @@ export type McpOAuthClientWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.McpOAuthClientWhereInput | Prisma.McpOAuthClientWhereInput[]
   clientName?: Prisma.StringFilter<"McpOAuthClient"> | string
   redirectUris?: Prisma.StringNullableListFilter<"McpOAuthClient">
-  userId?: Prisma.UuidNullableFilter<"McpOAuthClient"> | string | null
   createdAt?: Prisma.DateTimeFilter<"McpOAuthClient"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"McpOAuthClient"> | Date | string
 }, "id" | "clientId">
@@ -224,7 +214,6 @@ export type McpOAuthClientOrderByWithAggregationInput = {
   clientId?: Prisma.SortOrder
   clientName?: Prisma.SortOrder
   redirectUris?: Prisma.SortOrder
-  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.McpOAuthClientCountOrderByAggregateInput
@@ -240,7 +229,6 @@ export type McpOAuthClientScalarWhereWithAggregatesInput = {
   clientId?: Prisma.StringWithAggregatesFilter<"McpOAuthClient"> | string
   clientName?: Prisma.StringWithAggregatesFilter<"McpOAuthClient"> | string
   redirectUris?: Prisma.StringNullableListFilter<"McpOAuthClient">
-  userId?: Prisma.UuidNullableWithAggregatesFilter<"McpOAuthClient"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"McpOAuthClient"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"McpOAuthClient"> | Date | string
 }
@@ -250,7 +238,6 @@ export type McpOAuthClientCreateInput = {
   clientId: string
   clientName: string
   redirectUris?: Prisma.McpOAuthClientCreateredirectUrisInput | string[]
-  userId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -260,7 +247,6 @@ export type McpOAuthClientUncheckedCreateInput = {
   clientId: string
   clientName: string
   redirectUris?: Prisma.McpOAuthClientCreateredirectUrisInput | string[]
-  userId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -270,7 +256,6 @@ export type McpOAuthClientUpdateInput = {
   clientId?: Prisma.StringFieldUpdateOperationsInput | string
   clientName?: Prisma.StringFieldUpdateOperationsInput | string
   redirectUris?: Prisma.McpOAuthClientUpdateredirectUrisInput | string[]
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -280,7 +265,6 @@ export type McpOAuthClientUncheckedUpdateInput = {
   clientId?: Prisma.StringFieldUpdateOperationsInput | string
   clientName?: Prisma.StringFieldUpdateOperationsInput | string
   redirectUris?: Prisma.McpOAuthClientUpdateredirectUrisInput | string[]
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -290,7 +274,6 @@ export type McpOAuthClientCreateManyInput = {
   clientId: string
   clientName: string
   redirectUris?: Prisma.McpOAuthClientCreateredirectUrisInput | string[]
-  userId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -300,7 +283,6 @@ export type McpOAuthClientUpdateManyMutationInput = {
   clientId?: Prisma.StringFieldUpdateOperationsInput | string
   clientName?: Prisma.StringFieldUpdateOperationsInput | string
   redirectUris?: Prisma.McpOAuthClientUpdateredirectUrisInput | string[]
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -310,7 +292,6 @@ export type McpOAuthClientUncheckedUpdateManyInput = {
   clientId?: Prisma.StringFieldUpdateOperationsInput | string
   clientName?: Prisma.StringFieldUpdateOperationsInput | string
   redirectUris?: Prisma.McpOAuthClientUpdateredirectUrisInput | string[]
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -328,7 +309,6 @@ export type McpOAuthClientCountOrderByAggregateInput = {
   clientId?: Prisma.SortOrder
   clientName?: Prisma.SortOrder
   redirectUris?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -337,7 +317,6 @@ export type McpOAuthClientMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
   clientName?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -346,7 +325,6 @@ export type McpOAuthClientMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
   clientName?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -364,10 +342,6 @@ export type McpOAuthClientUpdateredirectUrisInput = {
   push?: string | string[]
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
@@ -379,7 +353,6 @@ export type McpOAuthClientSelect<ExtArgs extends runtime.Types.Extensions.Intern
   clientId?: boolean
   clientName?: boolean
   redirectUris?: boolean
-  userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["mcpOAuthClient"]>
@@ -389,7 +362,6 @@ export type McpOAuthClientSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   clientId?: boolean
   clientName?: boolean
   redirectUris?: boolean
-  userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["mcpOAuthClient"]>
@@ -399,7 +371,6 @@ export type McpOAuthClientSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   clientId?: boolean
   clientName?: boolean
   redirectUris?: boolean
-  userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["mcpOAuthClient"]>
@@ -409,12 +380,11 @@ export type McpOAuthClientSelectScalar = {
   clientId?: boolean
   clientName?: boolean
   redirectUris?: boolean
-  userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type McpOAuthClientOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "clientId" | "clientName" | "redirectUris" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["mcpOAuthClient"]>
+export type McpOAuthClientOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "clientId" | "clientName" | "redirectUris" | "createdAt" | "updatedAt", ExtArgs["result"]["mcpOAuthClient"]>
 
 export type $McpOAuthClientPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "McpOAuthClient"
@@ -424,7 +394,6 @@ export type $McpOAuthClientPayload<ExtArgs extends runtime.Types.Extensions.Inte
     clientId: string
     clientName: string
     redirectUris: string[]
-    userId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["mcpOAuthClient"]>
@@ -854,7 +823,6 @@ export interface McpOAuthClientFieldRefs {
   readonly clientId: Prisma.FieldRef<"McpOAuthClient", 'String'>
   readonly clientName: Prisma.FieldRef<"McpOAuthClient", 'String'>
   readonly redirectUris: Prisma.FieldRef<"McpOAuthClient", 'String[]'>
-  readonly userId: Prisma.FieldRef<"McpOAuthClient", 'String'>
   readonly createdAt: Prisma.FieldRef<"McpOAuthClient", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"McpOAuthClient", 'DateTime'>
 }

@@ -8,6 +8,9 @@ export const BACKEND_URL = process.env.BACKEND_URL || '';
 export const JWT_SECRET = process.env.JWT_SECRET || '';
 export const JWT_EXPIRY = process.env.JWT_EXPIRY || '30min';
 
+// OAUTH
+export const OAUTH_TOKEN_EXPIRY = process.env.OAUTH_TOKEN_EXPIRY || '3650d'; // ~10 years
+
 // METRICS
 const _METRICS_SERVER_ENABLED = process.env.METRICS_SERVER_ENABLED || 'false';
 export const METRICS_SERVER_ENABLED = _METRICS_SERVER_ENABLED === 'true';

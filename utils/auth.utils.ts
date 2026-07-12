@@ -21,8 +21,13 @@ export const comparePassword = async (hash: string, password: string) => {
 };
 
 // In generateJWT
-export const generateJWT = async (payload: { [key: string]: any }) => {
-  const exp = Math.floor(Date.now() / 1000) + parseDurationToSeconds(JWT_EXPIRY);
+export const generateJWT = async (
+  payload: { [key: string]: any },
+  expirySeconds?: number,
+) => {
+  const exp =
+    Math.floor(Date.now() / 1000) +
+    (expirySeconds ?? parseDurationToSeconds(JWT_EXPIRY));
   const tokenPayload = { ...payload, exp };
 
   // ADD 'HS256' HERE

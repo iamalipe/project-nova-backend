@@ -822,7 +822,6 @@ export const McpOAuthClientScalarFieldEnum = {
   clientId: 'clientId',
   clientName: 'clientName',
   redirectUris: 'redirectUris',
-  userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

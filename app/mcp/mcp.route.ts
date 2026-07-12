@@ -1,9 +1,8 @@
 import { Hono } from 'hono';
-import { createMiddleware } from 'hono/factory';
-import { handleMcpPost, methodNotAllowed } from './mcp.controller';
-import { verifyJWT } from '../../utils/auth.utils';
+import { handleMcpPost } from './mcp.controller';
 import { db } from '../../services/prisma.service';
 import { jwtAuth } from '../../middlewares/jwtAuth.middleware';
+import { mcpBearerAuth } from '../../middlewares/mcpBearerAuth.middleware';
 
 import { AuthUser } from '../../types/general.type';
 
@@ -14,47 +13,6 @@ type Variables = {
   query?: any;
   params?: any;
 };
-
-const mcpBearerAuth = createMiddleware(async (c, next) => {
-  if (c.req.method === 'OPTIONS') {
-    await next();
-    return;
-  }
-
-  let token = '';
-  const authHeader = c.req.header('Authorization');
-  if (authHeader && authHeader.startsWith('Bearer ')) {
-    token = authHeader.substring(7);
-  } else {
-    token = c.req.query('token') || '';
-  }
-
-  if (!token) {
-    return c.json({ error: 'Unauthorized', message: 'Missing token' }, 401);
-  }
-
-  const { decoded, expired } = (await verifyJWT(token)) as any;
-
-  if (expired) {
-    return c.json({ error: 'Unauthorized', message: 'Token expired' }, 401);
-  }
-
-  if (!decoded || !decoded.id || !decoded.sessionId) {
-    return c.json({ error: 'Unauthorized', message: 'Invalid token claims' }, 401);
-  }
-
-  const session = await db.userSession.findFirst({
-    where: { id: decoded.sessionId, userId: decoded.id },
-    include: { user: true },
-  });
-
-  if (!session) {
-    return c.json({ error: 'Unauthorized', message: 'Session has been revoked' }, 401);
-  }
-
-  c.set('user', session.user);
-  await next();
-});
 
 const mcpRouter = new Hono<{ Variables: Variables }>();
 mcpRouter.all('/', mcpBearerAuth, handleMcpPost);

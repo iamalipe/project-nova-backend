@@ -13,6 +13,7 @@ import {
   healthCheckController,
   oauthAuthorizationServerController,
   openidConfigurationController,
+  protectedResourceMetadataController,
   rootController,
   tempLogController,
 } from './app/app.controller';
@@ -86,6 +87,16 @@ app.get('/.well-known/openid-configuration', openidConfigurationController);
 app.get(
   '/.well-known/oauth-authorization-server',
   oauthAuthorizationServerController,
+);
+app.get(
+  '/.well-known/oauth-protected-resource',
+  protectedResourceMetadataController,
+);
+// RFC 9728 §3.1 also allows the resource's path appended after the
+// well-known prefix — some clients probe this form instead of the root one.
+app.get(
+  '/.well-known/oauth-protected-resource/v1/mcp',
+  protectedResourceMetadataController,
 );
 
 // Swagger/Scalar API Documentation protected by Basic Auth

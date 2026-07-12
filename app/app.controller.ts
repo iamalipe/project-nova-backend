@@ -17,16 +17,15 @@ export const openidConfigurationController = async (c: Context) => {
     issuer: BACKEND_URL,
     authorization_endpoint: `${BACKEND_URL}/oauth/authorize`,
     token_endpoint: `${BACKEND_URL}/oauth/token`,
+    registration_endpoint: `${BACKEND_URL}/oauth/register`,
     userinfo_endpoint: `${BACKEND_URL}/oauth/userinfo`,
-    jwks_uri: `${BACKEND_URL}/oauth/jwks`,
     scopes_supported: ['openid'],
     response_types_supported: ['code'],
     response_modes_supported: ['query'],
-    grant_types_supported: ['authorization_code', 'refresh_token'],
+    grant_types_supported: ['authorization_code'],
     code_challenge_methods_supported: ['S256'],
     subject_types_supported: ['public'],
-    id_token_signing_alg_values_supported: ['RS256'],
-    token_endpoint_auth_methods_supported: ['client_secret_post', 'none'],
+    token_endpoint_auth_methods_supported: ['none'],
   });
 };
 
@@ -36,12 +35,23 @@ export const oauthAuthorizationServerController = async (c: Context) => {
     issuer: BACKEND_URL,
     authorization_endpoint: `${BACKEND_URL}/oauth/authorize`,
     token_endpoint: `${BACKEND_URL}/oauth/token`,
-    jwks_uri: `${BACKEND_URL}/oauth/jwks`,
+    registration_endpoint: `${BACKEND_URL}/oauth/register`,
     scopes_supported: ['openid'],
     response_types_supported: ['code'],
-    grant_types_supported: ['authorization_code', 'refresh_token'],
+    grant_types_supported: ['authorization_code'],
     code_challenge_methods_supported: ['S256'],
-    token_endpoint_auth_methods_supported: ['client_secret_post', 'none'],
+    token_endpoint_auth_methods_supported: ['none'],
+  });
+};
+
+// /.well-known/oauth-protected-resource (RFC 9728) — tells a client which
+// authorization server(s) protect the MCP resource endpoint at /v1/mcp.
+export const protectedResourceMetadataController = async (c: Context) => {
+  return c.json({
+    resource: `${BACKEND_URL}/v1/mcp`,
+    authorization_servers: [BACKEND_URL],
+    bearer_methods_supported: ['header'],
+    scopes_supported: ['openid'],
   });
 };
 
