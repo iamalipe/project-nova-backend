@@ -1,0 +1,19 @@
+node_modules
+build
+.git
+.gitignore
+npm-debug.log*
+
+# Secrets — never bake these into an image layer
+.env
+.env.*
+!.env.example
+
+# OS / editor cruft
+.DS_Store
+.vscode
+.idea
+
+# Not needed inside the image
+coverage
+*.md
