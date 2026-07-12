@@ -2,8 +2,7 @@
   "name": "project-nova-backend",
   "version": "1.0.0",
   "description": "A high-performance Hono & Prisma relational database server built as an AI/MCP testing ground for serialized tech retail fulfillment.",
-  "main": "build/index.js",
-  "type": "module",
+  "main": "build/main.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iamalipe/project-nova-backend.git"
@@ -20,7 +19,7 @@
   "scripts": {
     "dev": "tsx watch main.ts",
     "build": "tsc",
-    "start": "node build/main.js",
+    "start": "cross-env NODE_ENV=production node ./build/main.js",
     "db:push": "prisma db push",
     "db:generate": "prisma generate",
     "db:seed": "tsx prisma/seed.ts",
@@ -30,6 +29,7 @@
     "@types/node": "^26.1.1",
     "@types/pg": "^8.20.0",
     "@types/uuid": "^10.0.0",
+    "cross-env": "^10.1.0",
     "prisma": "^7.8.0",
     "tsx": "^4.23.0",
     "typescript": "^7.0.2"

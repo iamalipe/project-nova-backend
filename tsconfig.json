@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES2023",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
+    // "target": "ES2023",
+    // "module": "ESNext",
+    // "moduleResolution": "bundler",
+    "target": "ES6",
+    "module": "commonjs",
     "allowJs": true,
     "sourceMap": true,
     "outDir": "./build",
