@@ -20,7 +20,7 @@
   "scripts": {
     "dev": "tsx watch main.ts",
     "build": "tsc",
-    "start": "node build/index.js",
+    "start": "node build/main.js",
     "db:push": "prisma db push",
     "db:generate": "prisma generate",
     "db:seed": "tsx prisma/seed.ts",
