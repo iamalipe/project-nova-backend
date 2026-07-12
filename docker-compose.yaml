@@ -1,0 +1,17 @@
+services:
+  project-nova-backend:
+    build: .
+    container_name: project-nova-backend
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    networks:
+      - app-network
+    deploy:
+      resources:
+        limits:
+          memory: 256M # Prevents Node.js from spiking and starving other services
+
+networks:
+  app-network:
+    external: true
