@@ -7,6 +7,8 @@ import {
   loginSchema,
   profileImageUpdateSchema,
   registerSchema,
+  profileUpdateSchema,
+  changePasswordSchema,
 } from './auth.schema';
 
 const router = new Hono();
@@ -37,6 +39,32 @@ router.put(
   }),
   validateRequest(profileImageUpdateSchema),
   controller.profileImageUpdate,
+);
+
+router.put(
+  '/profile',
+  jwtAuth,
+  validateRequest(profileUpdateSchema),
+  controller.profileUpdateController,
+);
+
+router.post(
+  '/change-password',
+  jwtAuth,
+  validateRequest(changePasswordSchema),
+  controller.changePasswordController,
+);
+
+router.get(
+  '/sessions',
+  jwtAuth,
+  controller.getSessionsController,
+);
+
+router.delete(
+  '/sessions/:id',
+  jwtAuth,
+  controller.deleteSessionController,
 );
 
 export default router;

@@ -5,6 +5,7 @@ model User {
   lastName     String?
   password     String?
   profileImage String?
+  role         String   @default("guest")
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 

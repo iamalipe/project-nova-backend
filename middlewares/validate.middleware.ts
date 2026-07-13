@@ -12,7 +12,9 @@ export const validateRequest = (schema: ZodType) => {
       contentType.includes('multipart/form-data') ||
       contentType.includes('application/x-www-form-urlencoded')
     ) {
-      body = await c.req.parseBody().catch(() => ({}));
+      const parsedBody = await c.req.parseBody().catch(() => ({}));
+      const uploadedFiles = (c as any).var?.uploadedFiles || {};
+      body = { ...parsedBody, ...uploadedFiles };
     }
 
     const parsedData: any = await schema.parseAsync({

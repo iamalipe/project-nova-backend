@@ -1,37 +1,16 @@
 import { Hono } from 'hono';
 import { validateRequest } from '../../middlewares/validate.middleware';
+import * as controller from './user.controller';
 import { requireRole } from '../../middlewares/role.middleware';
-import * as controller from './product.controller';
 import {
-  createManySchema,
-  createSchema,
   deleteSchema,
   getAllSchema,
   getSchema,
-  updateSchema,
   deleteManySchema,
-} from './product.schema';
+} from './user.schema';
 
 const router = new Hono();
 
-router.post(
-  '/',
-  requireRole(['superuser']),
-  validateRequest(createSchema),
-  controller.createController,
-);
-router.post(
-  '/many',
-  requireRole(['superuser']),
-  validateRequest(createManySchema),
-  controller.createManyController,
-);
-router.put(
-  '/:id',
-  requireRole(['superuser']),
-  validateRequest(updateSchema),
-  controller.updateController,
-);
 router.delete(
   '/:id',
   requireRole(['superuser']),

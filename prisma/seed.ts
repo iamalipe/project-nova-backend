@@ -6,21 +6,36 @@ async function seed() {
   await dbConnect();
   logger.info('Database seeding started...');
 
-  const userCount = await db.user.count();
-  if (userCount === 0) {
-    logger.info('No users found. Creating a test user...');
-    const hashedPassword = await hashPassword('password123');
+  const guestExists = await db.user.findUnique({ where: { email: 'test@example.com' } });
+  const hashedPassword = await hashPassword('password123');
+
+  if (!guestExists) {
+    logger.info('Creating guest test user (test@example.com)...');
     await db.user.create({
       data: {
         email: 'test@example.com',
         firstName: 'Test',
         lastName: 'User',
         password: hashedPassword,
+        role: 'guest',
       },
     });
     logger.info('Test user (test@example.com / password123) created.');
-  } else {
-    logger.info('Users already exist. Skipping creation.');
+  }
+
+  const adminExists = await db.user.findUnique({ where: { email: 'admin@example.com' } });
+  if (!adminExists) {
+    logger.info('Creating admin superuser (admin@example.com)...');
+    await db.user.create({
+      data: {
+        email: 'admin@example.com',
+        firstName: 'Admin',
+        lastName: 'User',
+        password: hashedPassword,
+        role: 'superuser',
+      },
+    });
+    logger.info('Admin user (admin@example.com / password123) created.');
   }
 
   logger.info('Database seeding completed successfully.');

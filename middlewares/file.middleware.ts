@@ -53,13 +53,14 @@ export const validateFiles = (params?: ValidateMulterType) => {
       return await next();
     }
 
-    // Hono's native Web Standard form data parser
-    const formData = await c.req.formData();
+    // Use parseBody which is cached and safe for multiple reads
+    const body = await c.req.parseBody({ all: true });
     const parsedFiles: Record<string, any> = {};
 
     for (const config of validateFiles) {
       // Get all entries for this field name
-      const entries = formData.getAll(config.fieldName);
+      const value = body[config.fieldName];
+      const entries = Array.isArray(value) ? value : value !== undefined ? [value] : [];
 
       // Filter out any text fields that happen to share the same name
       const uploadedFiles = entries.filter(

@@ -9,7 +9,7 @@ import {
   generateJWT,
   hashPassword,
 } from '../../utils/auth.utils';
-import type { loginSchemaType, registerSchemaType } from './auth.schema';
+import type { loginSchemaType, registerSchemaType, profileUpdateSchemaType, changePasswordSchemaType } from './auth.schema';
 
 export const registerController = async (c: Context) => {
   // Extract the explicitly nested body exactly like you wanted
@@ -192,6 +192,106 @@ export const profileImageUpdate = async (c: Context) => {
   return c.json({
     success: true,
     data: updatedUser,
+    errors: [],
+    timestamp: new Date().toISOString(),
+    message: 'success',
+  });
+};
+
+export const profileUpdateController = async (c: Context) => {
+  const body = c.get('body') as profileUpdateSchemaType['body'];
+  const user = c.get('user') as AuthUser;
+
+  const dataToUpdate: any = {};
+  if (body.firstName !== undefined) dataToUpdate.firstName = body.firstName;
+  if (body.lastName !== undefined) dataToUpdate.lastName = body.lastName;
+
+  const updatedUser = await db.user.update({
+    where: { id: user.id },
+    data: dataToUpdate,
+    omit: { password: true },
+  });
+
+  await cacheDel([`jwt-auth-middleware-user:${user.id}`, `user:${user.id}`]);
+
+  return c.json({
+    success: true,
+    data: updatedUser,
+    errors: [],
+    timestamp: new Date().toISOString(),
+    message: 'success',
+  });
+};
+
+export const changePasswordController = async (c: Context) => {
+  const body = c.get('body') as changePasswordSchemaType['body'];
+  const user = c.get('user') as AuthUser;
+
+  const dbUser = await db.user.findUnique({
+    where: { id: user.id },
+    omit: { password: false } as any,
+  });
+
+  if (!dbUser || !dbUser.password) {
+    throw new AppError('Unauthorized', { status: 401 });
+  }
+
+  const verifyResult = await comparePassword(dbUser.password, body.oldPassword);
+  if (!verifyResult) {
+    throw new AppError('Old password is wrong', { status: 400, path: 'oldPassword' });
+  }
+
+  const hashedPassword = await hashPassword(body.newPassword);
+  await db.user.update({
+    where: { id: user.id },
+    data: { password: hashedPassword },
+  });
+
+  await cacheDel([`jwt-auth-middleware-user:${user.id}`, `user:${user.id}`]);
+
+  return c.json({
+    success: true,
+    data: null,
+    errors: [],
+    timestamp: new Date().toISOString(),
+    message: 'success',
+  });
+};
+
+export const getSessionsController = async (c: Context) => {
+  const user = c.get('user') as AuthUser;
+  const sessions = await db.userSession.findMany({
+    where: { userId: user.id },
+    orderBy: { createdAt: 'desc' },
+  });
+  return c.json({
+    success: true,
+    data: sessions,
+    errors: [],
+    timestamp: new Date().toISOString(),
+    message: 'success',
+  });
+};
+
+export const deleteSessionController = async (c: Context) => {
+  const id = c.req.param('id');
+  const user = c.get('user') as AuthUser;
+
+  const session = await db.userSession.findUnique({
+    where: { id },
+  });
+
+  if (!session || session.userId !== user.id) {
+    throw new AppError('Session not found', { status: 404 });
+  }
+
+  await db.userSession.delete({
+    where: { id },
+  });
+
+  return c.json({
+    success: true,
+    data: null,
     errors: [],
     timestamp: new Date().toISOString(),
     message: 'success',

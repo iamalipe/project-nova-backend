@@ -36,9 +36,17 @@ export const profileImageUpdateSchema = z.object({
   }),
 });
 
+export const profileUpdateSchema = z.object({
+  body: z.object({
+    firstName: z.string().optional(),
+    lastName: z.string().optional(),
+  }),
+});
+
 export type registerSchemaType = z.infer<typeof registerSchema>;
 export type loginSchemaType = z.infer<typeof loginSchema>;
 export type changePasswordSchemaType = z.infer<typeof changePasswordSchema>;
 export type profileImageUpdateSchemaType = z.infer<
   typeof profileImageUpdateSchema
 >;
+export type profileUpdateSchemaType = z.infer<typeof profileUpdateSchema>;
