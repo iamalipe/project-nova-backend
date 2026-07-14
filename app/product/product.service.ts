@@ -1,23 +1,9 @@
-import { tool } from 'ai';
 import { db } from '../../services/prisma.service';
 import { AppError } from '../../utils/appError.utils';
-import { updateCheck } from '../../utils/general.utils';
 import {
-  createManySchema,
-  createManySchemaType,
-  createSchema,
-  createSchemaType,
-  deleteManySchema,
-  deleteManySchemaType,
-  deleteSchema,
-  deleteSchemaType,
-  getAllSchema,
-  getAllSchemaType,
-  getSchema,
-  getSchemaType,
-  updateSchema,
-  updateSchemaType,
-} from './product.schema';
+  serializeDatesAndDecimals,
+  updateCheck,
+} from '../../utils/general.utils';
 
 const createOne = async (
   data: {
@@ -51,7 +37,7 @@ const createOne = async (
     },
   });
 
-  return result;
+  return serializeDatesAndDecimals(result);
 };
 
 const createMany = async (
@@ -134,7 +120,10 @@ const createMany = async (
     },
   });
 
-  return { success: createdProducts, failed: uniqueArrayFailed };
+  return {
+    success: serializeDatesAndDecimals(createdProducts),
+    failed: serializeDatesAndDecimals(uniqueArrayFailed),
+  };
 };
 
 const updateOne = async (
@@ -178,7 +167,7 @@ const updateOne = async (
     data: updateSet,
   });
 
-  return updatedResult;
+  return serializeDatesAndDecimals(updatedResult);
 };
 
 const deleteOne = async (id: string, userId: string) => {
@@ -192,7 +181,7 @@ const deleteOne = async (id: string, userId: string) => {
     where: { id },
   });
 
-  return deletedResult;
+  return serializeDatesAndDecimals(deletedResult);
 };
 
 const deleteMany = async (ids: string[], userId: string) => {
@@ -201,7 +190,7 @@ const deleteMany = async (ids: string[], userId: string) => {
       id: { in: ids },
     },
   });
-  return result;
+  return serializeDatesAndDecimals(result);
 };
 
 const getOne = async (id: string, userId: string) => {
@@ -211,7 +200,7 @@ const getOne = async (id: string, userId: string) => {
 
   if (!result) throw new AppError('record not found', { status: 404 });
 
-  return result;
+  return serializeDatesAndDecimals(result);
 };
 
 const getAll = async (query: {
@@ -265,156 +254,11 @@ const getAll = async (query: {
   };
 
   return {
-    data,
+    data: serializeDatesAndDecimals(data),
     pagination,
     sort,
   };
 };
-
-const createOneProductAITool = tool({
-  description:
-    'Creates a single product. Use this tool when you need to create a new product entry.',
-  inputSchema: createSchema,
-  execute: async (input: createSchemaType) => {
-    const userId: string = ''; // FIXME later fix this userId issue
-    const result = await createOne(
-      {
-        ...input.body,
-        userId: userId,
-      },
-      userId,
-    );
-
-    return {
-      success: true,
-      data: result,
-      errors: [],
-      timestamp: new Date().toISOString(),
-      message: 'success',
-    };
-  },
-});
-
-const createManyProductAITool = tool({
-  description:
-    'Creates multiple products in bulk. Use this tool to batch create several products at once.',
-  inputSchema: createManySchema,
-  execute: async (input: createManySchemaType) => {
-    const userId: string = ''; // FIXME later fix this userId issue
-    const data = input.body.map((item) => ({
-      ...item,
-      userId,
-      price: Number(item.price),
-    }));
-    const result = await createMany(data, userId);
-
-    return {
-      success: true,
-      data: result,
-      errors: [],
-      timestamp: new Date().toISOString(),
-      message: 'success',
-    };
-  },
-});
-
-const updateOneProductAITool = tool({
-  description:
-    'Updates fields of an existing product (e.g., name, description, category, price) using its unique product ID.',
-  inputSchema: updateSchema,
-  execute: async (input: updateSchemaType) => {
-    const userId: string = ''; // FIXME later fix this userId issue
-    const result = await updateOne(input.params.id, input.body, userId);
-
-    return {
-      success: true,
-      data: result,
-      errors: [],
-      timestamp: new Date().toISOString(),
-      message: 'success',
-    };
-  },
-});
-
-const deleteOneProductAITool = tool({
-  description: 'Deletes an existing product by its unique product ID.',
-  inputSchema: deleteSchema,
-  execute: async (input: deleteSchemaType) => {
-    const userId: string = ''; // FIXME later fix this userId issue
-    const result = await deleteOne(input.params.id, userId);
-
-    return {
-      success: true,
-      data: result,
-      errors: [],
-      timestamp: new Date().toISOString(),
-      message: 'success',
-    };
-  },
-});
-
-const getOneProductAITool = tool({
-  description:
-    'Retrieves details of a single product using its unique product ID.',
-  inputSchema: getSchema,
-  execute: async (input: getSchemaType) => {
-    const userId: string = ''; // FIXME later fix this userId issue
-    const result = await getOne(input.params.id, userId);
-
-    return {
-      success: true,
-      data: result,
-      errors: [],
-      timestamp: new Date().toISOString(),
-      message: 'success',
-    };
-  },
-});
-
-const getAllProductAITool = tool({
-  description:
-    'Retrieves a list of products with optional search terms, pagination (page, limit), and custom sorting (order, orderBy).',
-  inputSchema: getAllSchema,
-  execute: async (input: getAllSchemaType) => {
-    const userId: string = ''; // FIXME later fix this userId issue
-    const query = {
-      limit: input.query.limit,
-      page: input.query.page,
-      orderBy: input.query.orderBy,
-      order: input.query.order,
-      userId: userId,
-      search: input.query.search,
-    };
-    const result = await getAll(query);
-
-    return {
-      success: true,
-      data: result.data,
-      sort: result.sort,
-      pagination: result.pagination,
-      errors: [],
-      timestamp: new Date().toISOString(),
-      message: 'success',
-    };
-  },
-});
-
-const deleteManyProductAITool = tool({
-  description: 'Deletes multiple products in bulk by their unique product IDs.',
-  inputSchema: deleteManySchema,
-  execute: async (input: deleteManySchemaType) => {
-    const userId: string = ''; // FIXME later fix this userId issue
-    const result = await deleteMany(input.body.ids, userId);
-
-    return {
-      success: true,
-      data: result,
-      errors: [],
-      timestamp: new Date().toISOString(),
-      message: 'success',
-    };
-  },
-});
 
 export default {
   createOne,
@@ -424,11 +268,4 @@ export default {
   deleteMany,
   getOne,
   getAll,
-  createOneProductAITool,
-  createManyProductAITool,
-  updateOneProductAITool,
-  deleteOneProductAITool,
-  deleteManyProductAITool,
-  getOneProductAITool,
-  getAllProductAITool,
 };

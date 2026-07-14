@@ -1,4 +1,7 @@
+import { Prisma } from '../prisma-generated/client';
+
 export const mongoIdRegex = /^[0-9a-fA-F]{24}$/;
+
 
 /**
  * The function `getObjectKeys` recursively retrieves all keys of an object, including nested keys with
@@ -118,3 +121,47 @@ export const parseDurationToSeconds = (duration: string | number): number => {
   }
 };
 
+/**
+ * Recursively traverses an object or array, converting all Date instances to ISO strings
+ * and all Decimal instances (Prisma/decimal.js) to JavaScript numbers.
+ *
+ * @param val The object or array to serialize.
+ * @returns A new serialized object or array.
+ */
+export function serializeDatesAndDecimals<T>(val: T): any {
+  if (val === null || val === undefined) {
+    return val;
+  }
+
+  if (val instanceof Date) {
+    return val.toISOString();
+  }
+
+  if (
+    typeof val === 'object' &&
+    (Prisma?.Decimal?.isDecimal(val) ||
+      Object.prototype.toString.call(val) === '[object Decimal]' ||
+      (typeof (val as any).toNumber === 'function' && typeof (val as any).toFixed === 'function'))
+  ) {
+    return (val as any).toNumber();
+  }
+
+  if (Array.isArray(val)) {
+    return val.map(serializeDatesAndDecimals);
+  }
+
+  if (typeof val === 'object') {
+    const toStringTag = Object.prototype.toString.call(val);
+    if (toStringTag !== '[object Object]') {
+      return val;
+    }
+
+    const copy: any = {};
+    for (const key of Object.keys(val)) {
+      copy[key] = serializeDatesAndDecimals((val as any)[key]);
+    }
+    return copy;
+  }
+
+  return val;
+}

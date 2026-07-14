@@ -174,3 +174,63 @@ export type deleteSchemaType = z.infer<typeof deleteSchema>;
 export type deleteManySchemaType = z.infer<typeof deleteManySchema>;
 export type getSchemaType = z.infer<typeof getSchema>;
 export type getAllSchemaType = z.infer<typeof getAllSchema>;
+
+// --- OUTPUT SCHEMAS ---
+
+export const singleOutputSchema = z
+  .object({
+    id: z.uuid().describe('The unique UUID of the product'),
+    name: z.string().describe('The name of the product'),
+    description: z.string().describe('A detailed description of the product'),
+    category: z.string().describe('The category classification of the product'),
+    price: z.number().describe('The price of the product'),
+    userId: z.uuid().describe('The owner user UUID of the product'),
+    createdAt: z.string().describe('ISO timestamp of creation'),
+    updatedAt: z.string().describe('ISO timestamp of last update'),
+  })
+  .describe('The schema of a product object');
+
+export const bulkCreateOutputSchema = z
+  .object({
+    count: z.number().int().describe('The number of products created'),
+  })
+  .describe('The schema of a bulk product creation result');
+
+export const bulkDeleteOutputSchema = z
+  .object({
+    count: z.number().int().describe('The number of products deleted'),
+  })
+  .describe('The schema of a bulk product deletion result');
+
+export const listOutputSchema = z
+  .object({
+    data: z
+      .array(singleOutputSchema)
+      .describe('The list of products for the current page'),
+    pagination: z
+      .object({
+        page: z.number().int().describe('Current page number'),
+        limit: z.number().int().describe('Maximum number of items per page'),
+        total: z
+          .number()
+          .int()
+          .describe('Total number of matching products in the database'),
+        current: z
+          .number()
+          .int()
+          .describe('Number of items on the current page'),
+      })
+      .describe('Pagination metadata'),
+    sort: z
+      .object({
+        order: z.enum(['asc', 'desc']).describe('Sorting order direction'),
+        orderBy: z.string().describe('The field used to sort the products'),
+      })
+      .describe('Sorting metadata'),
+  })
+  .describe('The schema of a paginated list products response');
+
+export type singleOutputSchemaType = z.infer<typeof singleOutputSchema>;
+export type bulkCreateOutputSchemaType = z.infer<typeof bulkCreateOutputSchema>;
+export type bulkDeleteOutputSchemaType = z.infer<typeof bulkDeleteOutputSchema>;
+export type listOutputSchemaType = z.infer<typeof listOutputSchema>;
