@@ -2,6 +2,8 @@ import { Hono } from 'hono';
 
 import { jwtAuth } from '../middlewares/jwtAuth.middleware';
 import authRouter from './auth/auth.route';
+import categoryRouter from './category/category.route';
+import subcategoryRouter from './subcategory/subcategory.route';
 import productRouter from './product/product.route';
 import userRouter from './user/user.route';
 import { mcpRouter, mcpConnectionRouter } from './mcp/mcp.route';
@@ -20,6 +22,12 @@ appRouter.route('/auth', authRouter);
 
 // Apply JWT middleware to protected routes, then mount the routers
 // Note the '/*' wildcard — this tells Hono to apply the middleware to all nested routes
+appRouter.use('/category/*', jwtAuth);
+appRouter.route('/category', categoryRouter);
+
+appRouter.use('/subcategory/*', jwtAuth);
+appRouter.route('/subcategory', subcategoryRouter);
+
 appRouter.use('/product/*', jwtAuth);
 appRouter.route('/product', productRouter);
 

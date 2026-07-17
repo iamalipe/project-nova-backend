@@ -18,6 +18,11 @@ export { Prisma }
 export * as $Enums from './enums'
 export * from './enums';
 /**
+ * Model Category
+ * 
+ */
+export type Category = Prisma.CategoryModel
+/**
  * Model McpOAuthClient
  * 
  */
@@ -32,6 +37,11 @@ export type McpOAuthCode = Prisma.McpOAuthCodeModel
  * 
  */
 export type Product = Prisma.ProductModel
+/**
+ * Model Subcategory
+ * 
+ */
+export type Subcategory = Prisma.SubcategoryModel
 /**
  * Model User
  * 

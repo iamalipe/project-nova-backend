@@ -6,18 +6,27 @@ export const createSchema = z.object({
       name: z.string().min(2).max(255).describe('The name of the product'),
       description: z
         .string()
-        .min(2)
         .max(2000)
-        .describe('A detailed description of the product'),
-      category: z
+        .optional()
+        .describe('A detailed description of the product (optional)'),
+      subcategoryId: z
         .string()
-        .min(2)
-        .max(255)
-        .describe('The category classification of the product'),
-      price: z
+        .uuid('Invalid Subcategory ID')
+        .describe('The subcategory classification of the product'),
+      mrp: z
         .number()
         .gt(0)
-        .describe('The price of the product (must be greater than 0)'),
+        .describe('The Maximum Retail Price (MRP) of the product'),
+      mop: z
+        .number()
+        .gt(0)
+        .describe('The Market Operating Price (MOP) of the product'),
+      images: z
+        .string()
+        .url('Invalid image URL')
+        .optional()
+        .or(z.literal(''))
+        .describe('An optional URL to an image for the product'),
     })
     .describe('Request body parameters for creating a new product'),
 });
@@ -29,24 +38,31 @@ export const createManySchema = z.object({
         name: z.string().min(2).max(255).describe('The name of the product'),
         description: z
           .string()
-          .min(2)
           .max(2000)
-          .describe('A detailed description of the product'),
-        category: z
+          .optional()
+          .describe('A detailed description of the product (optional)'),
+        subcategoryId: z
           .string()
-          .min(2)
-          .max(255)
-          .describe('The category classification of the product'),
-        price: z
+          .uuid('Invalid Subcategory ID')
+          .describe('The subcategory classification of the product'),
+        mrp: z
           .number()
           .gt(0)
-          .describe('The price of the product (must be greater than 0)'),
+          .describe('The Maximum Retail Price (MRP) of the product'),
+        mop: z
+          .number()
+          .gt(0)
+          .describe('The Market Operating Price (MOP) of the product'),
+        images: z
+          .string()
+          .url('Invalid image URL')
+          .optional()
+          .or(z.literal(''))
+          .describe('An optional URL to an image for the product'),
       }),
     )
     .min(1)
-    .describe(
-      'An array of product objects to be created in bulk (at least 1 product is required)',
-    ),
+    .describe('An array of product objects to be created in bulk'),
 });
 
 export const updateSchema = z.object({
@@ -68,29 +84,32 @@ export const updateSchema = z.object({
         .describe('The updated name of the product (optional)'),
       description: z
         .string()
-        .min(2)
         .max(2000)
         .optional()
         .describe('The updated detailed description of the product (optional)'),
-      category: z
+      subcategoryId: z
         .string()
-        .min(2)
-        .max(255)
+        .uuid('Invalid Subcategory ID')
         .optional()
-        .describe(
-          'The updated category classification of the product (optional)',
-        ),
-      price: z
+        .describe('The updated subcategory classification of the product (optional)'),
+      mrp: z
         .number()
         .gt(0)
         .optional()
-        .describe(
-          'The updated price of the product (optional, must be greater than 0)',
-        ),
+        .describe('The updated Maximum Retail Price of the product (optional)'),
+      mop: z
+        .number()
+        .gt(0)
+        .optional()
+        .describe('The updated Market Operating Price of the product (optional)'),
+      images: z
+        .string()
+        .url('Invalid image URL')
+        .optional()
+        .or(z.literal(''))
+        .describe('The updated URL to an image for the product (optional)'),
     })
-    .describe(
-      'Request body parameters containing the fields of the product to update',
-    ),
+    .describe('Request body parameters containing the fields of the product to update'),
 });
 
 export const deleteSchema = z.object({
@@ -126,9 +145,7 @@ export const getAllSchema = z.object({
         })
         .transform((val) => (val === '' || val === undefined ? 'desc' : val))
         .default('desc')
-        .describe(
-          'Sorting direction, either "asc" for ascending or "desc" for descending. Defaults to "desc".',
-        ),
+        .describe('Sorting direction, either "asc" or "desc". Defaults to "desc".'),
       orderBy: z
         .string()
         .optional()
@@ -136,35 +153,30 @@ export const getAllSchema = z.object({
           val === '' || val === undefined ? 'createdAt' : val,
         )
         .default('createdAt')
-        .describe(
-          'The schema field name by which to order the results (e.g., "createdAt", "price", "name"). Defaults to "createdAt".',
-        ),
+        .describe('The schema field name by which to order results. Defaults to "createdAt".'),
       page: z
         .string()
         .optional()
         .transform((val) => (val ? parseInt(val, 10) : 1))
         .pipe(z.number().min(0))
-        .describe(
-          'The page number of results to retrieve. A value of 0 retrieves all records (disables pagination). Defaults to 1.',
-        ),
+        .describe('The page number. A value of 0 retrieves all. Defaults to 1.'),
       limit: z
         .string()
         .optional()
         .transform((val) => (val ? parseInt(val, 10) : 10))
         .pipe(z.number().min(1).max(100))
-        .describe(
-          'The maximum number of products to return per page (must be between 1 and 100). Defaults to 10.',
-        ),
+        .describe('The maximum number of products to return per page. Defaults to 10.'),
       search: z
         .string()
         .optional()
-        .describe(
-          'A text search query string to filter products by their name, description, or category.',
-        ),
+        .describe('A text search query string to filter products by their name, description, or SKU.'),
+      subcategoryId: z
+        .string()
+        .uuid()
+        .optional()
+        .describe('Filter products by subcategory ID.'),
     })
-    .describe(
-      'Query parameters for paginating, sorting, and searching products',
-    ),
+    .describe('Query parameters for paginating, sorting, and searching products'),
 });
 
 export type createSchemaType = z.infer<typeof createSchema>;
@@ -181,18 +193,34 @@ export const singleOutputSchema = z
   .object({
     id: z.uuid().describe('The unique UUID of the product'),
     name: z.string().describe('The name of the product'),
-    description: z.string().describe('A detailed description of the product'),
-    category: z.string().describe('The category classification of the product'),
-    price: z.number().describe('The price of the product'),
+    description: z.string().nullable().describe('A detailed description of the product'),
+    subcategoryId: z.uuid().describe('The subcategory UUID'),
+    sku: z.string().describe('The 6-character auto-generated SKU'),
+    mrp: z.number().describe('Maximum Retail Price (MRP)'),
+    mop: z.number().describe('Market Operating Price (MOP)'),
+    images: z.string().nullable().describe('Product image URL'),
     userId: z.uuid().describe('The owner user UUID of the product'),
     createdAt: z.string().describe('ISO timestamp of creation'),
     updatedAt: z.string().describe('ISO timestamp of last update'),
+    subcategory: z
+      .object({
+        id: z.uuid(),
+        name: z.string(),
+        sku: z.string(),
+        category: z.object({
+          id: z.uuid(),
+          name: z.string(),
+          sku: z.string(),
+        }),
+      })
+      .optional(),
   })
   .describe('The schema of a product object');
 
 export const bulkCreateOutputSchema = z
   .object({
-    count: z.number().int().describe('The number of products created'),
+    success: z.array(singleOutputSchema),
+    failed: z.array(z.any()),
   })
   .describe('The schema of a bulk product creation result');
 

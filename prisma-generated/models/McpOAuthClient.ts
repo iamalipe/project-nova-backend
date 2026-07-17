@@ -333,17 +333,9 @@ export type McpOAuthClientCreateredirectUrisInput = {
   set: string[]
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
-}
-
 export type McpOAuthClientUpdateredirectUrisInput = {
   set?: string[]
   push?: string | string[]
-}
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
 }
 
 

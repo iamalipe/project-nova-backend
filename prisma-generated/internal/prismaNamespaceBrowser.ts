@@ -51,9 +51,11 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  Category: 'Category',
   McpOAuthClient: 'McpOAuthClient',
   McpOAuthCode: 'McpOAuthCode',
   Product: 'Product',
+  Subcategory: 'Subcategory',
   User: 'User',
   UserSession: 'UserSession'
 } as const
@@ -72,6 +74,19 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  sku: 'sku',
+  images: 'images',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
 
 
 export const McpOAuthClientScalarFieldEnum = {
@@ -104,15 +119,32 @@ export type McpOAuthCodeScalarFieldEnum = (typeof McpOAuthCodeScalarFieldEnum)[k
 export const ProductScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  subcategoryId: 'subcategoryId',
+  sku: 'sku',
   description: 'description',
-  category: 'category',
-  price: 'price',
+  mrp: 'mrp',
+  mop: 'mop',
+  images: 'images',
   userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+export const SubcategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  categoryId: 'categoryId',
+  sku: 'sku',
+  images: 'images',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SubcategoryScalarFieldEnum = (typeof SubcategoryScalarFieldEnum)[keyof typeof SubcategoryScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

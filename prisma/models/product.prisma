@@ -1,14 +1,19 @@
 model Product {
-  id          String   @id @default(uuid(7)) @db.Uuid
-  name        String
-  description String
-  category    String
-  price       Decimal  @db.Decimal(10, 2)
-  userId      String   @db.Uuid
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            String      @id @default(uuid(7)) @db.Uuid
+  name          String
+  subcategoryId String      @db.Uuid
+  subcategory   Subcategory @relation(fields: [subcategoryId], references: [id], onDelete: Cascade)
+  sku           String      @unique
+  description   String?
+  mrp           Decimal     @db.Decimal(10, 2)
+  mop           Decimal     @db.Decimal(10, 2)
+  images        String?
+  userId        String      @db.Uuid
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
 
   @@index([userId])
   @@index([name])
+  @@index([subcategoryId])
 }

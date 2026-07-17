@@ -1,0 +1,14 @@
+model Subcategory {
+  id          String   @id @default(uuid(7)) @db.Uuid
+  name        String
+  categoryId  String   @db.Uuid
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  sku         String   @unique
+  images      String?
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  products    Product[]
+
+  @@index([categoryId])
+}
