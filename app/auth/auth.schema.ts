@@ -40,6 +40,11 @@ export const profileUpdateSchema = z.object({
   body: z.object({
     firstName: z.string().optional(),
     lastName: z.string().optional(),
+    salary: z.number().positive().optional().nullable(),
+    countryId: z.string().uuid().optional().nullable(),
+    stateId: z.string().uuid().optional().nullable(),
+    address: z.string().optional().nullable(),
+    zip: z.string().optional().nullable(),
   }),
 });
 

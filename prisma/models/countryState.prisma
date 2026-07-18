@@ -1,0 +1,16 @@
+model CountryState {
+  id        String   @id @default(uuid(7)) @db.Uuid
+  name      String
+  countryId String   @db.Uuid
+  country   Country  @relation(fields: [countryId], references: [id], onDelete: Cascade)
+  code2     String   @db.VarChar(2)
+  code3     String   @db.VarChar(3)
+  tz        String?
+  flag      String?
+  users     User[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([countryId])
+}

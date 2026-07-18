@@ -45,7 +45,7 @@ export const registerUserTools = (server: McpServer, userId: string) => {
     'update_user_profile',
     {
       title: 'Update User Profile',
-      description: 'Updates the profile fields (firstName, lastName) of the connected user.',
+      description: 'Updates the profile fields (firstName, lastName, salary, countryId, stateId, address, zip) of the connected user.',
       inputSchema: updateUserProfileInputSchema,
       outputSchema: userProfileOutputSchema,
     },
@@ -54,6 +54,11 @@ export const registerUserTools = (server: McpServer, userId: string) => {
         const dataToUpdate: any = {};
         if (input.firstName !== undefined) dataToUpdate.firstName = input.firstName;
         if (input.lastName !== undefined) dataToUpdate.lastName = input.lastName;
+        if (input.salary !== undefined) dataToUpdate.salary = input.salary;
+        if (input.countryId !== undefined) dataToUpdate.countryId = input.countryId;
+        if (input.stateId !== undefined) dataToUpdate.stateId = input.stateId;
+        if (input.address !== undefined) dataToUpdate.address = input.address;
+        if (input.zip !== undefined) dataToUpdate.zip = input.zip;
 
         const updatedUser = await db.user.update({
           where: { id: userId },

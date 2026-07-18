@@ -1,5 +1,6 @@
 import { db } from '../../services/prisma.service';
 import { AppError } from '../../utils/appError.utils';
+import { Role } from '../../prisma-generated/client';
 
 const getOne = async (id: string) => {
   const result = await db.user.findUnique({
@@ -54,11 +55,14 @@ const getAll = async (query: {
   // Build match filter
   const where: any = {};
   if (query.search) {
+    const matchedRole = Object.values(Role).find(
+      (r) => r.toLowerCase() === query.search?.toLowerCase()
+    );
     where.OR = [
       { email: { contains: query.search, mode: 'insensitive' } },
       { firstName: { contains: query.search, mode: 'insensitive' } },
       { lastName: { contains: query.search, mode: 'insensitive' } },
-      { role: { contains: query.search, mode: 'insensitive' } },
+      ...(matchedRole ? [{ role: { equals: matchedRole } }] : []),
     ];
   }
 

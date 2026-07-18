@@ -52,6 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Category: 'Category',
+  Country: 'Country',
+  CountryState: 'CountryState',
   McpOAuthClient: 'McpOAuthClient',
   McpOAuthCode: 'McpOAuthCode',
   Product: 'Product',
@@ -87,6 +89,37 @@ export const CategoryScalarFieldEnum = {
 } as const
 
 export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
+
+
+export const CountryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  flag: 'flag',
+  code3: 'code3',
+  code2: 'code2',
+  tz: 'tz',
+  currency3: 'currency3',
+  currencySymbol: 'currencySymbol',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CountryScalarFieldEnum = (typeof CountryScalarFieldEnum)[keyof typeof CountryScalarFieldEnum]
+
+
+export const CountryStateScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  countryId: 'countryId',
+  code2: 'code2',
+  code3: 'code3',
+  tz: 'tz',
+  flag: 'flag',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CountryStateScalarFieldEnum = (typeof CountryStateScalarFieldEnum)[keyof typeof CountryStateScalarFieldEnum]
 
 
 export const McpOAuthClientScalarFieldEnum = {
@@ -155,6 +188,11 @@ export const UserScalarFieldEnum = {
   password: 'password',
   profileImage: 'profileImage',
   role: 'role',
+  salary: 'salary',
+  countryId: 'countryId',
+  stateId: 'stateId',
+  address: 'address',
+  zip: 'zip',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

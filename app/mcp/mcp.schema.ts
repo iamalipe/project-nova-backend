@@ -5,6 +5,11 @@ export const getUserProfileInputSchema = z.object({}).describe('Input schema for
 export const updateUserProfileInputSchema = z.object({
   firstName: z.string().min(2).max(255).optional().describe('The updated first name of the user'),
   lastName: z.string().min(2).max(255).optional().describe('The updated last name of the user'),
+  salary: z.number().positive().optional().nullable().describe('The updated salary of the user'),
+  countryId: z.string().uuid().optional().nullable().describe('The updated country UUID of the user'),
+  stateId: z.string().uuid().optional().nullable().describe('The updated state UUID of the user'),
+  address: z.string().optional().nullable().describe('The updated address of the user'),
+  zip: z.string().optional().nullable().describe('The updated ZIP code of the user'),
 }).describe('Input schema for updating user profile fields');
 
 export const userProfileOutputSchema = z.object({
@@ -14,6 +19,11 @@ export const userProfileOutputSchema = z.object({
   lastName: z.string().nullable().describe('Last name of the user'),
   profileImage: z.string().nullable().describe('URL to the profile image'),
   role: z.string().describe('The role assigned to the user'),
+  salary: z.any().nullable().optional().describe('The salary of the user'),
+  countryId: z.string().uuid().nullable().optional().describe('The country UUID of the user'),
+  stateId: z.string().uuid().nullable().optional().describe('The state UUID of the user'),
+  address: z.string().nullable().optional().describe('The address of the user'),
+  zip: z.string().nullable().optional().describe('The ZIP code of the user'),
   createdAt: z.string().describe('ISO timestamp of user creation'),
   updatedAt: z.string().describe('ISO timestamp of user last update'),
 }).describe('The user profile details');

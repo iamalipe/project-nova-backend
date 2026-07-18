@@ -6,6 +6,8 @@ import categoryRouter from './category/category.route';
 import subcategoryRouter from './subcategory/subcategory.route';
 import productRouter from './product/product.route';
 import userRouter from './user/user.route';
+import countryRouter from './country/country.route';
+import stateRouter from './state/state.route';
 import { mcpRouter, mcpConnectionRouter } from './mcp/mcp.route';
 
 import {
@@ -33,6 +35,12 @@ appRouter.route('/product', productRouter);
 
 appRouter.use('/user/*', jwtAuth);
 appRouter.route('/user', userRouter);
+
+appRouter.use('/country/*', jwtAuth);
+appRouter.route('/country', countryRouter);
+
+appRouter.use('/state/*', jwtAuth);
+appRouter.route('/state', stateRouter);
 
 appRouter.route('/mcp', mcpRouter);
 appRouter.route('/mcp/connections', mcpConnectionRouter);

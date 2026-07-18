@@ -205,6 +205,11 @@ export const profileUpdateController = async (c: Context) => {
   const dataToUpdate: any = {};
   if (body.firstName !== undefined) dataToUpdate.firstName = body.firstName;
   if (body.lastName !== undefined) dataToUpdate.lastName = body.lastName;
+  if (body.salary !== undefined) dataToUpdate.salary = body.salary;
+  if (body.countryId !== undefined) dataToUpdate.countryId = body.countryId;
+  if (body.stateId !== undefined) dataToUpdate.stateId = body.stateId;
+  if (body.address !== undefined) dataToUpdate.address = body.address;
+  if (body.zip !== undefined) dataToUpdate.zip = body.zip;
 
   const updatedUser = await db.user.update({
     where: { id: user.id },

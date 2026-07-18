@@ -20,8 +20,18 @@ export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayloa
 
 export type AggregateUser = {
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
+}
+
+export type UserAvgAggregateOutputType = {
+  salary: runtime.Decimal | null
+}
+
+export type UserSumAggregateOutputType = {
+  salary: runtime.Decimal | null
 }
 
 export type UserMinAggregateOutputType = {
@@ -31,7 +41,12 @@ export type UserMinAggregateOutputType = {
   lastName: string | null
   password: string | null
   profileImage: string | null
-  role: string | null
+  role: $Enums.Role | null
+  salary: runtime.Decimal | null
+  countryId: string | null
+  stateId: string | null
+  address: string | null
+  zip: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -43,7 +58,12 @@ export type UserMaxAggregateOutputType = {
   lastName: string | null
   password: string | null
   profileImage: string | null
-  role: string | null
+  role: $Enums.Role | null
+  salary: runtime.Decimal | null
+  countryId: string | null
+  stateId: string | null
+  address: string | null
+  zip: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -56,11 +76,24 @@ export type UserCountAggregateOutputType = {
   password: number
   profileImage: number
   role: number
+  salary: number
+  countryId: number
+  stateId: number
+  address: number
+  zip: number
   createdAt: number
   updatedAt: number
   _all: number
 }
 
+
+export type UserAvgAggregateInputType = {
+  salary?: true
+}
+
+export type UserSumAggregateInputType = {
+  salary?: true
+}
 
 export type UserMinAggregateInputType = {
   id?: true
@@ -70,6 +103,11 @@ export type UserMinAggregateInputType = {
   password?: true
   profileImage?: true
   role?: true
+  salary?: true
+  countryId?: true
+  stateId?: true
+  address?: true
+  zip?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -82,6 +120,11 @@ export type UserMaxAggregateInputType = {
   password?: true
   profileImage?: true
   role?: true
+  salary?: true
+  countryId?: true
+  stateId?: true
+  address?: true
+  zip?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -94,6 +137,11 @@ export type UserCountAggregateInputType = {
   password?: true
   profileImage?: true
   role?: true
+  salary?: true
+  countryId?: true
+  stateId?: true
+  address?: true
+  zip?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -137,6 +185,18 @@ export type UserAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: UserAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: UserSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserMinAggregateInputType
@@ -167,6 +227,8 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: UserCountAggregateInputType | true
+  _avg?: UserAvgAggregateInputType
+  _sum?: UserSumAggregateInputType
   _min?: UserMinAggregateInputType
   _max?: UserMaxAggregateInputType
 }
@@ -178,10 +240,17 @@ export type UserGroupByOutputType = {
   lastName: string | null
   password: string | null
   profileImage: string | null
-  role: string
+  role: $Enums.Role
+  salary: runtime.Decimal | null
+  countryId: string | null
+  stateId: string | null
+  address: string | null
+  zip: string | null
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
@@ -211,9 +280,16 @@ export type UserWhereInput = {
   lastName?: Prisma.StringNullableFilter<"User"> | string | null
   password?: Prisma.StringNullableFilter<"User"> | string | null
   profileImage?: Prisma.StringNullableFilter<"User"> | string | null
-  role?: Prisma.StringFilter<"User"> | string
+  role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
+  salary?: Prisma.DecimalNullableFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  countryId?: Prisma.UuidNullableFilter<"User"> | string | null
+  stateId?: Prisma.UuidNullableFilter<"User"> | string | null
+  address?: Prisma.StringNullableFilter<"User"> | string | null
+  zip?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  country?: Prisma.XOR<Prisma.CountryNullableScalarRelationFilter, Prisma.CountryWhereInput> | null
+  state?: Prisma.XOR<Prisma.CountryStateNullableScalarRelationFilter, Prisma.CountryStateWhereInput> | null
   sessions?: Prisma.UserSessionListRelationFilter
   products?: Prisma.ProductListRelationFilter
 }
@@ -226,8 +302,15 @@ export type UserOrderByWithRelationInput = {
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   profileImage?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
+  salary?: Prisma.SortOrderInput | Prisma.SortOrder
+  countryId?: Prisma.SortOrderInput | Prisma.SortOrder
+  stateId?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
+  zip?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  country?: Prisma.CountryOrderByWithRelationInput
+  state?: Prisma.CountryStateOrderByWithRelationInput
   sessions?: Prisma.UserSessionOrderByRelationAggregateInput
   products?: Prisma.ProductOrderByRelationAggregateInput
 }
@@ -242,9 +325,16 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   lastName?: Prisma.StringNullableFilter<"User"> | string | null
   password?: Prisma.StringNullableFilter<"User"> | string | null
   profileImage?: Prisma.StringNullableFilter<"User"> | string | null
-  role?: Prisma.StringFilter<"User"> | string
+  role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
+  salary?: Prisma.DecimalNullableFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  countryId?: Prisma.UuidNullableFilter<"User"> | string | null
+  stateId?: Prisma.UuidNullableFilter<"User"> | string | null
+  address?: Prisma.StringNullableFilter<"User"> | string | null
+  zip?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  country?: Prisma.XOR<Prisma.CountryNullableScalarRelationFilter, Prisma.CountryWhereInput> | null
+  state?: Prisma.XOR<Prisma.CountryStateNullableScalarRelationFilter, Prisma.CountryStateWhereInput> | null
   sessions?: Prisma.UserSessionListRelationFilter
   products?: Prisma.ProductListRelationFilter
 }, "id" | "email">
@@ -257,11 +347,18 @@ export type UserOrderByWithAggregationInput = {
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   profileImage?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
+  salary?: Prisma.SortOrderInput | Prisma.SortOrder
+  countryId?: Prisma.SortOrderInput | Prisma.SortOrder
+  stateId?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
+  zip?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
+  _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
+  _sum?: Prisma.UserSumOrderByAggregateInput
 }
 
 export type UserScalarWhereWithAggregatesInput = {
@@ -274,7 +371,12 @@ export type UserScalarWhereWithAggregatesInput = {
   lastName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   password?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   profileImage?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  role?: Prisma.StringWithAggregatesFilter<"User"> | string
+  role?: Prisma.EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
+  salary?: Prisma.DecimalNullableWithAggregatesFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  countryId?: Prisma.UuidNullableWithAggregatesFilter<"User"> | string | null
+  stateId?: Prisma.UuidNullableWithAggregatesFilter<"User"> | string | null
+  address?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  zip?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -286,9 +388,14 @@ export type UserCreateInput = {
   lastName?: string | null
   password?: string | null
   profileImage?: string | null
-  role?: string
+  role?: $Enums.Role
+  salary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
+  zip?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutUsersInput
+  state?: Prisma.CountryStateCreateNestedOneWithoutUsersInput
   sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
   products?: Prisma.ProductCreateNestedManyWithoutUserInput
 }
@@ -300,7 +407,12 @@ export type UserUncheckedCreateInput = {
   lastName?: string | null
   password?: string | null
   profileImage?: string | null
-  role?: string
+  role?: $Enums.Role
+  salary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  countryId?: string | null
+  stateId?: string | null
+  address?: string | null
+  zip?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
@@ -314,9 +426,14 @@ export type UserUpdateInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  salary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
+  state?: Prisma.CountryStateUpdateOneWithoutUsersNestedInput
   sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
   products?: Prisma.ProductUpdateManyWithoutUserNestedInput
 }
@@ -328,7 +445,12 @@ export type UserUncheckedUpdateInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  salary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
@@ -342,7 +464,12 @@ export type UserCreateManyInput = {
   lastName?: string | null
   password?: string | null
   profileImage?: string | null
-  role?: string
+  role?: $Enums.Role
+  salary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  countryId?: string | null
+  stateId?: string | null
+  address?: string | null
+  zip?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -354,7 +481,10 @@ export type UserUpdateManyMutationInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  salary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -366,9 +496,24 @@ export type UserUncheckedUpdateManyInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  salary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserListRelationFilter = {
+  every?: Prisma.UserWhereInput
+  some?: Prisma.UserWhereInput
+  none?: Prisma.UserWhereInput
+}
+
+export type UserOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -384,8 +529,17 @@ export type UserCountOrderByAggregateInput = {
   password?: Prisma.SortOrder
   profileImage?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  salary?: Prisma.SortOrder
+  countryId?: Prisma.SortOrder
+  stateId?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  zip?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type UserAvgOrderByAggregateInput = {
+  salary?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -396,6 +550,11 @@ export type UserMaxOrderByAggregateInput = {
   password?: Prisma.SortOrder
   profileImage?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  salary?: Prisma.SortOrder
+  countryId?: Prisma.SortOrder
+  stateId?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  zip?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -408,8 +567,101 @@ export type UserMinOrderByAggregateInput = {
   password?: Prisma.SortOrder
   profileImage?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  salary?: Prisma.SortOrder
+  countryId?: Prisma.SortOrder
+  stateId?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  zip?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type UserSumOrderByAggregateInput = {
+  salary?: Prisma.SortOrder
+}
+
+export type UserCreateNestedManyWithoutCountryInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCountryInput, Prisma.UserUncheckedCreateWithoutCountryInput> | Prisma.UserCreateWithoutCountryInput[] | Prisma.UserUncheckedCreateWithoutCountryInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCountryInput | Prisma.UserCreateOrConnectWithoutCountryInput[]
+  createMany?: Prisma.UserCreateManyCountryInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutCountryInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCountryInput, Prisma.UserUncheckedCreateWithoutCountryInput> | Prisma.UserCreateWithoutCountryInput[] | Prisma.UserUncheckedCreateWithoutCountryInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCountryInput | Prisma.UserCreateOrConnectWithoutCountryInput[]
+  createMany?: Prisma.UserCreateManyCountryInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateManyWithoutCountryNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCountryInput, Prisma.UserUncheckedCreateWithoutCountryInput> | Prisma.UserCreateWithoutCountryInput[] | Prisma.UserUncheckedCreateWithoutCountryInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCountryInput | Prisma.UserCreateOrConnectWithoutCountryInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutCountryInput | Prisma.UserUpsertWithWhereUniqueWithoutCountryInput[]
+  createMany?: Prisma.UserCreateManyCountryInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutCountryInput | Prisma.UserUpdateWithWhereUniqueWithoutCountryInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutCountryInput | Prisma.UserUpdateManyWithWhereWithoutCountryInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutCountryNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCountryInput, Prisma.UserUncheckedCreateWithoutCountryInput> | Prisma.UserCreateWithoutCountryInput[] | Prisma.UserUncheckedCreateWithoutCountryInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCountryInput | Prisma.UserCreateOrConnectWithoutCountryInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutCountryInput | Prisma.UserUpsertWithWhereUniqueWithoutCountryInput[]
+  createMany?: Prisma.UserCreateManyCountryInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutCountryInput | Prisma.UserUpdateWithWhereUniqueWithoutCountryInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutCountryInput | Prisma.UserUpdateManyWithWhereWithoutCountryInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserCreateNestedManyWithoutStateInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStateInput, Prisma.UserUncheckedCreateWithoutStateInput> | Prisma.UserCreateWithoutStateInput[] | Prisma.UserUncheckedCreateWithoutStateInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStateInput | Prisma.UserCreateOrConnectWithoutStateInput[]
+  createMany?: Prisma.UserCreateManyStateInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutStateInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStateInput, Prisma.UserUncheckedCreateWithoutStateInput> | Prisma.UserCreateWithoutStateInput[] | Prisma.UserUncheckedCreateWithoutStateInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStateInput | Prisma.UserCreateOrConnectWithoutStateInput[]
+  createMany?: Prisma.UserCreateManyStateInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateManyWithoutStateNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStateInput, Prisma.UserUncheckedCreateWithoutStateInput> | Prisma.UserCreateWithoutStateInput[] | Prisma.UserUncheckedCreateWithoutStateInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStateInput | Prisma.UserCreateOrConnectWithoutStateInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutStateInput | Prisma.UserUpsertWithWhereUniqueWithoutStateInput[]
+  createMany?: Prisma.UserCreateManyStateInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutStateInput | Prisma.UserUpdateWithWhereUniqueWithoutStateInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutStateInput | Prisma.UserUpdateManyWithWhereWithoutStateInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutStateNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStateInput, Prisma.UserUncheckedCreateWithoutStateInput> | Prisma.UserCreateWithoutStateInput[] | Prisma.UserUncheckedCreateWithoutStateInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStateInput | Prisma.UserCreateOrConnectWithoutStateInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutStateInput | Prisma.UserUpsertWithWhereUniqueWithoutStateInput[]
+  createMany?: Prisma.UserCreateManyStateInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutStateInput | Prisma.UserUpdateWithWhereUniqueWithoutStateInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutStateInput | Prisma.UserUpdateManyWithWhereWithoutStateInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
 export type UserCreateNestedOneWithoutProductsInput = {
@@ -426,6 +678,18 @@ export type UserUpdateOneRequiredWithoutProductsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProductsInput, Prisma.UserUpdateWithoutProductsInput>, Prisma.UserUncheckedUpdateWithoutProductsInput>
 }
 
+export type EnumRoleFieldUpdateOperationsInput = {
+  set?: $Enums.Role
+}
+
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
 export type UserCreateNestedOneWithoutSessionsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
@@ -440,6 +704,150 @@ export type UserUpdateOneRequiredWithoutSessionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSessionsInput, Prisma.UserUpdateWithoutSessionsInput>, Prisma.UserUncheckedUpdateWithoutSessionsInput>
 }
 
+export type UserCreateWithoutCountryInput = {
+  id?: string
+  email: string
+  firstName: string
+  lastName?: string | null
+  password?: string | null
+  profileImage?: string | null
+  role?: $Enums.Role
+  salary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
+  zip?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  state?: Prisma.CountryStateCreateNestedOneWithoutUsersInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  products?: Prisma.ProductCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutCountryInput = {
+  id?: string
+  email: string
+  firstName: string
+  lastName?: string | null
+  password?: string | null
+  profileImage?: string | null
+  role?: $Enums.Role
+  salary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stateId?: string | null
+  address?: string | null
+  zip?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutCountryInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCountryInput, Prisma.UserUncheckedCreateWithoutCountryInput>
+}
+
+export type UserCreateManyCountryInputEnvelope = {
+  data: Prisma.UserCreateManyCountryInput | Prisma.UserCreateManyCountryInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserUpsertWithWhereUniqueWithoutCountryInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCountryInput, Prisma.UserUncheckedUpdateWithoutCountryInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCountryInput, Prisma.UserUncheckedCreateWithoutCountryInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutCountryInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCountryInput, Prisma.UserUncheckedUpdateWithoutCountryInput>
+}
+
+export type UserUpdateManyWithWhereWithoutCountryInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutCountryInput>
+}
+
+export type UserScalarWhereInput = {
+  AND?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  OR?: Prisma.UserScalarWhereInput[]
+  NOT?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  id?: Prisma.UuidFilter<"User"> | string
+  email?: Prisma.StringFilter<"User"> | string
+  firstName?: Prisma.StringFilter<"User"> | string
+  lastName?: Prisma.StringNullableFilter<"User"> | string | null
+  password?: Prisma.StringNullableFilter<"User"> | string | null
+  profileImage?: Prisma.StringNullableFilter<"User"> | string | null
+  role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
+  salary?: Prisma.DecimalNullableFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  countryId?: Prisma.UuidNullableFilter<"User"> | string | null
+  stateId?: Prisma.UuidNullableFilter<"User"> | string | null
+  address?: Prisma.StringNullableFilter<"User"> | string | null
+  zip?: Prisma.StringNullableFilter<"User"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+}
+
+export type UserCreateWithoutStateInput = {
+  id?: string
+  email: string
+  firstName: string
+  lastName?: string | null
+  password?: string | null
+  profileImage?: string | null
+  role?: $Enums.Role
+  salary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
+  zip?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutUsersInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  products?: Prisma.ProductCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutStateInput = {
+  id?: string
+  email: string
+  firstName: string
+  lastName?: string | null
+  password?: string | null
+  profileImage?: string | null
+  role?: $Enums.Role
+  salary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  countryId?: string | null
+  address?: string | null
+  zip?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutStateInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStateInput, Prisma.UserUncheckedCreateWithoutStateInput>
+}
+
+export type UserCreateManyStateInputEnvelope = {
+  data: Prisma.UserCreateManyStateInput | Prisma.UserCreateManyStateInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserUpsertWithWhereUniqueWithoutStateInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStateInput, Prisma.UserUncheckedUpdateWithoutStateInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStateInput, Prisma.UserUncheckedCreateWithoutStateInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutStateInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStateInput, Prisma.UserUncheckedUpdateWithoutStateInput>
+}
+
+export type UserUpdateManyWithWhereWithoutStateInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutStateInput>
+}
+
 export type UserCreateWithoutProductsInput = {
   id?: string
   email: string
@@ -447,9 +855,14 @@ export type UserCreateWithoutProductsInput = {
   lastName?: string | null
   password?: string | null
   profileImage?: string | null
-  role?: string
+  role?: $Enums.Role
+  salary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
+  zip?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutUsersInput
+  state?: Prisma.CountryStateCreateNestedOneWithoutUsersInput
   sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
 }
 
@@ -460,7 +873,12 @@ export type UserUncheckedCreateWithoutProductsInput = {
   lastName?: string | null
   password?: string | null
   profileImage?: string | null
-  role?: string
+  role?: $Enums.Role
+  salary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  countryId?: string | null
+  stateId?: string | null
+  address?: string | null
+  zip?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
@@ -489,9 +907,14 @@ export type UserUpdateWithoutProductsInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  salary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
+  state?: Prisma.CountryStateUpdateOneWithoutUsersNestedInput
   sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
 }
 
@@ -502,7 +925,12 @@ export type UserUncheckedUpdateWithoutProductsInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  salary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
@@ -515,9 +943,14 @@ export type UserCreateWithoutSessionsInput = {
   lastName?: string | null
   password?: string | null
   profileImage?: string | null
-  role?: string
+  role?: $Enums.Role
+  salary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
+  zip?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutUsersInput
+  state?: Prisma.CountryStateCreateNestedOneWithoutUsersInput
   products?: Prisma.ProductCreateNestedManyWithoutUserInput
 }
 
@@ -528,7 +961,12 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   lastName?: string | null
   password?: string | null
   profileImage?: string | null
-  role?: string
+  role?: $Enums.Role
+  salary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  countryId?: string | null
+  stateId?: string | null
+  address?: string | null
+  zip?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
@@ -557,9 +995,14 @@ export type UserUpdateWithoutSessionsInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  salary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
+  state?: Prisma.CountryStateUpdateOneWithoutUsersNestedInput
   products?: Prisma.ProductUpdateManyWithoutUserNestedInput
 }
 
@@ -570,10 +1013,151 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  salary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateManyCountryInput = {
+  id?: string
+  email: string
+  firstName: string
+  lastName?: string | null
+  password?: string | null
+  profileImage?: string | null
+  role?: $Enums.Role
+  salary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stateId?: string | null
+  address?: string | null
+  zip?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type UserUpdateWithoutCountryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  salary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  state?: Prisma.CountryStateUpdateOneWithoutUsersNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  products?: Prisma.ProductUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCountryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  salary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutCountryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  salary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserCreateManyStateInput = {
+  id?: string
+  email: string
+  firstName: string
+  lastName?: string | null
+  password?: string | null
+  profileImage?: string | null
+  role?: $Enums.Role
+  salary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  countryId?: string | null
+  address?: string | null
+  zip?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type UserUpdateWithoutStateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  salary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  products?: Prisma.ProductUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  salary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutStateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  salary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -624,8 +1208,15 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   password?: boolean
   profileImage?: boolean
   role?: boolean
+  salary?: boolean
+  countryId?: boolean
+  stateId?: boolean
+  address?: boolean
+  zip?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  country?: boolean | Prisma.User$countryArgs<ExtArgs>
+  state?: boolean | Prisma.User$stateArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   products?: boolean | Prisma.User$productsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -639,8 +1230,15 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   password?: boolean
   profileImage?: boolean
   role?: boolean
+  salary?: boolean
+  countryId?: boolean
+  stateId?: boolean
+  address?: boolean
+  zip?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  country?: boolean | Prisma.User$countryArgs<ExtArgs>
+  state?: boolean | Prisma.User$stateArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -651,8 +1249,15 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   password?: boolean
   profileImage?: boolean
   role?: boolean
+  salary?: boolean
+  countryId?: boolean
+  stateId?: boolean
+  address?: boolean
+  zip?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  country?: boolean | Prisma.User$countryArgs<ExtArgs>
+  state?: boolean | Prisma.User$stateArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -663,22 +1268,37 @@ export type UserSelectScalar = {
   password?: boolean
   profileImage?: boolean
   role?: boolean
+  salary?: boolean
+  countryId?: boolean
+  stateId?: boolean
+  address?: boolean
+  zip?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "firstName" | "lastName" | "password" | "profileImage" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "firstName" | "lastName" | "password" | "profileImage" | "role" | "salary" | "countryId" | "stateId" | "address" | "zip" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  country?: boolean | Prisma.User$countryArgs<ExtArgs>
+  state?: boolean | Prisma.User$stateArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   products?: boolean | Prisma.User$productsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  country?: boolean | Prisma.User$countryArgs<ExtArgs>
+  state?: boolean | Prisma.User$stateArgs<ExtArgs>
+}
+export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  country?: boolean | Prisma.User$countryArgs<ExtArgs>
+  state?: boolean | Prisma.User$stateArgs<ExtArgs>
+}
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
+    country: Prisma.$CountryPayload<ExtArgs> | null
+    state: Prisma.$CountryStatePayload<ExtArgs> | null
     sessions: Prisma.$UserSessionPayload<ExtArgs>[]
     products: Prisma.$ProductPayload<ExtArgs>[]
   }
@@ -689,7 +1309,12 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     lastName: string | null
     password: string | null
     profileImage: string | null
-    role: string
+    role: $Enums.Role
+    salary: runtime.Decimal | null
+    countryId: string | null
+    stateId: string | null
+    address: string | null
+    zip: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -1086,6 +1711,8 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  country<T extends Prisma.User$countryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$countryArgs<ExtArgs>>): Prisma.Prisma__CountryClient<runtime.Types.Result.GetResult<Prisma.$CountryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  state<T extends Prisma.User$stateArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stateArgs<ExtArgs>>): Prisma.Prisma__CountryStateClient<runtime.Types.Result.GetResult<Prisma.$CountryStatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   products<T extends Prisma.User$productsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$productsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1123,7 +1750,12 @@ export interface UserFieldRefs {
   readonly lastName: Prisma.FieldRef<"User", 'String'>
   readonly password: Prisma.FieldRef<"User", 'String'>
   readonly profileImage: Prisma.FieldRef<"User", 'String'>
-  readonly role: Prisma.FieldRef<"User", 'String'>
+  readonly role: Prisma.FieldRef<"User", 'Role'>
+  readonly salary: Prisma.FieldRef<"User", 'Decimal'>
+  readonly countryId: Prisma.FieldRef<"User", 'String'>
+  readonly stateId: Prisma.FieldRef<"User", 'String'>
+  readonly address: Prisma.FieldRef<"User", 'String'>
+  readonly zip: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
@@ -1380,6 +2012,10 @@ export type UserCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    */
   data: Prisma.UserCreateManyInput | Prisma.UserCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1450,6 +2086,10 @@ export type UserUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many Users to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1516,6 +2156,44 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Users to delete.
    */
   limit?: number
+}
+
+/**
+ * User.country
+ */
+export type User$countryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Country
+   */
+  select?: Prisma.CountrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Country
+   */
+  omit?: Prisma.CountryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CountryInclude<ExtArgs> | null
+  where?: Prisma.CountryWhereInput
+}
+
+/**
+ * User.state
+ */
+export type User$stateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CountryState
+   */
+  select?: Prisma.CountryStateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CountryState
+   */
+  omit?: Prisma.CountryStateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CountryStateInclude<ExtArgs> | null
+  where?: Prisma.CountryStateWhereInput
 }
 
 /**

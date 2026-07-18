@@ -45,6 +45,16 @@ export { Prisma }
  */
 export type Category = Prisma.CategoryModel
 /**
+ * Model Country
+ * 
+ */
+export type Country = Prisma.CountryModel
+/**
+ * Model CountryState
+ * 
+ */
+export type CountryState = Prisma.CountryStateModel
+/**
  * Model McpOAuthClient
  * 
  */

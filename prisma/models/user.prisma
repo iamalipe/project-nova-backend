@@ -1,3 +1,11 @@
+enum Role {
+  SUPERUSER
+  GUEST
+  STORE_MANAGER
+  STAFF
+  CUSTOMER
+}
+
 model User {
   id           String   @id @default(uuid(7)) @db.Uuid
   email        String   @unique
@@ -5,7 +13,14 @@ model User {
   lastName     String?
   password     String?
   profileImage String?
-  role         String   @default("guest")
+  role         Role     @default(GUEST)
+  salary       Decimal? @db.Decimal(10, 2)
+  countryId    String?  @db.Uuid
+  country      Country? @relation(fields: [countryId], references: [id], onDelete: SetNull)
+  stateId      String?  @db.Uuid
+  state        CountryState? @relation(fields: [stateId], references: [id], onDelete: SetNull)
+  address      String?
+  zip          String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
