@@ -1,0 +1,25 @@
+model Store {
+  id              String        @id @default(uuid(7)) @db.Uuid
+  name            String
+  storeCode       String        @unique @db.VarChar(6)
+  addressLine1    String
+  zip             String
+  stateId         String        @db.Uuid
+  state           CountryState  @relation(fields: [stateId], references: [id], onDelete: Restrict)
+  countryId       String        @db.Uuid
+  country         Country       @relation(fields: [countryId], references: [id], onDelete: Restrict)
+  locationMapLink String?
+  images          String[]
+  description     String?
+  yearlyUpkeep    Decimal       @db.Decimal(12, 2)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  stocks               Stock[]
+  sells                Sell[]
+  outgoingTransactions StockTransaction[] @relation("FromStore")
+
+  @@index([name])
+  @@index([countryId])
+  @@index([stateId])
+}

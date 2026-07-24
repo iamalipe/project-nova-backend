@@ -8,6 +8,11 @@ import productRouter from './product/product.route';
 import userRouter from './user/user.route';
 import countryRouter from './country/country.route';
 import stateRouter from './state/state.route';
+import storeRouter from './store/store.route';
+import warehouseRouter from './warehouse/warehouse.route';
+import stockRouter from './stock/stock.route';
+import stockTransactionRouter from './stockTransaction/stockTransaction.route';
+import sellRouter from './sell/sell.route';
 import { mcpRouter, mcpConnectionRouter } from './mcp/mcp.route';
 
 import {
@@ -41,6 +46,21 @@ appRouter.route('/country', countryRouter);
 
 appRouter.use('/state/*', jwtAuth);
 appRouter.route('/state', stateRouter);
+
+appRouter.use('/store/*', jwtAuth);
+appRouter.route('/store', storeRouter);
+
+appRouter.use('/warehouse/*', jwtAuth);
+appRouter.route('/warehouse', warehouseRouter);
+
+appRouter.use('/stock/*', jwtAuth);
+appRouter.route('/stock', stockRouter);
+
+appRouter.use('/stock-transaction/*', jwtAuth);
+appRouter.route('/stock-transaction', stockTransactionRouter);
+
+appRouter.use('/sell/*', jwtAuth);
+appRouter.route('/sell', sellRouter);
 
 appRouter.route('/mcp', mcpRouter);
 appRouter.route('/mcp/connections', mcpConnectionRouter);

@@ -26,6 +26,8 @@ model User {
 
   sessions UserSession[]
   products Product[]
+  sellsCustomer Sell[] @relation("CustomerSells")
+  sellsStaff    Sell[] @relation("StaffSells")
 
   @@index([firstName, lastName])
 }

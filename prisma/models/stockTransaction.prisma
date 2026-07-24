@@ -1,0 +1,23 @@
+enum TransactionStatus {
+  PENDING
+  IN_TRANSIT
+  DELIVERED
+}
+
+model StockTransaction {
+  id              String            @id @default(uuid(7)) @db.Uuid
+  fromStoreId     String?           @db.Uuid
+  fromStore       Store?            @relation("FromStore", fields: [fromStoreId], references: [id], onDelete: SetNull)
+  fromWarehouseId String?           @db.Uuid
+  fromWarehouse   Warehouse?        @relation("FromWarehouse", fields: [fromWarehouseId], references: [id], onDelete: SetNull)
+  products        Json
+  travelCost      Decimal           @db.Decimal(10, 2)
+  status          TransactionStatus @default(PENDING)
+  transactionDate DateTime          @default(now())
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@index([fromStoreId])
+  @@index([fromWarehouseId])
+  @@index([status])
+}

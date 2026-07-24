@@ -1,0 +1,18 @@
+model Stock {
+  id           String     @id @default(uuid(7)) @db.Uuid
+  productId    String     @db.Uuid
+  product      Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+  storeId      String?    @db.Uuid
+  store        Store?     @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  warehouseId  String?    @db.Uuid
+  warehouse    Warehouse? @relation(fields: [warehouseId], references: [id], onDelete: Cascade)
+  quantity     Int
+  minThreshold Int?
+  lastUpdated  DateTime   @default(now()) @updatedAt
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@index([productId])
+  @@index([storeId])
+  @@index([warehouseId])
+}

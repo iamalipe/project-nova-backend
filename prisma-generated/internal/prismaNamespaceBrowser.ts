@@ -57,9 +57,14 @@ export const ModelName = {
   McpOAuthClient: 'McpOAuthClient',
   McpOAuthCode: 'McpOAuthCode',
   Product: 'Product',
+  Sell: 'Sell',
+  Stock: 'Stock',
+  StockTransaction: 'StockTransaction',
+  Store: 'Store',
   Subcategory: 'Subcategory',
   User: 'User',
-  UserSession: 'UserSession'
+  UserSession: 'UserSession',
+  Warehouse: 'Warehouse'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -165,6 +170,71 @@ export const ProductScalarFieldEnum = {
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
 
 
+export const SellScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  storeId: 'storeId',
+  customerId: 'customerId',
+  staffId: 'staffId',
+  quantity: 'quantity',
+  finalSellPrice: 'finalSellPrice',
+  transactionDate: 'transactionDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SellScalarFieldEnum = (typeof SellScalarFieldEnum)[keyof typeof SellScalarFieldEnum]
+
+
+export const StockScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  storeId: 'storeId',
+  warehouseId: 'warehouseId',
+  quantity: 'quantity',
+  minThreshold: 'minThreshold',
+  lastUpdated: 'lastUpdated',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StockScalarFieldEnum = (typeof StockScalarFieldEnum)[keyof typeof StockScalarFieldEnum]
+
+
+export const StockTransactionScalarFieldEnum = {
+  id: 'id',
+  fromStoreId: 'fromStoreId',
+  fromWarehouseId: 'fromWarehouseId',
+  products: 'products',
+  travelCost: 'travelCost',
+  status: 'status',
+  transactionDate: 'transactionDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StockTransactionScalarFieldEnum = (typeof StockTransactionScalarFieldEnum)[keyof typeof StockTransactionScalarFieldEnum]
+
+
+export const StoreScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  storeCode: 'storeCode',
+  addressLine1: 'addressLine1',
+  zip: 'zip',
+  stateId: 'stateId',
+  countryId: 'countryId',
+  locationMapLink: 'locationMapLink',
+  images: 'images',
+  description: 'description',
+  yearlyUpkeep: 'yearlyUpkeep',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StoreScalarFieldEnum = (typeof StoreScalarFieldEnum)[keyof typeof StoreScalarFieldEnum]
+
+
 export const SubcategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -211,12 +281,39 @@ export const UserSessionScalarFieldEnum = {
 export type UserSessionScalarFieldEnum = (typeof UserSessionScalarFieldEnum)[keyof typeof UserSessionScalarFieldEnum]
 
 
+export const WarehouseScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  warehouseCode: 'warehouseCode',
+  addressLine1: 'addressLine1',
+  zip: 'zip',
+  stateId: 'stateId',
+  countryId: 'countryId',
+  mapLocation: 'mapLocation',
+  images: 'images',
+  description: 'description',
+  supplyStoreIds: 'supplyStoreIds',
+  yearlyUpkeep: 'yearlyUpkeep',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WarehouseScalarFieldEnum = (typeof WarehouseScalarFieldEnum)[keyof typeof WarehouseScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -233,4 +330,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

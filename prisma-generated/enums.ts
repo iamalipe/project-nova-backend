@@ -9,6 +9,15 @@
 * 🟢 You can import this file directly.
 */
 
+export const TransactionStatus = {
+  PENDING: 'PENDING',
+  IN_TRANSIT: 'IN_TRANSIT',
+  DELIVERED: 'DELIVERED'
+} as const
+
+export type TransactionStatus = (typeof TransactionStatus)[keyof typeof TransactionStatus]
+
+
 export const Role = {
   SUPERUSER: 'SUPERUSER',
   GUEST: 'GUEST',

@@ -6,7 +6,9 @@ model CountryState {
   subdivisionCode String   @db.VarChar(10)
   tz        String?
   flag      String?
-  users     User[]
+  users      User[]
+  stores     Store[]
+  warehouses Warehouse[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

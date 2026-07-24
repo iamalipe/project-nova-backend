@@ -48,6 +48,26 @@ export type McpOAuthCode = Prisma.McpOAuthCodeModel
  */
 export type Product = Prisma.ProductModel
 /**
+ * Model Sell
+ * 
+ */
+export type Sell = Prisma.SellModel
+/**
+ * Model Stock
+ * 
+ */
+export type Stock = Prisma.StockModel
+/**
+ * Model StockTransaction
+ * 
+ */
+export type StockTransaction = Prisma.StockTransactionModel
+/**
+ * Model Store
+ * 
+ */
+export type Store = Prisma.StoreModel
+/**
  * Model Subcategory
  * 
  */
@@ -62,3 +82,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type UserSession = Prisma.UserSessionModel
+/**
+ * Model Warehouse
+ * 
+ */
+export type Warehouse = Prisma.WarehouseModel
