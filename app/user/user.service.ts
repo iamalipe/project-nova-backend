@@ -1,10 +1,148 @@
 import { db } from '../../services/prisma.service';
 import { AppError } from '../../utils/appError.utils';
 import { Role } from '../../prisma-generated/client';
+import { hashPassword } from '../../utils/auth.utils';
+import { cacheDel } from '../../services/cache.service';
+
+export interface UserCreateInput {
+  email: string;
+  firstName: string;
+  lastName?: string | null;
+  password?: string | null;
+  profileImage?: string | null;
+  role?: Role;
+  salary?: number | null;
+  countryId?: string | null;
+  stateId?: string | null;
+  address?: string | null;
+  zip?: string | null;
+}
+
+export interface UserUpdateInput {
+  email?: string;
+  firstName?: string;
+  lastName?: string | null;
+  password?: string | null;
+  profileImage?: string | null;
+  role?: Role;
+  salary?: number | null;
+  countryId?: string | null;
+  stateId?: string | null;
+  address?: string | null;
+  zip?: string | null;
+}
+
+const createOne = async (data: UserCreateInput) => {
+  const existing = await db.user.findFirst({
+    where: { email: { equals: data.email, mode: 'insensitive' } },
+  });
+  if (existing) {
+    throw new AppError('Email already exists', { status: 400, path: 'email' });
+  }
+
+  const hashedPassword = data.password
+    ? await hashPassword(data.password)
+    : await hashPassword('Password123!');
+
+  const result = await db.user.create({
+    data: {
+      email: data.email,
+      firstName: data.firstName,
+      lastName: data.lastName || null,
+      password: hashedPassword,
+      profileImage: data.profileImage || null,
+      role: data.role || Role.GUEST,
+      salary: data.salary !== undefined && data.salary !== null ? data.salary : null,
+      countryId: data.countryId || null,
+      stateId: data.stateId || null,
+      address: data.address || null,
+      zip: data.zip || null,
+    },
+    include: {
+      country: true,
+      state: true,
+    },
+    omit: {
+      password: true,
+    },
+  });
+
+  return result;
+};
+
+const createMany = async (dataList: UserCreateInput[]) => {
+  const success: any[] = [];
+  const failed: any[] = [];
+
+  for (const item of dataList) {
+    try {
+      const created = await createOne(item);
+      success.push(created);
+    } catch (err: any) {
+      failed.push({ item, error: err?.message || 'Failed to create user' });
+    }
+  }
+
+  return {
+    success,
+    failed,
+  };
+};
+
+const updateOne = async (id: string, data: UserUpdateInput) => {
+  const findResult = await db.user.findUnique({
+    where: { id },
+  });
+  if (!findResult) throw new AppError('User not found', { status: 404 });
+
+  if (data.email && data.email.toLowerCase() !== findResult.email.toLowerCase()) {
+    const existing = await db.user.findFirst({
+      where: { email: { equals: data.email, mode: 'insensitive' } },
+    });
+    if (existing && existing.id !== id) {
+      throw new AppError('Email already exists', { status: 400, path: 'email' });
+    }
+  }
+
+  const dataToUpdate: any = {};
+  if (data.email !== undefined) dataToUpdate.email = data.email;
+  if (data.firstName !== undefined) dataToUpdate.firstName = data.firstName;
+  if (data.lastName !== undefined) dataToUpdate.lastName = data.lastName || null;
+  if (data.profileImage !== undefined) dataToUpdate.profileImage = data.profileImage || null;
+  if (data.role !== undefined) dataToUpdate.role = data.role;
+  if (data.salary !== undefined) dataToUpdate.salary = data.salary !== null ? data.salary : null;
+  if (data.countryId !== undefined) dataToUpdate.countryId = data.countryId || null;
+  if (data.stateId !== undefined) dataToUpdate.stateId = data.stateId || null;
+  if (data.address !== undefined) dataToUpdate.address = data.address || null;
+  if (data.zip !== undefined) dataToUpdate.zip = data.zip || null;
+  if (data.password) {
+    dataToUpdate.password = await hashPassword(data.password);
+  }
+
+  const updatedResult = await db.user.update({
+    where: { id },
+    data: dataToUpdate,
+    include: {
+      country: true,
+      state: true,
+    },
+    omit: {
+      password: true,
+    },
+  });
+
+  await cacheDel([`jwt-auth-middleware-user:${id}`, `user:${id}`]);
+
+  return updatedResult;
+};
 
 const getOne = async (id: string) => {
   const result = await db.user.findUnique({
     where: { id },
+    include: {
+      country: true,
+      state: true,
+    },
     omit: { password: true },
   });
 
@@ -80,6 +218,10 @@ const getAll = async (query: {
       orderBy: orderByStage,
       skip: page > 0 ? skip : undefined,
       take: page > 0 ? limit : undefined,
+      include: {
+        country: true,
+        state: true,
+      },
       omit: { password: true },
     }),
     db.user.count({ where }),
@@ -104,8 +246,12 @@ const getAll = async (query: {
 };
 
 export default {
+  createOne,
+  createMany,
+  updateOne,
   deleteOne,
   deleteMany,
   getOne,
   getAll,
 };
+

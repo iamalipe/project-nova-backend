@@ -8,8 +8,7 @@ import {
 const createOne = async (data: {
   name: string;
   countryId: string;
-  code2: string;
-  code3: string;
+  subdivisionCode: string;
   tz?: string | null;
   flag?: string | null;
 }) => {
@@ -24,8 +23,7 @@ const createOne = async (data: {
     data: {
       name: data.name,
       countryId: data.countryId,
-      code2: data.code2,
-      code3: data.code3,
+      subdivisionCode: data.subdivisionCode,
       tz: data.tz || null,
       flag: data.flag || null,
     },
@@ -38,8 +36,7 @@ const createMany = async (
   data: {
     name: string;
     countryId: string;
-    code2: string;
-    code3: string;
+    subdivisionCode: string;
     tz?: string | null;
     flag?: string | null;
   }[],
@@ -67,8 +64,7 @@ const updateOne = async (
   data: {
     name?: string;
     countryId?: string;
-    code2?: string;
-    code3?: string;
+    subdivisionCode?: string;
     tz?: string | null;
     flag?: string | null;
   },
@@ -81,8 +77,7 @@ const updateOne = async (
   const updateSet: any = {};
 
   if (data.name !== undefined && updateCheck(data.name, findResult.name)) updateSet.name = data.name;
-  if (data.code2 !== undefined && updateCheck(data.code2, findResult.code2)) updateSet.code2 = data.code2;
-  if (data.code3 !== undefined && updateCheck(data.code3, findResult.code3)) updateSet.code3 = data.code3;
+  if (data.subdivisionCode !== undefined && updateCheck(data.subdivisionCode, findResult.subdivisionCode)) updateSet.subdivisionCode = data.subdivisionCode;
   if (data.tz !== undefined && updateCheck(data.tz, findResult.tz)) updateSet.tz = data.tz;
   if (data.flag !== undefined && updateCheck(data.flag, findResult.flag)) updateSet.flag = data.flag;
 
@@ -154,8 +149,7 @@ const getAll = async (query: {
   if (query.search) {
     where.OR = [
       { name: { contains: query.search, mode: 'insensitive' } },
-      { code2: { contains: query.search, mode: 'insensitive' } },
-      { code3: { contains: query.search, mode: 'insensitive' } },
+      { subdivisionCode: { contains: query.search, mode: 'insensitive' } },
     ];
   }
 

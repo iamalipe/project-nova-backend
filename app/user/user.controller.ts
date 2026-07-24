@@ -1,12 +1,71 @@
 import type { Context } from 'hono';
 import { AuthUser } from '../../types/general.type';
 import type {
+  createSchemaType,
+  createManySchemaType,
+  updateSchemaType,
   deleteSchemaType,
   getAllSchemaType,
   getSchemaType,
   deleteManySchemaType,
 } from './user.schema';
 import userService from './user.service';
+
+// CREATE ONE
+export const createController = async (c: Context) => {
+  const body = c.get('body') as createSchemaType['body'];
+
+  const createdResult = await userService.createOne(body);
+
+  return c.json(
+    {
+      success: true,
+      data: createdResult,
+      errors: [],
+      timestamp: new Date().toISOString(),
+      message: 'success',
+    },
+    201,
+  );
+};
+
+// CREATE MANY
+export const createManyController = async (c: Context) => {
+  const body = c.get('body') as createManySchemaType['body'];
+
+  const result = await userService.createMany(body);
+
+  return c.json(
+    {
+      success: true,
+      data: result,
+      info: {
+        success: result.success.length,
+        failed: result.failed.length,
+      },
+      errors: [],
+      timestamp: new Date().toISOString(),
+      message: 'success',
+    },
+    201,
+  );
+};
+
+// UPDATE ONE
+export const updateController = async (c: Context) => {
+  const params = c.get('params') as updateSchemaType['params'];
+  const body = c.get('body') as updateSchemaType['body'];
+
+  const updatedResult = await userService.updateOne(params.id, body);
+
+  return c.json({
+    success: true,
+    data: updatedResult,
+    errors: [],
+    timestamp: new Date().toISOString(),
+    message: 'success',
+  });
+};
 
 // DELETE ONE
 export const deleteController = async (c: Context) => {
@@ -71,3 +130,4 @@ export const deleteManyController = async (c: Context) => {
     message: 'success',
   });
 };
+

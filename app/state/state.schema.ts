@@ -5,8 +5,7 @@ export const createSchema = z.object({
     .object({
       name: z.string().min(2).max(255).describe('The name of the state'),
       countryId: z.string().uuid('Invalid Country ID').describe('The UUID of the country this state belongs to'),
-      code2: z.string().length(2).describe('The 2-letter ISO code'),
-      code3: z.string().length(3).describe('The 3-letter ISO code'),
+      subdivisionCode: z.string().min(1).max(10).describe('The ISO 3166-2 subdivision code (e.g. CA, NY, MH)'),
       tz: z.string().optional().nullable().describe('The state timezone (optional)'),
       flag: z.string().optional().nullable().describe('The state flag emoji/URL (optional)'),
     })
@@ -19,8 +18,7 @@ export const createManySchema = z.object({
       z.object({
         name: z.string().min(2).max(255),
         countryId: z.string().uuid('Invalid Country ID'),
-        code2: z.string().length(2),
-        code3: z.string().length(3),
+        subdivisionCode: z.string().min(1).max(10),
         tz: z.string().optional().nullable(),
         flag: z.string().optional().nullable(),
       })
@@ -39,8 +37,7 @@ export const updateSchema = z.object({
     .object({
       name: z.string().min(2).max(255).optional(),
       countryId: z.string().uuid('Invalid Country ID').optional(),
-      code2: z.string().length(2).optional(),
-      code3: z.string().length(3).optional(),
+      subdivisionCode: z.string().min(1).max(10).optional(),
       tz: z.string().optional().nullable(),
       flag: z.string().optional().nullable(),
     })
