@@ -7,22 +7,22 @@ enum Role {
 }
 
 model User {
-  id           String   @id @default(uuid(7)) @db.Uuid
-  email        String   @unique
+  id           String        @id @default(uuid(7)) @db.Uuid
+  email        String        @unique
   firstName    String
   lastName     String?
   password     String?
   profileImage String?
-  role         Role     @default(GUEST)
-  salary       Decimal? @db.Decimal(10, 2)
-  countryId    String?  @db.Uuid
-  country      Country? @relation(fields: [countryId], references: [id], onDelete: SetNull)
-  stateId      String?  @db.Uuid
+  role         Role          @default(GUEST)
+  salary       Decimal?      @db.Decimal(10, 2)
+  countryId    String?       @db.Uuid
+  country      Country?      @relation(fields: [countryId], references: [id], onDelete: SetNull)
+  stateId      String?       @db.Uuid
   state        CountryState? @relation(fields: [stateId], references: [id], onDelete: SetNull)
   address      String?
   zip          String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
 
   sessions UserSession[]
   products Product[]

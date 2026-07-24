@@ -1,46 +1,46 @@
 import { Hono } from 'hono';
-import { validateRequest } from '../../middlewares/validate.middleware';
 import { requireRole } from '../../middlewares/role.middleware';
+import { validateRequest } from '../../middlewares/validate.middleware';
 import * as controller from './category.controller';
 import {
   createManySchema,
   createSchema,
+  deleteManySchema,
   deleteSchema,
   getAllSchema,
   getSchema,
   updateSchema,
-  deleteManySchema,
 } from './category.schema';
 
 const router = new Hono();
 
 router.post(
   '/',
-  requireRole(['superuser']),
+  requireRole(['SUPERUSER']),
   validateRequest(createSchema),
   controller.createController,
 );
 router.post(
   '/many',
-  requireRole(['superuser']),
+  requireRole(['SUPERUSER']),
   validateRequest(createManySchema),
   controller.createManyController,
 );
 router.put(
   '/:id',
-  requireRole(['superuser']),
+  requireRole(['SUPERUSER']),
   validateRequest(updateSchema),
   controller.updateController,
 );
 router.delete(
   '/:id',
-  requireRole(['superuser']),
+  requireRole(['SUPERUSER']),
   validateRequest(deleteSchema),
   controller.deleteController,
 );
 router.post(
   '/delete-many',
-  requireRole(['superuser']),
+  requireRole(['SUPERUSER']),
   validateRequest(deleteManySchema),
   controller.deleteManyController,
 );

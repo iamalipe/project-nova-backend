@@ -1,25 +1,25 @@
 import { Hono } from 'hono';
+import { requireRole } from '../../middlewares/role.middleware';
 import { validateRequest } from '../../middlewares/validate.middleware';
 import * as controller from './user.controller';
-import { requireRole } from '../../middlewares/role.middleware';
 import {
+  deleteManySchema,
   deleteSchema,
   getAllSchema,
   getSchema,
-  deleteManySchema,
 } from './user.schema';
 
 const router = new Hono();
 
 router.delete(
   '/:id',
-  requireRole(['superuser']),
+  requireRole(['SUPERUSER']),
   validateRequest(deleteSchema),
   controller.deleteController,
 );
 router.post(
   '/delete-many',
-  requireRole(['superuser']),
+  requireRole(['SUPERUSER']),
   validateRequest(deleteManySchema),
   controller.deleteManyController,
 );
