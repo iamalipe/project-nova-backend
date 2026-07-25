@@ -244,8 +244,9 @@ const exportCsv = async () => {
   const items = await db.category.findMany({
     orderBy: { createdAt: 'desc' },
   });
-  const headers = ['name', 'url', 'description'];
+  const headers = ['sku', 'name', 'url', 'description'];
   const rows = items.map((c) => ({
+    sku: c.sku,
     name: c.name,
     url: c.images || '',
     description: c.description || '',

@@ -296,8 +296,9 @@ const exportCsv = async () => {
       },
     },
   });
-  const headers = ['categorysku', 'name', 'url', 'description'];
+  const headers = ['sku', 'categorysku', 'name', 'url', 'description'];
   const rows = items.map((s) => ({
+    sku: s.sku,
     categorysku: s.category?.sku || '',
     name: s.name,
     url: s.images || '',

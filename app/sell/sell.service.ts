@@ -175,10 +175,14 @@ const getAll = async (query: {
 const exportCsv = async () => {
   const items = await db.sell.findMany({
     orderBy: { transactionDate: 'desc' },
+    include: {
+      product: { select: { sku: true } },
+    },
   });
-  const headers = ['productId', 'storeId', 'customerId', 'staffId', 'quantity', 'finalSellPrice'];
+  const headers = ['productId', 'sku', 'storeId', 'customerId', 'staffId', 'quantity', 'finalSellPrice'];
   const rows = items.map((s) => ({
     productId: s.productId,
+    sku: s.product?.sku || '',
     storeId: s.storeId,
     customerId: s.customerId,
     staffId: s.staffId,

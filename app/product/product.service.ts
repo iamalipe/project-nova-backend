@@ -327,8 +327,9 @@ const exportCsv = async () => {
       },
     },
   });
-  const headers = ['sub-category sku', 'name', 'mrp', 'mop', 'url', 'description'];
+  const headers = ['sku', 'sub-category sku', 'name', 'mrp', 'mop', 'url', 'description'];
   const rows = items.map((p) => ({
+    sku: p.sku,
     'sub-category sku': p.subcategory?.sku || '',
     name: p.name,
     mrp: p.mrp ? Number(p.mrp) : '',

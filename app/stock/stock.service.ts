@@ -163,10 +163,14 @@ const getAll = async (query: {
 const exportCsv = async () => {
   const items = await db.stock.findMany({
     orderBy: { createdAt: 'desc' },
+    include: {
+      product: { select: { sku: true } },
+    },
   });
-  const headers = ['productId', 'storeId', 'warehouseId', 'quantity', 'minThreshold'];
+  const headers = ['productId', 'sku', 'storeId', 'warehouseId', 'quantity', 'minThreshold'];
   const rows = items.map((s) => ({
     productId: s.productId,
+    sku: s.product?.sku || '',
     storeId: s.storeId || '',
     warehouseId: s.warehouseId || '',
     quantity: s.quantity,
