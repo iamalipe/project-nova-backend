@@ -4,6 +4,7 @@ import {
   serializeDatesAndDecimals,
   updateCheck,
 } from '../../utils/general.utils';
+import { generateCsv } from '../../utils/csv.utils';
 
 // Helper to generate a unique 4-char subcategory SKU using parent category SKU and subcategory name as ref
 export const generateSubcategorySku = async (
@@ -286,6 +287,25 @@ const getAll = async (query: {
   };
 };
 
+const exportCsv = async () => {
+  const items = await db.subcategory.findMany({
+    orderBy: { createdAt: 'desc' },
+    include: {
+      category: {
+        select: { sku: true },
+      },
+    },
+  });
+  const headers = ['categorysku', 'name', 'url', 'description'];
+  const rows = items.map((s) => ({
+    categorysku: s.category?.sku || '',
+    name: s.name,
+    url: s.images || '',
+    description: s.description || '',
+  }));
+  return generateCsv(headers, rows);
+};
+
 export default {
   createOne,
   createMany,
@@ -294,4 +314,6 @@ export default {
   deleteMany,
   getOne,
   getAll,
+  exportCsv,
 };
+

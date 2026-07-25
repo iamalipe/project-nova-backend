@@ -4,6 +4,7 @@ import {
   serializeDatesAndDecimals,
   updateCheck,
 } from '../../utils/general.utils';
+import { generateCsv } from '../../utils/csv.utils';
 
 // Helper to generate a unique 2-char category SKU using name as ref
 export const generateCategorySku = async (name: string): Promise<string> => {
@@ -239,6 +240,19 @@ const getAll = async (query: {
   };
 };
 
+const exportCsv = async () => {
+  const items = await db.category.findMany({
+    orderBy: { createdAt: 'desc' },
+  });
+  const headers = ['name', 'url', 'description'];
+  const rows = items.map((c) => ({
+    name: c.name,
+    url: c.images || '',
+    description: c.description || '',
+  }));
+  return generateCsv(headers, rows);
+};
+
 export default {
   createOne,
   createMany,
@@ -247,4 +261,6 @@ export default {
   deleteMany,
   getOne,
   getAll,
+  exportCsv,
 };
+

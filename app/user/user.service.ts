@@ -3,6 +3,7 @@ import { AppError } from '../../utils/appError.utils';
 import { Role } from '../../prisma-generated/client';
 import { hashPassword } from '../../utils/auth.utils';
 import { cacheDel } from '../../services/cache.service';
+import { generateCsv } from '../../utils/csv.utils';
 
 export interface UserCreateInput {
   email: string;
@@ -245,6 +246,42 @@ const getAll = async (query: {
   };
 };
 
+const exportCsv = async () => {
+  const items = await db.user.findMany({
+    orderBy: { createdAt: 'desc' },
+    include: {
+      country: { select: { code2: true } },
+      state: { select: { subdivisionCode: true } },
+    },
+    omit: { password: true },
+  });
+  const headers = [
+    'email',
+    'firstName',
+    'lastName',
+    'role',
+    'salary',
+    'countrycode2',
+    'statecode2',
+    'address',
+    'zip',
+    'password',
+  ];
+  const rows = items.map((u) => ({
+    email: u.email,
+    firstName: u.firstName,
+    lastName: u.lastName || '',
+    role: u.role,
+    salary: u.salary ?? '',
+    countrycode2: u.country?.code2 || '',
+    statecode2: u.state?.subdivisionCode || '',
+    address: u.address || '',
+    zip: u.zip || '',
+    password: '',
+  }));
+  return generateCsv(headers, rows);
+};
+
 export default {
   createOne,
   createMany,
@@ -253,5 +290,7 @@ export default {
   deleteMany,
   getOne,
   getAll,
+  exportCsv,
 };
+
 

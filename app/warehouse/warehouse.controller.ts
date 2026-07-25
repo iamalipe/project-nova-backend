@@ -67,3 +67,11 @@ export const getAllController = async (c: Context) => {
     message: 'success',
   });
 };
+
+export const exportCsvController = async (c: Context) => {
+  const csvData = await warehouseService.exportCsv();
+  c.header('Content-Type', 'text/csv; charset=utf-8');
+  c.header('Content-Disposition', 'attachment; filename="warehouse.csv"');
+  return c.text(csvData);
+};
+

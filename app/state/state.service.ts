@@ -4,6 +4,7 @@ import {
   serializeDatesAndDecimals,
   updateCheck,
 } from '../../utils/general.utils';
+import { generateCsv } from '../../utils/csv.utils';
 
 const createOne = async (data: {
   name: string;
@@ -187,6 +188,24 @@ const getAll = async (query: {
   };
 };
 
+const exportCsv = async () => {
+  const items = await db.countryState.findMany({
+    orderBy: { createdAt: 'desc' },
+    include: {
+      country: { select: { code2: true } },
+    },
+  });
+  const headers = ['countrycode2', 'name', 'subdivisioncode', 'tz', 'flag'];
+  const rows = items.map((s) => ({
+    countrycode2: s.country?.code2 || '',
+    name: s.name,
+    subdivisioncode: s.subdivisionCode,
+    tz: s.tz || '',
+    flag: s.flag || '',
+  }));
+  return generateCsv(headers, rows);
+};
+
 export default {
   createOne,
   createMany,
@@ -195,4 +214,6 @@ export default {
   deleteMany,
   getOne,
   getAll,
+  exportCsv,
 };
+

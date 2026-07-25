@@ -44,6 +44,11 @@ router.post(
   validateRequest(deleteManySchema),
   controller.deleteManyController,
 );
+router.get(
+  '/export-csv',
+  requireRole(['SUPERUSER']),
+  controller.exportCsvController,
+);
 router.get('/:id', validateRequest(getSchema), controller.getController);
 router.get('/', validateRequest(getAllSchema), controller.getAllController);
 

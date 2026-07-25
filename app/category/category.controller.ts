@@ -124,3 +124,12 @@ export const deleteManyController = async (c: Context) => {
     message: 'success',
   });
 };
+
+// EXPORT CSV
+export const exportCsvController = async (c: Context) => {
+  const csvData = await categoryService.exportCsv();
+  c.header('Content-Type', 'text/csv; charset=utf-8');
+  c.header('Content-Disposition', 'attachment; filename="category.csv"');
+  return c.text(csvData);
+};
+

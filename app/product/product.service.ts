@@ -4,6 +4,7 @@ import {
   serializeDatesAndDecimals,
   updateCheck,
 } from '../../utils/general.utils';
+import { generateCsv } from '../../utils/csv.utils';
 
 // Helper to generate a unique 6-char product SKU using subcategory SKU and name as ref
 export const generateProductSku = async (
@@ -317,6 +318,27 @@ const getAll = async (query: {
   };
 };
 
+const exportCsv = async () => {
+  const items = await db.product.findMany({
+    orderBy: { createdAt: 'desc' },
+    include: {
+      subcategory: {
+        select: { sku: true },
+      },
+    },
+  });
+  const headers = ['sub-category sku', 'name', 'mrp', 'mop', 'url', 'description'];
+  const rows = items.map((p) => ({
+    'sub-category sku': p.subcategory?.sku || '',
+    name: p.name,
+    mrp: p.mrp ? Number(p.mrp) : '',
+    mop: p.mop ? Number(p.mop) : '',
+    url: p.images || '',
+    description: p.description || '',
+  }));
+  return generateCsv(headers, rows);
+};
+
 export default {
   createOne,
   createMany,
@@ -325,4 +347,6 @@ export default {
   deleteMany,
   getOne,
   getAll,
+  exportCsv,
 };
+

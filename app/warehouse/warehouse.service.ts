@@ -1,6 +1,7 @@
 import { db } from '../../services/prisma.service';
 import { AppError } from '../../utils/appError.utils';
 import { serializeDatesAndDecimals, updateCheck } from '../../utils/general.utils';
+import { generateCsv } from '../../utils/csv.utils';
 
 const createOne = async (data: {
   name: string;
@@ -187,6 +188,23 @@ const getAll = async (query: {
   };
 };
 
+const exportCsv = async () => {
+  const items = await db.warehouse.findMany({
+    orderBy: { createdAt: 'desc' },
+  });
+  const headers = ['name', 'warehouseCode', 'addressLine1', 'zip', 'countryId', 'stateId', 'yearlyUpkeep'];
+  const rows = items.map((w) => ({
+    name: w.name,
+    warehouseCode: w.warehouseCode,
+    addressLine1: w.addressLine1,
+    zip: w.zip,
+    countryId: w.countryId,
+    stateId: w.stateId,
+    yearlyUpkeep: w.yearlyUpkeep ? Number(w.yearlyUpkeep) : 0,
+  }));
+  return generateCsv(headers, rows);
+};
+
 export default {
   createOne,
   createMany,
@@ -195,4 +213,6 @@ export default {
   deleteMany,
   getOne,
   getAll,
+  exportCsv,
 };
+

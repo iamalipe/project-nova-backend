@@ -1,6 +1,7 @@
 import { db } from '../../services/prisma.service';
 import { AppError } from '../../utils/appError.utils';
 import { serializeDatesAndDecimals, updateCheck } from '../../utils/general.utils';
+import { generateCsv } from '../../utils/csv.utils';
 
 const createOne = async (data: {
   fromStoreId?: string | null;
@@ -159,6 +160,20 @@ const getAll = async (query: {
   };
 };
 
+const exportCsv = async () => {
+  const items = await db.stockTransaction.findMany({
+    orderBy: { transactionDate: 'desc' },
+  });
+  const headers = ['fromStoreId', 'fromWarehouseId', 'travelCost', 'status'];
+  const rows = items.map((t) => ({
+    fromStoreId: t.fromStoreId || '',
+    fromWarehouseId: t.fromWarehouseId || '',
+    travelCost: t.travelCost ? Number(t.travelCost) : 0,
+    status: t.status,
+  }));
+  return generateCsv(headers, rows);
+};
+
 export default {
   createOne,
   createMany,
@@ -167,4 +182,6 @@ export default {
   deleteMany,
   getOne,
   getAll,
+  exportCsv,
 };
+
