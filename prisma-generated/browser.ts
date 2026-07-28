@@ -58,11 +58,6 @@ export type Sell = Prisma.SellModel
  */
 export type Stock = Prisma.StockModel
 /**
- * Model StockTransaction
- * 
- */
-export type StockTransaction = Prisma.StockTransactionModel
-/**
  * Model Store
  * 
  */
@@ -82,8 +77,3 @@ export type User = Prisma.UserModel
  * 
  */
 export type UserSession = Prisma.UserSessionModel
-/**
- * Model Warehouse
- * 
- */
-export type Warehouse = Prisma.WarehouseModel

@@ -209,7 +209,6 @@ export type CountryStateWhereInput = {
   country?: Prisma.XOR<Prisma.CountryScalarRelationFilter, Prisma.CountryWhereInput>
   users?: Prisma.UserListRelationFilter
   stores?: Prisma.StoreListRelationFilter
-  warehouses?: Prisma.WarehouseListRelationFilter
 }
 
 export type CountryStateOrderByWithRelationInput = {
@@ -224,7 +223,6 @@ export type CountryStateOrderByWithRelationInput = {
   country?: Prisma.CountryOrderByWithRelationInput
   users?: Prisma.UserOrderByRelationAggregateInput
   stores?: Prisma.StoreOrderByRelationAggregateInput
-  warehouses?: Prisma.WarehouseOrderByRelationAggregateInput
 }
 
 export type CountryStateWhereUniqueInput = Prisma.AtLeast<{
@@ -242,7 +240,6 @@ export type CountryStateWhereUniqueInput = Prisma.AtLeast<{
   country?: Prisma.XOR<Prisma.CountryScalarRelationFilter, Prisma.CountryWhereInput>
   users?: Prisma.UserListRelationFilter
   stores?: Prisma.StoreListRelationFilter
-  warehouses?: Prisma.WarehouseListRelationFilter
 }, "id">
 
 export type CountryStateOrderByWithAggregationInput = {
@@ -284,7 +281,6 @@ export type CountryStateCreateInput = {
   country: Prisma.CountryCreateNestedOneWithoutStatesInput
   users?: Prisma.UserCreateNestedManyWithoutStateInput
   stores?: Prisma.StoreCreateNestedManyWithoutStateInput
-  warehouses?: Prisma.WarehouseCreateNestedManyWithoutStateInput
 }
 
 export type CountryStateUncheckedCreateInput = {
@@ -298,7 +294,6 @@ export type CountryStateUncheckedCreateInput = {
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutStateInput
   stores?: Prisma.StoreUncheckedCreateNestedManyWithoutStateInput
-  warehouses?: Prisma.WarehouseUncheckedCreateNestedManyWithoutStateInput
 }
 
 export type CountryStateUpdateInput = {
@@ -312,7 +307,6 @@ export type CountryStateUpdateInput = {
   country?: Prisma.CountryUpdateOneRequiredWithoutStatesNestedInput
   users?: Prisma.UserUpdateManyWithoutStateNestedInput
   stores?: Prisma.StoreUpdateManyWithoutStateNestedInput
-  warehouses?: Prisma.WarehouseUpdateManyWithoutStateNestedInput
 }
 
 export type CountryStateUncheckedUpdateInput = {
@@ -326,7 +320,6 @@ export type CountryStateUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutStateNestedInput
   stores?: Prisma.StoreUncheckedUpdateManyWithoutStateNestedInput
-  warehouses?: Prisma.WarehouseUncheckedUpdateManyWithoutStateNestedInput
 }
 
 export type CountryStateCreateManyInput = {
@@ -486,20 +479,6 @@ export type CountryStateUpdateOneWithoutUsersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CountryStateUpdateToOneWithWhereWithoutUsersInput, Prisma.CountryStateUpdateWithoutUsersInput>, Prisma.CountryStateUncheckedUpdateWithoutUsersInput>
 }
 
-export type CountryStateCreateNestedOneWithoutWarehousesInput = {
-  create?: Prisma.XOR<Prisma.CountryStateCreateWithoutWarehousesInput, Prisma.CountryStateUncheckedCreateWithoutWarehousesInput>
-  connectOrCreate?: Prisma.CountryStateCreateOrConnectWithoutWarehousesInput
-  connect?: Prisma.CountryStateWhereUniqueInput
-}
-
-export type CountryStateUpdateOneRequiredWithoutWarehousesNestedInput = {
-  create?: Prisma.XOR<Prisma.CountryStateCreateWithoutWarehousesInput, Prisma.CountryStateUncheckedCreateWithoutWarehousesInput>
-  connectOrCreate?: Prisma.CountryStateCreateOrConnectWithoutWarehousesInput
-  upsert?: Prisma.CountryStateUpsertWithoutWarehousesInput
-  connect?: Prisma.CountryStateWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CountryStateUpdateToOneWithWhereWithoutWarehousesInput, Prisma.CountryStateUpdateWithoutWarehousesInput>, Prisma.CountryStateUncheckedUpdateWithoutWarehousesInput>
-}
-
 export type CountryStateCreateWithoutCountryInput = {
   id?: string
   name: string
@@ -510,7 +489,6 @@ export type CountryStateCreateWithoutCountryInput = {
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutStateInput
   stores?: Prisma.StoreCreateNestedManyWithoutStateInput
-  warehouses?: Prisma.WarehouseCreateNestedManyWithoutStateInput
 }
 
 export type CountryStateUncheckedCreateWithoutCountryInput = {
@@ -523,7 +501,6 @@ export type CountryStateUncheckedCreateWithoutCountryInput = {
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutStateInput
   stores?: Prisma.StoreUncheckedCreateNestedManyWithoutStateInput
-  warehouses?: Prisma.WarehouseUncheckedCreateNestedManyWithoutStateInput
 }
 
 export type CountryStateCreateOrConnectWithoutCountryInput = {
@@ -576,7 +553,6 @@ export type CountryStateCreateWithoutStoresInput = {
   updatedAt?: Date | string
   country: Prisma.CountryCreateNestedOneWithoutStatesInput
   users?: Prisma.UserCreateNestedManyWithoutStateInput
-  warehouses?: Prisma.WarehouseCreateNestedManyWithoutStateInput
 }
 
 export type CountryStateUncheckedCreateWithoutStoresInput = {
@@ -589,7 +565,6 @@ export type CountryStateUncheckedCreateWithoutStoresInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutStateInput
-  warehouses?: Prisma.WarehouseUncheckedCreateNestedManyWithoutStateInput
 }
 
 export type CountryStateCreateOrConnectWithoutStoresInput = {
@@ -618,7 +593,6 @@ export type CountryStateUpdateWithoutStoresInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneRequiredWithoutStatesNestedInput
   users?: Prisma.UserUpdateManyWithoutStateNestedInput
-  warehouses?: Prisma.WarehouseUpdateManyWithoutStateNestedInput
 }
 
 export type CountryStateUncheckedUpdateWithoutStoresInput = {
@@ -631,7 +605,6 @@ export type CountryStateUncheckedUpdateWithoutStoresInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutStateNestedInput
-  warehouses?: Prisma.WarehouseUncheckedUpdateManyWithoutStateNestedInput
 }
 
 export type CountryStateCreateWithoutUsersInput = {
@@ -644,7 +617,6 @@ export type CountryStateCreateWithoutUsersInput = {
   updatedAt?: Date | string
   country: Prisma.CountryCreateNestedOneWithoutStatesInput
   stores?: Prisma.StoreCreateNestedManyWithoutStateInput
-  warehouses?: Prisma.WarehouseCreateNestedManyWithoutStateInput
 }
 
 export type CountryStateUncheckedCreateWithoutUsersInput = {
@@ -657,7 +629,6 @@ export type CountryStateUncheckedCreateWithoutUsersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   stores?: Prisma.StoreUncheckedCreateNestedManyWithoutStateInput
-  warehouses?: Prisma.WarehouseUncheckedCreateNestedManyWithoutStateInput
 }
 
 export type CountryStateCreateOrConnectWithoutUsersInput = {
@@ -686,7 +657,6 @@ export type CountryStateUpdateWithoutUsersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneRequiredWithoutStatesNestedInput
   stores?: Prisma.StoreUpdateManyWithoutStateNestedInput
-  warehouses?: Prisma.WarehouseUpdateManyWithoutStateNestedInput
 }
 
 export type CountryStateUncheckedUpdateWithoutUsersInput = {
@@ -698,75 +668,6 @@ export type CountryStateUncheckedUpdateWithoutUsersInput = {
   flag?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  stores?: Prisma.StoreUncheckedUpdateManyWithoutStateNestedInput
-  warehouses?: Prisma.WarehouseUncheckedUpdateManyWithoutStateNestedInput
-}
-
-export type CountryStateCreateWithoutWarehousesInput = {
-  id?: string
-  name: string
-  subdivisionCode: string
-  tz?: string | null
-  flag?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  country: Prisma.CountryCreateNestedOneWithoutStatesInput
-  users?: Prisma.UserCreateNestedManyWithoutStateInput
-  stores?: Prisma.StoreCreateNestedManyWithoutStateInput
-}
-
-export type CountryStateUncheckedCreateWithoutWarehousesInput = {
-  id?: string
-  name: string
-  countryId: string
-  subdivisionCode: string
-  tz?: string | null
-  flag?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutStateInput
-  stores?: Prisma.StoreUncheckedCreateNestedManyWithoutStateInput
-}
-
-export type CountryStateCreateOrConnectWithoutWarehousesInput = {
-  where: Prisma.CountryStateWhereUniqueInput
-  create: Prisma.XOR<Prisma.CountryStateCreateWithoutWarehousesInput, Prisma.CountryStateUncheckedCreateWithoutWarehousesInput>
-}
-
-export type CountryStateUpsertWithoutWarehousesInput = {
-  update: Prisma.XOR<Prisma.CountryStateUpdateWithoutWarehousesInput, Prisma.CountryStateUncheckedUpdateWithoutWarehousesInput>
-  create: Prisma.XOR<Prisma.CountryStateCreateWithoutWarehousesInput, Prisma.CountryStateUncheckedCreateWithoutWarehousesInput>
-  where?: Prisma.CountryStateWhereInput
-}
-
-export type CountryStateUpdateToOneWithWhereWithoutWarehousesInput = {
-  where?: Prisma.CountryStateWhereInput
-  data: Prisma.XOR<Prisma.CountryStateUpdateWithoutWarehousesInput, Prisma.CountryStateUncheckedUpdateWithoutWarehousesInput>
-}
-
-export type CountryStateUpdateWithoutWarehousesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  subdivisionCode?: Prisma.StringFieldUpdateOperationsInput | string
-  tz?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flag?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  country?: Prisma.CountryUpdateOneRequiredWithoutStatesNestedInput
-  users?: Prisma.UserUpdateManyWithoutStateNestedInput
-  stores?: Prisma.StoreUpdateManyWithoutStateNestedInput
-}
-
-export type CountryStateUncheckedUpdateWithoutWarehousesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  countryId?: Prisma.StringFieldUpdateOperationsInput | string
-  subdivisionCode?: Prisma.StringFieldUpdateOperationsInput | string
-  tz?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flag?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutStateNestedInput
   stores?: Prisma.StoreUncheckedUpdateManyWithoutStateNestedInput
 }
 
@@ -790,7 +691,6 @@ export type CountryStateUpdateWithoutCountryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutStateNestedInput
   stores?: Prisma.StoreUpdateManyWithoutStateNestedInput
-  warehouses?: Prisma.WarehouseUpdateManyWithoutStateNestedInput
 }
 
 export type CountryStateUncheckedUpdateWithoutCountryInput = {
@@ -803,7 +703,6 @@ export type CountryStateUncheckedUpdateWithoutCountryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutStateNestedInput
   stores?: Prisma.StoreUncheckedUpdateManyWithoutStateNestedInput
-  warehouses?: Prisma.WarehouseUncheckedUpdateManyWithoutStateNestedInput
 }
 
 export type CountryStateUncheckedUpdateManyWithoutCountryInput = {
@@ -824,13 +723,11 @@ export type CountryStateUncheckedUpdateManyWithoutCountryInput = {
 export type CountryStateCountOutputType = {
   users: number
   stores: number
-  warehouses: number
 }
 
 export type CountryStateCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | CountryStateCountOutputTypeCountUsersArgs
   stores?: boolean | CountryStateCountOutputTypeCountStoresArgs
-  warehouses?: boolean | CountryStateCountOutputTypeCountWarehousesArgs
 }
 
 /**
@@ -857,13 +754,6 @@ export type CountryStateCountOutputTypeCountStoresArgs<ExtArgs extends runtime.T
   where?: Prisma.StoreWhereInput
 }
 
-/**
- * CountryStateCountOutputType without action
- */
-export type CountryStateCountOutputTypeCountWarehousesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.WarehouseWhereInput
-}
-
 
 export type CountryStateSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -877,7 +767,6 @@ export type CountryStateSelect<ExtArgs extends runtime.Types.Extensions.Internal
   country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>
   users?: boolean | Prisma.CountryState$usersArgs<ExtArgs>
   stores?: boolean | Prisma.CountryState$storesArgs<ExtArgs>
-  warehouses?: boolean | Prisma.CountryState$warehousesArgs<ExtArgs>
   _count?: boolean | Prisma.CountryStateCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["countryState"]>
 
@@ -921,7 +810,6 @@ export type CountryStateInclude<ExtArgs extends runtime.Types.Extensions.Interna
   country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>
   users?: boolean | Prisma.CountryState$usersArgs<ExtArgs>
   stores?: boolean | Prisma.CountryState$storesArgs<ExtArgs>
-  warehouses?: boolean | Prisma.CountryState$warehousesArgs<ExtArgs>
   _count?: boolean | Prisma.CountryStateCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CountryStateIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -937,7 +825,6 @@ export type $CountryStatePayload<ExtArgs extends runtime.Types.Extensions.Intern
     country: Prisma.$CountryPayload<ExtArgs>
     users: Prisma.$UserPayload<ExtArgs>[]
     stores: Prisma.$StorePayload<ExtArgs>[]
-    warehouses: Prisma.$WarehousePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1345,7 +1232,6 @@ export interface Prisma__CountryStateClient<T, Null = never, ExtArgs extends run
   country<T extends Prisma.CountryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CountryDefaultArgs<ExtArgs>>): Prisma.Prisma__CountryClient<runtime.Types.Result.GetResult<Prisma.$CountryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   users<T extends Prisma.CountryState$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CountryState$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stores<T extends Prisma.CountryState$storesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CountryState$storesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  warehouses<T extends Prisma.CountryState$warehousesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CountryState$warehousesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WarehousePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1829,30 +1715,6 @@ export type CountryState$storesArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.StoreScalarFieldEnum | Prisma.StoreScalarFieldEnum[]
-}
-
-/**
- * CountryState.warehouses
- */
-export type CountryState$warehousesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Warehouse
-   */
-  select?: Prisma.WarehouseSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Warehouse
-   */
-  omit?: Prisma.WarehouseOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.WarehouseInclude<ExtArgs> | null
-  where?: Prisma.WarehouseWhereInput
-  orderBy?: Prisma.WarehouseOrderByWithRelationInput | Prisma.WarehouseOrderByWithRelationInput[]
-  cursor?: Prisma.WarehouseWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.WarehouseScalarFieldEnum | Prisma.WarehouseScalarFieldEnum[]
 }
 
 /**

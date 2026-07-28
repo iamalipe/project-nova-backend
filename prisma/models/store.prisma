@@ -17,7 +17,6 @@ model Store {
 
   stocks               Stock[]
   sells                Sell[]
-  outgoingTransactions StockTransaction[] @relation("FromStore")
 
   @@index([name])
   @@index([countryId])

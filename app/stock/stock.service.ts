@@ -4,30 +4,34 @@ import { serializeDatesAndDecimals, updateCheck } from '../../utils/general.util
 import { generateCsv } from '../../utils/csv.utils';
 
 const createOne = async (data: {
-  productId: string;
+  productId?: string;
+  productSku?: string;
   storeId?: string | null;
-  warehouseId?: string | null;
+  storeCode?: string;
   quantity: number;
   minThreshold?: number | null;
 }) => {
-  const productExists = await db.product.findUnique({ where: { id: data.productId } });
-  if (!productExists) throw new AppError('Product not found', { status: 404, path: 'productId' });
-
-  if (data.storeId) {
-    const storeExists = await db.store.findUnique({ where: { id: data.storeId } });
-    if (!storeExists) throw new AppError('Store not found', { status: 404, path: 'storeId' });
+  let targetProductId = data.productId;
+  if (!targetProductId && data.productSku) {
+    const product = await db.product.findUnique({ where: { sku: data.productSku } });
+    if (!product) throw new AppError(`Product with SKU '${data.productSku}' not found`, { status: 404, path: 'productSku' });
+    targetProductId = product.id;
+  }
+  if (!targetProductId) {
+    throw new AppError('Product ID or productSku is required', { status: 400, path: 'productId' });
   }
 
-  if (data.warehouseId) {
-    const whExists = await db.warehouse.findUnique({ where: { id: data.warehouseId } });
-    if (!whExists) throw new AppError('Warehouse not found', { status: 404, path: 'warehouseId' });
+  let targetStoreId = data.storeId;
+  if (!targetStoreId && data.storeCode) {
+    const store = await db.store.findUnique({ where: { storeCode: data.storeCode } });
+    if (!store) throw new AppError(`Store with code '${data.storeCode}' not found`, { status: 404, path: 'storeCode' });
+    targetStoreId = store.id;
   }
 
   const result = await db.stock.create({
     data: {
-      productId: data.productId,
-      storeId: data.storeId || null,
-      warehouseId: data.warehouseId || null,
+      productId: targetProductId,
+      storeId: targetStoreId || null,
       quantity: data.quantity,
       minThreshold: data.minThreshold ?? null,
     },
@@ -38,9 +42,10 @@ const createOne = async (data: {
 
 const createMany = async (
   data: {
-    productId: string;
+    productId?: string;
+    productSku?: string;
     storeId?: string | null;
-    warehouseId?: string | null;
+    storeCode?: string;
     quantity: number;
     minThreshold?: number | null;
   }[],
@@ -65,7 +70,6 @@ const updateOne = async (
   data: {
     productId?: string;
     storeId?: string | null;
-    warehouseId?: string | null;
     quantity?: number;
     minThreshold?: number | null;
   },
@@ -76,7 +80,6 @@ const updateOne = async (
   const updateSet: any = {};
   if (data.productId !== undefined && updateCheck(data.productId, findResult.productId)) updateSet.productId = data.productId;
   if (data.storeId !== undefined && updateCheck(data.storeId, findResult.storeId)) updateSet.storeId = data.storeId;
-  if (data.warehouseId !== undefined && updateCheck(data.warehouseId, findResult.warehouseId)) updateSet.warehouseId = data.warehouseId;
   if (data.quantity !== undefined && updateCheck(data.quantity, findResult.quantity)) updateSet.quantity = data.quantity;
   if (data.minThreshold !== undefined && updateCheck(data.minThreshold, findResult.minThreshold)) updateSet.minThreshold = data.minThreshold;
 
@@ -104,7 +107,7 @@ const deleteMany = async (ids: string[]) => {
 const getOne = async (id: string) => {
   const result = await db.stock.findUnique({
     where: { id },
-    include: { product: true, store: true, warehouse: true },
+    include: { product: true, store: true },
   });
   if (!result) throw new AppError('Stock item not found', { status: 404 });
   return serializeDatesAndDecimals(result);
@@ -118,7 +121,6 @@ const getAll = async (query: {
   search?: string;
   productId?: string;
   storeId?: string;
-  warehouseId?: string;
 }) => {
   const limit = parseInt(query.limit as unknown as string, 10);
   const page = parseInt(query.page as unknown as string, 10);
@@ -126,14 +128,12 @@ const getAll = async (query: {
   const where: any = {};
   if (query.productId) where.productId = query.productId;
   if (query.storeId) where.storeId = query.storeId;
-  if (query.warehouseId) where.warehouseId = query.warehouseId;
 
   if (query.search) {
     where.OR = [
       { product: { name: { contains: query.search, mode: 'insensitive' } } },
       { product: { sku: { contains: query.search, mode: 'insensitive' } } },
       { store: { name: { contains: query.search, mode: 'insensitive' } } },
-      { warehouse: { name: { contains: query.search, mode: 'insensitive' } } },
     ];
   }
 
@@ -148,7 +148,7 @@ const getAll = async (query: {
       orderBy: orderByStage,
       skip: page > 0 ? skip : undefined,
       take: page > 0 ? limit : undefined,
-      include: { product: true, store: true, warehouse: true },
+      include: { product: true, store: true },
     }),
     db.stock.count({ where }),
   ]);
@@ -165,14 +165,15 @@ const exportCsv = async () => {
     orderBy: { createdAt: 'desc' },
     include: {
       product: { select: { sku: true } },
+      store: { select: { storeCode: true } },
     },
   });
-  const headers = ['productId', 'sku', 'storeId', 'warehouseId', 'quantity', 'minThreshold'];
+  const headers = ['productId', 'productSku', 'storeId', 'storeCode', 'quantity', 'minThreshold'];
   const rows = items.map((s) => ({
     productId: s.productId,
-    sku: s.product?.sku || '',
+    productSku: s.product?.sku || '',
     storeId: s.storeId || '',
-    warehouseId: s.warehouseId || '',
+    storeCode: s.store?.storeCode || '',
     quantity: s.quantity,
     minThreshold: s.minThreshold ?? '',
   }));

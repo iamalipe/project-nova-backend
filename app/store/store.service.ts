@@ -8,8 +8,10 @@ const createOne = async (data: {
   storeCode: string;
   addressLine1: string;
   zip: string;
-  stateId: string;
-  countryId: string;
+  stateId?: string;
+  stateSubdivisionCode?: string;
+  countryId?: string;
+  countryCode3?: string;
   locationMapLink?: string | null;
   images?: string[];
   description?: string | null;
@@ -22,14 +24,38 @@ const createOne = async (data: {
     throw new AppError('Store code already exists', { status: 400, path: 'storeCode' });
   }
 
+  let targetCountryId = data.countryId;
+  if (!targetCountryId && data.countryCode3) {
+    const country = await db.country.findFirst({
+      where: { code3: { equals: data.countryCode3, mode: 'insensitive' } },
+    });
+    if (!country) throw new AppError(`Country code '${data.countryCode3}' not found`, { status: 404, path: 'countryCode3' });
+    targetCountryId = country.id;
+  }
+  if (!targetCountryId) {
+    throw new AppError('Country ID or countryCode3 is required', { status: 400, path: 'countryId' });
+  }
+
+  let targetStateId = data.stateId;
+  if (!targetStateId && data.stateSubdivisionCode) {
+    const state = await db.countryState.findFirst({
+      where: { subdivisionCode: { equals: data.stateSubdivisionCode, mode: 'insensitive' } },
+    });
+    if (!state) throw new AppError(`State subdivision code '${data.stateSubdivisionCode}' not found`, { status: 404, path: 'stateSubdivisionCode' });
+    targetStateId = state.id;
+  }
+  if (!targetStateId) {
+    throw new AppError('State ID or stateSubdivisionCode is required', { status: 400, path: 'stateId' });
+  }
+
   const result = await db.store.create({
     data: {
       name: data.name,
       storeCode: data.storeCode,
       addressLine1: data.addressLine1,
       zip: data.zip,
-      stateId: data.stateId,
-      countryId: data.countryId,
+      stateId: targetStateId,
+      countryId: targetCountryId,
       locationMapLink: data.locationMapLink || null,
       images: data.images || [],
       description: data.description || null,
@@ -46,8 +72,10 @@ const createMany = async (
     storeCode: string;
     addressLine1: string;
     zip: string;
-    stateId: string;
-    countryId: string;
+    stateId?: string;
+    stateSubdivisionCode?: string;
+    countryId?: string;
+    countryCode3?: string;
     locationMapLink?: string | null;
     images?: string[];
     description?: string | null;
@@ -186,8 +214,9 @@ const getAll = async (query: {
 const exportCsv = async () => {
   const items = await db.store.findMany({
     orderBy: { createdAt: 'desc' },
+    include: { country: true, state: true },
   });
-  const headers = ['name', 'storeCode', 'addressLine1', 'zip', 'countryId', 'stateId', 'yearlyUpkeep'];
+  const headers = ['name', 'storeCode', 'addressLine1', 'zip', 'countryId', 'stateId', 'countryCode3', 'stateSubdivisionCode', 'yearlyUpkeep'];
   const rows = items.map((s) => ({
     name: s.name,
     storeCode: s.storeCode,
@@ -195,6 +224,8 @@ const exportCsv = async () => {
     zip: s.zip,
     countryId: s.countryId,
     stateId: s.stateId,
+    countryCode3: s.country?.code3 || '',
+    stateSubdivisionCode: s.state?.subdivisionCode || '',
     yearlyUpkeep: s.yearlyUpkeep ? Number(s.yearlyUpkeep) : 0,
   }));
   return generateCsv(headers, rows);

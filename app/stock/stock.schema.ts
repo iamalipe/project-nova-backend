@@ -2,23 +2,22 @@ import { z } from 'zod';
 
 export const createSchema = z.object({
   body: z.object({
-    productId: z.string().uuid(),
+    productId: z.string().uuid().optional(),
+    productSku: z.string().optional(),
     storeId: z.string().uuid().optional().nullable(),
-    warehouseId: z.string().uuid().optional().nullable(),
+    storeCode: z.string().optional(),
     quantity: z.coerce.number().int().min(0),
     minThreshold: z.coerce.number().int().min(0).optional().nullable(),
-  }).refine((data) => data.storeId || data.warehouseId, {
-    message: 'Either storeId or warehouseId must be provided',
-    path: ['storeId'],
   }),
 });
 
 export const createManySchema = z.object({
   body: z.array(
     z.object({
-      productId: z.string().uuid(),
+      productId: z.string().uuid().optional(),
+      productSku: z.string().optional(),
       storeId: z.string().uuid().optional().nullable(),
-      warehouseId: z.string().uuid().optional().nullable(),
+      storeCode: z.string().optional(),
       quantity: z.coerce.number().int().min(0),
       minThreshold: z.coerce.number().int().min(0).optional().nullable(),
     })
@@ -30,7 +29,6 @@ export const updateSchema = z.object({
   body: z.object({
     productId: z.string().uuid().optional(),
     storeId: z.string().uuid().optional().nullable(),
-    warehouseId: z.string().uuid().optional().nullable(),
     quantity: z.coerce.number().int().min(0).optional(),
     minThreshold: z.coerce.number().int().min(0).optional().nullable(),
   }),
@@ -57,7 +55,6 @@ export const getAllSchema = z.object({
     search: z.string().optional(),
     productId: z.string().uuid().optional(),
     storeId: z.string().uuid().optional(),
-    warehouseId: z.string().uuid().optional(),
   }),
 });
 

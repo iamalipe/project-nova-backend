@@ -280,7 +280,6 @@ export type StoreWhereInput = {
   country?: Prisma.XOR<Prisma.CountryScalarRelationFilter, Prisma.CountryWhereInput>
   stocks?: Prisma.StockListRelationFilter
   sells?: Prisma.SellListRelationFilter
-  outgoingTransactions?: Prisma.StockTransactionListRelationFilter
 }
 
 export type StoreOrderByWithRelationInput = {
@@ -301,7 +300,6 @@ export type StoreOrderByWithRelationInput = {
   country?: Prisma.CountryOrderByWithRelationInput
   stocks?: Prisma.StockOrderByRelationAggregateInput
   sells?: Prisma.SellOrderByRelationAggregateInput
-  outgoingTransactions?: Prisma.StockTransactionOrderByRelationAggregateInput
 }
 
 export type StoreWhereUniqueInput = Prisma.AtLeast<{
@@ -325,7 +323,6 @@ export type StoreWhereUniqueInput = Prisma.AtLeast<{
   country?: Prisma.XOR<Prisma.CountryScalarRelationFilter, Prisma.CountryWhereInput>
   stocks?: Prisma.StockListRelationFilter
   sells?: Prisma.SellListRelationFilter
-  outgoingTransactions?: Prisma.StockTransactionListRelationFilter
 }, "id" | "storeCode">
 
 export type StoreOrderByWithAggregationInput = {
@@ -384,7 +381,6 @@ export type StoreCreateInput = {
   country: Prisma.CountryCreateNestedOneWithoutStoresInput
   stocks?: Prisma.StockCreateNestedManyWithoutStoreInput
   sells?: Prisma.SellCreateNestedManyWithoutStoreInput
-  outgoingTransactions?: Prisma.StockTransactionCreateNestedManyWithoutFromStoreInput
 }
 
 export type StoreUncheckedCreateInput = {
@@ -403,7 +399,6 @@ export type StoreUncheckedCreateInput = {
   updatedAt?: Date | string
   stocks?: Prisma.StockUncheckedCreateNestedManyWithoutStoreInput
   sells?: Prisma.SellUncheckedCreateNestedManyWithoutStoreInput
-  outgoingTransactions?: Prisma.StockTransactionUncheckedCreateNestedManyWithoutFromStoreInput
 }
 
 export type StoreUpdateInput = {
@@ -422,7 +417,6 @@ export type StoreUpdateInput = {
   country?: Prisma.CountryUpdateOneRequiredWithoutStoresNestedInput
   stocks?: Prisma.StockUpdateManyWithoutStoreNestedInput
   sells?: Prisma.SellUpdateManyWithoutStoreNestedInput
-  outgoingTransactions?: Prisma.StockTransactionUpdateManyWithoutFromStoreNestedInput
 }
 
 export type StoreUncheckedUpdateInput = {
@@ -441,7 +435,6 @@ export type StoreUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stocks?: Prisma.StockUncheckedUpdateManyWithoutStoreNestedInput
   sells?: Prisma.SellUncheckedUpdateManyWithoutStoreNestedInput
-  outgoingTransactions?: Prisma.StockTransactionUncheckedUpdateManyWithoutFromStoreNestedInput
 }
 
 export type StoreCreateManyInput = {
@@ -678,22 +671,6 @@ export type StoreUpdateOneWithoutStocksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StoreUpdateToOneWithWhereWithoutStocksInput, Prisma.StoreUpdateWithoutStocksInput>, Prisma.StoreUncheckedUpdateWithoutStocksInput>
 }
 
-export type StoreCreateNestedOneWithoutOutgoingTransactionsInput = {
-  create?: Prisma.XOR<Prisma.StoreCreateWithoutOutgoingTransactionsInput, Prisma.StoreUncheckedCreateWithoutOutgoingTransactionsInput>
-  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutOutgoingTransactionsInput
-  connect?: Prisma.StoreWhereUniqueInput
-}
-
-export type StoreUpdateOneWithoutOutgoingTransactionsNestedInput = {
-  create?: Prisma.XOR<Prisma.StoreCreateWithoutOutgoingTransactionsInput, Prisma.StoreUncheckedCreateWithoutOutgoingTransactionsInput>
-  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutOutgoingTransactionsInput
-  upsert?: Prisma.StoreUpsertWithoutOutgoingTransactionsInput
-  disconnect?: Prisma.StoreWhereInput | boolean
-  delete?: Prisma.StoreWhereInput | boolean
-  connect?: Prisma.StoreWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.StoreUpdateToOneWithWhereWithoutOutgoingTransactionsInput, Prisma.StoreUpdateWithoutOutgoingTransactionsInput>, Prisma.StoreUncheckedUpdateWithoutOutgoingTransactionsInput>
-}
-
 export type StoreCreateimagesInput = {
   set: string[]
 }
@@ -718,7 +695,6 @@ export type StoreCreateWithoutCountryInput = {
   state: Prisma.CountryStateCreateNestedOneWithoutStoresInput
   stocks?: Prisma.StockCreateNestedManyWithoutStoreInput
   sells?: Prisma.SellCreateNestedManyWithoutStoreInput
-  outgoingTransactions?: Prisma.StockTransactionCreateNestedManyWithoutFromStoreInput
 }
 
 export type StoreUncheckedCreateWithoutCountryInput = {
@@ -736,7 +712,6 @@ export type StoreUncheckedCreateWithoutCountryInput = {
   updatedAt?: Date | string
   stocks?: Prisma.StockUncheckedCreateNestedManyWithoutStoreInput
   sells?: Prisma.SellUncheckedCreateNestedManyWithoutStoreInput
-  outgoingTransactions?: Prisma.StockTransactionUncheckedCreateNestedManyWithoutFromStoreInput
 }
 
 export type StoreCreateOrConnectWithoutCountryInput = {
@@ -799,7 +774,6 @@ export type StoreCreateWithoutStateInput = {
   country: Prisma.CountryCreateNestedOneWithoutStoresInput
   stocks?: Prisma.StockCreateNestedManyWithoutStoreInput
   sells?: Prisma.SellCreateNestedManyWithoutStoreInput
-  outgoingTransactions?: Prisma.StockTransactionCreateNestedManyWithoutFromStoreInput
 }
 
 export type StoreUncheckedCreateWithoutStateInput = {
@@ -817,7 +791,6 @@ export type StoreUncheckedCreateWithoutStateInput = {
   updatedAt?: Date | string
   stocks?: Prisma.StockUncheckedCreateNestedManyWithoutStoreInput
   sells?: Prisma.SellUncheckedCreateNestedManyWithoutStoreInput
-  outgoingTransactions?: Prisma.StockTransactionUncheckedCreateNestedManyWithoutFromStoreInput
 }
 
 export type StoreCreateOrConnectWithoutStateInput = {
@@ -861,7 +834,6 @@ export type StoreCreateWithoutSellsInput = {
   state: Prisma.CountryStateCreateNestedOneWithoutStoresInput
   country: Prisma.CountryCreateNestedOneWithoutStoresInput
   stocks?: Prisma.StockCreateNestedManyWithoutStoreInput
-  outgoingTransactions?: Prisma.StockTransactionCreateNestedManyWithoutFromStoreInput
 }
 
 export type StoreUncheckedCreateWithoutSellsInput = {
@@ -879,7 +851,6 @@ export type StoreUncheckedCreateWithoutSellsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   stocks?: Prisma.StockUncheckedCreateNestedManyWithoutStoreInput
-  outgoingTransactions?: Prisma.StockTransactionUncheckedCreateNestedManyWithoutFromStoreInput
 }
 
 export type StoreCreateOrConnectWithoutSellsInput = {
@@ -913,7 +884,6 @@ export type StoreUpdateWithoutSellsInput = {
   state?: Prisma.CountryStateUpdateOneRequiredWithoutStoresNestedInput
   country?: Prisma.CountryUpdateOneRequiredWithoutStoresNestedInput
   stocks?: Prisma.StockUpdateManyWithoutStoreNestedInput
-  outgoingTransactions?: Prisma.StockTransactionUpdateManyWithoutFromStoreNestedInput
 }
 
 export type StoreUncheckedUpdateWithoutSellsInput = {
@@ -931,7 +901,6 @@ export type StoreUncheckedUpdateWithoutSellsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stocks?: Prisma.StockUncheckedUpdateManyWithoutStoreNestedInput
-  outgoingTransactions?: Prisma.StockTransactionUncheckedUpdateManyWithoutFromStoreNestedInput
 }
 
 export type StoreCreateWithoutStocksInput = {
@@ -949,7 +918,6 @@ export type StoreCreateWithoutStocksInput = {
   state: Prisma.CountryStateCreateNestedOneWithoutStoresInput
   country: Prisma.CountryCreateNestedOneWithoutStoresInput
   sells?: Prisma.SellCreateNestedManyWithoutStoreInput
-  outgoingTransactions?: Prisma.StockTransactionCreateNestedManyWithoutFromStoreInput
 }
 
 export type StoreUncheckedCreateWithoutStocksInput = {
@@ -967,7 +935,6 @@ export type StoreUncheckedCreateWithoutStocksInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   sells?: Prisma.SellUncheckedCreateNestedManyWithoutStoreInput
-  outgoingTransactions?: Prisma.StockTransactionUncheckedCreateNestedManyWithoutFromStoreInput
 }
 
 export type StoreCreateOrConnectWithoutStocksInput = {
@@ -1001,7 +968,6 @@ export type StoreUpdateWithoutStocksInput = {
   state?: Prisma.CountryStateUpdateOneRequiredWithoutStoresNestedInput
   country?: Prisma.CountryUpdateOneRequiredWithoutStoresNestedInput
   sells?: Prisma.SellUpdateManyWithoutStoreNestedInput
-  outgoingTransactions?: Prisma.StockTransactionUpdateManyWithoutFromStoreNestedInput
 }
 
 export type StoreUncheckedUpdateWithoutStocksInput = {
@@ -1018,95 +984,6 @@ export type StoreUncheckedUpdateWithoutStocksInput = {
   yearlyUpkeep?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sells?: Prisma.SellUncheckedUpdateManyWithoutStoreNestedInput
-  outgoingTransactions?: Prisma.StockTransactionUncheckedUpdateManyWithoutFromStoreNestedInput
-}
-
-export type StoreCreateWithoutOutgoingTransactionsInput = {
-  id?: string
-  name: string
-  storeCode: string
-  addressLine1: string
-  zip: string
-  locationMapLink?: string | null
-  images?: Prisma.StoreCreateimagesInput | string[]
-  description?: string | null
-  yearlyUpkeep: runtime.Decimal | runtime.DecimalJsLike | number | string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  state: Prisma.CountryStateCreateNestedOneWithoutStoresInput
-  country: Prisma.CountryCreateNestedOneWithoutStoresInput
-  stocks?: Prisma.StockCreateNestedManyWithoutStoreInput
-  sells?: Prisma.SellCreateNestedManyWithoutStoreInput
-}
-
-export type StoreUncheckedCreateWithoutOutgoingTransactionsInput = {
-  id?: string
-  name: string
-  storeCode: string
-  addressLine1: string
-  zip: string
-  stateId: string
-  countryId: string
-  locationMapLink?: string | null
-  images?: Prisma.StoreCreateimagesInput | string[]
-  description?: string | null
-  yearlyUpkeep: runtime.Decimal | runtime.DecimalJsLike | number | string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  stocks?: Prisma.StockUncheckedCreateNestedManyWithoutStoreInput
-  sells?: Prisma.SellUncheckedCreateNestedManyWithoutStoreInput
-}
-
-export type StoreCreateOrConnectWithoutOutgoingTransactionsInput = {
-  where: Prisma.StoreWhereUniqueInput
-  create: Prisma.XOR<Prisma.StoreCreateWithoutOutgoingTransactionsInput, Prisma.StoreUncheckedCreateWithoutOutgoingTransactionsInput>
-}
-
-export type StoreUpsertWithoutOutgoingTransactionsInput = {
-  update: Prisma.XOR<Prisma.StoreUpdateWithoutOutgoingTransactionsInput, Prisma.StoreUncheckedUpdateWithoutOutgoingTransactionsInput>
-  create: Prisma.XOR<Prisma.StoreCreateWithoutOutgoingTransactionsInput, Prisma.StoreUncheckedCreateWithoutOutgoingTransactionsInput>
-  where?: Prisma.StoreWhereInput
-}
-
-export type StoreUpdateToOneWithWhereWithoutOutgoingTransactionsInput = {
-  where?: Prisma.StoreWhereInput
-  data: Prisma.XOR<Prisma.StoreUpdateWithoutOutgoingTransactionsInput, Prisma.StoreUncheckedUpdateWithoutOutgoingTransactionsInput>
-}
-
-export type StoreUpdateWithoutOutgoingTransactionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  storeCode?: Prisma.StringFieldUpdateOperationsInput | string
-  addressLine1?: Prisma.StringFieldUpdateOperationsInput | string
-  zip?: Prisma.StringFieldUpdateOperationsInput | string
-  locationMapLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  images?: Prisma.StoreUpdateimagesInput | string[]
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  yearlyUpkeep?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  state?: Prisma.CountryStateUpdateOneRequiredWithoutStoresNestedInput
-  country?: Prisma.CountryUpdateOneRequiredWithoutStoresNestedInput
-  stocks?: Prisma.StockUpdateManyWithoutStoreNestedInput
-  sells?: Prisma.SellUpdateManyWithoutStoreNestedInput
-}
-
-export type StoreUncheckedUpdateWithoutOutgoingTransactionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  storeCode?: Prisma.StringFieldUpdateOperationsInput | string
-  addressLine1?: Prisma.StringFieldUpdateOperationsInput | string
-  zip?: Prisma.StringFieldUpdateOperationsInput | string
-  stateId?: Prisma.StringFieldUpdateOperationsInput | string
-  countryId?: Prisma.StringFieldUpdateOperationsInput | string
-  locationMapLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  images?: Prisma.StoreUpdateimagesInput | string[]
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  yearlyUpkeep?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  stocks?: Prisma.StockUncheckedUpdateManyWithoutStoreNestedInput
   sells?: Prisma.SellUncheckedUpdateManyWithoutStoreNestedInput
 }
 
@@ -1140,7 +1017,6 @@ export type StoreUpdateWithoutCountryInput = {
   state?: Prisma.CountryStateUpdateOneRequiredWithoutStoresNestedInput
   stocks?: Prisma.StockUpdateManyWithoutStoreNestedInput
   sells?: Prisma.SellUpdateManyWithoutStoreNestedInput
-  outgoingTransactions?: Prisma.StockTransactionUpdateManyWithoutFromStoreNestedInput
 }
 
 export type StoreUncheckedUpdateWithoutCountryInput = {
@@ -1158,7 +1034,6 @@ export type StoreUncheckedUpdateWithoutCountryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stocks?: Prisma.StockUncheckedUpdateManyWithoutStoreNestedInput
   sells?: Prisma.SellUncheckedUpdateManyWithoutStoreNestedInput
-  outgoingTransactions?: Prisma.StockTransactionUncheckedUpdateManyWithoutFromStoreNestedInput
 }
 
 export type StoreUncheckedUpdateManyWithoutCountryInput = {
@@ -1206,7 +1081,6 @@ export type StoreUpdateWithoutStateInput = {
   country?: Prisma.CountryUpdateOneRequiredWithoutStoresNestedInput
   stocks?: Prisma.StockUpdateManyWithoutStoreNestedInput
   sells?: Prisma.SellUpdateManyWithoutStoreNestedInput
-  outgoingTransactions?: Prisma.StockTransactionUpdateManyWithoutFromStoreNestedInput
 }
 
 export type StoreUncheckedUpdateWithoutStateInput = {
@@ -1224,7 +1098,6 @@ export type StoreUncheckedUpdateWithoutStateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stocks?: Prisma.StockUncheckedUpdateManyWithoutStoreNestedInput
   sells?: Prisma.SellUncheckedUpdateManyWithoutStoreNestedInput
-  outgoingTransactions?: Prisma.StockTransactionUncheckedUpdateManyWithoutFromStoreNestedInput
 }
 
 export type StoreUncheckedUpdateManyWithoutStateInput = {
@@ -1250,13 +1123,11 @@ export type StoreUncheckedUpdateManyWithoutStateInput = {
 export type StoreCountOutputType = {
   stocks: number
   sells: number
-  outgoingTransactions: number
 }
 
 export type StoreCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   stocks?: boolean | StoreCountOutputTypeCountStocksArgs
   sells?: boolean | StoreCountOutputTypeCountSellsArgs
-  outgoingTransactions?: boolean | StoreCountOutputTypeCountOutgoingTransactionsArgs
 }
 
 /**
@@ -1283,13 +1154,6 @@ export type StoreCountOutputTypeCountSellsArgs<ExtArgs extends runtime.Types.Ext
   where?: Prisma.SellWhereInput
 }
 
-/**
- * StoreCountOutputType without action
- */
-export type StoreCountOutputTypeCountOutgoingTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.StockTransactionWhereInput
-}
-
 
 export type StoreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1309,7 +1173,6 @@ export type StoreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>
   stocks?: boolean | Prisma.Store$stocksArgs<ExtArgs>
   sells?: boolean | Prisma.Store$sellsArgs<ExtArgs>
-  outgoingTransactions?: boolean | Prisma.Store$outgoingTransactionsArgs<ExtArgs>
   _count?: boolean | Prisma.StoreCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["store"]>
 
@@ -1371,7 +1234,6 @@ export type StoreInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>
   stocks?: boolean | Prisma.Store$stocksArgs<ExtArgs>
   sells?: boolean | Prisma.Store$sellsArgs<ExtArgs>
-  outgoingTransactions?: boolean | Prisma.Store$outgoingTransactionsArgs<ExtArgs>
   _count?: boolean | Prisma.StoreCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StoreIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1390,7 +1252,6 @@ export type $StorePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     country: Prisma.$CountryPayload<ExtArgs>
     stocks: Prisma.$StockPayload<ExtArgs>[]
     sells: Prisma.$SellPayload<ExtArgs>[]
-    outgoingTransactions: Prisma.$StockTransactionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1804,7 +1665,6 @@ export interface Prisma__StoreClient<T, Null = never, ExtArgs extends runtime.Ty
   country<T extends Prisma.CountryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CountryDefaultArgs<ExtArgs>>): Prisma.Prisma__CountryClient<runtime.Types.Result.GetResult<Prisma.$CountryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   stocks<T extends Prisma.Store$stocksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$stocksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sells<T extends Prisma.Store$sellsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$sellsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SellPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  outgoingTransactions<T extends Prisma.Store$outgoingTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$outgoingTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2293,30 +2153,6 @@ export type Store$sellsArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   distinct?: Prisma.SellScalarFieldEnum | Prisma.SellScalarFieldEnum[]
-}
-
-/**
- * Store.outgoingTransactions
- */
-export type Store$outgoingTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the StockTransaction
-   */
-  select?: Prisma.StockTransactionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the StockTransaction
-   */
-  omit?: Prisma.StockTransactionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.StockTransactionInclude<ExtArgs> | null
-  where?: Prisma.StockTransactionWhereInput
-  orderBy?: Prisma.StockTransactionOrderByWithRelationInput | Prisma.StockTransactionOrderByWithRelationInput[]
-  cursor?: Prisma.StockTransactionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.StockTransactionScalarFieldEnum | Prisma.StockTransactionScalarFieldEnum[]
 }
 
 /**
