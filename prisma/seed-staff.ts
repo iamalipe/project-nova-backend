@@ -1,9 +1,9 @@
-import { db } from '../services/prisma.service';
 import { Role } from '../prisma-generated/client';
+import { db } from '../services/prisma.service';
 import { hashPassword } from '../utils/auth.utils';
-const { STAFF_CONFIG } = require('../../demo-data/salary.js');
 import { logger } from '../utils/logger';
 import { LOCALIZED_NAMES, STREET_NAMES } from './seed-utils';
+const { STAFF_CONFIG } = require('../../demo-data/salary.js');
 
 export async function seedStaff() {
   logger.info('Deleting existing store staff...');
@@ -13,8 +13,8 @@ export async function seedStaff() {
   const stores = await db.store.findMany({
     include: {
       country: true,
-      state: true
-    }
+      state: true,
+    },
   });
 
   logger.info('Seeding store staff...');
@@ -30,9 +30,9 @@ export async function seedStaff() {
 
     // Get config
     const config = STAFF_CONFIG.find(
-      (c: any) => c.subdivisioncode.toUpperCase() === lookupKey
+      (c: any) => c.subdivisioncode.toUpperCase() === lookupKey,
     );
-    
+
     let minSalary = 20000;
     let maxSalary = 40000;
     let minCount = 2;
@@ -45,21 +45,23 @@ export async function seedStaff() {
     }
 
     // Determine random staff count for this store
-    const count = Math.floor(Math.random() * (maxCount - minCount + 1)) + minCount;
+    const count =
+      Math.floor(Math.random() * (maxCount - minCount + 1)) + minCount;
 
     const names = LOCALIZED_NAMES[c3] || LOCALIZED_NAMES['USA'];
     const streets = STREET_NAMES[c3] || STREET_NAMES['USA'];
 
     for (let j = 0; j < count; j++) {
-      const salary = Math.floor(Math.random() * (maxSalary - minSalary + 1)) + minSalary;
+      const salary =
+        Math.floor(Math.random() * (maxSalary - minSalary + 1)) + minSalary;
 
       // Localized name choice
       const first = names.first[Math.floor(Math.random() * names.first.length)];
       const last = names.last[Math.floor(Math.random() * names.last.length)];
-      
+
       // Unique email per staff member
-      const email = `staff.${store.storeCode.toLowerCase()}.${j + 1}@nova.dev`;
-      
+      const email = `${first}.staff.${store.storeCode.toLowerCase()}.${j + 1}@yopmail.com`;
+
       // Address
       const street = streets[Math.floor(Math.random() * streets.length)];
       const streetNum = Math.floor(Math.random() * 900) + 100;
@@ -75,7 +77,7 @@ export async function seedStaff() {
         countryId: store.countryId,
         stateId: store.stateId,
         address,
-        zip: store.zip
+        zip: store.zip,
       });
     }
   }
@@ -85,7 +87,7 @@ export async function seedStaff() {
   for (let i = 0; i < usersToCreate.length; i += chunkSize) {
     const chunk = usersToCreate.slice(i, i + chunkSize);
     await db.user.createMany({
-      data: chunk
+      data: chunk,
     });
   }
 

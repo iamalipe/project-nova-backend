@@ -1,19 +1,44 @@
-import { db } from '../services/prisma.service';
 import { Role } from '../prisma-generated/client';
+import { db } from '../services/prisma.service';
 import { hashPassword } from '../utils/auth.utils';
-const { CUSTOMER_CONFIG } = require('../../demo-data/salary.js');
 import { logger } from '../utils/logger';
 import { LOCALIZED_NAMES, STREET_NAMES, generateZip } from './seed-utils';
+const { CUSTOMER_CONFIG } = require('../../demo-data/salary.js');
 
 export async function seedCustomers() {
-  logger.info('Deleting existing customers...');
-  await db.user.deleteMany({ where: { role: Role.CUSTOMER } });
+  const totalToClear = await db.user.count({ where: { role: Role.CUSTOMER } });
+  logger.info(`Found ${totalToClear} existing customers to delete. Deleting in batches...`);
+  
+  let deletedCount = 0;
+  const deleteBatchSize = 10000;
+  
+  while (true) {
+    const recordsToDelete = await db.user.findMany({
+      where: { role: Role.CUSTOMER },
+      select: { id: true },
+      take: deleteBatchSize
+    });
+    
+    if (recordsToDelete.length === 0) {
+      break;
+    }
+    
+    const ids = recordsToDelete.map(c => c.id);
+    await db.user.deleteMany({
+      where: {
+        id: { in: ids }
+      }
+    });
+    
+    deletedCount += ids.length;
+    logger.info(`Deleted ${deletedCount}/${totalToClear} customers...`);
+  }
 
   logger.info('Fetching all states and countries...');
   const states = await db.countryState.findMany({
     include: {
-      country: true
-    }
+      country: true,
+    },
   });
 
   logger.info(`Seeding customers for ${states.length} states...`);
@@ -30,17 +55,22 @@ export async function seedCustomers() {
 
     // Get config
     const config = CUSTOMER_CONFIG.find(
-      (c: any) => c.subdivisioncode.toUpperCase() === lookupKey
+      (c: any) => c.subdivisioncode.toUpperCase() === lookupKey,
     );
 
-    let minCount = 50000;
-    let maxCount = 100000;
-    
+    let minCount = 10000;
+    let maxCount = 50000;
+
     // Default distributions and salary ranges
-    let low_p = 15, norm_p = 60, high_p = 25;
-    let c_low_min = 20000, c_low_max = 45000;
-    let c_norm_min = 45000, c_norm_max = 100000;
-    let c_high_min = 100000, c_high_max = 250000;
+    let low_p = 15,
+      norm_p = 60,
+      high_p = 25;
+    let c_low_min = 20000,
+      c_low_max = 45000;
+    let c_norm_min = 45000,
+      c_norm_max = 100000;
+    let c_high_min = 100000,
+      c_high_max = 250000;
 
     if (config) {
       // NOTE: We do not overwrite minCount and maxCount from configuration
@@ -60,7 +90,8 @@ export async function seedCustomers() {
     }
 
     // Determine customer count for this state
-    const count = Math.floor(Math.random() * (maxCount - minCount + 1)) + minCount;
+    const count =
+      Math.floor(Math.random() * (maxCount - minCount + 1)) + minCount;
 
     const names = LOCALIZED_NAMES[c3] || LOCALIZED_NAMES['USA'];
     const streets = STREET_NAMES[c3] || STREET_NAMES['USA'];
@@ -71,23 +102,28 @@ export async function seedCustomers() {
       let salary = 0;
       if (roll < low_p) {
         // Low income
-        salary = Math.floor(Math.random() * (c_low_max - c_low_min + 1)) + c_low_min;
+        salary =
+          Math.floor(Math.random() * (c_low_max - c_low_min + 1)) + c_low_min;
       } else if (roll < low_p + norm_p) {
         // Normal income
-        salary = Math.floor(Math.random() * (c_norm_max - c_norm_min + 1)) + c_norm_min;
+        salary =
+          Math.floor(Math.random() * (c_norm_max - c_norm_min + 1)) +
+          c_norm_min;
       } else {
         // High income
-        salary = Math.floor(Math.random() * (c_high_max - c_high_min + 1)) + c_high_min;
+        salary =
+          Math.floor(Math.random() * (c_high_max - c_high_min + 1)) +
+          c_high_min;
       }
 
       // Localized name choice
       const first = names.first[Math.floor(Math.random() * names.first.length)];
       const last = names.last[Math.floor(Math.random() * names.last.length)];
-      
+
       // Unique email per customer (stateSub + count index + random key)
       const randomStr = Math.random().toString(36).substring(2, 6);
-      const email = `cust.${stateSub.toLowerCase()}.${j + 1}.${randomStr}@example.com`;
-      
+      const email = `${first}.${last}.cust.${j + 1}.${randomStr}@yopmail.com`;
+
       // Address
       const street = streets[Math.floor(Math.random() * streets.length)];
       const streetNum = Math.floor(Math.random() * 9900) + 100;
@@ -104,7 +140,7 @@ export async function seedCustomers() {
         countryId: state.countryId,
         stateId: state.id,
         address,
-        zip
+        zip,
       });
 
       // Write in batches of 5000 and clear from memory to prevent OOM
