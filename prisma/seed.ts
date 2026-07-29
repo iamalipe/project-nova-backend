@@ -1,9 +1,18 @@
 import { dbConnect, dbDisconnect } from '../services/prisma.service';
 import { logger } from '../utils/logger';
+import { seedManagers } from './seed-managers';
+import { seedStaff } from './seed-staff';
+import { seedCustomers } from './seed-customers';
 
 async function seed() {
   await dbConnect();
-  logger.info('Database seeding is disabled (no-op).');
+  logger.info('Starting database seeding...');
+  
+  await seedManagers();
+  await seedStaff();
+  await seedCustomers();
+  
+  logger.info('Database seeding completed successfully!');
   await dbDisconnect();
 }
 
