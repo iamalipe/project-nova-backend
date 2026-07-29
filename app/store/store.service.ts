@@ -5,7 +5,7 @@ import { generateCsv } from '../../utils/csv.utils';
 
 const createOne = async (data: {
   name: string;
-  storeCode: string;
+  storeCode?: string;
   addressLine1: string;
   zip: string;
   stateId?: string;
@@ -17,8 +17,31 @@ const createOne = async (data: {
   description?: string | null;
   yearlyUpkeep: number;
 }) => {
+  let storeCode = data.storeCode;
+  if (!storeCode) {
+    const lastStore = await db.store.findFirst({
+      where: {
+        storeCode: {
+          startsWith: 's',
+        },
+      },
+      orderBy: {
+        storeCode: 'desc',
+      },
+    });
+
+    let lastNum = 0;
+    if (lastStore) {
+      const numPart = parseInt(lastStore.storeCode.substring(1), 10);
+      if (!isNaN(numPart)) {
+        lastNum = numPart;
+      }
+    }
+    storeCode = `s${(lastNum + 1).toString().padStart(5, '0')}`;
+  }
+
   const existing = await db.store.findUnique({
-    where: { storeCode: data.storeCode },
+    where: { storeCode },
   });
   if (existing) {
     throw new AppError('Store code already exists', { status: 400, path: 'storeCode' });
@@ -38,8 +61,14 @@ const createOne = async (data: {
 
   let targetStateId = data.stateId;
   if (!targetStateId && data.stateSubdivisionCode) {
+    const codeParts = data.stateSubdivisionCode.split('-');
+    const searchCode = codeParts.length > 1 ? codeParts[1] : codeParts[0];
+
     const state = await db.countryState.findFirst({
-      where: { subdivisionCode: { equals: data.stateSubdivisionCode, mode: 'insensitive' } },
+      where: {
+        subdivisionCode: { equals: searchCode, mode: 'insensitive' },
+        countryId: targetCountryId,
+      },
     });
     if (!state) throw new AppError(`State subdivision code '${data.stateSubdivisionCode}' not found`, { status: 404, path: 'stateSubdivisionCode' });
     targetStateId = state.id;
@@ -51,7 +80,7 @@ const createOne = async (data: {
   const result = await db.store.create({
     data: {
       name: data.name,
-      storeCode: data.storeCode,
+      storeCode: storeCode,
       addressLine1: data.addressLine1,
       zip: data.zip,
       stateId: targetStateId,
@@ -69,7 +98,7 @@ const createOne = async (data: {
 const createMany = async (
   data: {
     name: string;
-    storeCode: string;
+    storeCode?: string;
     addressLine1: string;
     zip: string;
     stateId?: string;
@@ -85,10 +114,37 @@ const createMany = async (
   const success: any[] = [];
   const failed: any[] = [];
 
+  const lastStore = await db.store.findFirst({
+    where: {
+      storeCode: {
+        startsWith: 's',
+      },
+    },
+    orderBy: {
+      storeCode: 'desc',
+    },
+  });
+
+  let lastNum = 0;
+  if (lastStore) {
+    const numPart = parseInt(lastStore.storeCode.substring(1), 10);
+    if (!isNaN(numPart)) {
+      lastNum = numPart;
+    }
+  }
+
+  let codeOffset = 0;
   for (const item of data) {
     try {
-      const created = await createOne(item);
+      const nextNum = lastNum + 1 + codeOffset;
+      const generatedCode = `s${nextNum.toString().padStart(5, '0')}`;
+
+      const created = await createOne({
+        ...item,
+        storeCode: generatedCode,
+      });
       success.push(created);
+      codeOffset++;
     } catch (err) {
       failed.push(item);
     }

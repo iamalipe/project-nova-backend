@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const createSchema = z.object({
   body: z.object({
     name: z.string().min(1).max(255),
-    storeCode: z.string().length(6, 'Store code must be exactly 6 characters'),
+    storeCode: z.string().length(6, 'Store code must be exactly 6 characters').optional(),
     addressLine1: z.string().min(1),
     zip: z.string().min(1),
     stateId: z.string().uuid().optional(),
@@ -21,7 +21,7 @@ export const createManySchema = z.object({
   body: z.array(
     z.object({
       name: z.string().min(1).max(255),
-      storeCode: z.string().length(6),
+      storeCode: z.string().length(6).optional(),
       addressLine1: z.string().min(1),
       zip: z.string().min(1),
       stateId: z.string().uuid().optional(),
