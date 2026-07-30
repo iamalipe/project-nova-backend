@@ -222,7 +222,7 @@ const getAll = async (query: {
     query.order === 'asc' ? 'asc' : 'desc';
 
   // Build pagination
-  const skip = page > 0 ? (page - 1) * limit : 0;
+  const skip = (page - 1) * limit;
 
   const countPromise =
     Object.keys(where).length === 0
@@ -237,8 +237,8 @@ const getAll = async (query: {
     db.user.findMany({
       where,
       orderBy: orderByStage,
-      skip: page > 0 ? skip : undefined,
-      take: page > 0 ? limit : undefined,
+      skip,
+      take: limit,
       include: {
         country: true,
         state: true,

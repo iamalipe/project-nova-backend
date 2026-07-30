@@ -29,7 +29,7 @@ const getAllSchema = z.object({
         .string()
         .optional()
         .transform((val) => (val ? parseInt(val, 10) : 1))
-        .pipe(z.number().min(0))
+        .pipe(z.number().min(1))
         .describe('The page number to retrieve.'),
       limit: z
         .string()
@@ -76,13 +76,13 @@ router.get('/user-test', validateRequest(getAllSchema), async (c: Context) => {
     query.order === 'asc' ? 'asc' : 'desc';
 
   // Build pagination
-  const skip = page > 0 ? (page - 1) * limit : 0;
+  const skip = (page - 1) * limit;
   // const data = [];
   const data = await db.user.findMany({
     where,
     orderBy: orderByStage,
-    skip: page > 0 ? skip : undefined,
-    take: page > 0 ? limit : undefined,
+    skip,
+    take: limit,
     include: {
       country: true,
       state: true,
