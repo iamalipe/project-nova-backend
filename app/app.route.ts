@@ -3,16 +3,18 @@ import { Hono } from 'hono';
 import { jwtAuth } from '../middlewares/jwtAuth.middleware';
 import authRouter from './auth/auth.route';
 import categoryRouter from './category/category.route';
-import subcategoryRouter from './subcategory/subcategory.route';
-import productRouter from './product/product.route';
-import userRouter from './user/user.route';
 import countryRouter from './country/country.route';
-import stateRouter from './state/state.route';
-import storeRouter from './store/store.route';
-import stockRouter from './stock/stock.route';
+import { mcpConnectionRouter, mcpRouter } from './mcp/mcp.route';
+import productRouter from './product/product.route';
 import sellRouter from './sell/sell.route';
-import { mcpRouter, mcpConnectionRouter } from './mcp/mcp.route';
+import stateRouter from './state/state.route';
+import stockRouter from './stock/stock.route';
+import storeRouter from './store/store.route';
+import subcategoryRouter from './subcategory/subcategory.route';
+import testRouter from './test/test.route';
+import userRouter from './user/user.route';
 
+import { NODE_ENV } from '../config/default';
 import {
   getImageController,
   longPollDemoController,
@@ -57,15 +59,17 @@ appRouter.route('/sell', sellRouter);
 appRouter.route('/mcp', mcpRouter);
 appRouter.route('/mcp/connections', mcpConnectionRouter);
 
+console.log('NODE_ENV', NODE_ENV);
+
+// Environment specific routes
+if (NODE_ENV === 'development') {
+  appRouter.route('/test', testRouter);
+}
+
 // Standard controllers
 appRouter.get('/sse-demo', sseDemoController);
 appRouter.get('/readable-stream-demo', readableStreamDemoController);
 appRouter.get('/long-poll-demo', longPollDemoController);
 appRouter.get('/get-image/*', getImageController);
-
-// Environment specific routes
-// if (process.env.NODE_ENV === 'development') {
-//   appRouter.route('/testing', testingRouter);
-// }
 
 export default appRouter;
