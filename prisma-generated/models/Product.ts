@@ -271,7 +271,7 @@ export type ProductWhereInput = {
   subcategory?: Prisma.XOR<Prisma.SubcategoryScalarRelationFilter, Prisma.SubcategoryWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   stocks?: Prisma.StockListRelationFilter
-  sells?: Prisma.SellListRelationFilter
+  sellItems?: Prisma.SellItemListRelationFilter
 }
 
 export type ProductOrderByWithRelationInput = {
@@ -289,7 +289,7 @@ export type ProductOrderByWithRelationInput = {
   subcategory?: Prisma.SubcategoryOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   stocks?: Prisma.StockOrderByRelationAggregateInput
-  sells?: Prisma.SellOrderByRelationAggregateInput
+  sellItems?: Prisma.SellItemOrderByRelationAggregateInput
 }
 
 export type ProductWhereUniqueInput = Prisma.AtLeast<{
@@ -310,7 +310,7 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   subcategory?: Prisma.XOR<Prisma.SubcategoryScalarRelationFilter, Prisma.SubcategoryWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   stocks?: Prisma.StockListRelationFilter
-  sells?: Prisma.SellListRelationFilter
+  sellItems?: Prisma.SellItemListRelationFilter
 }, "id" | "sku">
 
 export type ProductOrderByWithAggregationInput = {
@@ -362,7 +362,7 @@ export type ProductCreateInput = {
   subcategory: Prisma.SubcategoryCreateNestedOneWithoutProductsInput
   user: Prisma.UserCreateNestedOneWithoutProductsInput
   stocks?: Prisma.StockCreateNestedManyWithoutProductInput
-  sells?: Prisma.SellCreateNestedManyWithoutProductInput
+  sellItems?: Prisma.SellItemCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateInput = {
@@ -378,7 +378,7 @@ export type ProductUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   stocks?: Prisma.StockUncheckedCreateNestedManyWithoutProductInput
-  sells?: Prisma.SellUncheckedCreateNestedManyWithoutProductInput
+  sellItems?: Prisma.SellItemUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductUpdateInput = {
@@ -394,7 +394,7 @@ export type ProductUpdateInput = {
   subcategory?: Prisma.SubcategoryUpdateOneRequiredWithoutProductsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutProductsNestedInput
   stocks?: Prisma.StockUpdateManyWithoutProductNestedInput
-  sells?: Prisma.SellUpdateManyWithoutProductNestedInput
+  sellItems?: Prisma.SellItemUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateInput = {
@@ -410,7 +410,7 @@ export type ProductUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stocks?: Prisma.StockUncheckedUpdateManyWithoutProductNestedInput
-  sells?: Prisma.SellUncheckedUpdateManyWithoutProductNestedInput
+  sellItems?: Prisma.SellItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductCreateManyInput = {
@@ -528,18 +528,18 @@ export type DecimalFieldUpdateOperationsInput = {
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
-export type ProductCreateNestedOneWithoutSellsInput = {
-  create?: Prisma.XOR<Prisma.ProductCreateWithoutSellsInput, Prisma.ProductUncheckedCreateWithoutSellsInput>
-  connectOrCreate?: Prisma.ProductCreateOrConnectWithoutSellsInput
+export type ProductCreateNestedOneWithoutSellItemsInput = {
+  create?: Prisma.XOR<Prisma.ProductCreateWithoutSellItemsInput, Prisma.ProductUncheckedCreateWithoutSellItemsInput>
+  connectOrCreate?: Prisma.ProductCreateOrConnectWithoutSellItemsInput
   connect?: Prisma.ProductWhereUniqueInput
 }
 
-export type ProductUpdateOneRequiredWithoutSellsNestedInput = {
-  create?: Prisma.XOR<Prisma.ProductCreateWithoutSellsInput, Prisma.ProductUncheckedCreateWithoutSellsInput>
-  connectOrCreate?: Prisma.ProductCreateOrConnectWithoutSellsInput
-  upsert?: Prisma.ProductUpsertWithoutSellsInput
+export type ProductUpdateOneRequiredWithoutSellItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductCreateWithoutSellItemsInput, Prisma.ProductUncheckedCreateWithoutSellItemsInput>
+  connectOrCreate?: Prisma.ProductCreateOrConnectWithoutSellItemsInput
+  upsert?: Prisma.ProductUpsertWithoutSellItemsInput
   connect?: Prisma.ProductWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductUpdateToOneWithWhereWithoutSellsInput, Prisma.ProductUpdateWithoutSellsInput>, Prisma.ProductUncheckedUpdateWithoutSellsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductUpdateToOneWithWhereWithoutSellItemsInput, Prisma.ProductUpdateWithoutSellItemsInput>, Prisma.ProductUncheckedUpdateWithoutSellItemsInput>
 }
 
 export type ProductCreateNestedOneWithoutStocksInput = {
@@ -640,7 +640,7 @@ export type ProductUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.ProductScalarWhereInput | Prisma.ProductScalarWhereInput[]
 }
 
-export type ProductCreateWithoutSellsInput = {
+export type ProductCreateWithoutSellItemsInput = {
   id?: string
   name: string
   sku: string
@@ -655,7 +655,7 @@ export type ProductCreateWithoutSellsInput = {
   stocks?: Prisma.StockCreateNestedManyWithoutProductInput
 }
 
-export type ProductUncheckedCreateWithoutSellsInput = {
+export type ProductUncheckedCreateWithoutSellItemsInput = {
   id?: string
   name: string
   subcategoryId: string
@@ -670,23 +670,23 @@ export type ProductUncheckedCreateWithoutSellsInput = {
   stocks?: Prisma.StockUncheckedCreateNestedManyWithoutProductInput
 }
 
-export type ProductCreateOrConnectWithoutSellsInput = {
+export type ProductCreateOrConnectWithoutSellItemsInput = {
   where: Prisma.ProductWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProductCreateWithoutSellsInput, Prisma.ProductUncheckedCreateWithoutSellsInput>
+  create: Prisma.XOR<Prisma.ProductCreateWithoutSellItemsInput, Prisma.ProductUncheckedCreateWithoutSellItemsInput>
 }
 
-export type ProductUpsertWithoutSellsInput = {
-  update: Prisma.XOR<Prisma.ProductUpdateWithoutSellsInput, Prisma.ProductUncheckedUpdateWithoutSellsInput>
-  create: Prisma.XOR<Prisma.ProductCreateWithoutSellsInput, Prisma.ProductUncheckedCreateWithoutSellsInput>
+export type ProductUpsertWithoutSellItemsInput = {
+  update: Prisma.XOR<Prisma.ProductUpdateWithoutSellItemsInput, Prisma.ProductUncheckedUpdateWithoutSellItemsInput>
+  create: Prisma.XOR<Prisma.ProductCreateWithoutSellItemsInput, Prisma.ProductUncheckedCreateWithoutSellItemsInput>
   where?: Prisma.ProductWhereInput
 }
 
-export type ProductUpdateToOneWithWhereWithoutSellsInput = {
+export type ProductUpdateToOneWithWhereWithoutSellItemsInput = {
   where?: Prisma.ProductWhereInput
-  data: Prisma.XOR<Prisma.ProductUpdateWithoutSellsInput, Prisma.ProductUncheckedUpdateWithoutSellsInput>
+  data: Prisma.XOR<Prisma.ProductUpdateWithoutSellItemsInput, Prisma.ProductUncheckedUpdateWithoutSellItemsInput>
 }
 
-export type ProductUpdateWithoutSellsInput = {
+export type ProductUpdateWithoutSellItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
@@ -701,7 +701,7 @@ export type ProductUpdateWithoutSellsInput = {
   stocks?: Prisma.StockUpdateManyWithoutProductNestedInput
 }
 
-export type ProductUncheckedUpdateWithoutSellsInput = {
+export type ProductUncheckedUpdateWithoutSellItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   subcategoryId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -728,7 +728,7 @@ export type ProductCreateWithoutStocksInput = {
   updatedAt?: Date | string
   subcategory: Prisma.SubcategoryCreateNestedOneWithoutProductsInput
   user: Prisma.UserCreateNestedOneWithoutProductsInput
-  sells?: Prisma.SellCreateNestedManyWithoutProductInput
+  sellItems?: Prisma.SellItemCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutStocksInput = {
@@ -743,7 +743,7 @@ export type ProductUncheckedCreateWithoutStocksInput = {
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  sells?: Prisma.SellUncheckedCreateNestedManyWithoutProductInput
+  sellItems?: Prisma.SellItemUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutStocksInput = {
@@ -774,7 +774,7 @@ export type ProductUpdateWithoutStocksInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subcategory?: Prisma.SubcategoryUpdateOneRequiredWithoutProductsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutProductsNestedInput
-  sells?: Prisma.SellUpdateManyWithoutProductNestedInput
+  sellItems?: Prisma.SellItemUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutStocksInput = {
@@ -789,7 +789,7 @@ export type ProductUncheckedUpdateWithoutStocksInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sells?: Prisma.SellUncheckedUpdateManyWithoutProductNestedInput
+  sellItems?: Prisma.SellItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductCreateWithoutSubcategoryInput = {
@@ -804,7 +804,7 @@ export type ProductCreateWithoutSubcategoryInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutProductsInput
   stocks?: Prisma.StockCreateNestedManyWithoutProductInput
-  sells?: Prisma.SellCreateNestedManyWithoutProductInput
+  sellItems?: Prisma.SellItemCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutSubcategoryInput = {
@@ -819,7 +819,7 @@ export type ProductUncheckedCreateWithoutSubcategoryInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   stocks?: Prisma.StockUncheckedCreateNestedManyWithoutProductInput
-  sells?: Prisma.SellUncheckedCreateNestedManyWithoutProductInput
+  sellItems?: Prisma.SellItemUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutSubcategoryInput = {
@@ -877,7 +877,7 @@ export type ProductCreateWithoutUserInput = {
   updatedAt?: Date | string
   subcategory: Prisma.SubcategoryCreateNestedOneWithoutProductsInput
   stocks?: Prisma.StockCreateNestedManyWithoutProductInput
-  sells?: Prisma.SellCreateNestedManyWithoutProductInput
+  sellItems?: Prisma.SellItemCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutUserInput = {
@@ -892,7 +892,7 @@ export type ProductUncheckedCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   stocks?: Prisma.StockUncheckedCreateNestedManyWithoutProductInput
-  sells?: Prisma.SellUncheckedCreateNestedManyWithoutProductInput
+  sellItems?: Prisma.SellItemUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutUserInput = {
@@ -946,7 +946,7 @@ export type ProductUpdateWithoutSubcategoryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutProductsNestedInput
   stocks?: Prisma.StockUpdateManyWithoutProductNestedInput
-  sells?: Prisma.SellUpdateManyWithoutProductNestedInput
+  sellItems?: Prisma.SellItemUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutSubcategoryInput = {
@@ -961,7 +961,7 @@ export type ProductUncheckedUpdateWithoutSubcategoryInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stocks?: Prisma.StockUncheckedUpdateManyWithoutProductNestedInput
-  sells?: Prisma.SellUncheckedUpdateManyWithoutProductNestedInput
+  sellItems?: Prisma.SellItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateManyWithoutSubcategoryInput = {
@@ -1002,7 +1002,7 @@ export type ProductUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subcategory?: Prisma.SubcategoryUpdateOneRequiredWithoutProductsNestedInput
   stocks?: Prisma.StockUpdateManyWithoutProductNestedInput
-  sells?: Prisma.SellUpdateManyWithoutProductNestedInput
+  sellItems?: Prisma.SellItemUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutUserInput = {
@@ -1017,7 +1017,7 @@ export type ProductUncheckedUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stocks?: Prisma.StockUncheckedUpdateManyWithoutProductNestedInput
-  sells?: Prisma.SellUncheckedUpdateManyWithoutProductNestedInput
+  sellItems?: Prisma.SellItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateManyWithoutUserInput = {
@@ -1040,12 +1040,12 @@ export type ProductUncheckedUpdateManyWithoutUserInput = {
 
 export type ProductCountOutputType = {
   stocks: number
-  sells: number
+  sellItems: number
 }
 
 export type ProductCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   stocks?: boolean | ProductCountOutputTypeCountStocksArgs
-  sells?: boolean | ProductCountOutputTypeCountSellsArgs
+  sellItems?: boolean | ProductCountOutputTypeCountSellItemsArgs
 }
 
 /**
@@ -1068,8 +1068,8 @@ export type ProductCountOutputTypeCountStocksArgs<ExtArgs extends runtime.Types.
 /**
  * ProductCountOutputType without action
  */
-export type ProductCountOutputTypeCountSellsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SellWhereInput
+export type ProductCountOutputTypeCountSellItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SellItemWhereInput
 }
 
 
@@ -1088,7 +1088,7 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   subcategory?: boolean | Prisma.SubcategoryDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   stocks?: boolean | Prisma.Product$stocksArgs<ExtArgs>
-  sells?: boolean | Prisma.Product$sellsArgs<ExtArgs>
+  sellItems?: boolean | Prisma.Product$sellItemsArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["product"]>
 
@@ -1143,7 +1143,7 @@ export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   subcategory?: boolean | Prisma.SubcategoryDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   stocks?: boolean | Prisma.Product$stocksArgs<ExtArgs>
-  sells?: boolean | Prisma.Product$sellsArgs<ExtArgs>
+  sellItems?: boolean | Prisma.Product$sellItemsArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProductIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1161,7 +1161,7 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     subcategory: Prisma.$SubcategoryPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
     stocks: Prisma.$StockPayload<ExtArgs>[]
-    sells: Prisma.$SellPayload<ExtArgs>[]
+    sellItems: Prisma.$SellItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1572,7 +1572,7 @@ export interface Prisma__ProductClient<T, Null = never, ExtArgs extends runtime.
   subcategory<T extends Prisma.SubcategoryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubcategoryDefaultArgs<ExtArgs>>): Prisma.Prisma__SubcategoryClient<runtime.Types.Result.GetResult<Prisma.$SubcategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   stocks<T extends Prisma.Product$stocksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$stocksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  sells<T extends Prisma.Product$sellsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$sellsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SellPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sellItems<T extends Prisma.Product$sellItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$sellItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SellItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2038,27 +2038,27 @@ export type Product$stocksArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * Product.sells
+ * Product.sellItems
  */
-export type Product$sellsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Product$sellItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Sell
+   * Select specific fields to fetch from the SellItem
    */
-  select?: Prisma.SellSelect<ExtArgs> | null
+  select?: Prisma.SellItemSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Sell
+   * Omit specific fields from the SellItem
    */
-  omit?: Prisma.SellOmit<ExtArgs> | null
+  omit?: Prisma.SellItemOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.SellInclude<ExtArgs> | null
-  where?: Prisma.SellWhereInput
-  orderBy?: Prisma.SellOrderByWithRelationInput | Prisma.SellOrderByWithRelationInput[]
-  cursor?: Prisma.SellWhereUniqueInput
+  include?: Prisma.SellItemInclude<ExtArgs> | null
+  where?: Prisma.SellItemWhereInput
+  orderBy?: Prisma.SellItemOrderByWithRelationInput | Prisma.SellItemOrderByWithRelationInput[]
+  cursor?: Prisma.SellItemWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.SellScalarFieldEnum | Prisma.SellScalarFieldEnum[]
+  distinct?: Prisma.SellItemScalarFieldEnum | Prisma.SellItemScalarFieldEnum[]
 }
 
 /**

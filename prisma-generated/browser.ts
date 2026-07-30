@@ -53,6 +53,11 @@ export type Product = Prisma.ProductModel
  */
 export type Sell = Prisma.SellModel
 /**
+ * Model SellItem
+ * 
+ */
+export type SellItem = Prisma.SellItemModel
+/**
  * Model Stock
  * 
  */

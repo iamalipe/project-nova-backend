@@ -391,6 +391,7 @@ export const ModelName = {
   McpOAuthCode: 'McpOAuthCode',
   Product: 'Product',
   Sell: 'Sell',
+  SellItem: 'SellItem',
   Stock: 'Stock',
   Store: 'Store',
   Subcategory: 'Subcategory',
@@ -411,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "category" | "country" | "countryState" | "mcpOAuthClient" | "mcpOAuthCode" | "product" | "sell" | "stock" | "store" | "subcategory" | "user" | "userSession"
+    modelProps: "category" | "country" | "countryState" | "mcpOAuthClient" | "mcpOAuthCode" | "product" | "sell" | "sellItem" | "stock" | "store" | "subcategory" | "user" | "userSession"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -933,6 +934,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SellItem: {
+      payload: Prisma.$SellItemPayload<ExtArgs>
+      fields: Prisma.SellItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SellItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SellItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellItemPayload>
+        }
+        findFirst: {
+          args: Prisma.SellItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SellItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellItemPayload>
+        }
+        findMany: {
+          args: Prisma.SellItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellItemPayload>[]
+        }
+        create: {
+          args: Prisma.SellItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellItemPayload>
+        }
+        createMany: {
+          args: Prisma.SellItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SellItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellItemPayload>[]
+        }
+        delete: {
+          args: Prisma.SellItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellItemPayload>
+        }
+        update: {
+          args: Prisma.SellItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.SellItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SellItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SellItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.SellItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellItemPayload>
+        }
+        aggregate: {
+          args: Prisma.SellItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSellItem>
+        }
+        groupBy: {
+          args: Prisma.SellItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SellItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SellItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SellItemCountAggregateOutputType> | number
+        }
+      }
+    }
     Stock: {
       payload: Prisma.$StockPayload<ExtArgs>
       fields: Prisma.StockFieldRefs
@@ -1431,11 +1506,9 @@ export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeo
 
 export const SellScalarFieldEnum = {
   id: 'id',
-  productId: 'productId',
   storeId: 'storeId',
   customerId: 'customerId',
   staffId: 'staffId',
-  quantity: 'quantity',
   finalSellPrice: 'finalSellPrice',
   transactionDate: 'transactionDate',
   createdAt: 'createdAt',
@@ -1443,6 +1516,17 @@ export const SellScalarFieldEnum = {
 } as const
 
 export type SellScalarFieldEnum = (typeof SellScalarFieldEnum)[keyof typeof SellScalarFieldEnum]
+
+
+export const SellItemScalarFieldEnum = {
+  id: 'id',
+  sellId: 'sellId',
+  productId: 'productId',
+  quantity: 'quantity',
+  finalPrice: 'finalPrice'
+} as const
+
+export type SellItemScalarFieldEnum = (typeof SellItemScalarFieldEnum)[keyof typeof SellItemScalarFieldEnum]
 
 
 export const StockScalarFieldEnum = {
@@ -1754,6 +1838,7 @@ export type GlobalOmitConfig = {
   mcpOAuthCode?: Prisma.McpOAuthCodeOmit
   product?: Prisma.ProductOmit
   sell?: Prisma.SellOmit
+  sellItem?: Prisma.SellItemOmit
   stock?: Prisma.StockOmit
   store?: Prisma.StoreOmit
   subcategory?: Prisma.SubcategoryOmit

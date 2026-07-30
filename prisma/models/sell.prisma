@@ -1,21 +1,31 @@
 model Sell {
-  id              String   @id @default(uuid(7)) @db.Uuid
-  productId       String   @db.Uuid
-  product         Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  storeId         String   @db.Uuid
-  store           Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
-  customerId      String   @db.Uuid
-  customer        User     @relation("CustomerSells", fields: [customerId], references: [id], onDelete: Restrict)
-  staffId         String   @db.Uuid
-  staff           User     @relation("StaffSells", fields: [staffId], references: [id], onDelete: Restrict)
-  quantity        Int
-  finalSellPrice  Decimal  @db.Decimal(10, 2)
-  transactionDate DateTime @default(now())
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id              String     @id @default(uuid(7)) @db.Uuid
+  storeId         String     @db.Uuid
+  store           Store      @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  customerId      String     @db.Uuid
+  customer        User       @relation("CustomerSells", fields: [customerId], references: [id], onDelete: Restrict)
+  staffId         String     @db.Uuid
+  staff           User       @relation("StaffSells", fields: [staffId], references: [id], onDelete: Restrict)
+  cart            SellItem[]
+  finalSellPrice  Decimal    @db.Decimal(10, 2)
+  transactionDate DateTime   @default(now())
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
 
-  @@index([productId])
   @@index([storeId])
   @@index([customerId])
   @@index([staffId])
+}
+
+model SellItem {
+  id         String   @id @default(uuid(7)) @db.Uuid
+  sellId     String   @db.Uuid
+  sell       Sell     @relation(fields: [sellId], references: [id], onDelete: Cascade)
+  productId  String   @db.Uuid
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity   Int
+  finalPrice Decimal  @db.Decimal(10, 2)
+
+  @@index([sellId])
+  @@index([productId])
 }

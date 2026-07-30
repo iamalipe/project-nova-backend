@@ -58,6 +58,7 @@ export const ModelName = {
   McpOAuthCode: 'McpOAuthCode',
   Product: 'Product',
   Sell: 'Sell',
+  SellItem: 'SellItem',
   Stock: 'Stock',
   Store: 'Store',
   Subcategory: 'Subcategory',
@@ -170,11 +171,9 @@ export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeo
 
 export const SellScalarFieldEnum = {
   id: 'id',
-  productId: 'productId',
   storeId: 'storeId',
   customerId: 'customerId',
   staffId: 'staffId',
-  quantity: 'quantity',
   finalSellPrice: 'finalSellPrice',
   transactionDate: 'transactionDate',
   createdAt: 'createdAt',
@@ -182,6 +181,17 @@ export const SellScalarFieldEnum = {
 } as const
 
 export type SellScalarFieldEnum = (typeof SellScalarFieldEnum)[keyof typeof SellScalarFieldEnum]
+
+
+export const SellItemScalarFieldEnum = {
+  id: 'id',
+  sellId: 'sellId',
+  productId: 'productId',
+  quantity: 'quantity',
+  finalPrice: 'finalPrice'
+} as const
+
+export type SellItemScalarFieldEnum = (typeof SellItemScalarFieldEnum)[keyof typeof SellItemScalarFieldEnum]
 
 
 export const StockScalarFieldEnum = {
