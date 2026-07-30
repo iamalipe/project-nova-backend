@@ -59,8 +59,6 @@ appRouter.route('/sell', sellRouter);
 appRouter.route('/mcp', mcpRouter);
 appRouter.route('/mcp/connections', mcpConnectionRouter);
 
-console.log('NODE_ENV', NODE_ENV);
-
 // Environment specific routes
 if (NODE_ENV === 'development') {
   appRouter.route('/test', testRouter);

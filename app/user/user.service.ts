@@ -1,8 +1,8 @@
+import { Role } from '../../prisma-generated/client';
+import { cacheDel } from '../../services/cache.service';
 import { db } from '../../services/prisma.service';
 import { AppError } from '../../utils/appError.utils';
-import { Role } from '../../prisma-generated/client';
 import { hashPassword } from '../../utils/auth.utils';
-import { cacheDel } from '../../services/cache.service';
 import { generateCsv } from '../../utils/csv.utils';
 
 export interface UserCreateInput {
@@ -53,7 +53,8 @@ const createOne = async (data: UserCreateInput) => {
       password: hashedPassword,
       profileImage: data.profileImage || null,
       role: data.role || Role.GUEST,
-      salary: data.salary !== undefined && data.salary !== null ? data.salary : null,
+      salary:
+        data.salary !== undefined && data.salary !== null ? data.salary : null,
       countryId: data.countryId || null,
       stateId: data.stateId || null,
       address: data.address || null,
@@ -96,23 +97,33 @@ const updateOne = async (id: string, data: UserUpdateInput) => {
   });
   if (!findResult) throw new AppError('User not found', { status: 404 });
 
-  if (data.email && data.email.toLowerCase() !== findResult.email.toLowerCase()) {
+  if (
+    data.email &&
+    data.email.toLowerCase() !== findResult.email.toLowerCase()
+  ) {
     const existing = await db.user.findFirst({
       where: { email: { equals: data.email, mode: 'insensitive' } },
     });
     if (existing && existing.id !== id) {
-      throw new AppError('Email already exists', { status: 400, path: 'email' });
+      throw new AppError('Email already exists', {
+        status: 400,
+        path: 'email',
+      });
     }
   }
 
   const dataToUpdate: any = {};
   if (data.email !== undefined) dataToUpdate.email = data.email;
   if (data.firstName !== undefined) dataToUpdate.firstName = data.firstName;
-  if (data.lastName !== undefined) dataToUpdate.lastName = data.lastName || null;
-  if (data.profileImage !== undefined) dataToUpdate.profileImage = data.profileImage || null;
+  if (data.lastName !== undefined)
+    dataToUpdate.lastName = data.lastName || null;
+  if (data.profileImage !== undefined)
+    dataToUpdate.profileImage = data.profileImage || null;
   if (data.role !== undefined) dataToUpdate.role = data.role;
-  if (data.salary !== undefined) dataToUpdate.salary = data.salary !== null ? data.salary : null;
-  if (data.countryId !== undefined) dataToUpdate.countryId = data.countryId || null;
+  if (data.salary !== undefined)
+    dataToUpdate.salary = data.salary !== null ? data.salary : null;
+  if (data.countryId !== undefined)
+    dataToUpdate.countryId = data.countryId || null;
   if (data.stateId !== undefined) dataToUpdate.stateId = data.stateId || null;
   if (data.address !== undefined) dataToUpdate.address = data.address || null;
   if (data.zip !== undefined) dataToUpdate.zip = data.zip || null;
@@ -195,7 +206,7 @@ const getAll = async (query: {
   const where: any = {};
   if (query.search) {
     const matchedRole = Object.values(Role).find(
-      (r) => r.toLowerCase() === query.search?.toLowerCase()
+      (r) => r.toLowerCase() === query.search?.toLowerCase(),
     );
     where.OR = [
       { email: { contains: query.search, mode: 'insensitive' } },
@@ -213,6 +224,15 @@ const getAll = async (query: {
   // Build pagination
   const skip = page > 0 ? (page - 1) * limit : 0;
 
+  const countPromise =
+    Object.keys(where).length === 0
+      ? db.$queryRaw<
+          { estimate: string }[]
+        >`SELECT reltuples::bigint AS estimate FROM pg_class WHERE relname = 'User'`.then(
+          (res) => Number(res[0]?.estimate || 0),
+        )
+      : db.user.count({ where });
+
   const [data, total] = await Promise.all([
     db.user.findMany({
       where,
@@ -225,7 +245,7 @@ const getAll = async (query: {
       },
       omit: { password: true },
     }),
-    db.user.count({ where }),
+    countPromise,
   ]);
 
   const pagination = {
@@ -292,5 +312,3 @@ export default {
   getAll,
   exportCsv,
 };
-
-

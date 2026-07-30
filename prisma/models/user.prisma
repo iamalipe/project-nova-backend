@@ -30,6 +30,10 @@ model User {
   sellsStaff    Sell[] @relation("StaffSells")
 
   @@index([firstName, lastName])
+  @@index([createdAt(sort: Desc)])
+  @@index([role])
+  @@index([countryId])
+  @@index([stateId])
 }
 
 model UserSession {

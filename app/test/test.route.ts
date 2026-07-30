@@ -89,7 +89,19 @@ router.get('/user-test', validateRequest(getAllSchema), async (c: Context) => {
     },
     omit: { password: true },
   });
-  const total = 0;
+
+  console.log('where', where);
+
+  const countPromise =
+    Object.keys(where).length === 0
+      ? db.$queryRaw<
+          { estimate: string }[]
+        >`SELECT reltuples::bigint AS estimate FROM pg_class WHERE relname = 'User'`.then(
+          (res) => Number(res[0]?.estimate || 0),
+        )
+      : db.user.count({ where });
+  // const total = 0;
+  const total = await countPromise;
   // const total = await db.user.count({ where });
   // const total = await db.user.count();
 
