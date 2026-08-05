@@ -1,3 +1,4 @@
+import { randomUUID } from 'crypto';
 import dayjs from 'dayjs';
 import { db, dbConnect, dbDisconnect } from '../services/prisma.service';
 import { logger } from '../utils/logger';
@@ -14,13 +15,7 @@ interface DaySellConfig {
 }
 
 type WeekSellConfig = Record<
-  | 'monday'
-  | 'tuesday'
-  | 'wednesday'
-  | 'thursday'
-  | 'friday'
-  | 'saturday'
-  | 'sunday',
+  'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday',
   DaySellConfig
 >;
 
@@ -76,23 +71,18 @@ function splitRandom(amount: number, count: number): number[] {
   return result;
 }
 
-// Build monthly candidate pool ONCE for fast sampling
-function buildMonthlyTimePool(monthStart: string, monthEnd: string) {
-  const startDate = dayjs(monthStart).startOf('day');
-  const endDate = dayjs(monthEnd).endOf('day');
+/**
+ * Builds weighted monthly time-slot pool ONCE for fast sampling across any target month.
+ */
+function buildMonthlyTimePool(yearMonth: string) {
+  const startDate = dayjs(`${yearMonth}-01`).startOf('month');
+  const endDate = startDate.endOf('month');
   let currentDate = startDate;
 
-  const candidates: {
-    date: dayjs.Dayjs;
-    startTime: string;
-    endTime: string;
-    weight: number;
-  }[] = [];
+  const candidates: { date: dayjs.Dayjs; startTime: string; endTime: string; weight: number }[] = [];
 
   while (currentDate.isBefore(endDate) || currentDate.isSame(endDate, 'day')) {
-    const dayName = currentDate
-      .format('dddd')
-      .toLowerCase() as keyof WeekSellConfig;
+    const dayName = currentDate.format('dddd').toLowerCase() as keyof WeekSellConfig;
     const dayConfig = weekSellConfig[dayName];
 
     if (dayConfig) {
@@ -112,12 +102,10 @@ function buildMonthlyTimePool(monthStart: string, monthEnd: string) {
   }
 
   const totalWeight = candidates.reduce((sum, c) => sum + c.weight, 0);
-  return { candidates, totalWeight };
+  return { candidates, totalWeight, startDate, endDate };
 }
 
-function getRandomPurchaseTime(
-  pool: ReturnType<typeof buildMonthlyTimePool>,
-): string {
+function getRandomPurchaseTime(pool: ReturnType<typeof buildMonthlyTimePool>): string {
   let randomWeight = Math.random() * pool.totalWeight;
   let selected = pool.candidates[0];
 
@@ -132,10 +120,7 @@ function getRandomPurchaseTime(
   const [startHour, startMin] = selected.startTime.split(':').map(Number);
   const [endHour, endMin] = selected.endTime.split(':').map(Number);
 
-  const chosenMinutes = randomInt(
-    startHour * 60 + startMin,
-    endHour * 60 + endMin,
-  );
+  const chosenMinutes = randomInt(startHour * 60 + startMin, endHour * 60 + endMin);
   const hour = Math.floor(chosenMinutes / 60);
   const minute = chosenMinutes % 60;
   const second = randomInt(0, 59);
@@ -143,137 +128,263 @@ function getRandomPurchaseTime(
   return selected.date.hour(hour).minute(minute).second(second).toISOString();
 }
 
-export async function seedSell(countryCode2: string, subdivisionCode: string) {
-  logger.info('Deleting existing sell items and sales...');
-  await db.sellItem.deleteMany();
-  await db.sell.deleteMany();
+export interface SeedSellOptions {
+  yearMonth?: string; // Format: "YYYY-MM", e.g. "2026-01" or "2026-02"
+  dryRun?: boolean;   // true for simulation report only, false to populate DB
+  maxCustomersTotal?: number; // Cap overall customer sample size for ultra-fast execution
+}
 
-  const monthStart = dayjs('2026-01-15').startOf('month').toISOString();
-  const monthEnd = dayjs('2026-01-15').endOf('month').toISOString();
-  const timePool = buildMonthlyTimePool(monthStart, monthEnd);
+export async function seedSellAll(options: SeedSellOptions = {}) {
+  const yearMonth = options.yearMonth || '2026-01';
+  const isDryRun = options.dryRun ?? false;
+  const maxCustomersTotal = options.maxCustomersTotal || 5000;
 
-  const countryData = await db.country.findFirst({
-    where: { code2: countryCode2 },
-  });
-  if (!countryData) return;
+  const modeTitle = isDryRun ? 'DRY RUN (Simulation Only)' : 'REAL RUN (Populating Database)';
+  logger.info(`=======================================================`);
+  logger.info(`Starting Sell Data Generation - [${modeTitle}]`);
+  logger.info(`Target Month: ${yearMonth}`);
+  logger.info(`=======================================================`);
 
-  const stateData = await db.countryState.findFirst({
-    where: { countryId: countryData.id, subdivisionCode },
-  });
-  if (!stateData) return;
+  const timePool = buildMonthlyTimePool(yearMonth);
 
-  logger.info('Fetching products and stores...');
+  // Fetch reference data
   const products = await db.product.findMany({
     select: { id: true, mop: true, mrp: true },
   });
   if (products.length === 0) {
-    logger.warn('No products found to generate sell data.');
+    logger.warn('No products found in database to generate sell data.');
     return;
   }
 
-  const stores = await db.store.findMany({
-    where: { countryId: countryData.id, stateId: stateData.id },
-    select: { id: true, staffIds: true, managerId: true },
+  const countries = await db.country.findMany({ select: { id: true, name: true, code2: true } });
+  const states = await db.countryState.findMany({ select: { id: true, name: true, countryId: true, subdivisionCode: true } });
+  const stores = await db.store.findMany({ select: { id: true, countryId: true, stateId: true, staffIds: true, managerId: true } });
+  const allStaff = await db.user.findMany({
+    where: { role: 'STAFF' },
+    select: { id: true, countryId: true, stateId: true },
   });
-  if (stores.length === 0) {
-    logger.warn('No stores found for selected state.');
-    return;
+
+  // Fast raw SQL sample query to bypass index scan overhead on 6.8M customers
+  logger.info(`Sampling customer users (max: ${maxCustomersTotal})...`);
+  const rawCustomers = await db.$queryRaw<
+    { id: string; salary: any; countryId: string; stateId: string }[]
+  >`SELECT id, salary, "countryId", "stateId" FROM "User" WHERE role = 'CUSTOMER'::"Role" AND "countryId" IS NOT NULL AND "stateId" IS NOT NULL LIMIT ${maxCustomersTotal}`;
+
+  // Group stores & staff by country_state key
+  const storeMap = new Map<string, typeof stores>();
+  const staffMap = new Map<string, string[]>();
+  const customerMap = new Map<string, typeof rawCustomers>();
+
+  for (const store of stores) {
+    const key = `${store.countryId}_${store.stateId}`;
+    if (!storeMap.has(key)) storeMap.set(key, []);
+    storeMap.get(key)!.push(store);
   }
 
-  const staffUsers = await db.user.findMany({
-    where: { countryId: countryData.id, stateId: stateData.id, role: 'STAFF' },
-    select: { id: true },
-  });
-  const fallbackStaffId = staffUsers[0]?.id;
+  for (const stf of allStaff) {
+    if (stf.countryId && stf.stateId) {
+      const key = `${stf.countryId}_${stf.stateId}`;
+      if (!staffMap.has(key)) staffMap.set(key, []);
+      staffMap.get(key)!.push(stf.id);
+    }
+  }
 
-  const customers = await db.user.findMany({
-    where: {
-      countryId: countryData.id,
-      stateId: stateData.id,
-      role: 'CUSTOMER',
-    },
-    select: { id: true, salary: true },
-    take: 100,
-  });
+  for (const cust of rawCustomers) {
+    const key = `${cust.countryId}_${cust.stateId}`;
+    if (!customerMap.has(key)) customerMap.set(key, []);
+    customerMap.get(key)!.push(cust);
+  }
 
-  logger.info(`Generating transactions for ${customers.length} customers...`);
+  logger.info(`Loaded ${countries.length} countries, ${states.length} states, ${stores.length} stores, and sampled ${rawCustomers.length} customers.`);
 
-  for (const customer of customers) {
-    const salary = Number(customer.salary || 40000);
-    const monthlySpend = randomPercentage(salary / 12, 30, 80);
-    const visitCount = randomInt(4, 20);
-    const visitsSpend = splitRandom(monthlySpend, visitCount);
+  const sellsToCreate: any[] = [];
+  const sellItemsToCreate: any[] = [];
 
-    for (const visitSpend of visitsSpend) {
-      const store = stores[randomInt(0, stores.length - 1)];
-      const staffId =
-        store.staffIds && store.staffIds.length > 0
-          ? store.staffIds[randomInt(0, store.staffIds.length - 1)]
-          : fallbackStaffId;
+  let totalSalesCount = 0;
+  let totalItemsCount = 0;
+  let totalRevenue = 0;
 
-      if (!staffId) continue;
+  const regionSummary: {
+    country: string;
+    state: string;
+    storesCount: number;
+    customersCount: number;
+    salesCount: number;
+    itemsCount: number;
+    revenue: number;
+  }[] = [];
 
-      const cartItemCount = randomInt(1, 8);
-      const itemTargetSpends = splitRandom(visitSpend, cartItemCount);
+  for (const country of countries) {
+    const countryStates = states.filter((s) => s.countryId === country.id);
 
-      const cartItems: {
-        productId: string;
-        quantity: number;
-        finalPrice: number;
-      }[] = [];
-      let totalSellPrice = 0;
+    for (const state of countryStates) {
+      const key = `${country.id}_${state.id}`;
+      const stateStores = storeMap.get(key) || [];
+      const stateStaff = staffMap.get(key) || [];
+      const stateCustomers = customerMap.get(key) || [];
 
-      for (const targetSpend of itemTargetSpends) {
-        // Fast O(1) random product pick
-        const product = products[randomInt(0, products.length - 1)];
-        const mop = Number(product.mop);
-        const qty = Math.max(
-          1,
-          Math.min(10, Math.round(targetSpend / (mop || 10))),
-        );
-        const itemPrice = mop * qty;
+      if (stateStores.length === 0 || stateCustomers.length === 0) continue;
 
-        cartItems.push({
-          productId: product.id,
-          quantity: qty,
-          finalPrice: itemPrice,
-        });
-        totalSellPrice += itemPrice;
+      let stateSalesCount = 0;
+      let stateItemsCount = 0;
+      let stateRevenue = 0;
+
+      for (const customer of stateCustomers) {
+        const salary = Number(customer.salary || 40000);
+        const monthlySpend = randomPercentage(salary / 12, 30, 80);
+        const visitCount = randomInt(4, 20);
+        const visitsSpend = splitRandom(monthlySpend, visitCount);
+
+        for (const visitSpend of visitsSpend) {
+          const store = stateStores[randomInt(0, stateStores.length - 1)];
+          let staffId =
+            store.staffIds && store.staffIds.length > 0
+              ? store.staffIds[randomInt(0, store.staffIds.length - 1)]
+              : stateStaff.length > 0
+              ? stateStaff[randomInt(0, stateStaff.length - 1)]
+              : store.managerId;
+
+          if (!staffId) continue;
+
+          const sellId = randomUUID();
+          const cartItemCount = randomInt(1, 8);
+          const itemTargetSpends = splitRandom(visitSpend, cartItemCount);
+
+          let saleTotal = 0;
+
+          for (const targetSpend of itemTargetSpends) {
+            const product = products[randomInt(0, products.length - 1)];
+            const mop = Number(product.mop);
+            const qty = Math.max(1, Math.min(10, Math.round(targetSpend / (mop || 10))));
+            const itemPrice = mop * qty;
+
+            saleTotal += itemPrice;
+            stateItemsCount++;
+
+            sellItemsToCreate.push({
+              sellId,
+              productId: product.id,
+              quantity: qty,
+              finalPrice: itemPrice,
+            });
+          }
+
+          const transactionDate = getRandomPurchaseTime(timePool);
+
+          sellsToCreate.push({
+            id: sellId,
+            customerId: customer.id,
+            storeId: store.id,
+            staffId,
+            transactionDate,
+            finalSellPrice: saleTotal,
+          });
+
+          stateSalesCount++;
+          stateRevenue += saleTotal;
+        }
       }
 
-      const transactionDate = getRandomPurchaseTime(timePool);
+      totalSalesCount += stateSalesCount;
+      totalItemsCount += stateItemsCount;
+      totalRevenue += stateRevenue;
 
-      // Create sell record with items
-      await db.sell.create({
-        data: {
-          customerId: customer.id,
-          storeId: store.id,
-          staffId,
-          transactionDate,
-          finalSellPrice: totalSellPrice,
-          cart: {
-            createMany: {
-              data: cartItems,
-            },
-          },
-        },
+      regionSummary.push({
+        country: `${country.code2} - ${country.name}`,
+        state: state.name,
+        storesCount: stateStores.length,
+        customersCount: stateCustomers.length,
+        salesCount: stateSalesCount,
+        itemsCount: stateItemsCount,
+        revenue: Math.round(stateRevenue * 100) / 100,
       });
     }
   }
 
-  logger.info('Successfully seeded all sales transactions!');
+  // Display Summary Table
+  console.log('\n=======================================================');
+  console.log(` SUMMARY REPORT (${modeTitle}) - Target Month: ${yearMonth}`);
+  console.log('=======================================================');
+  console.table(regionSummary.slice(0, 15)); // Show top 15 regions sample
+  if (regionSummary.length > 15) {
+    console.log(`... and ${regionSummary.length - 15} more regions.`);
+  }
+
+  console.log('-------------------------------------------------------');
+  console.log(`TOTAL REGIONS PROCESSED      : ${regionSummary.length.toLocaleString()}`);
+  console.log(`TOTAL TRANSACTIONS GENERATED : ${totalSalesCount.toLocaleString()}`);
+  console.log(`TOTAL CART ITEMS GENERATED   : ${totalItemsCount.toLocaleString()}`);
+  console.log(`TOTAL SIMULATED REVENUE ($)  : $${totalRevenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`);
+  console.log('-------------------------------------------------------');
+
+  if (isDryRun) {
+    logger.info(`[DRY RUN COMPLETE] Simulation succeeded! No database changes were made.`);
+    return {
+      dryRun: true,
+      yearMonth,
+      totalSalesCount,
+      totalItemsCount,
+      totalRevenue,
+    };
+  }
+
+  // Real Run: Save to PostgreSQL using fast chunked bulk creation
+  logger.info('Deleting existing sell items and sales records...');
+  await db.sellItem.deleteMany();
+  await db.sell.deleteMany();
+
+  logger.info(`Bulk inserting ${sellsToCreate.length} sales records...`);
+  const sellChunkSize = 2000;
+  for (let i = 0; i < sellsToCreate.length; i += sellChunkSize) {
+    const chunk = sellsToCreate.slice(i, i + sellChunkSize);
+    await db.sell.createMany({ data: chunk });
+  }
+
+  logger.info(`Bulk inserting ${sellItemsToCreate.length} sell items...`);
+  const itemChunkSize = 5000;
+  for (let i = 0; i < sellItemsToCreate.length; i += itemChunkSize) {
+    const chunk = sellItemsToCreate.slice(i, i + itemChunkSize);
+    await db.sellItem.createMany({ data: chunk });
+  }
+
+  logger.info(`[REAL RUN COMPLETE] Successfully seeded ${totalSalesCount.toLocaleString()} sales transactions into PostgreSQL!`);
+
+  return {
+    dryRun: false,
+    yearMonth,
+    totalSalesCount,
+    totalItemsCount,
+    totalRevenue,
+  };
 }
 
-async function seed() {
+async function main() {
   await dbConnect();
-  logger.info('Starting database seeding...');
-  await seedSell('US', 'NY');
-  logger.info('Database seeding completed successfully!');
-  await dbDisconnect();
+
+  // Parse command line flags
+  const args = process.argv.slice(2);
+  const isDryRun = args.includes('--dry-run') || args.includes('-d');
+
+  const monthMatch = args.find((a) => a.startsWith('--month='));
+  const yearMonth = monthMatch ? monthMatch.split('=')[1] : '2026-01';
+
+  const sampleMatch = args.find((a) => a.startsWith('--sample='));
+  const sample = sampleMatch ? parseInt(sampleMatch.split('=')[1], 10) : 5000;
+
+  try {
+    await seedSellAll({
+      yearMonth,
+      dryRun: isDryRun,
+      maxCustomersTotal: sample,
+    });
+  } catch (err) {
+    logger.error('Seeding failed:', err);
+  } finally {
+    await dbDisconnect();
+  }
 }
 
-seed().catch(async (e) => {
-  logger.error('Database seeding failed:', e);
-  await dbDisconnect();
-  process.exit(1);
-});
+// Execute if run directly from CLI
+if (require.main === module) {
+  main();
+}
