@@ -21,6 +21,7 @@ export async function seedStaff() {
   const hashedPassword = await hashPassword('Abcd@1234');
 
   const usersToCreate: any[] = [];
+  const usedEmails = new Set<string>();
 
   for (const store of stores) {
     const c3 = store.country.code3.toUpperCase();
@@ -35,16 +36,14 @@ export async function seedStaff() {
 
     let minSalary = 20000;
     let maxSalary = 40000;
-    let minCount = 2;
-    let maxCount = 10;
     if (config) {
       minSalary = config.minSalary;
       maxSalary = config.maxSalary;
-      minCount = config.minCount;
-      maxCount = config.maxCount;
     }
 
-    // Determine random staff count for this store
+    // Determine random staff count between 1 and 10 for this store
+    const minCount = 1;
+    const maxCount = 10;
     const count =
       Math.floor(Math.random() * (maxCount - minCount + 1)) + minCount;
 
@@ -60,7 +59,13 @@ export async function seedStaff() {
       const last = names.last[Math.floor(Math.random() * names.last.length)];
 
       // Unique email per staff member
-      const email = `${first}.staff.${store.storeCode.toLowerCase()}.${j + 1}@yopmail.com`;
+      let email = `${first.toLowerCase()}.${last.toLowerCase()}.staff.${store.storeCode.toLowerCase()}.${j + 1}@yopmail.com`.replace(/[^a-z0-9.@_-]/g, '');
+      let counter = 1;
+      while (usedEmails.has(email)) {
+        email = `${first.toLowerCase()}.${last.toLowerCase()}.staff.${store.storeCode.toLowerCase()}.${j + 1}.${counter}@yopmail.com`.replace(/[^a-z0-9.@_-]/g, '');
+        counter++;
+      }
+      usedEmails.add(email);
 
       // Address
       const street = streets[Math.floor(Math.random() * streets.length)];

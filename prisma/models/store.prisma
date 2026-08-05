@@ -1,7 +1,7 @@
 model Store {
   id              String        @id @default(uuid(7)) @db.Uuid
   name            String
-  storeCode       String        @unique @db.VarChar(6)
+  storeCode       String        @unique @db.VarChar(20)
   addressLine1    String
   zip             String
   stateId         String        @db.Uuid

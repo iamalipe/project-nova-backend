@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const createSchema = z.object({
   body: z.object({
     name: z.string().min(1).max(255),
-    storeCode: z.string().length(6, 'Store code must be exactly 6 characters').optional(),
+    storeCode: z.string().min(1).max(20).optional(),
     addressLine1: z.string().min(1),
     zip: z.string().min(1),
     stateId: z.string().uuid().optional(),
@@ -14,6 +14,8 @@ export const createSchema = z.object({
     images: z.array(z.string()).optional().default([]),
     description: z.string().optional().nullable(),
     yearlyUpkeep: z.coerce.number().min(0),
+    managerId: z.string().uuid().optional().nullable(),
+    staffIds: z.array(z.string().uuid()).optional(),
   }),
 });
 
@@ -21,7 +23,7 @@ export const createManySchema = z.object({
   body: z.array(
     z.object({
       name: z.string().min(1).max(255),
-      storeCode: z.string().length(6).optional(),
+      storeCode: z.string().min(1).max(20).optional(),
       addressLine1: z.string().min(1),
       zip: z.string().min(1),
       stateId: z.string().uuid().optional(),
@@ -42,7 +44,7 @@ export const updateSchema = z.object({
   }),
   body: z.object({
     name: z.string().min(1).max(255).optional(),
-    storeCode: z.string().length(6).optional(),
+    storeCode: z.string().min(1).max(20).optional(),
     addressLine1: z.string().min(1).optional(),
     zip: z.string().min(1).optional(),
     stateId: z.string().uuid().optional(),
@@ -51,6 +53,8 @@ export const updateSchema = z.object({
     images: z.array(z.string()).optional(),
     description: z.string().optional().nullable(),
     yearlyUpkeep: z.coerce.number().min(0).optional(),
+    managerId: z.string().uuid().optional().nullable(),
+    staffIds: z.array(z.string().uuid()).optional(),
   }),
 });
 

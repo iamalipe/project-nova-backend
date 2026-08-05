@@ -21,6 +21,7 @@ export async function seedManagers() {
   const hashedPassword = await hashPassword('Abcd@1234');
 
   const usersToCreate: any[] = [];
+  const usedEmails = new Set<string>();
 
   for (const store of stores) {
     const c3 = store.country.code3.toUpperCase();
@@ -49,7 +50,13 @@ export async function seedManagers() {
     const last = names.last[Math.floor(Math.random() * names.last.length)];
 
     // Unique email per store manager
-    const email = `${first}.manager.${store.storeCode.toLowerCase()}@yopmail.com`;
+    let email = `${first.toLowerCase()}.${last.toLowerCase()}.manager.${store.storeCode.toLowerCase()}@yopmail.com`.replace(/[^a-z0-9.@_-]/g, '');
+    let counter = 1;
+    while (usedEmails.has(email)) {
+      email = `${first.toLowerCase()}.${last.toLowerCase()}.manager.${store.storeCode.toLowerCase()}.${counter}@yopmail.com`.replace(/[^a-z0-9.@_-]/g, '');
+      counter++;
+    }
+    usedEmails.add(email);
 
     // Address
     const streets = STREET_NAMES[c3] || STREET_NAMES['USA'];

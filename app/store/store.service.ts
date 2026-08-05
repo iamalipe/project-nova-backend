@@ -1,3 +1,4 @@
+import { Role } from '../../prisma-generated/client';
 import { db } from '../../services/prisma.service';
 import { AppError } from '../../utils/appError.utils';
 import { serializeDatesAndDecimals, updateCheck } from '../../utils/general.utils';
@@ -16,37 +17,9 @@ const createOne = async (data: {
   images?: string[];
   description?: string | null;
   yearlyUpkeep: number;
+  managerId?: string | null;
+  staffIds?: string[];
 }) => {
-  let storeCode = data.storeCode;
-  if (!storeCode) {
-    const lastStore = await db.store.findFirst({
-      where: {
-        storeCode: {
-          startsWith: 's',
-        },
-      },
-      orderBy: {
-        storeCode: 'desc',
-      },
-    });
-
-    let lastNum = 0;
-    if (lastStore) {
-      const numPart = parseInt(lastStore.storeCode.substring(1), 10);
-      if (!isNaN(numPart)) {
-        lastNum = numPart;
-      }
-    }
-    storeCode = `s${(lastNum + 1).toString().padStart(5, '0')}`;
-  }
-
-  const existing = await db.store.findUnique({
-    where: { storeCode },
-  });
-  if (existing) {
-    throw new AppError('Store code already exists', { status: 400, path: 'storeCode' });
-  }
-
   let targetCountryId = data.countryId;
   if (!targetCountryId && data.countryCode3) {
     const country = await db.country.findFirst({
@@ -57,6 +30,22 @@ const createOne = async (data: {
   }
   if (!targetCountryId) {
     throw new AppError('Country ID or countryCode3 is required', { status: 400, path: 'countryId' });
+  }
+
+  const countryObj = await db.country.findUnique({ where: { id: targetCountryId } });
+  const cc2 = countryObj?.code2?.toUpperCase() || 'XX';
+
+  let storeCode = data.storeCode;
+  if (!storeCode) {
+    const totalStoresCount = await db.store.count();
+    storeCode = `S${cc2}${(totalStoresCount + 1).toString().padStart(6, '0')}`;
+  }
+
+  const existing = await db.store.findUnique({
+    where: { storeCode },
+  });
+  if (existing) {
+    throw new AppError('Store code already exists', { status: 400, path: 'storeCode' });
   }
 
   let targetStateId = data.stateId;
@@ -92,6 +81,47 @@ const createOne = async (data: {
     },
   });
 
+  const sanitizedStoreCode = storeCode.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+  if (data.managerId) {
+    const mgr = await db.user.findUnique({ where: { id: data.managerId } });
+    if (mgr) {
+      const newEmail = mgr.email.includes('.manager.')
+        ? mgr.email
+        : `manager.${sanitizedStoreCode}.${Date.now()}@yopmail.com`;
+      await db.user.update({
+        where: { id: data.managerId },
+        data: {
+          role: Role.STORE_MANAGER,
+          countryId: targetCountryId,
+          stateId: targetStateId,
+          email: newEmail,
+        },
+      });
+    }
+  }
+
+  if (data.staffIds && data.staffIds.length > 0) {
+    for (let i = 0; i < data.staffIds.length; i++) {
+      const sId = data.staffIds[i];
+      const stf = await db.user.findUnique({ where: { id: sId } });
+      if (stf) {
+        const newEmail = stf.email.includes('.staff.')
+          ? stf.email
+          : `staff.${sanitizedStoreCode}.${i + 1}.${Date.now()}@yopmail.com`;
+        await db.user.update({
+          where: { id: sId },
+          data: {
+            role: Role.STAFF,
+            countryId: targetCountryId,
+            stateId: targetStateId,
+            email: newEmail,
+          },
+        });
+      }
+    }
+  }
+
   return serializeDatesAndDecimals(result);
 };
 
@@ -114,30 +144,24 @@ const createMany = async (
   const success: any[] = [];
   const failed: any[] = [];
 
-  const lastStore = await db.store.findFirst({
-    where: {
-      storeCode: {
-        startsWith: 's',
-      },
-    },
-    orderBy: {
-      storeCode: 'desc',
-    },
-  });
-
-  let lastNum = 0;
-  if (lastStore) {
-    const numPart = parseInt(lastStore.storeCode.substring(1), 10);
-    if (!isNaN(numPart)) {
-      lastNum = numPart;
-    }
-  }
-
   let codeOffset = 0;
+  const initialCount = await db.store.count();
   for (const item of data) {
     try {
-      const nextNum = lastNum + 1 + codeOffset;
-      const generatedCode = `s${nextNum.toString().padStart(5, '0')}`;
+      let generatedCode = item.storeCode;
+      if (!generatedCode) {
+        let countryCc2 = 'XX';
+        let cId = item.countryId;
+        if (!cId && item.countryCode3) {
+          const c = await db.country.findFirst({ where: { code3: { equals: item.countryCode3, mode: 'insensitive' } } });
+          cId = c?.id;
+        }
+        if (cId) {
+          const countryObj = await db.country.findUnique({ where: { id: cId } });
+          if (countryObj) countryCc2 = countryObj.code2.toUpperCase();
+        }
+        generatedCode = `S${countryCc2}${(initialCount + 1 + codeOffset).toString().padStart(6, '0')}`;
+      }
 
       const created = await createOne({
         ...item,
@@ -166,6 +190,8 @@ const updateOne = async (
     images?: string[];
     description?: string | null;
     yearlyUpkeep?: number;
+    managerId?: string | null;
+    staffIds?: string[];
   },
 ) => {
   const findResult = await db.store.findUnique({ where: { id } });
@@ -195,6 +221,49 @@ const updateOne = async (
     data: updateSet,
   });
 
+  const targetCountryId = updateSet.countryId || findResult.countryId;
+  const targetStateId = updateSet.stateId || findResult.stateId;
+  const sanitizedStoreCode = (updateSet.storeCode || findResult.storeCode).toLowerCase().replace(/[^a-z0-9]/g, '');
+
+  if (data.managerId !== undefined && data.managerId) {
+    const mgr = await db.user.findUnique({ where: { id: data.managerId } });
+    if (mgr) {
+      const newEmail = mgr.email.includes('.manager.')
+        ? mgr.email
+        : `manager.${sanitizedStoreCode}.${Date.now()}@yopmail.com`;
+      await db.user.update({
+        where: { id: data.managerId },
+        data: {
+          role: Role.STORE_MANAGER,
+          countryId: targetCountryId,
+          stateId: targetStateId,
+          email: newEmail,
+        },
+      });
+    }
+  }
+
+  if (data.staffIds !== undefined && Array.isArray(data.staffIds)) {
+    for (let i = 0; i < data.staffIds.length; i++) {
+      const sId = data.staffIds[i];
+      const stf = await db.user.findUnique({ where: { id: sId } });
+      if (stf) {
+        const newEmail = stf.email.includes('.staff.')
+          ? stf.email
+          : `staff.${sanitizedStoreCode}.${i + 1}.${Date.now()}@yopmail.com`;
+        await db.user.update({
+          where: { id: sId },
+          data: {
+            role: Role.STAFF,
+            countryId: targetCountryId,
+            stateId: targetStateId,
+            email: newEmail,
+          },
+        });
+      }
+    }
+  }
+
   return serializeDatesAndDecimals(updatedResult);
 };
 
@@ -211,13 +280,78 @@ const deleteMany = async (ids: string[]) => {
   return serializeDatesAndDecimals(result);
 };
 
+const fetchStoreManagerAndStaff = async (store: any) => {
+  const sanitizedCode = store.storeCode.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+  let manager = await db.user.findFirst({
+    where: {
+      role: Role.STORE_MANAGER,
+      countryId: store.countryId,
+      stateId: store.stateId,
+      email: { contains: `.manager.${sanitizedCode}` },
+    },
+    include: { country: true, state: true },
+    omit: { password: true },
+  });
+
+  if (!manager) {
+    manager = await db.user.findFirst({
+      where: {
+        role: Role.STORE_MANAGER,
+        countryId: store.countryId,
+        stateId: store.stateId,
+      },
+      include: { country: true, state: true },
+      omit: { password: true },
+    });
+  }
+
+  let staff = await db.user.findMany({
+    where: {
+      role: Role.STAFF,
+      countryId: store.countryId,
+      stateId: store.stateId,
+      email: { contains: `.staff.${sanitizedCode}.` },
+    },
+    include: { country: true, state: true },
+    omit: { password: true },
+    orderBy: { createdAt: 'asc' },
+  });
+
+  if (staff.length === 0) {
+    staff = await db.user.findMany({
+      where: {
+        role: Role.STAFF,
+        countryId: store.countryId,
+        stateId: store.stateId,
+      },
+      include: { country: true, state: true },
+      omit: { password: true },
+      orderBy: { createdAt: 'asc' },
+    });
+  }
+
+  return {
+    manager: manager ? serializeDatesAndDecimals(manager) : null,
+    staff: serializeDatesAndDecimals(staff),
+    staffCount: staff.length,
+  };
+};
+
 const getOne = async (id: string) => {
   const result = await db.store.findUnique({
     where: { id },
     include: { country: true, state: true },
   });
   if (!result) throw new AppError('Store not found', { status: 404 });
-  return serializeDatesAndDecimals(result);
+  const { manager, staff, staffCount } = await fetchStoreManagerAndStaff(result);
+  const serialized = serializeDatesAndDecimals(result);
+  return {
+    ...serialized,
+    manager,
+    staff,
+    staffCount,
+  };
 };
 
 const getAll = async (query: {
@@ -260,8 +394,21 @@ const getAll = async (query: {
     db.store.count({ where }),
   ]);
 
+  const enrichedData = await Promise.all(
+    data.map(async (store) => {
+      const { manager, staff, staffCount } = await fetchStoreManagerAndStaff(store);
+      const serialized = serializeDatesAndDecimals(store);
+      return {
+        ...serialized,
+        manager,
+        staff,
+        staffCount,
+      };
+    }),
+  );
+
   return {
-    data: serializeDatesAndDecimals(data),
+    data: enrichedData,
     pagination: { page, limit, total, current: data.length },
     sort: { order: query.order, orderBy: query.orderBy },
   };
