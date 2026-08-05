@@ -15,7 +15,13 @@ interface DaySellConfig {
 }
 
 type WeekSellConfig = Record<
-  'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday',
+  | 'monday'
+  | 'tuesday'
+  | 'wednesday'
+  | 'thursday'
+  | 'friday'
+  | 'saturday'
+  | 'sunday',
   DaySellConfig
 >;
 
@@ -79,10 +85,17 @@ function buildMonthlyTimePool(yearMonth: string) {
   const endDate = startDate.endOf('month');
   let currentDate = startDate;
 
-  const candidates: { date: dayjs.Dayjs; startTime: string; endTime: string; weight: number }[] = [];
+  const candidates: {
+    date: dayjs.Dayjs;
+    startTime: string;
+    endTime: string;
+    weight: number;
+  }[] = [];
 
   while (currentDate.isBefore(endDate) || currentDate.isSame(endDate, 'day')) {
-    const dayName = currentDate.format('dddd').toLowerCase() as keyof WeekSellConfig;
+    const dayName = currentDate
+      .format('dddd')
+      .toLowerCase() as keyof WeekSellConfig;
     const dayConfig = weekSellConfig[dayName];
 
     if (dayConfig) {
@@ -105,7 +118,9 @@ function buildMonthlyTimePool(yearMonth: string) {
   return { candidates, totalWeight, startDate, endDate };
 }
 
-function getRandomPurchaseTime(pool: ReturnType<typeof buildMonthlyTimePool>): string {
+function getRandomPurchaseTime(
+  pool: ReturnType<typeof buildMonthlyTimePool>,
+): string {
   let randomWeight = Math.random() * pool.totalWeight;
   let selected = pool.candidates[0];
 
@@ -120,7 +135,10 @@ function getRandomPurchaseTime(pool: ReturnType<typeof buildMonthlyTimePool>): s
   const [startHour, startMin] = selected.startTime.split(':').map(Number);
   const [endHour, endMin] = selected.endTime.split(':').map(Number);
 
-  const chosenMinutes = randomInt(startHour * 60 + startMin, endHour * 60 + endMin);
+  const chosenMinutes = randomInt(
+    startHour * 60 + startMin,
+    endHour * 60 + endMin,
+  );
   const hour = Math.floor(chosenMinutes / 60);
   const minute = chosenMinutes % 60;
   const second = randomInt(0, 59);
@@ -130,7 +148,7 @@ function getRandomPurchaseTime(pool: ReturnType<typeof buildMonthlyTimePool>): s
 
 export interface SeedSellOptions {
   yearMonth?: string; // Format: "YYYY-MM", e.g. "2026-01" or "2026-02"
-  dryRun?: boolean;   // true for simulation report only, false to populate DB
+  dryRun?: boolean; // true for simulation report only, false to populate DB
   maxCustomersTotal?: number; // Cap overall customer sample size for ultra-fast execution
 }
 
@@ -139,7 +157,9 @@ export async function seedSellAll(options: SeedSellOptions = {}) {
   const isDryRun = options.dryRun ?? false;
   const maxCustomersTotal = options.maxCustomersTotal || 5000;
 
-  const modeTitle = isDryRun ? 'DRY RUN (Simulation Only)' : 'REAL RUN (Populating Database)';
+  const modeTitle = isDryRun
+    ? 'DRY RUN (Simulation Only)'
+    : 'REAL RUN (Populating Database)';
   logger.info(`=======================================================`);
   logger.info(`Starting Sell Data Generation - [${modeTitle}]`);
   logger.info(`Target Month: ${yearMonth}`);
@@ -156,9 +176,21 @@ export async function seedSellAll(options: SeedSellOptions = {}) {
     return;
   }
 
-  const countries = await db.country.findMany({ select: { id: true, name: true, code2: true } });
-  const states = await db.countryState.findMany({ select: { id: true, name: true, countryId: true, subdivisionCode: true } });
-  const stores = await db.store.findMany({ select: { id: true, countryId: true, stateId: true, staffIds: true, managerId: true } });
+  const countries = await db.country.findMany({
+    select: { id: true, name: true, code2: true },
+  });
+  const states = await db.countryState.findMany({
+    select: { id: true, name: true, countryId: true, subdivisionCode: true },
+  });
+  const stores = await db.store.findMany({
+    select: {
+      id: true,
+      countryId: true,
+      stateId: true,
+      staffIds: true,
+      managerId: true,
+    },
+  });
   const allStaff = await db.user.findMany({
     where: { role: 'STAFF' },
     select: { id: true, countryId: true, stateId: true },
@@ -195,7 +227,9 @@ export async function seedSellAll(options: SeedSellOptions = {}) {
     customerMap.get(key)!.push(cust);
   }
 
-  logger.info(`Loaded ${countries.length} countries, ${states.length} states, ${stores.length} stores, and sampled ${rawCustomers.length} customers.`);
+  logger.info(
+    `Loaded ${countries.length} countries, ${states.length} states, ${stores.length} stores, and sampled ${rawCustomers.length} customers.`,
+  );
 
   const sellsToCreate: any[] = [];
   const sellItemsToCreate: any[] = [];
@@ -241,8 +275,8 @@ export async function seedSellAll(options: SeedSellOptions = {}) {
             store.staffIds && store.staffIds.length > 0
               ? store.staffIds[randomInt(0, store.staffIds.length - 1)]
               : stateStaff.length > 0
-              ? stateStaff[randomInt(0, stateStaff.length - 1)]
-              : store.managerId;
+                ? stateStaff[randomInt(0, stateStaff.length - 1)]
+                : store.managerId;
 
           if (!staffId) continue;
 
@@ -255,7 +289,10 @@ export async function seedSellAll(options: SeedSellOptions = {}) {
           for (const targetSpend of itemTargetSpends) {
             const product = products[randomInt(0, products.length - 1)];
             const mop = Number(product.mop);
-            const qty = Math.max(1, Math.min(10, Math.round(targetSpend / (mop || 10))));
+            const qty = Math.max(
+              1,
+              Math.min(10, Math.round(targetSpend / (mop || 10))),
+            );
             const itemPrice = mop * qty;
 
             saleTotal += itemPrice;
@@ -311,14 +348,24 @@ export async function seedSellAll(options: SeedSellOptions = {}) {
   }
 
   console.log('-------------------------------------------------------');
-  console.log(`TOTAL REGIONS PROCESSED      : ${regionSummary.length.toLocaleString()}`);
-  console.log(`TOTAL TRANSACTIONS GENERATED : ${totalSalesCount.toLocaleString()}`);
-  console.log(`TOTAL CART ITEMS GENERATED   : ${totalItemsCount.toLocaleString()}`);
-  console.log(`TOTAL SIMULATED REVENUE ($)  : $${totalRevenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`);
+  console.log(
+    `TOTAL REGIONS PROCESSED      : ${regionSummary.length.toLocaleString()}`,
+  );
+  console.log(
+    `TOTAL TRANSACTIONS GENERATED : ${totalSalesCount.toLocaleString()}`,
+  );
+  console.log(
+    `TOTAL CART ITEMS GENERATED   : ${totalItemsCount.toLocaleString()}`,
+  );
+  console.log(
+    `TOTAL SIMULATED REVENUE ($)  : $${totalRevenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
+  );
   console.log('-------------------------------------------------------');
 
   if (isDryRun) {
-    logger.info(`[DRY RUN COMPLETE] Simulation succeeded! No database changes were made.`);
+    logger.info(
+      `[DRY RUN COMPLETE] Simulation succeeded! No database changes were made.`,
+    );
     return {
       dryRun: true,
       yearMonth,
@@ -347,7 +394,9 @@ export async function seedSellAll(options: SeedSellOptions = {}) {
     await db.sellItem.createMany({ data: chunk });
   }
 
-  logger.info(`[REAL RUN COMPLETE] Successfully seeded ${totalSalesCount.toLocaleString()} sales transactions into PostgreSQL!`);
+  logger.info(
+    `[REAL RUN COMPLETE] Successfully seeded ${totalSalesCount.toLocaleString()} sales transactions into PostgreSQL!`,
+  );
 
   return {
     dryRun: false,
@@ -369,7 +418,9 @@ async function main() {
   const yearMonth = monthMatch ? monthMatch.split('=')[1] : '2026-01';
 
   const sampleMatch = args.find((a) => a.startsWith('--sample='));
-  const sample = sampleMatch ? parseInt(sampleMatch.split('=')[1], 10) : 5000;
+  const sample = sampleMatch
+    ? parseInt(sampleMatch.split('=')[1], 10)
+    : 1000000;
 
   try {
     await seedSellAll({
