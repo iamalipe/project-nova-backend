@@ -28,6 +28,7 @@ model User {
   products Product[]
   sellsCustomer Sell[] @relation("CustomerSells")
   sellsStaff    Sell[] @relation("StaffSells")
+  storesManaged Store[] @relation("StoreManager")
 
   @@index([firstName, lastName])
   @@index([createdAt(sort: Desc)])

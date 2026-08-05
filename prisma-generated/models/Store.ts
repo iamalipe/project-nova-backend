@@ -42,6 +42,7 @@ export type StoreMinAggregateOutputType = {
   zip: string | null
   stateId: string | null
   countryId: string | null
+  managerId: string | null
   locationMapLink: string | null
   description: string | null
   yearlyUpkeep: runtime.Decimal | null
@@ -57,6 +58,7 @@ export type StoreMaxAggregateOutputType = {
   zip: string | null
   stateId: string | null
   countryId: string | null
+  managerId: string | null
   locationMapLink: string | null
   description: string | null
   yearlyUpkeep: runtime.Decimal | null
@@ -72,6 +74,8 @@ export type StoreCountAggregateOutputType = {
   zip: number
   stateId: number
   countryId: number
+  managerId: number
+  staffIds: number
   locationMapLink: number
   images: number
   description: number
@@ -98,6 +102,7 @@ export type StoreMinAggregateInputType = {
   zip?: true
   stateId?: true
   countryId?: true
+  managerId?: true
   locationMapLink?: true
   description?: true
   yearlyUpkeep?: true
@@ -113,6 +118,7 @@ export type StoreMaxAggregateInputType = {
   zip?: true
   stateId?: true
   countryId?: true
+  managerId?: true
   locationMapLink?: true
   description?: true
   yearlyUpkeep?: true
@@ -128,6 +134,8 @@ export type StoreCountAggregateInputType = {
   zip?: true
   stateId?: true
   countryId?: true
+  managerId?: true
+  staffIds?: true
   locationMapLink?: true
   images?: true
   description?: true
@@ -231,6 +239,8 @@ export type StoreGroupByOutputType = {
   zip: string
   stateId: string
   countryId: string
+  managerId: string | null
+  staffIds: string[]
   locationMapLink: string | null
   images: string[]
   description: string | null
@@ -270,6 +280,8 @@ export type StoreWhereInput = {
   zip?: Prisma.StringFilter<"Store"> | string
   stateId?: Prisma.UuidFilter<"Store"> | string
   countryId?: Prisma.UuidFilter<"Store"> | string
+  managerId?: Prisma.UuidNullableFilter<"Store"> | string | null
+  staffIds?: Prisma.StringNullableListFilter<"Store">
   locationMapLink?: Prisma.StringNullableFilter<"Store"> | string | null
   images?: Prisma.StringNullableListFilter<"Store">
   description?: Prisma.StringNullableFilter<"Store"> | string | null
@@ -278,6 +290,7 @@ export type StoreWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Store"> | Date | string
   state?: Prisma.XOR<Prisma.CountryStateScalarRelationFilter, Prisma.CountryStateWhereInput>
   country?: Prisma.XOR<Prisma.CountryScalarRelationFilter, Prisma.CountryWhereInput>
+  manager?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   stocks?: Prisma.StockListRelationFilter
   sells?: Prisma.SellListRelationFilter
 }
@@ -290,6 +303,8 @@ export type StoreOrderByWithRelationInput = {
   zip?: Prisma.SortOrder
   stateId?: Prisma.SortOrder
   countryId?: Prisma.SortOrder
+  managerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  staffIds?: Prisma.SortOrder
   locationMapLink?: Prisma.SortOrderInput | Prisma.SortOrder
   images?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -298,6 +313,7 @@ export type StoreOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   state?: Prisma.CountryStateOrderByWithRelationInput
   country?: Prisma.CountryOrderByWithRelationInput
+  manager?: Prisma.UserOrderByWithRelationInput
   stocks?: Prisma.StockOrderByRelationAggregateInput
   sells?: Prisma.SellOrderByRelationAggregateInput
 }
@@ -313,6 +329,8 @@ export type StoreWhereUniqueInput = Prisma.AtLeast<{
   zip?: Prisma.StringFilter<"Store"> | string
   stateId?: Prisma.UuidFilter<"Store"> | string
   countryId?: Prisma.UuidFilter<"Store"> | string
+  managerId?: Prisma.UuidNullableFilter<"Store"> | string | null
+  staffIds?: Prisma.StringNullableListFilter<"Store">
   locationMapLink?: Prisma.StringNullableFilter<"Store"> | string | null
   images?: Prisma.StringNullableListFilter<"Store">
   description?: Prisma.StringNullableFilter<"Store"> | string | null
@@ -321,6 +339,7 @@ export type StoreWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Store"> | Date | string
   state?: Prisma.XOR<Prisma.CountryStateScalarRelationFilter, Prisma.CountryStateWhereInput>
   country?: Prisma.XOR<Prisma.CountryScalarRelationFilter, Prisma.CountryWhereInput>
+  manager?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   stocks?: Prisma.StockListRelationFilter
   sells?: Prisma.SellListRelationFilter
 }, "id" | "storeCode">
@@ -333,6 +352,8 @@ export type StoreOrderByWithAggregationInput = {
   zip?: Prisma.SortOrder
   stateId?: Prisma.SortOrder
   countryId?: Prisma.SortOrder
+  managerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  staffIds?: Prisma.SortOrder
   locationMapLink?: Prisma.SortOrderInput | Prisma.SortOrder
   images?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -357,6 +378,8 @@ export type StoreScalarWhereWithAggregatesInput = {
   zip?: Prisma.StringWithAggregatesFilter<"Store"> | string
   stateId?: Prisma.UuidWithAggregatesFilter<"Store"> | string
   countryId?: Prisma.UuidWithAggregatesFilter<"Store"> | string
+  managerId?: Prisma.UuidNullableWithAggregatesFilter<"Store"> | string | null
+  staffIds?: Prisma.StringNullableListFilter<"Store">
   locationMapLink?: Prisma.StringNullableWithAggregatesFilter<"Store"> | string | null
   images?: Prisma.StringNullableListFilter<"Store">
   description?: Prisma.StringNullableWithAggregatesFilter<"Store"> | string | null
@@ -371,6 +394,7 @@ export type StoreCreateInput = {
   storeCode: string
   addressLine1: string
   zip: string
+  staffIds?: Prisma.StoreCreatestaffIdsInput | string[]
   locationMapLink?: string | null
   images?: Prisma.StoreCreateimagesInput | string[]
   description?: string | null
@@ -379,6 +403,7 @@ export type StoreCreateInput = {
   updatedAt?: Date | string
   state: Prisma.CountryStateCreateNestedOneWithoutStoresInput
   country: Prisma.CountryCreateNestedOneWithoutStoresInput
+  manager?: Prisma.UserCreateNestedOneWithoutStoresManagedInput
   stocks?: Prisma.StockCreateNestedManyWithoutStoreInput
   sells?: Prisma.SellCreateNestedManyWithoutStoreInput
 }
@@ -391,6 +416,8 @@ export type StoreUncheckedCreateInput = {
   zip: string
   stateId: string
   countryId: string
+  managerId?: string | null
+  staffIds?: Prisma.StoreCreatestaffIdsInput | string[]
   locationMapLink?: string | null
   images?: Prisma.StoreCreateimagesInput | string[]
   description?: string | null
@@ -407,6 +434,7 @@ export type StoreUpdateInput = {
   storeCode?: Prisma.StringFieldUpdateOperationsInput | string
   addressLine1?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
+  staffIds?: Prisma.StoreUpdatestaffIdsInput | string[]
   locationMapLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   images?: Prisma.StoreUpdateimagesInput | string[]
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -415,6 +443,7 @@ export type StoreUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state?: Prisma.CountryStateUpdateOneRequiredWithoutStoresNestedInput
   country?: Prisma.CountryUpdateOneRequiredWithoutStoresNestedInput
+  manager?: Prisma.UserUpdateOneWithoutStoresManagedNestedInput
   stocks?: Prisma.StockUpdateManyWithoutStoreNestedInput
   sells?: Prisma.SellUpdateManyWithoutStoreNestedInput
 }
@@ -427,6 +456,8 @@ export type StoreUncheckedUpdateInput = {
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
   countryId?: Prisma.StringFieldUpdateOperationsInput | string
+  managerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffIds?: Prisma.StoreUpdatestaffIdsInput | string[]
   locationMapLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   images?: Prisma.StoreUpdateimagesInput | string[]
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -445,6 +476,8 @@ export type StoreCreateManyInput = {
   zip: string
   stateId: string
   countryId: string
+  managerId?: string | null
+  staffIds?: Prisma.StoreCreatestaffIdsInput | string[]
   locationMapLink?: string | null
   images?: Prisma.StoreCreateimagesInput | string[]
   description?: string | null
@@ -459,6 +492,7 @@ export type StoreUpdateManyMutationInput = {
   storeCode?: Prisma.StringFieldUpdateOperationsInput | string
   addressLine1?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
+  staffIds?: Prisma.StoreUpdatestaffIdsInput | string[]
   locationMapLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   images?: Prisma.StoreUpdateimagesInput | string[]
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -475,6 +509,8 @@ export type StoreUncheckedUpdateManyInput = {
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
   countryId?: Prisma.StringFieldUpdateOperationsInput | string
+  managerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffIds?: Prisma.StoreUpdatestaffIdsInput | string[]
   locationMapLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   images?: Prisma.StoreUpdateimagesInput | string[]
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -511,6 +547,8 @@ export type StoreCountOrderByAggregateInput = {
   zip?: Prisma.SortOrder
   stateId?: Prisma.SortOrder
   countryId?: Prisma.SortOrder
+  managerId?: Prisma.SortOrder
+  staffIds?: Prisma.SortOrder
   locationMapLink?: Prisma.SortOrder
   images?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -531,6 +569,7 @@ export type StoreMaxOrderByAggregateInput = {
   zip?: Prisma.SortOrder
   stateId?: Prisma.SortOrder
   countryId?: Prisma.SortOrder
+  managerId?: Prisma.SortOrder
   locationMapLink?: Prisma.SortOrder
   description?: Prisma.SortOrder
   yearlyUpkeep?: Prisma.SortOrder
@@ -546,6 +585,7 @@ export type StoreMinOrderByAggregateInput = {
   zip?: Prisma.SortOrder
   stateId?: Prisma.SortOrder
   countryId?: Prisma.SortOrder
+  managerId?: Prisma.SortOrder
   locationMapLink?: Prisma.SortOrder
   description?: Prisma.SortOrder
   yearlyUpkeep?: Prisma.SortOrder
@@ -671,13 +711,64 @@ export type StoreUpdateOneWithoutStocksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StoreUpdateToOneWithWhereWithoutStocksInput, Prisma.StoreUpdateWithoutStocksInput>, Prisma.StoreUncheckedUpdateWithoutStocksInput>
 }
 
+export type StoreCreatestaffIdsInput = {
+  set: string[]
+}
+
 export type StoreCreateimagesInput = {
   set: string[]
+}
+
+export type StoreUpdatestaffIdsInput = {
+  set?: string[]
+  push?: string | string[]
 }
 
 export type StoreUpdateimagesInput = {
   set?: string[]
   push?: string | string[]
+}
+
+export type StoreCreateNestedManyWithoutManagerInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutManagerInput, Prisma.StoreUncheckedCreateWithoutManagerInput> | Prisma.StoreCreateWithoutManagerInput[] | Prisma.StoreUncheckedCreateWithoutManagerInput[]
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutManagerInput | Prisma.StoreCreateOrConnectWithoutManagerInput[]
+  createMany?: Prisma.StoreCreateManyManagerInputEnvelope
+  connect?: Prisma.StoreWhereUniqueInput | Prisma.StoreWhereUniqueInput[]
+}
+
+export type StoreUncheckedCreateNestedManyWithoutManagerInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutManagerInput, Prisma.StoreUncheckedCreateWithoutManagerInput> | Prisma.StoreCreateWithoutManagerInput[] | Prisma.StoreUncheckedCreateWithoutManagerInput[]
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutManagerInput | Prisma.StoreCreateOrConnectWithoutManagerInput[]
+  createMany?: Prisma.StoreCreateManyManagerInputEnvelope
+  connect?: Prisma.StoreWhereUniqueInput | Prisma.StoreWhereUniqueInput[]
+}
+
+export type StoreUpdateManyWithoutManagerNestedInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutManagerInput, Prisma.StoreUncheckedCreateWithoutManagerInput> | Prisma.StoreCreateWithoutManagerInput[] | Prisma.StoreUncheckedCreateWithoutManagerInput[]
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutManagerInput | Prisma.StoreCreateOrConnectWithoutManagerInput[]
+  upsert?: Prisma.StoreUpsertWithWhereUniqueWithoutManagerInput | Prisma.StoreUpsertWithWhereUniqueWithoutManagerInput[]
+  createMany?: Prisma.StoreCreateManyManagerInputEnvelope
+  set?: Prisma.StoreWhereUniqueInput | Prisma.StoreWhereUniqueInput[]
+  disconnect?: Prisma.StoreWhereUniqueInput | Prisma.StoreWhereUniqueInput[]
+  delete?: Prisma.StoreWhereUniqueInput | Prisma.StoreWhereUniqueInput[]
+  connect?: Prisma.StoreWhereUniqueInput | Prisma.StoreWhereUniqueInput[]
+  update?: Prisma.StoreUpdateWithWhereUniqueWithoutManagerInput | Prisma.StoreUpdateWithWhereUniqueWithoutManagerInput[]
+  updateMany?: Prisma.StoreUpdateManyWithWhereWithoutManagerInput | Prisma.StoreUpdateManyWithWhereWithoutManagerInput[]
+  deleteMany?: Prisma.StoreScalarWhereInput | Prisma.StoreScalarWhereInput[]
+}
+
+export type StoreUncheckedUpdateManyWithoutManagerNestedInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutManagerInput, Prisma.StoreUncheckedCreateWithoutManagerInput> | Prisma.StoreCreateWithoutManagerInput[] | Prisma.StoreUncheckedCreateWithoutManagerInput[]
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutManagerInput | Prisma.StoreCreateOrConnectWithoutManagerInput[]
+  upsert?: Prisma.StoreUpsertWithWhereUniqueWithoutManagerInput | Prisma.StoreUpsertWithWhereUniqueWithoutManagerInput[]
+  createMany?: Prisma.StoreCreateManyManagerInputEnvelope
+  set?: Prisma.StoreWhereUniqueInput | Prisma.StoreWhereUniqueInput[]
+  disconnect?: Prisma.StoreWhereUniqueInput | Prisma.StoreWhereUniqueInput[]
+  delete?: Prisma.StoreWhereUniqueInput | Prisma.StoreWhereUniqueInput[]
+  connect?: Prisma.StoreWhereUniqueInput | Prisma.StoreWhereUniqueInput[]
+  update?: Prisma.StoreUpdateWithWhereUniqueWithoutManagerInput | Prisma.StoreUpdateWithWhereUniqueWithoutManagerInput[]
+  updateMany?: Prisma.StoreUpdateManyWithWhereWithoutManagerInput | Prisma.StoreUpdateManyWithWhereWithoutManagerInput[]
+  deleteMany?: Prisma.StoreScalarWhereInput | Prisma.StoreScalarWhereInput[]
 }
 
 export type StoreCreateWithoutCountryInput = {
@@ -686,6 +777,7 @@ export type StoreCreateWithoutCountryInput = {
   storeCode: string
   addressLine1: string
   zip: string
+  staffIds?: Prisma.StoreCreatestaffIdsInput | string[]
   locationMapLink?: string | null
   images?: Prisma.StoreCreateimagesInput | string[]
   description?: string | null
@@ -693,6 +785,7 @@ export type StoreCreateWithoutCountryInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state: Prisma.CountryStateCreateNestedOneWithoutStoresInput
+  manager?: Prisma.UserCreateNestedOneWithoutStoresManagedInput
   stocks?: Prisma.StockCreateNestedManyWithoutStoreInput
   sells?: Prisma.SellCreateNestedManyWithoutStoreInput
 }
@@ -704,6 +797,8 @@ export type StoreUncheckedCreateWithoutCountryInput = {
   addressLine1: string
   zip: string
   stateId: string
+  managerId?: string | null
+  staffIds?: Prisma.StoreCreatestaffIdsInput | string[]
   locationMapLink?: string | null
   images?: Prisma.StoreCreateimagesInput | string[]
   description?: string | null
@@ -751,6 +846,8 @@ export type StoreScalarWhereInput = {
   zip?: Prisma.StringFilter<"Store"> | string
   stateId?: Prisma.UuidFilter<"Store"> | string
   countryId?: Prisma.UuidFilter<"Store"> | string
+  managerId?: Prisma.UuidNullableFilter<"Store"> | string | null
+  staffIds?: Prisma.StringNullableListFilter<"Store">
   locationMapLink?: Prisma.StringNullableFilter<"Store"> | string | null
   images?: Prisma.StringNullableListFilter<"Store">
   description?: Prisma.StringNullableFilter<"Store"> | string | null
@@ -765,6 +862,7 @@ export type StoreCreateWithoutStateInput = {
   storeCode: string
   addressLine1: string
   zip: string
+  staffIds?: Prisma.StoreCreatestaffIdsInput | string[]
   locationMapLink?: string | null
   images?: Prisma.StoreCreateimagesInput | string[]
   description?: string | null
@@ -772,6 +870,7 @@ export type StoreCreateWithoutStateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   country: Prisma.CountryCreateNestedOneWithoutStoresInput
+  manager?: Prisma.UserCreateNestedOneWithoutStoresManagedInput
   stocks?: Prisma.StockCreateNestedManyWithoutStoreInput
   sells?: Prisma.SellCreateNestedManyWithoutStoreInput
 }
@@ -783,6 +882,8 @@ export type StoreUncheckedCreateWithoutStateInput = {
   addressLine1: string
   zip: string
   countryId: string
+  managerId?: string | null
+  staffIds?: Prisma.StoreCreatestaffIdsInput | string[]
   locationMapLink?: string | null
   images?: Prisma.StoreCreateimagesInput | string[]
   description?: string | null
@@ -825,6 +926,7 @@ export type StoreCreateWithoutSellsInput = {
   storeCode: string
   addressLine1: string
   zip: string
+  staffIds?: Prisma.StoreCreatestaffIdsInput | string[]
   locationMapLink?: string | null
   images?: Prisma.StoreCreateimagesInput | string[]
   description?: string | null
@@ -833,6 +935,7 @@ export type StoreCreateWithoutSellsInput = {
   updatedAt?: Date | string
   state: Prisma.CountryStateCreateNestedOneWithoutStoresInput
   country: Prisma.CountryCreateNestedOneWithoutStoresInput
+  manager?: Prisma.UserCreateNestedOneWithoutStoresManagedInput
   stocks?: Prisma.StockCreateNestedManyWithoutStoreInput
 }
 
@@ -844,6 +947,8 @@ export type StoreUncheckedCreateWithoutSellsInput = {
   zip: string
   stateId: string
   countryId: string
+  managerId?: string | null
+  staffIds?: Prisma.StoreCreatestaffIdsInput | string[]
   locationMapLink?: string | null
   images?: Prisma.StoreCreateimagesInput | string[]
   description?: string | null
@@ -875,6 +980,7 @@ export type StoreUpdateWithoutSellsInput = {
   storeCode?: Prisma.StringFieldUpdateOperationsInput | string
   addressLine1?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
+  staffIds?: Prisma.StoreUpdatestaffIdsInput | string[]
   locationMapLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   images?: Prisma.StoreUpdateimagesInput | string[]
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -883,6 +989,7 @@ export type StoreUpdateWithoutSellsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state?: Prisma.CountryStateUpdateOneRequiredWithoutStoresNestedInput
   country?: Prisma.CountryUpdateOneRequiredWithoutStoresNestedInput
+  manager?: Prisma.UserUpdateOneWithoutStoresManagedNestedInput
   stocks?: Prisma.StockUpdateManyWithoutStoreNestedInput
 }
 
@@ -894,6 +1001,8 @@ export type StoreUncheckedUpdateWithoutSellsInput = {
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
   countryId?: Prisma.StringFieldUpdateOperationsInput | string
+  managerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffIds?: Prisma.StoreUpdatestaffIdsInput | string[]
   locationMapLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   images?: Prisma.StoreUpdateimagesInput | string[]
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -909,6 +1018,7 @@ export type StoreCreateWithoutStocksInput = {
   storeCode: string
   addressLine1: string
   zip: string
+  staffIds?: Prisma.StoreCreatestaffIdsInput | string[]
   locationMapLink?: string | null
   images?: Prisma.StoreCreateimagesInput | string[]
   description?: string | null
@@ -917,6 +1027,7 @@ export type StoreCreateWithoutStocksInput = {
   updatedAt?: Date | string
   state: Prisma.CountryStateCreateNestedOneWithoutStoresInput
   country: Prisma.CountryCreateNestedOneWithoutStoresInput
+  manager?: Prisma.UserCreateNestedOneWithoutStoresManagedInput
   sells?: Prisma.SellCreateNestedManyWithoutStoreInput
 }
 
@@ -928,6 +1039,8 @@ export type StoreUncheckedCreateWithoutStocksInput = {
   zip: string
   stateId: string
   countryId: string
+  managerId?: string | null
+  staffIds?: Prisma.StoreCreatestaffIdsInput | string[]
   locationMapLink?: string | null
   images?: Prisma.StoreCreateimagesInput | string[]
   description?: string | null
@@ -959,6 +1072,7 @@ export type StoreUpdateWithoutStocksInput = {
   storeCode?: Prisma.StringFieldUpdateOperationsInput | string
   addressLine1?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
+  staffIds?: Prisma.StoreUpdatestaffIdsInput | string[]
   locationMapLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   images?: Prisma.StoreUpdateimagesInput | string[]
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -967,6 +1081,7 @@ export type StoreUpdateWithoutStocksInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state?: Prisma.CountryStateUpdateOneRequiredWithoutStoresNestedInput
   country?: Prisma.CountryUpdateOneRequiredWithoutStoresNestedInput
+  manager?: Prisma.UserUpdateOneWithoutStoresManagedNestedInput
   sells?: Prisma.SellUpdateManyWithoutStoreNestedInput
 }
 
@@ -978,6 +1093,8 @@ export type StoreUncheckedUpdateWithoutStocksInput = {
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
   countryId?: Prisma.StringFieldUpdateOperationsInput | string
+  managerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffIds?: Prisma.StoreUpdatestaffIdsInput | string[]
   locationMapLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   images?: Prisma.StoreUpdateimagesInput | string[]
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -987,6 +1104,70 @@ export type StoreUncheckedUpdateWithoutStocksInput = {
   sells?: Prisma.SellUncheckedUpdateManyWithoutStoreNestedInput
 }
 
+export type StoreCreateWithoutManagerInput = {
+  id?: string
+  name: string
+  storeCode: string
+  addressLine1: string
+  zip: string
+  staffIds?: Prisma.StoreCreatestaffIdsInput | string[]
+  locationMapLink?: string | null
+  images?: Prisma.StoreCreateimagesInput | string[]
+  description?: string | null
+  yearlyUpkeep: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  state: Prisma.CountryStateCreateNestedOneWithoutStoresInput
+  country: Prisma.CountryCreateNestedOneWithoutStoresInput
+  stocks?: Prisma.StockCreateNestedManyWithoutStoreInput
+  sells?: Prisma.SellCreateNestedManyWithoutStoreInput
+}
+
+export type StoreUncheckedCreateWithoutManagerInput = {
+  id?: string
+  name: string
+  storeCode: string
+  addressLine1: string
+  zip: string
+  stateId: string
+  countryId: string
+  staffIds?: Prisma.StoreCreatestaffIdsInput | string[]
+  locationMapLink?: string | null
+  images?: Prisma.StoreCreateimagesInput | string[]
+  description?: string | null
+  yearlyUpkeep: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  stocks?: Prisma.StockUncheckedCreateNestedManyWithoutStoreInput
+  sells?: Prisma.SellUncheckedCreateNestedManyWithoutStoreInput
+}
+
+export type StoreCreateOrConnectWithoutManagerInput = {
+  where: Prisma.StoreWhereUniqueInput
+  create: Prisma.XOR<Prisma.StoreCreateWithoutManagerInput, Prisma.StoreUncheckedCreateWithoutManagerInput>
+}
+
+export type StoreCreateManyManagerInputEnvelope = {
+  data: Prisma.StoreCreateManyManagerInput | Prisma.StoreCreateManyManagerInput[]
+  skipDuplicates?: boolean
+}
+
+export type StoreUpsertWithWhereUniqueWithoutManagerInput = {
+  where: Prisma.StoreWhereUniqueInput
+  update: Prisma.XOR<Prisma.StoreUpdateWithoutManagerInput, Prisma.StoreUncheckedUpdateWithoutManagerInput>
+  create: Prisma.XOR<Prisma.StoreCreateWithoutManagerInput, Prisma.StoreUncheckedCreateWithoutManagerInput>
+}
+
+export type StoreUpdateWithWhereUniqueWithoutManagerInput = {
+  where: Prisma.StoreWhereUniqueInput
+  data: Prisma.XOR<Prisma.StoreUpdateWithoutManagerInput, Prisma.StoreUncheckedUpdateWithoutManagerInput>
+}
+
+export type StoreUpdateManyWithWhereWithoutManagerInput = {
+  where: Prisma.StoreScalarWhereInput
+  data: Prisma.XOR<Prisma.StoreUpdateManyMutationInput, Prisma.StoreUncheckedUpdateManyWithoutManagerInput>
+}
+
 export type StoreCreateManyCountryInput = {
   id?: string
   name: string
@@ -994,6 +1175,8 @@ export type StoreCreateManyCountryInput = {
   addressLine1: string
   zip: string
   stateId: string
+  managerId?: string | null
+  staffIds?: Prisma.StoreCreatestaffIdsInput | string[]
   locationMapLink?: string | null
   images?: Prisma.StoreCreateimagesInput | string[]
   description?: string | null
@@ -1008,6 +1191,7 @@ export type StoreUpdateWithoutCountryInput = {
   storeCode?: Prisma.StringFieldUpdateOperationsInput | string
   addressLine1?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
+  staffIds?: Prisma.StoreUpdatestaffIdsInput | string[]
   locationMapLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   images?: Prisma.StoreUpdateimagesInput | string[]
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1015,6 +1199,7 @@ export type StoreUpdateWithoutCountryInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state?: Prisma.CountryStateUpdateOneRequiredWithoutStoresNestedInput
+  manager?: Prisma.UserUpdateOneWithoutStoresManagedNestedInput
   stocks?: Prisma.StockUpdateManyWithoutStoreNestedInput
   sells?: Prisma.SellUpdateManyWithoutStoreNestedInput
 }
@@ -1026,6 +1211,8 @@ export type StoreUncheckedUpdateWithoutCountryInput = {
   addressLine1?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
+  managerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffIds?: Prisma.StoreUpdatestaffIdsInput | string[]
   locationMapLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   images?: Prisma.StoreUpdateimagesInput | string[]
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1043,6 +1230,8 @@ export type StoreUncheckedUpdateManyWithoutCountryInput = {
   addressLine1?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
+  managerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffIds?: Prisma.StoreUpdatestaffIdsInput | string[]
   locationMapLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   images?: Prisma.StoreUpdateimagesInput | string[]
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1058,6 +1247,8 @@ export type StoreCreateManyStateInput = {
   addressLine1: string
   zip: string
   countryId: string
+  managerId?: string | null
+  staffIds?: Prisma.StoreCreatestaffIdsInput | string[]
   locationMapLink?: string | null
   images?: Prisma.StoreCreateimagesInput | string[]
   description?: string | null
@@ -1072,6 +1263,7 @@ export type StoreUpdateWithoutStateInput = {
   storeCode?: Prisma.StringFieldUpdateOperationsInput | string
   addressLine1?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
+  staffIds?: Prisma.StoreUpdatestaffIdsInput | string[]
   locationMapLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   images?: Prisma.StoreUpdateimagesInput | string[]
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1079,6 +1271,7 @@ export type StoreUpdateWithoutStateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneRequiredWithoutStoresNestedInput
+  manager?: Prisma.UserUpdateOneWithoutStoresManagedNestedInput
   stocks?: Prisma.StockUpdateManyWithoutStoreNestedInput
   sells?: Prisma.SellUpdateManyWithoutStoreNestedInput
 }
@@ -1090,6 +1283,8 @@ export type StoreUncheckedUpdateWithoutStateInput = {
   addressLine1?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   countryId?: Prisma.StringFieldUpdateOperationsInput | string
+  managerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffIds?: Prisma.StoreUpdatestaffIdsInput | string[]
   locationMapLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   images?: Prisma.StoreUpdateimagesInput | string[]
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1107,6 +1302,80 @@ export type StoreUncheckedUpdateManyWithoutStateInput = {
   addressLine1?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   countryId?: Prisma.StringFieldUpdateOperationsInput | string
+  managerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffIds?: Prisma.StoreUpdatestaffIdsInput | string[]
+  locationMapLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  images?: Prisma.StoreUpdateimagesInput | string[]
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  yearlyUpkeep?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type StoreCreateManyManagerInput = {
+  id?: string
+  name: string
+  storeCode: string
+  addressLine1: string
+  zip: string
+  stateId: string
+  countryId: string
+  staffIds?: Prisma.StoreCreatestaffIdsInput | string[]
+  locationMapLink?: string | null
+  images?: Prisma.StoreCreateimagesInput | string[]
+  description?: string | null
+  yearlyUpkeep: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type StoreUpdateWithoutManagerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  storeCode?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine1?: Prisma.StringFieldUpdateOperationsInput | string
+  zip?: Prisma.StringFieldUpdateOperationsInput | string
+  staffIds?: Prisma.StoreUpdatestaffIdsInput | string[]
+  locationMapLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  images?: Prisma.StoreUpdateimagesInput | string[]
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  yearlyUpkeep?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  state?: Prisma.CountryStateUpdateOneRequiredWithoutStoresNestedInput
+  country?: Prisma.CountryUpdateOneRequiredWithoutStoresNestedInput
+  stocks?: Prisma.StockUpdateManyWithoutStoreNestedInput
+  sells?: Prisma.SellUpdateManyWithoutStoreNestedInput
+}
+
+export type StoreUncheckedUpdateWithoutManagerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  storeCode?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine1?: Prisma.StringFieldUpdateOperationsInput | string
+  zip?: Prisma.StringFieldUpdateOperationsInput | string
+  stateId?: Prisma.StringFieldUpdateOperationsInput | string
+  countryId?: Prisma.StringFieldUpdateOperationsInput | string
+  staffIds?: Prisma.StoreUpdatestaffIdsInput | string[]
+  locationMapLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  images?: Prisma.StoreUpdateimagesInput | string[]
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  yearlyUpkeep?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stocks?: Prisma.StockUncheckedUpdateManyWithoutStoreNestedInput
+  sells?: Prisma.SellUncheckedUpdateManyWithoutStoreNestedInput
+}
+
+export type StoreUncheckedUpdateManyWithoutManagerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  storeCode?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine1?: Prisma.StringFieldUpdateOperationsInput | string
+  zip?: Prisma.StringFieldUpdateOperationsInput | string
+  stateId?: Prisma.StringFieldUpdateOperationsInput | string
+  countryId?: Prisma.StringFieldUpdateOperationsInput | string
+  staffIds?: Prisma.StoreUpdatestaffIdsInput | string[]
   locationMapLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   images?: Prisma.StoreUpdateimagesInput | string[]
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1163,6 +1432,8 @@ export type StoreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   zip?: boolean
   stateId?: boolean
   countryId?: boolean
+  managerId?: boolean
+  staffIds?: boolean
   locationMapLink?: boolean
   images?: boolean
   description?: boolean
@@ -1171,6 +1442,7 @@ export type StoreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   updatedAt?: boolean
   state?: boolean | Prisma.CountryStateDefaultArgs<ExtArgs>
   country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>
+  manager?: boolean | Prisma.Store$managerArgs<ExtArgs>
   stocks?: boolean | Prisma.Store$stocksArgs<ExtArgs>
   sells?: boolean | Prisma.Store$sellsArgs<ExtArgs>
   _count?: boolean | Prisma.StoreCountOutputTypeDefaultArgs<ExtArgs>
@@ -1184,6 +1456,8 @@ export type StoreSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   zip?: boolean
   stateId?: boolean
   countryId?: boolean
+  managerId?: boolean
+  staffIds?: boolean
   locationMapLink?: boolean
   images?: boolean
   description?: boolean
@@ -1192,6 +1466,7 @@ export type StoreSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   updatedAt?: boolean
   state?: boolean | Prisma.CountryStateDefaultArgs<ExtArgs>
   country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>
+  manager?: boolean | Prisma.Store$managerArgs<ExtArgs>
 }, ExtArgs["result"]["store"]>
 
 export type StoreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1202,6 +1477,8 @@ export type StoreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   zip?: boolean
   stateId?: boolean
   countryId?: boolean
+  managerId?: boolean
+  staffIds?: boolean
   locationMapLink?: boolean
   images?: boolean
   description?: boolean
@@ -1210,6 +1487,7 @@ export type StoreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   updatedAt?: boolean
   state?: boolean | Prisma.CountryStateDefaultArgs<ExtArgs>
   country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>
+  manager?: boolean | Prisma.Store$managerArgs<ExtArgs>
 }, ExtArgs["result"]["store"]>
 
 export type StoreSelectScalar = {
@@ -1220,6 +1498,8 @@ export type StoreSelectScalar = {
   zip?: boolean
   stateId?: boolean
   countryId?: boolean
+  managerId?: boolean
+  staffIds?: boolean
   locationMapLink?: boolean
   images?: boolean
   description?: boolean
@@ -1228,10 +1508,11 @@ export type StoreSelectScalar = {
   updatedAt?: boolean
 }
 
-export type StoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "storeCode" | "addressLine1" | "zip" | "stateId" | "countryId" | "locationMapLink" | "images" | "description" | "yearlyUpkeep" | "createdAt" | "updatedAt", ExtArgs["result"]["store"]>
+export type StoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "storeCode" | "addressLine1" | "zip" | "stateId" | "countryId" | "managerId" | "staffIds" | "locationMapLink" | "images" | "description" | "yearlyUpkeep" | "createdAt" | "updatedAt", ExtArgs["result"]["store"]>
 export type StoreInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   state?: boolean | Prisma.CountryStateDefaultArgs<ExtArgs>
   country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>
+  manager?: boolean | Prisma.Store$managerArgs<ExtArgs>
   stocks?: boolean | Prisma.Store$stocksArgs<ExtArgs>
   sells?: boolean | Prisma.Store$sellsArgs<ExtArgs>
   _count?: boolean | Prisma.StoreCountOutputTypeDefaultArgs<ExtArgs>
@@ -1239,10 +1520,12 @@ export type StoreInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 export type StoreIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   state?: boolean | Prisma.CountryStateDefaultArgs<ExtArgs>
   country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>
+  manager?: boolean | Prisma.Store$managerArgs<ExtArgs>
 }
 export type StoreIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   state?: boolean | Prisma.CountryStateDefaultArgs<ExtArgs>
   country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>
+  manager?: boolean | Prisma.Store$managerArgs<ExtArgs>
 }
 
 export type $StorePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1250,6 +1533,7 @@ export type $StorePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   objects: {
     state: Prisma.$CountryStatePayload<ExtArgs>
     country: Prisma.$CountryPayload<ExtArgs>
+    manager: Prisma.$UserPayload<ExtArgs> | null
     stocks: Prisma.$StockPayload<ExtArgs>[]
     sells: Prisma.$SellPayload<ExtArgs>[]
   }
@@ -1261,6 +1545,8 @@ export type $StorePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     zip: string
     stateId: string
     countryId: string
+    managerId: string | null
+    staffIds: string[]
     locationMapLink: string | null
     images: string[]
     description: string | null
@@ -1663,6 +1949,7 @@ export interface Prisma__StoreClient<T, Null = never, ExtArgs extends runtime.Ty
   readonly [Symbol.toStringTag]: "PrismaPromise"
   state<T extends Prisma.CountryStateDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CountryStateDefaultArgs<ExtArgs>>): Prisma.Prisma__CountryStateClient<runtime.Types.Result.GetResult<Prisma.$CountryStatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   country<T extends Prisma.CountryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CountryDefaultArgs<ExtArgs>>): Prisma.Prisma__CountryClient<runtime.Types.Result.GetResult<Prisma.$CountryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  manager<T extends Prisma.Store$managerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$managerArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   stocks<T extends Prisma.Store$stocksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$stocksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sells<T extends Prisma.Store$sellsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$sellsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SellPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1701,6 +1988,8 @@ export interface StoreFieldRefs {
   readonly zip: Prisma.FieldRef<"Store", 'String'>
   readonly stateId: Prisma.FieldRef<"Store", 'String'>
   readonly countryId: Prisma.FieldRef<"Store", 'String'>
+  readonly managerId: Prisma.FieldRef<"Store", 'String'>
+  readonly staffIds: Prisma.FieldRef<"Store", 'String[]'>
   readonly locationMapLink: Prisma.FieldRef<"Store", 'String'>
   readonly images: Prisma.FieldRef<"Store", 'String[]'>
   readonly description: Prisma.FieldRef<"Store", 'String'>
@@ -2105,6 +2394,25 @@ export type StoreDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Stores to delete.
    */
   limit?: number
+}
+
+/**
+ * Store.manager
+ */
+export type Store$managerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

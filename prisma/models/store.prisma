@@ -8,6 +8,9 @@ model Store {
   state           CountryState  @relation(fields: [stateId], references: [id], onDelete: Restrict)
   countryId       String        @db.Uuid
   country         Country       @relation(fields: [countryId], references: [id], onDelete: Restrict)
+  managerId       String?       @db.Uuid
+  manager         User?         @relation("StoreManager", fields: [managerId], references: [id], onDelete: SetNull)
+  staffIds        String[]      @db.Uuid
   locationMapLink String?
   images          String[]
   description     String?

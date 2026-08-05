@@ -216,6 +216,8 @@ export const StoreScalarFieldEnum = {
   zip: 'zip',
   stateId: 'stateId',
   countryId: 'countryId',
+  managerId: 'managerId',
+  staffIds: 'staffIds',
   locationMapLink: 'locationMapLink',
   images: 'images',
   description: 'description',

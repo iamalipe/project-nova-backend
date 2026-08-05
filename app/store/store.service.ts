@@ -74,6 +74,8 @@ const createOne = async (data: {
       zip: data.zip,
       stateId: targetStateId,
       countryId: targetCountryId,
+      managerId: data.managerId || null,
+      staffIds: data.staffIds || [],
       locationMapLink: data.locationMapLink || null,
       images: data.images || [],
       description: data.description || null,
@@ -215,6 +217,8 @@ const updateOne = async (
   if (data.images !== undefined) updateSet.images = data.images;
   if (data.description !== undefined && updateCheck(data.description, findResult.description)) updateSet.description = data.description;
   if (data.yearlyUpkeep !== undefined && updateCheck(data.yearlyUpkeep, findResult.yearlyUpkeep)) updateSet.yearlyUpkeep = data.yearlyUpkeep;
+  if (data.managerId !== undefined) updateSet.managerId = data.managerId || null;
+  if (data.staffIds !== undefined) updateSet.staffIds = data.staffIds || [];
 
   const updatedResult = await db.store.update({
     where: { id },
@@ -283,16 +287,27 @@ const deleteMany = async (ids: string[]) => {
 const fetchStoreManagerAndStaff = async (store: any) => {
   const sanitizedCode = store.storeCode.toLowerCase().replace(/[^a-z0-9]/g, '');
 
-  let manager = await db.user.findFirst({
-    where: {
-      role: Role.STORE_MANAGER,
-      countryId: store.countryId,
-      stateId: store.stateId,
-      email: { contains: `.manager.${sanitizedCode}` },
-    },
-    include: { country: true, state: true },
-    omit: { password: true },
-  });
+  let manager = null;
+  if (store.managerId) {
+    manager = await db.user.findUnique({
+      where: { id: store.managerId },
+      include: { country: true, state: true },
+      omit: { password: true },
+    });
+  }
+
+  if (!manager) {
+    manager = await db.user.findFirst({
+      where: {
+        role: Role.STORE_MANAGER,
+        countryId: store.countryId,
+        stateId: store.stateId,
+        email: { contains: `.manager.${sanitizedCode}` },
+      },
+      include: { country: true, state: true },
+      omit: { password: true },
+    });
+  }
 
   if (!manager) {
     manager = await db.user.findFirst({
@@ -306,17 +321,29 @@ const fetchStoreManagerAndStaff = async (store: any) => {
     });
   }
 
-  let staff = await db.user.findMany({
-    where: {
-      role: Role.STAFF,
-      countryId: store.countryId,
-      stateId: store.stateId,
-      email: { contains: `.staff.${sanitizedCode}.` },
-    },
-    include: { country: true, state: true },
-    omit: { password: true },
-    orderBy: { createdAt: 'asc' },
-  });
+  let staff: any[] = [];
+  if (store.staffIds && Array.isArray(store.staffIds) && store.staffIds.length > 0) {
+    staff = await db.user.findMany({
+      where: { id: { in: store.staffIds } },
+      include: { country: true, state: true },
+      omit: { password: true },
+      orderBy: { createdAt: 'asc' },
+    });
+  }
+
+  if (staff.length === 0) {
+    staff = await db.user.findMany({
+      where: {
+        role: Role.STAFF,
+        countryId: store.countryId,
+        stateId: store.stateId,
+        email: { contains: `.staff.${sanitizedCode}.` },
+      },
+      include: { country: true, state: true },
+      omit: { password: true },
+      orderBy: { createdAt: 'asc' },
+    });
+  }
 
   if (staff.length === 0) {
     staff = await db.user.findMany({
