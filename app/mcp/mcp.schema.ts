@@ -27,3 +27,51 @@ export const userProfileOutputSchema = z.object({
   createdAt: z.string().describe('ISO timestamp of user creation'),
   updatedAt: z.string().describe('ISO timestamp of user last update'),
 }).describe('The user profile details');
+
+export const executeRawSqlQueryInputSchema = z.object({
+  query: z
+    .string()
+    .min(1)
+    .describe(
+      'The raw SQL SELECT/read query to execute against the PostgreSQL database. Only fetch/read operations are allowed (SELECT, EXPLAIN, WITH...SELECT). Multi-statements and write operations (DELETE, CREATE, UPDATE, INSERT, DROP, ALTER, etc.) are strictly forbidden.'
+    ),
+}).describe('Input schema for running read-only raw SQL queries');
+
+export const executeRawSqlQueryOutputSchema = z.object({
+  rowCount: z.number().describe('Total number of rows returned by the query'),
+  rows: z.array(z.record(z.string(), z.any())).describe('Array of row objects returned by the SQL query'),
+}).describe('Output schema for raw SQL query execution results');
+
+export const getDatabaseSchemaInputSchema = z.object({
+  tableName: z
+    .string()
+    .optional()
+    .describe('Optional name of a specific table to inspect (e.g. "User", "Product", "Category", "Store", "Sell")'),
+}).describe('Input schema for inspecting database table formats and schemas');
+
+export const getDatabaseSchemaOutputSchema = z.object({
+  tables: z.array(
+    z.object({
+      tableName: z.string(),
+      columns: z.array(
+        z.object({
+          columnName: z.string(),
+          dataType: z.string(),
+          isNullable: z.boolean(),
+          columnDefault: z.string().nullable().optional(),
+        })
+      ),
+      primaryKeyColumns: z.array(z.string()).optional(),
+      foreignKeys: z
+        .array(
+          z.object({
+            columnName: z.string(),
+            foreignTableName: z.string(),
+            foreignColumnName: z.string(),
+          })
+        )
+        .optional(),
+    })
+  ).describe('List of database table definitions with column types and key relations'),
+}).describe('Output schema containing table formats and schemas');
+
