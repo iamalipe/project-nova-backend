@@ -58,7 +58,10 @@ export const getAllSchema = z.object({
   query: z.object({
     order: z.string().optional().transform((val) => (val === 'asc' ? 'asc' : 'desc')).default('desc'),
     orderBy: z.string().optional().transform((val) => (val || 'transactionDate')).default('transactionDate'),
-    page: z.string().optional().transform((val) => (val ? parseInt(val, 10) : 1)).pipe(z.number().min(1)).default(1),
+    page: z.string().optional().transform((val) => {
+      const parsed = val ? parseInt(val, 10) : 1;
+      return isNaN(parsed) || parsed < 1 ? 1 : parsed;
+    }).default(1),
     limit: z.string().optional().transform((val) => (val ? parseInt(val, 10) : 10)).pipe(z.number().min(1).max(100)).default(10),
     search: z.string().optional(),
     productId: z.string().uuid().optional(),

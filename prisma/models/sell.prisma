@@ -15,6 +15,10 @@ model Sell {
   @@index([storeId])
   @@index([customerId])
   @@index([staffId])
+  @@index([transactionDate(sort: Desc)])
+  @@index([storeId, transactionDate(sort: Desc)])
+  @@index([customerId, transactionDate(sort: Desc)])
+  @@index([staffId, transactionDate(sort: Desc)])
 }
 
 model SellItem {

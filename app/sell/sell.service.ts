@@ -1,17 +1,97 @@
 import { db } from '../../services/prisma.service';
+import { cacheGet, cacheSet, cacheClear } from '../../services/cache.service';
 import { AppError } from '../../utils/appError.utils';
-import { serializeDatesAndDecimals, updateCheck } from '../../utils/general.utils';
+import { updateCheck } from '../../utils/general.utils';
 import { generateCsv } from '../../utils/csv.utils';
 
-const includeClause = {
-  store: true,
-  customer: true,
-  staff: true,
-  cart: {
-    include: {
-      product: true,
+const selectClause = {
+  id: true,
+  storeId: true,
+  customerId: true,
+  staffId: true,
+  finalSellPrice: true,
+  transactionDate: true,
+  createdAt: true,
+  updatedAt: true,
+  store: {
+    select: {
+      id: true,
+      name: true,
+      storeCode: true,
     },
   },
+  customer: {
+    select: {
+      id: true,
+      firstName: true,
+      lastName: true,
+      email: true,
+    },
+  },
+  staff: {
+    select: {
+      id: true,
+      firstName: true,
+      lastName: true,
+      email: true,
+    },
+  },
+  cart: {
+    select: {
+      id: true,
+      sellId: true,
+      productId: true,
+      quantity: true,
+      finalPrice: true,
+      product: {
+        select: {
+          id: true,
+          name: true,
+          sku: true,
+          mrp: true,
+          mop: true,
+          images: true,
+        },
+      },
+    },
+  },
+};
+
+const serializeSell = (sell: any) => {
+  if (!sell) return sell;
+  return {
+    ...sell,
+    finalSellPrice: typeof sell.finalSellPrice === 'object' && sell.finalSellPrice !== null ? Number(sell.finalSellPrice) : sell.finalSellPrice,
+    transactionDate: sell.transactionDate instanceof Date ? sell.transactionDate.toISOString() : sell.transactionDate,
+    createdAt: sell.createdAt instanceof Date ? sell.createdAt.toISOString() : sell.createdAt,
+    updatedAt: sell.updatedAt instanceof Date ? sell.updatedAt.toISOString() : sell.updatedAt,
+    cart: Array.isArray(sell.cart)
+      ? sell.cart.map((item: any) => ({
+          ...item,
+          finalPrice: typeof item.finalPrice === 'object' && item.finalPrice !== null ? Number(item.finalPrice) : item.finalPrice,
+          product: item.product
+            ? {
+                ...item.product,
+                mrp: typeof item.product.mrp === 'object' && item.product.mrp !== null ? Number(item.product.mrp) : item.product.mrp,
+                mop: typeof item.product.mop === 'object' && item.product.mop !== null ? Number(item.product.mop) : item.product.mop,
+              }
+            : item.product,
+        }))
+      : sell.cart,
+  };
+};
+
+const serializeSells = (sells: any[]) => {
+  if (!Array.isArray(sells)) return [];
+  return sells.map(serializeSell);
+};
+
+const invalidateCache = async () => {
+  try {
+    await cacheClear();
+  } catch (err) {
+    // Silent fail for cache clear error
+  }
 };
 
 const createOne = async (data: {
@@ -54,10 +134,11 @@ const createOne = async (data: {
         })),
       },
     },
-    include: includeClause,
+    select: selectClause,
   });
 
-  return serializeDatesAndDecimals(result);
+  await invalidateCache();
+  return serializeSell(result);
 };
 
 const createMany = async (
@@ -82,6 +163,7 @@ const createMany = async (
     }
   }
 
+  await invalidateCache();
   return { success, failed };
 };
 
@@ -128,10 +210,11 @@ const updateOne = async (
   const updatedResult = await db.sell.update({
     where: { id },
     data: updateSet,
-    include: includeClause,
+    select: selectClause,
   });
 
-  return serializeDatesAndDecimals(updatedResult);
+  await invalidateCache();
+  return serializeSell(updatedResult);
 };
 
 const deleteOne = async (id: string) => {
@@ -139,21 +222,23 @@ const deleteOne = async (id: string) => {
   if (!findResult) throw new AppError('Sale transaction not found', { status: 404 });
 
   const deletedResult = await db.sell.delete({ where: { id } });
-  return serializeDatesAndDecimals(deletedResult);
+  await invalidateCache();
+  return serializeSell(deletedResult);
 };
 
 const deleteMany = async (ids: string[]) => {
   const result = await db.sell.deleteMany({ where: { id: { in: ids } } });
-  return serializeDatesAndDecimals(result);
+  await invalidateCache();
+  return serializeSell(result);
 };
 
 const getOne = async (id: string) => {
   const result = await db.sell.findUnique({
     where: { id },
-    include: includeClause,
+    select: selectClause,
   });
   if (!result) throw new AppError('Sale transaction not found', { status: 404 });
-  return serializeDatesAndDecimals(result);
+  return serializeSell(result);
 };
 
 const getAll = async (query: {
@@ -167,8 +252,20 @@ const getAll = async (query: {
   customerId?: string;
   staffId?: string;
 }) => {
-  const limit = parseInt(query.limit as unknown as string, 10);
-  const page = parseInt(query.page as unknown as string, 10);
+  const limit = Math.max(1, parseInt(query.limit as unknown as string, 10) || 10);
+  const rawPage = parseInt(query.page as unknown as string, 10);
+  const page = isNaN(rawPage) || rawPage < 1 ? 1 : rawPage;
+
+  // Check cache first
+  const cacheKey = `sell:all:${JSON.stringify({ ...query, page, limit })}`;
+  try {
+    const cached = await cacheGet<any>(cacheKey);
+    if (cached) {
+      return cached;
+    }
+  } catch (e) {
+    // Ignore cache error and proceed to DB
+  }
 
   const where: any = {};
   if (query.productId) {
@@ -192,8 +289,9 @@ const getAll = async (query: {
     ];
   }
 
-  const orderByStage: any = {};
-  orderByStage[query.orderBy || 'transactionDate'] = query.order === 'asc' ? 'asc' : 'desc';
+  const orderByField = query.orderBy || 'transactionDate';
+  const orderDirection = query.order === 'asc' ? 'asc' : 'desc';
+  const orderByStage: any = { [orderByField]: orderDirection };
 
   const skip = (page - 1) * limit;
 
@@ -203,23 +301,45 @@ const getAll = async (query: {
       orderBy: orderByStage,
       skip,
       take: limit,
-      include: includeClause,
+      select: selectClause,
     }),
     db.sell.count({ where }),
   ]);
 
-  return {
-    data: serializeDatesAndDecimals(data),
-    pagination: { page, limit, total, current: data.length },
+  const serializedData = serializeSells(data);
+
+  const responseObj = {
+    data: serializedData,
+    pagination: { page, limit, total, current: serializedData.length },
     sort: { order: query.order, orderBy: query.orderBy },
   };
+
+  try {
+    await cacheSet(cacheKey, responseObj, 30); // cache for 30s
+  } catch (e) {
+    // Ignore cache write failure
+  }
+
+  return responseObj;
 };
 
 const exportCsv = async () => {
   const items = await db.sell.findMany({
     orderBy: { transactionDate: 'desc' },
-    include: {
-      cart: { include: { product: { select: { sku: true } } } },
+    select: {
+      id: true,
+      storeId: true,
+      customerId: true,
+      staffId: true,
+      finalSellPrice: true,
+      cart: {
+        select: {
+          productId: true,
+          quantity: true,
+          finalPrice: true,
+          product: { select: { sku: true } },
+        },
+      },
     },
   });
   const headers = ['sellId', 'storeId', 'customerId', 'staffId', 'productId', 'sku', 'quantity', 'finalPrice', 'finalSellPrice'];
@@ -252,3 +372,4 @@ export default {
   getAll,
   exportCsv,
 };
+
