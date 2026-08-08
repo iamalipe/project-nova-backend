@@ -13,6 +13,7 @@ import storeRouter from './store/store.route';
 import subcategoryRouter from './subcategory/subcategory.route';
 import testRouter from './test/test.route';
 import userRouter from './user/user.route';
+import kpiRouter from './kpi/kpi.route';
 
 import { NODE_ENV } from '../config/default';
 import {
@@ -55,6 +56,9 @@ appRouter.route('/stock', stockRouter);
 
 appRouter.use('/sell/*', jwtAuth);
 appRouter.route('/sell', sellRouter);
+
+appRouter.use('/kpi/*', jwtAuth);
+appRouter.route('/kpi', kpiRouter);
 
 appRouter.route('/mcp', mcpRouter);
 appRouter.route('/mcp/connections', mcpConnectionRouter);
