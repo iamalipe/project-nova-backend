@@ -1,0 +1,99 @@
+{
+  "exportedAt": "2026-09-05T02:56:27.358Z",
+  "totalModels": 13,
+  "totalRecordsExported": 21930,
+  "maxLimitPerTable": 5000,
+  "collections": {
+    "Category": {
+      "totalInDb": 10,
+      "exportedCount": 10,
+      "collection": "categories",
+      "jsonFile": "exports/json/categories.json",
+      "jsonlFile": "exports/json/categories.jsonl"
+    },
+    "Country": {
+      "totalInDb": 10,
+      "exportedCount": 10,
+      "collection": "countries",
+      "jsonFile": "exports/json/countries.json",
+      "jsonlFile": "exports/json/countries.jsonl"
+    },
+    "CountryState": {
+      "totalInDb": 225,
+      "exportedCount": 225,
+      "collection": "country_states",
+      "jsonFile": "exports/json/country_states.json",
+      "jsonlFile": "exports/json/country_states.jsonl"
+    },
+    "McpOAuthClient": {
+      "totalInDb": 24,
+      "exportedCount": 24,
+      "collection": "mcp_oauth_clients",
+      "jsonFile": "exports/json/mcp_oauth_clients.json",
+      "jsonlFile": "exports/json/mcp_oauth_clients.jsonl"
+    },
+    "McpOAuthCode": {
+      "totalInDb": 4,
+      "exportedCount": 4,
+      "collection": "mcp_oauth_codes",
+      "jsonFile": "exports/json/mcp_oauth_codes.json",
+      "jsonlFile": "exports/json/mcp_oauth_codes.jsonl"
+    },
+    "Product": {
+      "totalInDb": 500,
+      "exportedCount": 500,
+      "collection": "products",
+      "jsonFile": "exports/json/products.json",
+      "jsonlFile": "exports/json/products.jsonl"
+    },
+    "Sell": {
+      "totalInDb": 15256132,
+      "exportedCount": 5000,
+      "collection": "sells",
+      "jsonFile": "exports/json/sells.json",
+      "jsonlFile": "exports/json/sells.jsonl"
+    },
+    "SellItem": {
+      "totalInDb": 68649046,
+      "exportedCount": 5000,
+      "collection": "sell_items",
+      "jsonFile": "exports/json/sell_items.json",
+      "jsonlFile": "exports/json/sell_items.jsonl"
+    },
+    "Stock": {
+      "totalInDb": 405505,
+      "exportedCount": 5000,
+      "collection": "stocks",
+      "jsonFile": "exports/json/stocks.json",
+      "jsonlFile": "exports/json/stocks.jsonl"
+    },
+    "Store": {
+      "totalInDb": 1073,
+      "exportedCount": 1073,
+      "collection": "stores",
+      "jsonFile": "exports/json/stores.json",
+      "jsonlFile": "exports/json/stores.jsonl"
+    },
+    "Subcategory": {
+      "totalInDb": 50,
+      "exportedCount": 50,
+      "collection": "subcategories",
+      "jsonFile": "exports/json/subcategories.json",
+      "jsonlFile": "exports/json/subcategories.jsonl"
+    },
+    "User": {
+      "totalInDb": 6855767,
+      "exportedCount": 5000,
+      "collection": "users",
+      "jsonFile": "exports/json/users.json",
+      "jsonlFile": "exports/json/users.jsonl"
+    },
+    "UserSession": {
+      "totalInDb": 34,
+      "exportedCount": 34,
+      "collection": "user_sessions",
+      "jsonFile": "exports/json/user_sessions.json",
+      "jsonlFile": "exports/json/user_sessions.jsonl"
+    }
+  }
+}

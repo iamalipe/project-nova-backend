@@ -1,0 +1,245 @@
+[
+{
+  "id": "019f4fd3-caf3-760e-8c87-9be94736d728",
+  "clientId": "f4645309-6242-4ca9-9745-68b766935395",
+  "clientName": "ChatGPT",
+  "redirectUris": [
+    "https://oauth.pstmn.io/v1/callback"
+  ],
+  "createdAt": "2026-07-11T06:18:27.955Z",
+  "updatedAt": "2026-07-11T06:18:27.991Z"
+},
+{
+  "id": "019f4fd3-f753-70df-a751-b2cdfa98f492",
+  "clientId": "51b36fee-1ebc-4e18-a391-97487ca63fd5",
+  "clientName": "ChatGPT",
+  "redirectUris": [
+    "https://oauth.pstmn.io/v1/callback"
+  ],
+  "createdAt": "2026-07-11T06:18:39.315Z",
+  "updatedAt": "2026-07-11T06:18:39.347Z"
+},
+{
+  "id": "019f4fd4-36cf-731b-8114-4313156ce84d",
+  "clientId": "de203955-756e-406f-a7ef-935c83fe2b48",
+  "clientName": "ChatGPT",
+  "redirectUris": [
+    "https://oauth.pstmn.io/v1/callback"
+  ],
+  "createdAt": "2026-07-11T06:18:55.567Z",
+  "updatedAt": "2026-07-11T06:18:55.602Z"
+},
+{
+  "id": "019f4fd4-59b3-72a5-8d5c-a47839f98e69",
+  "clientId": "87de1102-f2b2-419a-b7fa-b1f984ed7663",
+  "clientName": "ChatGPT",
+  "redirectUris": [
+    "https://oauth.pstmn.io/v1/callback"
+  ],
+  "createdAt": "2026-07-11T06:19:04.499Z",
+  "updatedAt": "2026-07-11T06:19:04.525Z"
+},
+{
+  "id": "019f4fd4-9778-7589-98f6-905590d8f768",
+  "clientId": "7dd0b83c-fb38-47ac-818d-0bcaf2eae865",
+  "clientName": "ChatGPT",
+  "redirectUris": [
+    "https://oauth.pstmn.io/v1/callback"
+  ],
+  "createdAt": "2026-07-11T06:19:20.312Z",
+  "updatedAt": "2026-07-11T06:19:20.348Z"
+},
+{
+  "id": "019f4fd4-da55-7678-832a-d8028d443966",
+  "clientId": "e0c494fc-cb61-4c04-95ee-7078979c116a",
+  "clientName": "ChatGPT",
+  "redirectUris": [
+    "https://oauth.pstmn.io/v1/callback"
+  ],
+  "createdAt": "2026-07-11T06:19:37.429Z",
+  "updatedAt": "2026-07-11T06:19:37.471Z"
+},
+{
+  "id": "019f4fd5-1691-7228-b36f-0f6008c2666b",
+  "clientId": "6612c7cb-0ec8-463d-b708-1ff496b1016f",
+  "clientName": "ChatGPT",
+  "redirectUris": [
+    "https://oauth.pstmn.io/v1/callback"
+  ],
+  "createdAt": "2026-07-11T06:19:52.849Z",
+  "updatedAt": "2026-07-11T06:19:52.876Z"
+},
+{
+  "id": "019f4fd5-3cc4-70bb-a160-fad7a818a910",
+  "clientId": "6f76da5d-bdec-4ed8-a842-03aa506e2ff8",
+  "clientName": "ChatGPT",
+  "redirectUris": [
+    "https://oauth.pstmn.io/v1/callback"
+  ],
+  "createdAt": "2026-07-11T06:20:02.628Z",
+  "updatedAt": "2026-07-11T06:20:02.654Z"
+},
+{
+  "id": "019f4ff0-90e9-777c-a763-a879b0b4ac44",
+  "clientId": "019f4ff0-90e7-762d-ad62-f87896f5f688",
+  "clientName": "InspectorTest",
+  "redirectUris": [
+    "https://oauth.pstmn.io/v1/callback"
+  ],
+  "createdAt": "2026-07-11T06:49:53.641Z",
+  "updatedAt": "2026-07-11T06:49:53.675Z"
+},
+{
+  "id": "019f4ff0-f212-76a8-b4e7-5bedca9e3132",
+  "clientId": "019f4ff0-f211-7539-8034-5cd514acd866",
+  "clientName": "InspectorTest",
+  "redirectUris": [
+    "https://oauth.pstmn.io/v1/callback"
+  ],
+  "createdAt": "2026-07-11T06:50:18.514Z",
+  "updatedAt": "2026-07-11T06:50:18.548Z"
+},
+{
+  "id": "019f4ff1-0612-7471-9594-edd1426a2666",
+  "clientId": "019f4ff1-0611-777e-84fb-18c21a934a29",
+  "clientName": "InspectorTest",
+  "redirectUris": [
+    "https://oauth.pstmn.io/v1/callback"
+  ],
+  "createdAt": "2026-07-11T06:50:23.634Z",
+  "updatedAt": "2026-07-11T06:50:23.667Z"
+},
+{
+  "id": "019f4ff1-385d-7696-9b86-91c882611238",
+  "clientId": "019f4ff1-385c-7698-8e8e-7e422390dcaa",
+  "clientName": "InspectorTest",
+  "redirectUris": [
+    "https://oauth.pstmn.io/v1/callback"
+  ],
+  "createdAt": "2026-07-11T06:50:36.509Z",
+  "updatedAt": "2026-07-11T06:50:36.544Z"
+},
+{
+  "id": "019f500a-ea38-7397-82b8-d5c98e749a8f",
+  "clientId": "019f500a-ea37-7129-8951-7f424ebdf25c",
+  "clientName": "InspectorTest",
+  "redirectUris": [
+    "https://oauth.pstmn.io/v1/callback"
+  ],
+  "createdAt": "2026-07-11T07:18:40.440Z",
+  "updatedAt": "2026-07-11T07:18:40.470Z"
+},
+{
+  "id": "019f56b2-543c-77dd-9245-bdb059d0f71c",
+  "clientId": "pn_019f56b2-5424-76e6-b353-2de3daa2cf34",
+  "clientName": "MCP Inspector",
+  "redirectUris": [
+    "http://localhost:6274/oauth/callback",
+    "http://localhost:6274/oauth/callback/debug"
+  ],
+  "createdAt": "2026-07-12T14:19:15.388Z",
+  "updatedAt": "2026-07-12T14:19:15.388Z"
+},
+{
+  "id": "019f56b6-351e-77f2-8d56-67377cebc51d",
+  "clientId": "pn_019f56b6-350b-76f8-a1f0-e53992db8006",
+  "clientName": "MCP Inspector",
+  "redirectUris": [
+    "http://localhost:6274/oauth/callback",
+    "http://localhost:6274/oauth/callback/debug"
+  ],
+  "createdAt": "2026-07-12T14:23:29.566Z",
+  "updatedAt": "2026-07-12T14:23:29.566Z"
+},
+{
+  "id": "019f56bc-ca61-77c9-989c-14f25e1c34c0",
+  "clientId": "pn_019f56bc-ca60-73d1-a4a2-a5250ac00ff8",
+  "clientName": "MCP Inspector",
+  "redirectUris": [
+    "http://localhost:6274/oauth/callback",
+    "http://localhost:6274/oauth/callback/debug"
+  ],
+  "createdAt": "2026-07-12T14:30:40.993Z",
+  "updatedAt": "2026-07-12T14:30:40.993Z"
+},
+{
+  "id": "019f58e8-e17e-758c-92cc-e18381f17a91",
+  "clientId": "pn_019f58e8-e171-72bb-9d9e-c37a9c648a6e",
+  "clientName": "ChatGPT",
+  "redirectUris": [
+    "https://chatgpt.com/connector/oauth/AHvwfrOwc0M9"
+  ],
+  "createdAt": "2026-07-13T00:38:04.926Z",
+  "updatedAt": "2026-07-13T00:38:04.926Z"
+},
+{
+  "id": "019f59aa-dd9f-7380-b948-5c64401c6574",
+  "clientId": "pn_019f59aa-dd99-739d-837a-1e80ae912bdc",
+  "clientName": "Claude",
+  "redirectUris": [
+    "https://claude.ai/api/mcp/auth_callback"
+  ],
+  "createdAt": "2026-07-13T04:09:57.919Z",
+  "updatedAt": "2026-07-13T04:09:57.919Z"
+},
+{
+  "id": "019f59ab-883f-7513-9443-24640dbfbe56",
+  "clientId": "pn_019f59ab-883d-7058-acfa-46e4ee422019",
+  "clientName": "Claude",
+  "redirectUris": [
+    "https://claude.ai/api/mcp/auth_callback"
+  ],
+  "createdAt": "2026-07-13T04:10:41.599Z",
+  "updatedAt": "2026-07-13T04:10:41.599Z"
+},
+{
+  "id": "019f59b5-94bd-73bb-988c-04fc80e5e9d2",
+  "clientId": "pn_019f59b5-94b0-76cc-b22d-2868b5f34274",
+  "clientName": "MCPJam - Project Nova",
+  "redirectUris": [
+    "https://app.mcpjam.com/oauth/callback"
+  ],
+  "createdAt": "2026-07-13T04:21:40.157Z",
+  "updatedAt": "2026-07-13T04:21:40.157Z"
+},
+{
+  "id": "019f59b9-8bc5-739a-a128-4aea930ddddf",
+  "clientId": "pn_019f59b9-8bbf-7153-b610-4a2648e7b44c",
+  "clientName": "MCPJam Inspector Debug Client",
+  "redirectUris": [
+    "https://app.mcpjam.com/oauth/callback/debug"
+  ],
+  "createdAt": "2026-07-13T04:26:00.006Z",
+  "updatedAt": "2026-07-13T04:26:00.006Z"
+},
+{
+  "id": "019f5a12-3e36-721e-bb71-acb0c476859a",
+  "clientId": "pn_019f5a12-3e2f-73cc-8eb5-4dacc266268f",
+  "clientName": "LM Studio",
+  "redirectUris": [
+    "http://127.0.0.1:33389/mcp-oauth-callback"
+  ],
+  "createdAt": "2026-07-13T06:02:52.854Z",
+  "updatedAt": "2026-07-13T06:02:52.854Z"
+},
+{
+  "id": "019f5a12-4166-716e-ad86-80064379ba44",
+  "clientId": "pn_019f5a12-4164-7277-bd76-fe84eb0edc09",
+  "clientName": "LM Studio",
+  "redirectUris": [
+    "http://127.0.0.1:33389/mcp-oauth-callback"
+  ],
+  "createdAt": "2026-07-13T06:02:53.670Z",
+  "updatedAt": "2026-07-13T06:02:53.670Z"
+},
+{
+  "id": "019f5e45-1842-71b8-be2a-97197eef3f64",
+  "clientId": "pn_019f5e45-183a-771a-b7dc-c18c993a72eb",
+  "clientName": "MCPJam - Project Nova Local",
+  "redirectUris": [
+    "http://127.0.0.1:6274/oauth/callback"
+  ],
+  "createdAt": "2026-07-14T01:36:54.338Z",
+  "updatedAt": "2026-07-14T01:36:54.338Z"
+}
+]

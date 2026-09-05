@@ -1,0 +1,2252 @@
+[
+{
+  "id": "019f920a-63b2-711f-83bc-6f4caba26ffb",
+  "name": "Alabama",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "AL",
+  "tz": "UTC-6",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.258Z",
+  "updatedAt": "2026-07-24T02:53:02.258Z"
+},
+{
+  "id": "019f920a-63ca-7018-81ed-b875f57889f1",
+  "name": "Alaska",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "AK",
+  "tz": "UTC-9",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.282Z",
+  "updatedAt": "2026-07-24T02:53:02.282Z"
+},
+{
+  "id": "019f920a-63dc-74ff-92dd-22fbe0492c42",
+  "name": "Arizona",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "AZ",
+  "tz": "UTC-7",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.300Z",
+  "updatedAt": "2026-07-24T02:53:02.300Z"
+},
+{
+  "id": "019f920a-63ed-736b-b10b-4a9c185e1049",
+  "name": "Arkansas",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "AR",
+  "tz": "UTC-6",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.317Z",
+  "updatedAt": "2026-07-24T02:53:02.317Z"
+},
+{
+  "id": "019f920a-63fe-73cc-9d75-2bdcbede11fd",
+  "name": "California",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "CA",
+  "tz": "UTC-8",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.334Z",
+  "updatedAt": "2026-07-24T02:53:02.334Z"
+},
+{
+  "id": "019f920a-640e-74fc-8880-eb8f8c2116c8",
+  "name": "Colorado",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "CO",
+  "tz": "UTC-7",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.350Z",
+  "updatedAt": "2026-07-24T02:53:02.350Z"
+},
+{
+  "id": "019f920a-641e-7577-9bbe-61f94def72eb",
+  "name": "Connecticut",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "CT",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.366Z",
+  "updatedAt": "2026-07-24T02:53:02.366Z"
+},
+{
+  "id": "019f920a-642e-70ce-bc01-c49261841626",
+  "name": "Delaware",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "DE",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.382Z",
+  "updatedAt": "2026-07-24T02:53:02.382Z"
+},
+{
+  "id": "019f920a-643e-725d-b7b6-3fc7a68f5470",
+  "name": "Florida",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "FL",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.398Z",
+  "updatedAt": "2026-07-24T02:53:02.398Z"
+},
+{
+  "id": "019f920a-644c-749d-882c-cc53d97c63a4",
+  "name": "Georgia",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "GA",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.412Z",
+  "updatedAt": "2026-07-24T02:53:02.412Z"
+},
+{
+  "id": "019f920a-645c-75ee-bb63-268710397e4f",
+  "name": "Hawaii",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "HI",
+  "tz": "UTC-10",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.428Z",
+  "updatedAt": "2026-07-24T02:53:02.428Z"
+},
+{
+  "id": "019f920a-646a-71fe-b775-ea98076dbdd4",
+  "name": "Idaho",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "ID",
+  "tz": "UTC-7",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.442Z",
+  "updatedAt": "2026-07-24T02:53:02.442Z"
+},
+{
+  "id": "019f920a-6479-763d-8d17-b94b9040cb3e",
+  "name": "Illinois",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "IL",
+  "tz": "UTC-6",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.457Z",
+  "updatedAt": "2026-07-24T02:53:02.457Z"
+},
+{
+  "id": "019f920a-6486-760d-ab06-8ffcc886107e",
+  "name": "Indiana",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "IN",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.470Z",
+  "updatedAt": "2026-07-24T02:53:02.470Z"
+},
+{
+  "id": "019f920a-6492-73b8-ab66-bec6af8a3f6e",
+  "name": "Iowa",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "IA",
+  "tz": "UTC-6",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.482Z",
+  "updatedAt": "2026-07-24T02:53:02.482Z"
+},
+{
+  "id": "019f920a-64a1-72db-9d69-d90d138df984",
+  "name": "Kansas",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "KS",
+  "tz": "UTC-6",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.497Z",
+  "updatedAt": "2026-07-24T02:53:02.497Z"
+},
+{
+  "id": "019f920a-64ae-707a-83e8-4893303a0811",
+  "name": "Kentucky",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "KY",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.510Z",
+  "updatedAt": "2026-07-24T02:53:02.510Z"
+},
+{
+  "id": "019f920a-64bd-759d-bcb0-22b93fff82de",
+  "name": "Louisiana",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "LA",
+  "tz": "UTC-6",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.525Z",
+  "updatedAt": "2026-07-24T02:53:02.525Z"
+},
+{
+  "id": "019f920a-64ca-766f-a918-20d0c2b5eb51",
+  "name": "Maine",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "ME",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.538Z",
+  "updatedAt": "2026-07-24T02:53:02.538Z"
+},
+{
+  "id": "019f920a-64d9-7367-b2a8-00cfec89d8d2",
+  "name": "Maryland",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "MD",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.553Z",
+  "updatedAt": "2026-07-24T02:53:02.553Z"
+},
+{
+  "id": "019f920a-64e6-757f-aae8-8d91a60556c4",
+  "name": "Massachusetts",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "MA",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.566Z",
+  "updatedAt": "2026-07-24T02:53:02.566Z"
+},
+{
+  "id": "019f920a-64f6-70b8-8d3a-bbbd277855cc",
+  "name": "Michigan",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "MI",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.582Z",
+  "updatedAt": "2026-07-24T02:53:02.582Z"
+},
+{
+  "id": "019f920a-6502-735a-bae3-3048d4f7b9f9",
+  "name": "Minnesota",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "MN",
+  "tz": "UTC-6",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.594Z",
+  "updatedAt": "2026-07-24T02:53:02.594Z"
+},
+{
+  "id": "019f920a-6510-70ef-8da0-e664754c399f",
+  "name": "Mississippi",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "MS",
+  "tz": "UTC-6",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.608Z",
+  "updatedAt": "2026-07-24T02:53:02.608Z"
+},
+{
+  "id": "019f920a-651e-70bb-969c-b30c8a446360",
+  "name": "Missouri",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "MO",
+  "tz": "UTC-6",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.622Z",
+  "updatedAt": "2026-07-24T02:53:02.622Z"
+},
+{
+  "id": "019f920a-652d-754f-8542-39f72d0fff55",
+  "name": "Montana",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "MT",
+  "tz": "UTC-7",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.637Z",
+  "updatedAt": "2026-07-24T02:53:02.637Z"
+},
+{
+  "id": "019f920a-6539-760a-b503-c4c9c8e6030e",
+  "name": "Nebraska",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "NE",
+  "tz": "UTC-6",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.649Z",
+  "updatedAt": "2026-07-24T02:53:02.649Z"
+},
+{
+  "id": "019f920a-6548-70d2-98d8-fe52a40dee12",
+  "name": "Nevada",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "NV",
+  "tz": "UTC-8",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.664Z",
+  "updatedAt": "2026-07-24T02:53:02.664Z"
+},
+{
+  "id": "019f920a-6555-7609-aa9f-8322a3650eff",
+  "name": "New Hampshire",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "NH",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.677Z",
+  "updatedAt": "2026-07-24T02:53:02.677Z"
+},
+{
+  "id": "019f920a-6563-74eb-a822-ad681fbdc02e",
+  "name": "New Jersey",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "NJ",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.691Z",
+  "updatedAt": "2026-07-24T02:53:02.691Z"
+},
+{
+  "id": "019f920a-656f-71ce-a9e4-9b236b77d281",
+  "name": "New Mexico",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "NM",
+  "tz": "UTC-7",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.703Z",
+  "updatedAt": "2026-07-24T02:53:02.703Z"
+},
+{
+  "id": "019f920a-657d-75b9-87d6-98641199783d",
+  "name": "New York",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "NY",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.717Z",
+  "updatedAt": "2026-07-24T02:53:02.717Z"
+},
+{
+  "id": "019f920a-658b-77b8-aa7e-aa34cd9cd404",
+  "name": "North Carolina",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "NC",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.731Z",
+  "updatedAt": "2026-07-24T02:53:02.731Z"
+},
+{
+  "id": "019f920a-659a-7335-8f30-f389e7ab2e84",
+  "name": "North Dakota",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "ND",
+  "tz": "UTC-6",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.746Z",
+  "updatedAt": "2026-07-24T02:53:02.746Z"
+},
+{
+  "id": "019f920a-65a7-70ea-977c-1cdcaa0184f6",
+  "name": "Ohio",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "OH",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.759Z",
+  "updatedAt": "2026-07-24T02:53:02.759Z"
+},
+{
+  "id": "019f920a-65b5-7738-a5c0-03e321f60fc8",
+  "name": "Oklahoma",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "OK",
+  "tz": "UTC-6",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.773Z",
+  "updatedAt": "2026-07-24T02:53:02.773Z"
+},
+{
+  "id": "019f920a-65c2-73b6-832d-b8de9441d809",
+  "name": "Oregon",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "OR",
+  "tz": "UTC-8",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.786Z",
+  "updatedAt": "2026-07-24T02:53:02.786Z"
+},
+{
+  "id": "019f920a-65d1-735d-ba64-315ef11c68f2",
+  "name": "Pennsylvania",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "PA",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.801Z",
+  "updatedAt": "2026-07-24T02:53:02.801Z"
+},
+{
+  "id": "019f920a-65de-718f-9e0a-921840b0e4fe",
+  "name": "Rhode Island",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "RI",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.814Z",
+  "updatedAt": "2026-07-24T02:53:02.814Z"
+},
+{
+  "id": "019f920a-65f1-7613-8fde-2597918377a1",
+  "name": "South Carolina",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "SC",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.833Z",
+  "updatedAt": "2026-07-24T02:53:02.833Z"
+},
+{
+  "id": "019f920a-65fe-77dd-95fb-0d14f3e7fe95",
+  "name": "South Dakota",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "SD",
+  "tz": "UTC-6",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.846Z",
+  "updatedAt": "2026-07-24T02:53:02.846Z"
+},
+{
+  "id": "019f920a-660c-76da-b601-26821fd5322b",
+  "name": "Tennessee",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "TN",
+  "tz": "UTC-6",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.860Z",
+  "updatedAt": "2026-07-24T02:53:02.860Z"
+},
+{
+  "id": "019f920a-661a-77e0-ab3f-193f390809e0",
+  "name": "Texas",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "TX",
+  "tz": "UTC-6",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.874Z",
+  "updatedAt": "2026-07-24T02:53:02.874Z"
+},
+{
+  "id": "019f920a-662a-74f5-ac00-8c292bc66325",
+  "name": "Utah",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "UT",
+  "tz": "UTC-7",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.890Z",
+  "updatedAt": "2026-07-24T02:53:02.890Z"
+},
+{
+  "id": "019f920a-6639-71ac-8c17-1ecebcf3586a",
+  "name": "Vermont",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "VT",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.905Z",
+  "updatedAt": "2026-07-24T02:53:02.905Z"
+},
+{
+  "id": "019f920a-6648-77ff-a732-5dff058c4787",
+  "name": "Virginia",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "VA",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.920Z",
+  "updatedAt": "2026-07-24T02:53:02.920Z"
+},
+{
+  "id": "019f920a-6654-73a6-8261-fb7acf4b81b2",
+  "name": "Washington",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "WA",
+  "tz": "UTC-8",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.932Z",
+  "updatedAt": "2026-07-24T02:53:02.932Z"
+},
+{
+  "id": "019f920a-6663-70b2-8e81-3716d30066ec",
+  "name": "West Virginia",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "WV",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.947Z",
+  "updatedAt": "2026-07-24T02:53:02.947Z"
+},
+{
+  "id": "019f920a-6670-760e-90d7-67f88dc5d553",
+  "name": "Wisconsin",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "WI",
+  "tz": "UTC-6",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.960Z",
+  "updatedAt": "2026-07-24T02:53:02.960Z"
+},
+{
+  "id": "019f920a-667f-70be-8726-e392a46e4577",
+  "name": "Wyoming",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "WY",
+  "tz": "UTC-7",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.975Z",
+  "updatedAt": "2026-07-24T02:53:02.975Z"
+},
+{
+  "id": "019f920a-668e-775c-8a6e-40efa371568a",
+  "name": "District of Columbia",
+  "countryId": "019f91f7-ad36-76d0-ad6d-47288ad9ef93",
+  "subdivisionCode": "DC",
+  "tz": "UTC-5",
+  "flag": "🇺🇸",
+  "createdAt": "2026-07-24T02:53:02.990Z",
+  "updatedAt": "2026-07-24T02:53:02.990Z"
+},
+{
+  "id": "019f920a-669e-7421-b9bd-bc479f049b27",
+  "name": "Andhra Pradesh",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "AP",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.006Z",
+  "updatedAt": "2026-07-24T02:53:03.006Z"
+},
+{
+  "id": "019f920a-66ac-7598-95d1-61356e95c7d0",
+  "name": "Arunachal Pradesh",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "AR",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.020Z",
+  "updatedAt": "2026-07-24T02:53:03.020Z"
+},
+{
+  "id": "019f920a-66bc-754c-9f05-daaef5aee4e1",
+  "name": "Assam",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "AS",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.036Z",
+  "updatedAt": "2026-07-24T02:53:03.036Z"
+},
+{
+  "id": "019f920a-66c8-731c-a7e8-a728ab1ea144",
+  "name": "Bihar",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "BR",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.048Z",
+  "updatedAt": "2026-07-24T02:53:03.048Z"
+},
+{
+  "id": "019f920a-66d6-710e-8534-328190d532f0",
+  "name": "Chhattisgarh",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "CG",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.062Z",
+  "updatedAt": "2026-07-24T02:53:03.062Z"
+},
+{
+  "id": "019f920a-66e5-7464-b79b-b1bcff0b8b24",
+  "name": "Goa",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "GA",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.077Z",
+  "updatedAt": "2026-07-24T02:53:03.077Z"
+},
+{
+  "id": "019f920a-66f4-7299-97ec-c80ba0a5be81",
+  "name": "Gujarat",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "GJ",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.092Z",
+  "updatedAt": "2026-07-24T02:53:03.092Z"
+},
+{
+  "id": "019f920a-6701-7148-876e-cebca0d5a970",
+  "name": "Haryana",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "HR",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.105Z",
+  "updatedAt": "2026-07-24T02:53:03.105Z"
+},
+{
+  "id": "019f920a-670e-70e6-80ab-27d75ae84ec8",
+  "name": "Himachal Pradesh",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "HP",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.118Z",
+  "updatedAt": "2026-07-24T02:53:03.118Z"
+},
+{
+  "id": "019f920a-671c-73c9-b251-8063cc6efdf4",
+  "name": "Jharkhand",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "JH",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.132Z",
+  "updatedAt": "2026-07-24T02:53:03.132Z"
+},
+{
+  "id": "019f920a-672b-7606-88e6-4f78de1f1f60",
+  "name": "Karnataka",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "KA",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.147Z",
+  "updatedAt": "2026-07-24T02:53:03.147Z"
+},
+{
+  "id": "019f920a-6739-74f8-a288-a45d5ddb195b",
+  "name": "Kerala",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "KL",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.161Z",
+  "updatedAt": "2026-07-24T02:53:03.161Z"
+},
+{
+  "id": "019f920a-6747-76e2-8674-33e9fcb58fc7",
+  "name": "Madhya Pradesh",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "MP",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.175Z",
+  "updatedAt": "2026-07-24T02:53:03.175Z"
+},
+{
+  "id": "019f920a-6754-718b-8553-925541cfa126",
+  "name": "Maharashtra",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "MH",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.188Z",
+  "updatedAt": "2026-07-24T02:53:03.188Z"
+},
+{
+  "id": "019f920a-6761-73bb-aaec-0c124817253c",
+  "name": "Manipur",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "MN",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.201Z",
+  "updatedAt": "2026-07-24T02:53:03.201Z"
+},
+{
+  "id": "019f920a-676f-759f-b6f9-c18e7c1c2786",
+  "name": "Meghalaya",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "ML",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.215Z",
+  "updatedAt": "2026-07-24T02:53:03.215Z"
+},
+{
+  "id": "019f920a-677e-70e5-8b54-64d4d7b278cb",
+  "name": "Mizoram",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "MZ",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.230Z",
+  "updatedAt": "2026-07-24T02:53:03.230Z"
+},
+{
+  "id": "019f920a-678d-75ed-84f3-2569c1a5b271",
+  "name": "Nagaland",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "NL",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.245Z",
+  "updatedAt": "2026-07-24T02:53:03.245Z"
+},
+{
+  "id": "019f920a-679b-7783-b983-e78a8619def9",
+  "name": "Odisha",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "OD",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.259Z",
+  "updatedAt": "2026-07-24T02:53:03.259Z"
+},
+{
+  "id": "019f920a-67ab-74ce-9215-087c8580eb31",
+  "name": "Punjab",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "PB",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.275Z",
+  "updatedAt": "2026-07-24T02:53:03.275Z"
+},
+{
+  "id": "019f920a-67b9-719c-a944-eb3d4a5f2750",
+  "name": "Rajasthan",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "RJ",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.289Z",
+  "updatedAt": "2026-07-24T02:53:03.289Z"
+},
+{
+  "id": "019f920a-67c5-75bd-a732-38416426a551",
+  "name": "Sikkim",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "SK",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.301Z",
+  "updatedAt": "2026-07-24T02:53:03.301Z"
+},
+{
+  "id": "019f920a-67d3-7162-8239-e1285337bcc3",
+  "name": "Tamil Nadu",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "TN",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.315Z",
+  "updatedAt": "2026-07-24T02:53:03.315Z"
+},
+{
+  "id": "019f920a-67df-75cd-9aba-01edd55401c1",
+  "name": "Telangana",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "TS",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.327Z",
+  "updatedAt": "2026-07-24T02:53:03.327Z"
+},
+{
+  "id": "019f920a-67ed-7583-8660-4d5b8e22be6b",
+  "name": "Tripura",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "TR",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.341Z",
+  "updatedAt": "2026-07-24T02:53:03.341Z"
+},
+{
+  "id": "019f920a-67fa-730f-ab95-834dd1c2b8b8",
+  "name": "Uttar Pradesh",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "UP",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.354Z",
+  "updatedAt": "2026-07-24T02:53:03.354Z"
+},
+{
+  "id": "019f920a-6809-71f6-9827-dc1dea6299c9",
+  "name": "Uttarakhand",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "UK",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.369Z",
+  "updatedAt": "2026-07-24T02:53:03.369Z"
+},
+{
+  "id": "019f920a-6816-763f-9e82-f4c88659770b",
+  "name": "West Bengal",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "WB",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.382Z",
+  "updatedAt": "2026-07-24T02:53:03.382Z"
+},
+{
+  "id": "019f920a-6824-76ba-99ac-0fb00bd3e3f9",
+  "name": "Andaman and Nicobar Islands",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "AN",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.396Z",
+  "updatedAt": "2026-07-24T02:53:03.396Z"
+},
+{
+  "id": "019f920a-6832-7590-9c6a-ae0d30e3edf0",
+  "name": "Chandigarh",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "CH",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.410Z",
+  "updatedAt": "2026-07-24T02:53:03.410Z"
+},
+{
+  "id": "019f920a-6842-7298-8a03-532a8fb0e2e1",
+  "name": "Dadra and Nagar Haveli and Daman and Diu",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "DH",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.426Z",
+  "updatedAt": "2026-07-24T02:53:03.426Z"
+},
+{
+  "id": "019f920a-6850-711a-a81d-2a61a468ca91",
+  "name": "Delhi",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "DL",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.440Z",
+  "updatedAt": "2026-07-24T02:53:03.440Z"
+},
+{
+  "id": "019f920a-685f-702b-91a0-05ff14c1d3f3",
+  "name": "Jammu and Kashmir",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "JK",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.455Z",
+  "updatedAt": "2026-07-24T02:53:03.455Z"
+},
+{
+  "id": "019f920a-686b-723d-ad8a-3b8bceb6ab9f",
+  "name": "Ladakh",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "LA",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.467Z",
+  "updatedAt": "2026-07-24T02:53:03.467Z"
+},
+{
+  "id": "019f920a-687a-73af-bb6c-09d00bb52835",
+  "name": "Lakshadweep",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "LD",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.482Z",
+  "updatedAt": "2026-07-24T02:53:03.482Z"
+},
+{
+  "id": "019f920a-6888-73df-8a68-8713655c4ead",
+  "name": "Puducherry",
+  "countryId": "019f91f7-ad4b-76ef-b6a3-2c098bf6a542",
+  "subdivisionCode": "PY",
+  "tz": "UTC+5:30",
+  "flag": "🇮🇳",
+  "createdAt": "2026-07-24T02:53:03.496Z",
+  "updatedAt": "2026-07-24T02:53:03.496Z"
+},
+{
+  "id": "019f920a-6896-7795-92a5-5123da5d57f4",
+  "name": "England",
+  "countryId": "019f91f7-ad53-755e-84ac-d2fe844e36e9",
+  "subdivisionCode": "ENG",
+  "tz": "UTC+0",
+  "flag": "🇬🇧",
+  "createdAt": "2026-07-24T02:53:03.510Z",
+  "updatedAt": "2026-07-24T02:53:03.510Z"
+},
+{
+  "id": "019f920a-68a5-72da-901e-97dac6fa7ef7",
+  "name": "Northern Ireland",
+  "countryId": "019f91f7-ad53-755e-84ac-d2fe844e36e9",
+  "subdivisionCode": "NIR",
+  "tz": "UTC+0",
+  "flag": "🇬🇧",
+  "createdAt": "2026-07-24T02:53:03.525Z",
+  "updatedAt": "2026-07-24T02:53:03.525Z"
+},
+{
+  "id": "019f920a-68b5-714f-9f22-d92f33834fcb",
+  "name": "Scotland",
+  "countryId": "019f91f7-ad53-755e-84ac-d2fe844e36e9",
+  "subdivisionCode": "SCT",
+  "tz": "UTC+0",
+  "flag": "🇬🇧",
+  "createdAt": "2026-07-24T02:53:03.541Z",
+  "updatedAt": "2026-07-24T02:53:03.541Z"
+},
+{
+  "id": "019f920a-68c3-7684-9184-0ba4b0cb1dbe",
+  "name": "Wales",
+  "countryId": "019f91f7-ad53-755e-84ac-d2fe844e36e9",
+  "subdivisionCode": "WLS",
+  "tz": "UTC+0",
+  "flag": "🇬🇧",
+  "createdAt": "2026-07-24T02:53:03.555Z",
+  "updatedAt": "2026-07-24T02:53:03.555Z"
+},
+{
+  "id": "019f920a-68d2-705d-a1d6-66a1abb1b6cb",
+  "name": "Baden-Württemberg",
+  "countryId": "019f91f7-ad5c-75af-b8e2-50b144c00e6e",
+  "subdivisionCode": "BW",
+  "tz": "UTC+1",
+  "flag": "🇩🇪",
+  "createdAt": "2026-07-24T02:53:03.570Z",
+  "updatedAt": "2026-07-24T02:53:03.570Z"
+},
+{
+  "id": "019f920a-68e0-7200-978a-7acdde78e9e4",
+  "name": "Bavaria",
+  "countryId": "019f91f7-ad5c-75af-b8e2-50b144c00e6e",
+  "subdivisionCode": "BY",
+  "tz": "UTC+1",
+  "flag": "🇩🇪",
+  "createdAt": "2026-07-24T02:53:03.584Z",
+  "updatedAt": "2026-07-24T02:53:03.584Z"
+},
+{
+  "id": "019f920a-68ef-740e-870e-a7b37eaaeca9",
+  "name": "Berlin",
+  "countryId": "019f91f7-ad5c-75af-b8e2-50b144c00e6e",
+  "subdivisionCode": "BE",
+  "tz": "UTC+1",
+  "flag": "🇩🇪",
+  "createdAt": "2026-07-24T02:53:03.599Z",
+  "updatedAt": "2026-07-24T02:53:03.599Z"
+},
+{
+  "id": "019f920a-68fd-77d4-bac9-d5f34db228f2",
+  "name": "Brandenburg",
+  "countryId": "019f91f7-ad5c-75af-b8e2-50b144c00e6e",
+  "subdivisionCode": "BB",
+  "tz": "UTC+1",
+  "flag": "🇩🇪",
+  "createdAt": "2026-07-24T02:53:03.613Z",
+  "updatedAt": "2026-07-24T02:53:03.613Z"
+},
+{
+  "id": "019f920a-690c-75ee-a45c-8c0a62df551a",
+  "name": "Bremen",
+  "countryId": "019f91f7-ad5c-75af-b8e2-50b144c00e6e",
+  "subdivisionCode": "HB",
+  "tz": "UTC+1",
+  "flag": "🇩🇪",
+  "createdAt": "2026-07-24T02:53:03.628Z",
+  "updatedAt": "2026-07-24T02:53:03.628Z"
+},
+{
+  "id": "019f920a-691a-769d-9bd1-88e7d1286d67",
+  "name": "Hamburg",
+  "countryId": "019f91f7-ad5c-75af-b8e2-50b144c00e6e",
+  "subdivisionCode": "HH",
+  "tz": "UTC+1",
+  "flag": "🇩🇪",
+  "createdAt": "2026-07-24T02:53:03.642Z",
+  "updatedAt": "2026-07-24T02:53:03.642Z"
+},
+{
+  "id": "019f920a-6929-709f-b84e-04dd6ab538e3",
+  "name": "Hesse",
+  "countryId": "019f91f7-ad5c-75af-b8e2-50b144c00e6e",
+  "subdivisionCode": "HE",
+  "tz": "UTC+1",
+  "flag": "🇩🇪",
+  "createdAt": "2026-07-24T02:53:03.657Z",
+  "updatedAt": "2026-07-24T02:53:03.657Z"
+},
+{
+  "id": "019f920a-6937-7170-b1ab-84d4466b9e1d",
+  "name": "Lower Saxony",
+  "countryId": "019f91f7-ad5c-75af-b8e2-50b144c00e6e",
+  "subdivisionCode": "NI",
+  "tz": "UTC+1",
+  "flag": "🇩🇪",
+  "createdAt": "2026-07-24T02:53:03.671Z",
+  "updatedAt": "2026-07-24T02:53:03.671Z"
+},
+{
+  "id": "019f920a-6947-77ee-b843-33326721d45a",
+  "name": "Mecklenburg-Vorpommern",
+  "countryId": "019f91f7-ad5c-75af-b8e2-50b144c00e6e",
+  "subdivisionCode": "MV",
+  "tz": "UTC+1",
+  "flag": "🇩🇪",
+  "createdAt": "2026-07-24T02:53:03.687Z",
+  "updatedAt": "2026-07-24T02:53:03.687Z"
+},
+{
+  "id": "019f920a-6954-71c8-9bc7-c6c11569b1fc",
+  "name": "North Rhine-Westphalia",
+  "countryId": "019f91f7-ad5c-75af-b8e2-50b144c00e6e",
+  "subdivisionCode": "NW",
+  "tz": "UTC+1",
+  "flag": "🇩🇪",
+  "createdAt": "2026-07-24T02:53:03.701Z",
+  "updatedAt": "2026-07-24T02:53:03.701Z"
+},
+{
+  "id": "019f920a-6964-718f-9e3c-90b0dc122bed",
+  "name": "Rhineland-Palatinate",
+  "countryId": "019f91f7-ad5c-75af-b8e2-50b144c00e6e",
+  "subdivisionCode": "RP",
+  "tz": "UTC+1",
+  "flag": "🇩🇪",
+  "createdAt": "2026-07-24T02:53:03.716Z",
+  "updatedAt": "2026-07-24T02:53:03.716Z"
+},
+{
+  "id": "019f920a-6972-7639-8502-edb227b801b7",
+  "name": "Saarland",
+  "countryId": "019f91f7-ad5c-75af-b8e2-50b144c00e6e",
+  "subdivisionCode": "SL",
+  "tz": "UTC+1",
+  "flag": "🇩🇪",
+  "createdAt": "2026-07-24T02:53:03.730Z",
+  "updatedAt": "2026-07-24T02:53:03.730Z"
+},
+{
+  "id": "019f920a-6982-779a-a7ec-5ce47558852c",
+  "name": "Saxony",
+  "countryId": "019f91f7-ad5c-75af-b8e2-50b144c00e6e",
+  "subdivisionCode": "SN",
+  "tz": "UTC+1",
+  "flag": "🇩🇪",
+  "createdAt": "2026-07-24T02:53:03.746Z",
+  "updatedAt": "2026-07-24T02:53:03.746Z"
+},
+{
+  "id": "019f920a-6990-71ea-bd86-a5b75b15bdfa",
+  "name": "Saxony-Anhalt",
+  "countryId": "019f91f7-ad5c-75af-b8e2-50b144c00e6e",
+  "subdivisionCode": "ST",
+  "tz": "UTC+1",
+  "flag": "🇩🇪",
+  "createdAt": "2026-07-24T02:53:03.760Z",
+  "updatedAt": "2026-07-24T02:53:03.760Z"
+},
+{
+  "id": "019f920a-699e-72eb-af4e-264b06e1e46b",
+  "name": "Schleswig-Holstein",
+  "countryId": "019f91f7-ad5c-75af-b8e2-50b144c00e6e",
+  "subdivisionCode": "SH",
+  "tz": "UTC+1",
+  "flag": "🇩🇪",
+  "createdAt": "2026-07-24T02:53:03.774Z",
+  "updatedAt": "2026-07-24T02:53:03.774Z"
+},
+{
+  "id": "019f920a-69ab-7438-ba8b-e501e20475c8",
+  "name": "Thuringia",
+  "countryId": "019f91f7-ad5c-75af-b8e2-50b144c00e6e",
+  "subdivisionCode": "TH",
+  "tz": "UTC+1",
+  "flag": "🇩🇪",
+  "createdAt": "2026-07-24T02:53:03.787Z",
+  "updatedAt": "2026-07-24T02:53:03.787Z"
+},
+{
+  "id": "019f920a-69b8-736f-a522-416b9c6ede84",
+  "name": "Auvergne-Rhône-Alpes",
+  "countryId": "019f91f7-ad64-7220-a5c1-8a8152087918",
+  "subdivisionCode": "ARA",
+  "tz": "UTC+1",
+  "flag": "🇫🇷",
+  "createdAt": "2026-07-24T02:53:03.800Z",
+  "updatedAt": "2026-07-24T02:53:03.800Z"
+},
+{
+  "id": "019f920a-69c6-75ec-92b3-b58010da114f",
+  "name": "Bourgogne-Franche-Comté",
+  "countryId": "019f91f7-ad64-7220-a5c1-8a8152087918",
+  "subdivisionCode": "BFC",
+  "tz": "UTC+1",
+  "flag": "🇫🇷",
+  "createdAt": "2026-07-24T02:53:03.814Z",
+  "updatedAt": "2026-07-24T02:53:03.814Z"
+},
+{
+  "id": "019f920a-69d3-743b-8e09-f0244843c730",
+  "name": "Brittany",
+  "countryId": "019f91f7-ad64-7220-a5c1-8a8152087918",
+  "subdivisionCode": "BRE",
+  "tz": "UTC+1",
+  "flag": "🇫🇷",
+  "createdAt": "2026-07-24T02:53:03.828Z",
+  "updatedAt": "2026-07-24T02:53:03.828Z"
+},
+{
+  "id": "019f920a-69e0-757d-90d0-907d3a82dddb",
+  "name": "Centre-Val de Loire",
+  "countryId": "019f91f7-ad64-7220-a5c1-8a8152087918",
+  "subdivisionCode": "CVL",
+  "tz": "UTC+1",
+  "flag": "🇫🇷",
+  "createdAt": "2026-07-24T02:53:03.840Z",
+  "updatedAt": "2026-07-24T02:53:03.840Z"
+},
+{
+  "id": "019f920a-69ef-767f-9a92-8e100167d8d0",
+  "name": "Corsica",
+  "countryId": "019f91f7-ad64-7220-a5c1-8a8152087918",
+  "subdivisionCode": "COR",
+  "tz": "UTC+1",
+  "flag": "🇫🇷",
+  "createdAt": "2026-07-24T02:53:03.855Z",
+  "updatedAt": "2026-07-24T02:53:03.855Z"
+},
+{
+  "id": "019f920a-69fd-742c-9559-4d02c6153141",
+  "name": "Grand Est",
+  "countryId": "019f91f7-ad64-7220-a5c1-8a8152087918",
+  "subdivisionCode": "GES",
+  "tz": "UTC+1",
+  "flag": "🇫🇷",
+  "createdAt": "2026-07-24T02:53:03.869Z",
+  "updatedAt": "2026-07-24T02:53:03.869Z"
+},
+{
+  "id": "019f920a-6a0c-7418-a86d-93b2a4408331",
+  "name": "Hauts-de-France",
+  "countryId": "019f91f7-ad64-7220-a5c1-8a8152087918",
+  "subdivisionCode": "HDF",
+  "tz": "UTC+1",
+  "flag": "🇫🇷",
+  "createdAt": "2026-07-24T02:53:03.884Z",
+  "updatedAt": "2026-07-24T02:53:03.884Z"
+},
+{
+  "id": "019f920a-6a1b-732f-8476-6d3151c8f3f4",
+  "name": "Île-de-France",
+  "countryId": "019f91f7-ad64-7220-a5c1-8a8152087918",
+  "subdivisionCode": "IDF",
+  "tz": "UTC+1",
+  "flag": "🇫🇷",
+  "createdAt": "2026-07-24T02:53:03.900Z",
+  "updatedAt": "2026-07-24T02:53:03.900Z"
+},
+{
+  "id": "019f920a-6a2b-707a-8c99-1d60e770f2e8",
+  "name": "Normandy",
+  "countryId": "019f91f7-ad64-7220-a5c1-8a8152087918",
+  "subdivisionCode": "NOR",
+  "tz": "UTC+1",
+  "flag": "🇫🇷",
+  "createdAt": "2026-07-24T02:53:03.915Z",
+  "updatedAt": "2026-07-24T02:53:03.915Z"
+},
+{
+  "id": "019f920a-6a37-740d-b4a3-ac96cd8ce4ea",
+  "name": "Nouvelle-Aquitaine",
+  "countryId": "019f91f7-ad64-7220-a5c1-8a8152087918",
+  "subdivisionCode": "NAQ",
+  "tz": "UTC+1",
+  "flag": "🇫🇷",
+  "createdAt": "2026-07-24T02:53:03.928Z",
+  "updatedAt": "2026-07-24T02:53:03.928Z"
+},
+{
+  "id": "019f920a-6a46-76fa-8fbd-00c677f4954f",
+  "name": "Occitanie",
+  "countryId": "019f91f7-ad64-7220-a5c1-8a8152087918",
+  "subdivisionCode": "OCC",
+  "tz": "UTC+1",
+  "flag": "🇫🇷",
+  "createdAt": "2026-07-24T02:53:03.942Z",
+  "updatedAt": "2026-07-24T02:53:03.942Z"
+},
+{
+  "id": "019f920a-6a53-71aa-9716-9b93b570bd5e",
+  "name": "Pays de la Loire",
+  "countryId": "019f91f7-ad64-7220-a5c1-8a8152087918",
+  "subdivisionCode": "PDL",
+  "tz": "UTC+1",
+  "flag": "🇫🇷",
+  "createdAt": "2026-07-24T02:53:03.955Z",
+  "updatedAt": "2026-07-24T02:53:03.955Z"
+},
+{
+  "id": "019f920a-6a63-7759-aada-3bb46b2242fc",
+  "name": "Provence-Alpes-Côte d'Azur",
+  "countryId": "019f91f7-ad64-7220-a5c1-8a8152087918",
+  "subdivisionCode": "PAC",
+  "tz": "UTC+1",
+  "flag": "🇫🇷",
+  "createdAt": "2026-07-24T02:53:03.971Z",
+  "updatedAt": "2026-07-24T02:53:03.971Z"
+},
+{
+  "id": "019f920a-6a72-70fb-82a2-05bc4b735a37",
+  "name": "Guadeloupe",
+  "countryId": "019f91f7-ad64-7220-a5c1-8a8152087918",
+  "subdivisionCode": "GUA",
+  "tz": "UTC-4",
+  "flag": "🇫🇷",
+  "createdAt": "2026-07-24T02:53:03.986Z",
+  "updatedAt": "2026-07-24T02:53:03.986Z"
+},
+{
+  "id": "019f920a-6a81-7209-b2ef-46586bfbe0bd",
+  "name": "French Guiana",
+  "countryId": "019f91f7-ad64-7220-a5c1-8a8152087918",
+  "subdivisionCode": "GF",
+  "tz": "UTC-3",
+  "flag": "🇫🇷",
+  "createdAt": "2026-07-24T02:53:04.001Z",
+  "updatedAt": "2026-07-24T02:53:04.001Z"
+},
+{
+  "id": "019f920a-6a8f-7119-8565-63fe525a6bbe",
+  "name": "Martinique",
+  "countryId": "019f91f7-ad64-7220-a5c1-8a8152087918",
+  "subdivisionCode": "MQ",
+  "tz": "UTC-4",
+  "flag": "🇫🇷",
+  "createdAt": "2026-07-24T02:53:04.015Z",
+  "updatedAt": "2026-07-24T02:53:04.015Z"
+},
+{
+  "id": "019f920a-6a9d-7000-97d7-9cf7e51f2be4",
+  "name": "Mayotte",
+  "countryId": "019f91f7-ad64-7220-a5c1-8a8152087918",
+  "subdivisionCode": "YT",
+  "tz": "UTC+3",
+  "flag": "🇫🇷",
+  "createdAt": "2026-07-24T02:53:04.029Z",
+  "updatedAt": "2026-07-24T02:53:04.029Z"
+},
+{
+  "id": "019f920a-6aaa-71cf-b38c-bbd551bbdb46",
+  "name": "Réunion",
+  "countryId": "019f91f7-ad64-7220-a5c1-8a8152087918",
+  "subdivisionCode": "RE",
+  "tz": "UTC+4",
+  "flag": "🇫🇷",
+  "createdAt": "2026-07-24T02:53:04.042Z",
+  "updatedAt": "2026-07-24T02:53:04.042Z"
+},
+{
+  "id": "019f920a-6ab9-760b-a8ab-d7ded38e80b4",
+  "name": "Hokkaido",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "01",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.057Z",
+  "updatedAt": "2026-07-24T02:53:04.057Z"
+},
+{
+  "id": "019f920a-6ac5-713f-a2bd-c992cd8ef876",
+  "name": "Aomori",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "02",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.069Z",
+  "updatedAt": "2026-07-24T02:53:04.069Z"
+},
+{
+  "id": "019f920a-6ad5-700c-8711-00036cc5a817",
+  "name": "Iwate",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "03",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.085Z",
+  "updatedAt": "2026-07-24T02:53:04.085Z"
+},
+{
+  "id": "019f920a-6ae4-7360-ac5e-0b608ff2ab91",
+  "name": "Miyagi",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "04",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.101Z",
+  "updatedAt": "2026-07-24T02:53:04.101Z"
+},
+{
+  "id": "019f920a-6af3-7215-8d32-2605987ece15",
+  "name": "Akita",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "05",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.115Z",
+  "updatedAt": "2026-07-24T02:53:04.115Z"
+},
+{
+  "id": "019f920a-6b00-76b8-87ea-b7849908ec36",
+  "name": "Yamagata",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "06",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.128Z",
+  "updatedAt": "2026-07-24T02:53:04.128Z"
+},
+{
+  "id": "019f920a-6b0f-74dc-a206-3a51cf7518dd",
+  "name": "Fukushima",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "07",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.143Z",
+  "updatedAt": "2026-07-24T02:53:04.143Z"
+},
+{
+  "id": "019f920a-6b1c-77bd-a93f-2ed657a75cea",
+  "name": "Ibaraki",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "08",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.156Z",
+  "updatedAt": "2026-07-24T02:53:04.156Z"
+},
+{
+  "id": "019f920a-6b2b-753f-858b-b1fe4a8125be",
+  "name": "Tochigi",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "09",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.171Z",
+  "updatedAt": "2026-07-24T02:53:04.171Z"
+},
+{
+  "id": "019f920a-6b39-76ff-a8d7-dc5aa9689664",
+  "name": "Gunma",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "10",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.185Z",
+  "updatedAt": "2026-07-24T02:53:04.185Z"
+},
+{
+  "id": "019f920a-6b47-7454-921a-c9046cc3c71e",
+  "name": "Saitama",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "11",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.199Z",
+  "updatedAt": "2026-07-24T02:53:04.199Z"
+},
+{
+  "id": "019f920a-6b55-758c-8877-b7ae59453eac",
+  "name": "Chiba",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "12",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.214Z",
+  "updatedAt": "2026-07-24T02:53:04.214Z"
+},
+{
+  "id": "019f920a-6b65-714b-9c58-cafb7d7a6b06",
+  "name": "Tokyo",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "13",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.229Z",
+  "updatedAt": "2026-07-24T02:53:04.229Z"
+},
+{
+  "id": "019f920a-6b71-72b9-94b5-fe68c59294c2",
+  "name": "Kanagawa",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "14",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.241Z",
+  "updatedAt": "2026-07-24T02:53:04.241Z"
+},
+{
+  "id": "019f920a-6b83-7755-ba5b-4a0297016ba6",
+  "name": "Niigata",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "15",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.259Z",
+  "updatedAt": "2026-07-24T02:53:04.259Z"
+},
+{
+  "id": "019f920a-6b91-760d-adcd-fe6233ffe1ea",
+  "name": "Toyama",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "16",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.273Z",
+  "updatedAt": "2026-07-24T02:53:04.273Z"
+},
+{
+  "id": "019f920a-6b9f-711c-b55e-b04961711644",
+  "name": "Ishikawa",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "17",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.288Z",
+  "updatedAt": "2026-07-24T02:53:04.288Z"
+},
+{
+  "id": "019f920a-6bae-721f-af67-f511a6f34023",
+  "name": "Fukui",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "18",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.302Z",
+  "updatedAt": "2026-07-24T02:53:04.302Z"
+},
+{
+  "id": "019f920a-6bbc-76e9-8dca-b0ef513e0a39",
+  "name": "Yamanashi",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "19",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.316Z",
+  "updatedAt": "2026-07-24T02:53:04.316Z"
+},
+{
+  "id": "019f920a-6bc9-763c-ba86-f7f76418b885",
+  "name": "Nagano",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "20",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.329Z",
+  "updatedAt": "2026-07-24T02:53:04.329Z"
+},
+{
+  "id": "019f920a-6bd8-7211-8a66-98621a9f7235",
+  "name": "Gifu",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "21",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.344Z",
+  "updatedAt": "2026-07-24T02:53:04.344Z"
+},
+{
+  "id": "019f920a-6be6-70dc-b13e-cc00b24b92b0",
+  "name": "Shizuoka",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "22",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.358Z",
+  "updatedAt": "2026-07-24T02:53:04.358Z"
+},
+{
+  "id": "019f920a-6bf5-77bb-ab08-fe993d7ff43a",
+  "name": "Aichi",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "23",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.373Z",
+  "updatedAt": "2026-07-24T02:53:04.373Z"
+},
+{
+  "id": "019f920a-6c01-75ab-bdff-a1d5c35414fc",
+  "name": "Mie",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "24",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.385Z",
+  "updatedAt": "2026-07-24T02:53:04.385Z"
+},
+{
+  "id": "019f920a-6c11-7414-93bf-9f2747e854da",
+  "name": "Shiga",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "25",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.401Z",
+  "updatedAt": "2026-07-24T02:53:04.401Z"
+},
+{
+  "id": "019f920a-6c1e-77f7-b750-4f2c06a73d75",
+  "name": "Kyoto",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "26",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.414Z",
+  "updatedAt": "2026-07-24T02:53:04.414Z"
+},
+{
+  "id": "019f920a-6c2c-76de-bbd5-7153f7af5657",
+  "name": "Osaka",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "27",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.428Z",
+  "updatedAt": "2026-07-24T02:53:04.428Z"
+},
+{
+  "id": "019f920a-6c39-734f-bd68-8f108a9e80ab",
+  "name": "Hyogo",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "28",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.441Z",
+  "updatedAt": "2026-07-24T02:53:04.441Z"
+},
+{
+  "id": "019f920a-6c47-7404-8546-54a6e7548c07",
+  "name": "Nara",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "29",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.455Z",
+  "updatedAt": "2026-07-24T02:53:04.455Z"
+},
+{
+  "id": "019f920a-6c54-761c-8a86-d670d20636fc",
+  "name": "Wakayama",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "30",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.468Z",
+  "updatedAt": "2026-07-24T02:53:04.468Z"
+},
+{
+  "id": "019f920a-6c62-719b-85a4-1edd943acbd6",
+  "name": "Tottori",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "31",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.482Z",
+  "updatedAt": "2026-07-24T02:53:04.482Z"
+},
+{
+  "id": "019f920a-6c6f-74a9-8638-4311aeb9ed0c",
+  "name": "Shimane",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "32",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.495Z",
+  "updatedAt": "2026-07-24T02:53:04.495Z"
+},
+{
+  "id": "019f920a-6c7c-763b-b83c-6d3c0efe4cca",
+  "name": "Okayama",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "33",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.508Z",
+  "updatedAt": "2026-07-24T02:53:04.508Z"
+},
+{
+  "id": "019f920a-6c89-76c9-bef4-d2106ad3083b",
+  "name": "Hiroshima",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "34",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.521Z",
+  "updatedAt": "2026-07-24T02:53:04.521Z"
+},
+{
+  "id": "019f920a-6c97-74d9-a45c-077c7a543519",
+  "name": "Yamaguchi",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "35",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.535Z",
+  "updatedAt": "2026-07-24T02:53:04.535Z"
+},
+{
+  "id": "019f920a-6ca4-738e-8759-6cbe0b9b1e23",
+  "name": "Tokushima",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "36",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.548Z",
+  "updatedAt": "2026-07-24T02:53:04.548Z"
+},
+{
+  "id": "019f920a-6cb2-740c-b24b-80b44958f519",
+  "name": "Kagawa",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "37",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.562Z",
+  "updatedAt": "2026-07-24T02:53:04.562Z"
+},
+{
+  "id": "019f920a-6cbf-7564-b76f-4f74340b6b26",
+  "name": "Ehime",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "38",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.575Z",
+  "updatedAt": "2026-07-24T02:53:04.575Z"
+},
+{
+  "id": "019f920a-6cce-70f8-8771-23d69c4d664a",
+  "name": "Kochi",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "39",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.590Z",
+  "updatedAt": "2026-07-24T02:53:04.590Z"
+},
+{
+  "id": "019f920a-6cdb-7344-800c-8162cafa40d3",
+  "name": "Fukuoka",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "40",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.603Z",
+  "updatedAt": "2026-07-24T02:53:04.603Z"
+},
+{
+  "id": "019f920a-6ceb-7590-833b-e3d61bf3748e",
+  "name": "Saga",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "41",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.619Z",
+  "updatedAt": "2026-07-24T02:53:04.619Z"
+},
+{
+  "id": "019f920a-6cf9-72fa-a9e0-7cb207efd296",
+  "name": "Nagasaki",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "42",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.633Z",
+  "updatedAt": "2026-07-24T02:53:04.633Z"
+},
+{
+  "id": "019f920a-6d08-71a5-957e-73cb2e76c58d",
+  "name": "Kumamoto",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "43",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.648Z",
+  "updatedAt": "2026-07-24T02:53:04.648Z"
+},
+{
+  "id": "019f920a-6d16-721e-9a87-6e45384ee04f",
+  "name": "Oita",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "44",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.662Z",
+  "updatedAt": "2026-07-24T02:53:04.662Z"
+},
+{
+  "id": "019f920a-6d26-76db-a891-40fcd5f4cf75",
+  "name": "Miyazaki",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "45",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.678Z",
+  "updatedAt": "2026-07-24T02:53:04.678Z"
+},
+{
+  "id": "019f920a-6d33-7012-8b4b-e6c06f4034aa",
+  "name": "Kagoshima",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "46",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.691Z",
+  "updatedAt": "2026-07-24T02:53:04.691Z"
+},
+{
+  "id": "019f920a-6d45-7196-bdf0-350d295f0611",
+  "name": "Okinawa",
+  "countryId": "019f91f7-ad6e-712b-a4dd-0f1ed08f5524",
+  "subdivisionCode": "47",
+  "tz": "UTC+9",
+  "flag": "🇯🇵",
+  "createdAt": "2026-07-24T02:53:04.709Z",
+  "updatedAt": "2026-07-24T02:53:04.709Z"
+},
+{
+  "id": "019f920a-6d51-74ea-b779-12590d7bee5b",
+  "name": "Alberta",
+  "countryId": "019f91f7-ad77-7463-a523-243de3bb46bc",
+  "subdivisionCode": "AB",
+  "tz": "UTC-7",
+  "flag": "🇨🇦",
+  "createdAt": "2026-07-24T02:53:04.721Z",
+  "updatedAt": "2026-07-24T02:53:04.721Z"
+},
+{
+  "id": "019f920a-6d5f-761f-9938-c268edd88c75",
+  "name": "British Columbia",
+  "countryId": "019f91f7-ad77-7463-a523-243de3bb46bc",
+  "subdivisionCode": "BC",
+  "tz": "UTC-8",
+  "flag": "🇨🇦",
+  "createdAt": "2026-07-24T02:53:04.735Z",
+  "updatedAt": "2026-07-24T02:53:04.735Z"
+},
+{
+  "id": "019f920a-6d6d-73b0-b6da-16292984da14",
+  "name": "Manitoba",
+  "countryId": "019f91f7-ad77-7463-a523-243de3bb46bc",
+  "subdivisionCode": "MB",
+  "tz": "UTC-6",
+  "flag": "🇨🇦",
+  "createdAt": "2026-07-24T02:53:04.749Z",
+  "updatedAt": "2026-07-24T02:53:04.749Z"
+},
+{
+  "id": "019f920a-6d7b-7456-834b-f3289fea5726",
+  "name": "New Brunswick",
+  "countryId": "019f91f7-ad77-7463-a523-243de3bb46bc",
+  "subdivisionCode": "NB",
+  "tz": "UTC-4",
+  "flag": "🇨🇦",
+  "createdAt": "2026-07-24T02:53:04.763Z",
+  "updatedAt": "2026-07-24T02:53:04.763Z"
+},
+{
+  "id": "019f920a-6d88-75bb-bac1-c157005c0331",
+  "name": "Newfoundland and Labrador",
+  "countryId": "019f91f7-ad77-7463-a523-243de3bb46bc",
+  "subdivisionCode": "NL",
+  "tz": "UTC-3:30",
+  "flag": "🇨🇦",
+  "createdAt": "2026-07-24T02:53:04.776Z",
+  "updatedAt": "2026-07-24T02:53:04.776Z"
+},
+{
+  "id": "019f920a-6d98-727f-8db3-04a6941ce372",
+  "name": "Nova Scotia",
+  "countryId": "019f91f7-ad77-7463-a523-243de3bb46bc",
+  "subdivisionCode": "NS",
+  "tz": "UTC-4",
+  "flag": "🇨🇦",
+  "createdAt": "2026-07-24T02:53:04.792Z",
+  "updatedAt": "2026-07-24T02:53:04.792Z"
+},
+{
+  "id": "019f920a-6da7-75d9-94a8-b11f0fb10c1d",
+  "name": "Ontario",
+  "countryId": "019f91f7-ad77-7463-a523-243de3bb46bc",
+  "subdivisionCode": "ON",
+  "tz": "UTC-5",
+  "flag": "🇨🇦",
+  "createdAt": "2026-07-24T02:53:04.807Z",
+  "updatedAt": "2026-07-24T02:53:04.807Z"
+},
+{
+  "id": "019f920a-6db5-7296-871e-d34d2f94ae9a",
+  "name": "Prince Edward Island",
+  "countryId": "019f91f7-ad77-7463-a523-243de3bb46bc",
+  "subdivisionCode": "PE",
+  "tz": "UTC-4",
+  "flag": "🇨🇦",
+  "createdAt": "2026-07-24T02:53:04.821Z",
+  "updatedAt": "2026-07-24T02:53:04.821Z"
+},
+{
+  "id": "019f920a-6dc3-73c4-a70b-ca349e578279",
+  "name": "Quebec",
+  "countryId": "019f91f7-ad77-7463-a523-243de3bb46bc",
+  "subdivisionCode": "QC",
+  "tz": "UTC-5",
+  "flag": "🇨🇦",
+  "createdAt": "2026-07-24T02:53:04.835Z",
+  "updatedAt": "2026-07-24T02:53:04.835Z"
+},
+{
+  "id": "019f920a-6dd1-77ce-8648-476492169068",
+  "name": "Saskatchewan",
+  "countryId": "019f91f7-ad77-7463-a523-243de3bb46bc",
+  "subdivisionCode": "SK",
+  "tz": "UTC-6",
+  "flag": "🇨🇦",
+  "createdAt": "2026-07-24T02:53:04.849Z",
+  "updatedAt": "2026-07-24T02:53:04.849Z"
+},
+{
+  "id": "019f920a-6dde-719b-8935-8c30c237c76f",
+  "name": "Northwest Territories",
+  "countryId": "019f91f7-ad77-7463-a523-243de3bb46bc",
+  "subdivisionCode": "NT",
+  "tz": "UTC-7",
+  "flag": "🇨🇦",
+  "createdAt": "2026-07-24T02:53:04.862Z",
+  "updatedAt": "2026-07-24T02:53:04.862Z"
+},
+{
+  "id": "019f920a-6dee-746d-bbed-7acf993cc81a",
+  "name": "Nunavut",
+  "countryId": "019f91f7-ad77-7463-a523-243de3bb46bc",
+  "subdivisionCode": "NU",
+  "tz": "UTC-5",
+  "flag": "🇨🇦",
+  "createdAt": "2026-07-24T02:53:04.878Z",
+  "updatedAt": "2026-07-24T02:53:04.878Z"
+},
+{
+  "id": "019f920a-6dfc-71a6-af98-2ab50c0f3187",
+  "name": "Yukon",
+  "countryId": "019f91f7-ad77-7463-a523-243de3bb46bc",
+  "subdivisionCode": "YT",
+  "tz": "UTC-7",
+  "flag": "🇨🇦",
+  "createdAt": "2026-07-24T02:53:04.892Z",
+  "updatedAt": "2026-07-24T02:53:04.892Z"
+},
+{
+  "id": "019f920a-6e0b-72f2-b8bc-d4c78f924b7c",
+  "name": "New South Wales",
+  "countryId": "019f91f7-ad80-720c-8fca-54db6dc36d76",
+  "subdivisionCode": "NSW",
+  "tz": "UTC+10",
+  "flag": "🇦🇺",
+  "createdAt": "2026-07-24T02:53:04.907Z",
+  "updatedAt": "2026-07-24T02:53:04.907Z"
+},
+{
+  "id": "019f920a-6e18-74ea-b7be-9bbded5454f6",
+  "name": "Queensland",
+  "countryId": "019f91f7-ad80-720c-8fca-54db6dc36d76",
+  "subdivisionCode": "QLD",
+  "tz": "UTC+10",
+  "flag": "🇦🇺",
+  "createdAt": "2026-07-24T02:53:04.920Z",
+  "updatedAt": "2026-07-24T02:53:04.920Z"
+},
+{
+  "id": "019f920a-6e26-7228-89c1-ec2f008eddc6",
+  "name": "South Australia",
+  "countryId": "019f91f7-ad80-720c-8fca-54db6dc36d76",
+  "subdivisionCode": "SA",
+  "tz": "UTC+9:30",
+  "flag": "🇦🇺",
+  "createdAt": "2026-07-24T02:53:04.934Z",
+  "updatedAt": "2026-07-24T02:53:04.934Z"
+},
+{
+  "id": "019f920a-6e35-7779-898e-91daf5c4f66f",
+  "name": "Tasmania",
+  "countryId": "019f91f7-ad80-720c-8fca-54db6dc36d76",
+  "subdivisionCode": "TAS",
+  "tz": "UTC+10",
+  "flag": "🇦🇺",
+  "createdAt": "2026-07-24T02:53:04.949Z",
+  "updatedAt": "2026-07-24T02:53:04.949Z"
+},
+{
+  "id": "019f920a-6e46-76a4-af8a-b61fee5bbe8c",
+  "name": "Victoria",
+  "countryId": "019f91f7-ad80-720c-8fca-54db6dc36d76",
+  "subdivisionCode": "VIC",
+  "tz": "UTC+10",
+  "flag": "🇦🇺",
+  "createdAt": "2026-07-24T02:53:04.966Z",
+  "updatedAt": "2026-07-24T02:53:04.966Z"
+},
+{
+  "id": "019f920a-6e54-7588-b506-d7d6d2af2ef3",
+  "name": "Western Australia",
+  "countryId": "019f91f7-ad80-720c-8fca-54db6dc36d76",
+  "subdivisionCode": "WA",
+  "tz": "UTC+8",
+  "flag": "🇦🇺",
+  "createdAt": "2026-07-24T02:53:04.980Z",
+  "updatedAt": "2026-07-24T02:53:04.980Z"
+},
+{
+  "id": "019f920a-6e63-734a-9c61-f6d29e70bfb0",
+  "name": "Australian Capital Territory",
+  "countryId": "019f91f7-ad80-720c-8fca-54db6dc36d76",
+  "subdivisionCode": "ACT",
+  "tz": "UTC+10",
+  "flag": "🇦🇺",
+  "createdAt": "2026-07-24T02:53:04.995Z",
+  "updatedAt": "2026-07-24T02:53:04.995Z"
+},
+{
+  "id": "019f920a-6e70-774b-bf79-4bbaf9054edf",
+  "name": "Northern Territory",
+  "countryId": "019f91f7-ad80-720c-8fca-54db6dc36d76",
+  "subdivisionCode": "NT",
+  "tz": "UTC+9:30",
+  "flag": "🇦🇺",
+  "createdAt": "2026-07-24T02:53:05.008Z",
+  "updatedAt": "2026-07-24T02:53:05.008Z"
+},
+{
+  "id": "019f920a-6e7e-71e1-9411-35385dad65c5",
+  "name": "Acre",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "AC",
+  "tz": "UTC-5",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.022Z",
+  "updatedAt": "2026-07-24T02:53:05.022Z"
+},
+{
+  "id": "019f920a-6e8a-7728-8c25-11e275bbe331",
+  "name": "Alagoas",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "AL",
+  "tz": "UTC-3",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.035Z",
+  "updatedAt": "2026-07-24T02:53:05.035Z"
+},
+{
+  "id": "019f920a-6e9b-7107-97f2-ecfaf25a606e",
+  "name": "Amapá",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "AP",
+  "tz": "UTC-3",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.051Z",
+  "updatedAt": "2026-07-24T02:53:05.051Z"
+},
+{
+  "id": "019f920a-6ea9-708d-9362-36654416cc3b",
+  "name": "Amazonas",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "AM",
+  "tz": "UTC-4",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.065Z",
+  "updatedAt": "2026-07-24T02:53:05.065Z"
+},
+{
+  "id": "019f920a-6eba-721c-8829-a7434d18eff4",
+  "name": "Bahia",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "BA",
+  "tz": "UTC-3",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.082Z",
+  "updatedAt": "2026-07-24T02:53:05.082Z"
+},
+{
+  "id": "019f920a-6ec7-779d-b614-f68e14468e28",
+  "name": "Ceará",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "CE",
+  "tz": "UTC-3",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.095Z",
+  "updatedAt": "2026-07-24T02:53:05.095Z"
+},
+{
+  "id": "019f920a-6ed6-7380-a07c-dd678d0565dd",
+  "name": "Distrito Federal",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "DF",
+  "tz": "UTC-3",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.110Z",
+  "updatedAt": "2026-07-24T02:53:05.110Z"
+},
+{
+  "id": "019f920a-6ee3-7138-b328-e8e0b328c978",
+  "name": "Espírito Santo",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "ES",
+  "tz": "UTC-3",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.123Z",
+  "updatedAt": "2026-07-24T02:53:05.123Z"
+},
+{
+  "id": "019f920a-6ef3-737d-b70c-a2b63e4b5da3",
+  "name": "Goiás",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "GO",
+  "tz": "UTC-3",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.139Z",
+  "updatedAt": "2026-07-24T02:53:05.139Z"
+},
+{
+  "id": "019f920a-6f01-772c-9ba8-ac6c5260df30",
+  "name": "Maranhão",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "MA",
+  "tz": "UTC-3",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.153Z",
+  "updatedAt": "2026-07-24T02:53:05.153Z"
+},
+{
+  "id": "019f920a-6f10-712b-9a9e-38d3bb24491b",
+  "name": "Mato Grosso",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "MT",
+  "tz": "UTC-4",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.168Z",
+  "updatedAt": "2026-07-24T02:53:05.168Z"
+},
+{
+  "id": "019f920a-6f1d-72b4-ab4e-1313c3e5badf",
+  "name": "Mato Grosso do Sul",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "MS",
+  "tz": "UTC-4",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.181Z",
+  "updatedAt": "2026-07-24T02:53:05.181Z"
+},
+{
+  "id": "019f920a-6f2b-713e-a7cc-d2d37b6967bc",
+  "name": "Minas Gerais",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "MG",
+  "tz": "UTC-3",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.195Z",
+  "updatedAt": "2026-07-24T02:53:05.195Z"
+},
+{
+  "id": "019f920a-6f38-71bc-ac7d-ef4f804fe522",
+  "name": "Pará",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "PA",
+  "tz": "UTC-3",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.208Z",
+  "updatedAt": "2026-07-24T02:53:05.208Z"
+},
+{
+  "id": "019f920a-6f46-739e-a8c8-008178f4b62f",
+  "name": "Paraíba",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "PB",
+  "tz": "UTC-3",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.222Z",
+  "updatedAt": "2026-07-24T02:53:05.222Z"
+},
+{
+  "id": "019f920a-6f52-71eb-be8e-e86de60df963",
+  "name": "Paraná",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "PR",
+  "tz": "UTC-3",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.234Z",
+  "updatedAt": "2026-07-24T02:53:05.234Z"
+},
+{
+  "id": "019f920a-6f60-75ed-9821-8ca3898f9f67",
+  "name": "Pernambuco",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "PE",
+  "tz": "UTC-3",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.248Z",
+  "updatedAt": "2026-07-24T02:53:05.248Z"
+},
+{
+  "id": "019f920a-6f7d-74fa-9f20-188d02da6d1f",
+  "name": "Piauí",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "PI",
+  "tz": "UTC-3",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.277Z",
+  "updatedAt": "2026-07-24T02:53:05.277Z"
+},
+{
+  "id": "019f920a-6f8b-7287-a2fe-a790ce36dcb4",
+  "name": "Rio de Janeiro",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "RJ",
+  "tz": "UTC-3",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.291Z",
+  "updatedAt": "2026-07-24T02:53:05.291Z"
+},
+{
+  "id": "019f920a-6f99-764c-a512-504883accbdd",
+  "name": "Rio Grande do Norte",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "RN",
+  "tz": "UTC-3",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.305Z",
+  "updatedAt": "2026-07-24T02:53:05.305Z"
+},
+{
+  "id": "019f920a-6fa8-7062-bd2b-18b566571fc4",
+  "name": "Rio Grande do Sul",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "RS",
+  "tz": "UTC-3",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.320Z",
+  "updatedAt": "2026-07-24T02:53:05.320Z"
+},
+{
+  "id": "019f920a-6fb6-7119-8aa5-29b26eaf57f7",
+  "name": "Rondônia",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "RO",
+  "tz": "UTC-4",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.334Z",
+  "updatedAt": "2026-07-24T02:53:05.334Z"
+},
+{
+  "id": "019f920a-6fc4-73dd-9488-f9de328a0629",
+  "name": "Roraima",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "RR",
+  "tz": "UTC-4",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.348Z",
+  "updatedAt": "2026-07-24T02:53:05.348Z"
+},
+{
+  "id": "019f920a-6fd1-730f-8b92-953f274a7c7a",
+  "name": "Santa Catarina",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "SC",
+  "tz": "UTC-3",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.361Z",
+  "updatedAt": "2026-07-24T02:53:05.361Z"
+},
+{
+  "id": "019f920a-6fdf-7672-8a05-c9007fc640c2",
+  "name": "São Paulo",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "SP",
+  "tz": "UTC-3",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.375Z",
+  "updatedAt": "2026-07-24T02:53:05.375Z"
+},
+{
+  "id": "019f920a-6feb-70e3-ad93-c67ce0200468",
+  "name": "Sergipe",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "SE",
+  "tz": "UTC-3",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.387Z",
+  "updatedAt": "2026-07-24T02:53:05.387Z"
+},
+{
+  "id": "019f920a-6ffa-73cb-9b24-abf07463fe1a",
+  "name": "Tocantins",
+  "countryId": "019f91f7-ad88-70aa-898d-5c1c5f9c1120",
+  "subdivisionCode": "TO",
+  "tz": "UTC-3",
+  "flag": "🇧🇷",
+  "createdAt": "2026-07-24T02:53:05.403Z",
+  "updatedAt": "2026-07-24T02:53:05.403Z"
+},
+{
+  "id": "019f920a-700a-77cf-af5b-fba949ae65e4",
+  "name": "Central Region",
+  "countryId": "019f91f7-ad91-733a-b248-1ab87ccbdb5a",
+  "subdivisionCode": "CR",
+  "tz": "UTC+8",
+  "flag": "🇸🇬",
+  "createdAt": "2026-07-24T02:53:05.418Z",
+  "updatedAt": "2026-07-24T02:53:05.418Z"
+},
+{
+  "id": "019f920a-701a-72a9-b9b7-5702698b34fd",
+  "name": "East Region",
+  "countryId": "019f91f7-ad91-733a-b248-1ab87ccbdb5a",
+  "subdivisionCode": "ER",
+  "tz": "UTC+8",
+  "flag": "🇸🇬",
+  "createdAt": "2026-07-24T02:53:05.434Z",
+  "updatedAt": "2026-07-24T02:53:05.434Z"
+},
+{
+  "id": "019f920a-7028-710a-aadc-955222942e27",
+  "name": "North Region",
+  "countryId": "019f91f7-ad91-733a-b248-1ab87ccbdb5a",
+  "subdivisionCode": "NR",
+  "tz": "UTC+8",
+  "flag": "🇸🇬",
+  "createdAt": "2026-07-24T02:53:05.448Z",
+  "updatedAt": "2026-07-24T02:53:05.448Z"
+},
+{
+  "id": "019f920a-7036-72bc-b9eb-59f279ace3af",
+  "name": "North-East Region",
+  "countryId": "019f91f7-ad91-733a-b248-1ab87ccbdb5a",
+  "subdivisionCode": "NER",
+  "tz": "UTC+8",
+  "flag": "🇸🇬",
+  "createdAt": "2026-07-24T02:53:05.462Z",
+  "updatedAt": "2026-07-24T02:53:05.462Z"
+},
+{
+  "id": "019f920a-7044-7353-bafe-48ad8533ae96",
+  "name": "West Region",
+  "countryId": "019f91f7-ad91-733a-b248-1ab87ccbdb5a",
+  "subdivisionCode": "WR",
+  "tz": "UTC+8",
+  "flag": "🇸🇬",
+  "createdAt": "2026-07-24T02:53:05.476Z",
+  "updatedAt": "2026-07-24T02:53:05.476Z"
+}
+]
